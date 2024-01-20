@@ -21,10 +21,25 @@ ul {
   background-position: center;
  
 }
-.logo {
-  background-image: url(../src/img/LogoYoCampo.jpg);
-  height: 5rem;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
 
+  .border {
+    border:  solid .1rem gray!important;
+}
+.navbar {
+  padding: 0 !important;
+}
+.container {
+  padding: 0 !important;
+
+}
+.imputBuscar {
+  border-radius: 0;
+
+  padding: .5rem;
+}
+.iconoBuscar {
+  border: none;
+}
+p {
+  margin: 0 !important;
+}

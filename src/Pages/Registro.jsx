@@ -1,4 +1,4 @@
-import { FormGroup } from "react-bootstrap";
+import { Container, FormGroup } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
@@ -8,6 +8,7 @@ function Registro() {
   return (
     <>
       <h1 className="container text-center">SOY LA PAGINA DE REGISTRO</h1>
+      <Container>
       <Form>
         <FormGroup className="mb-3">
       <Form.Label>Nombre</Form.Label>
@@ -32,6 +33,7 @@ function Registro() {
           Submit
         </Button>
       </Form>
+      </Container>
     </>
   );
 }

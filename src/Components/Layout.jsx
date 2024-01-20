@@ -1,7 +1,7 @@
 
 
 import { Outlet } from "react-router-dom";
-import BasicExample from "./NavBarEx";
+import NavBarEx from "./NavBarEx";
 
 
 
@@ -10,7 +10,7 @@ import BasicExample from "./NavBarEx";
 function Layout() {
   return (
     <>
-    <BasicExample />
+    <NavBarEx />
     <main>
     <div>
       <Outlet />
