@@ -1,38 +1,124 @@
-import { Container, FormGroup } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-
-
+import { Container } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 
 function Registro() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    reset
+  } = useForm();
+  console.log(errors);
+
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
+    alert("Enviando datos")
+    reset()
+  });
   return (
     <>
-      <h1 className="container text-center">SOY LA PAGINA DE REGISTRO</h1>
       <Container>
-      <Form>
-        <FormGroup className="mb-3">
-      <Form.Label>Nombre</Form.Label>
-      <Form.Control
-        type="text"
-        placeholder="ej: Federico"
-        />
-</FormGroup>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="ej: fede@gmail.com" />
-      
-        </Form.Group>
+        <form>
+          <div className="mb-3">
+            <label className="form-label">Nombre</label>
+            <input
+              type="text"
+              name="nombre"
+              {...register("nombre", {
+                required: {
+                  value: true,
+                  message: "Nombre es requerido",
+                },
+                minLength: {
+                  value: 2,
+                  message: "El nombre debe tener al menos dos letras.",
+                },
+                maxLength: {
+                  value: 20,
+                  message: "Tu nombre es demasiado largo, maximo 20 letras.",
+                },
+              })}
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            />
+            {errors.nombre && <span>{errors.nombre.message}</span>}
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Email</label>
+            <input
+              type="email"
+              name="email"
+              {...register("email", {
+                required: {
+                  value: true,
+                  message: "Correo electrónico es requerido",
+                },
+                pattern: {
+                  value:
+                    /^(([^<>()[\].,;:\s@”]+(.[^<>()[\].,;:\s@”]+)*)|(”.+”))@(([^<>()[\].,;:\s@”]+\.)+[^<>()[\].,;:\s@”]{2,})$/,
+                  message: "Correo invalido",
+                },
+              })}
+              className="form-control"
+              id="exampleInputPassword1"
+            />
+            {errors.email && <span>{errors.email.message}</span>}
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Password</label>
+            <input
+              type="password"
+              name="password"
+              {...register("password", {
+                required: {
+                  value: true,
+                  message: "Contraseña es requerida.",
+                },
+                minLength: {
+                  value: 8,
+                  message: "La contraseña debe tener al menos 8 caracteres.",
+                },
+                maxLength: {
+                  value: 20,
+                  message: "La contraseña no puede superar",
+                },
+              })}
+              className="form-control"
+              id="exampleInputPassword1"
+            />
+            {errors.password && <span>{errors.password.message}</span>}
+          </div>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
-        
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
+          <div className="mb-3">
+            <label className="form-label">Comfirmar Password</label>
+            <input
+              type="password"
+              name="confirmarPassword"
+              {...register("confirmarPassword",{
+                required: {
+                  value:true,
+                  message:"Confirmación de la Contraseña es requerido."
+                },
+                validate: (value) => value === watch("password") || "Las contraseñas no coinciden"
+              })}
+              className="form-control"
+              id="exampleInputPassword1"
+            />
+            {errors.confirmarPassword && <span>{errors.confirmarPassword.message}</span>}
+          </div>
+
+          <button type="button" className="btn btn-primary" onClick={onSubmit}>
+            Enviar
+          </button>
+
+          <pre>
+            {
+              JSON.stringify(watch(), null, 2)
+            }
+          </pre>
+        </form>
       </Container>
     </>
   );

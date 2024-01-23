@@ -1,11 +1,14 @@
+
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { Container, FormGroup } from "react-bootstrap";
-
-import Form from "react-bootstrap/Form";
+import Registro from "../Pages/Registro"
+import {useForm} from "react-hook-form"
 
 function ModalEx() {
+
+  const {register, handleSubmit} = useForm()
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -13,47 +16,25 @@ function ModalEx() {
 
   return (
     <>
-      <p onClick={handleShow}>
+      <p  onClick={handleShow}>
         Registro
       </p>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Registro</Modal.Title>
+          <Modal.Title>REGISTRO</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Container>
-      <Form>
-        <FormGroup className="mb-3">
-      <Form.Label>Nombre</Form.Label>
-      <Form.Control
-        type="text"
-        placeholder="ej: Federico"
-        />
-</FormGroup>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="ej: fede@gmail.com" />
-      
-        </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
+   
+      < Registro />
         
-        <Button variant="primary" type="submit" onClick={handleClose}>
-          Enviar
-        </Button>
-      </Form>
-      </Container>
-      </Modal.Body>
+    
+
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cerrar
-          </Button>
          
+          <Button variant="primary" onClick={handleClose}>
+            Cancelar
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

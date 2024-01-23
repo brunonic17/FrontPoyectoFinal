@@ -2,6 +2,7 @@
 
   export const routes = [
     {
+        
         label: "Inico",
         path: "/"
     },
