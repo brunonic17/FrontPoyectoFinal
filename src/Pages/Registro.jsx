@@ -1,5 +1,6 @@
 import { Container } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { registerRequest } from "../api/auth";
 
 function Registro() {
   const {
@@ -9,23 +10,26 @@ function Registro() {
     watch,
     reset
   } = useForm();
-  console.log(errors);
+  
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    console.log(data)
+    registerRequest(data)
     alert("Enviando datos")
     reset()
+    
   });
   return (
     <>
       <Container>
-        <form>
+        <form className="p-2 bg-secondary ">
+          
           <div className="mb-3">
-            <label className="form-label">Nombre</label>
+            <label className="form-label fst-italic ">Nombre</label>
             <input
               type="text"
-              name="nombre"
-              {...register("nombre", {
+              name="nameUser"
+              {...register("nameUser", {
                 required: {
                   value: true,
                   message: "Nombre es requerido",
@@ -46,7 +50,7 @@ function Registro() {
             {errors.nombre && <span>{errors.nombre.message}</span>}
           </div>
           <div className="mb-3">
-            <label className="form-label">Email</label>
+            <label className="form-label fst-italic">Email</label>
             <input
               type="email"
               name="email"
@@ -67,7 +71,7 @@ function Registro() {
             {errors.email && <span>{errors.email.message}</span>}
           </div>
           <div className="mb-3">
-            <label className="form-label">Password</label>
+            <label className="form-label fst-italic">Password</label>
             <input
               type="password"
               name="password"
@@ -92,7 +96,7 @@ function Registro() {
           </div>
 
           <div className="mb-3">
-            <label className="form-label">Comfirmar Password</label>
+            <label className="form-label fst-italic">Comfirmar Password</label>
             <input
               type="password"
               name="confirmarPassword"
@@ -112,12 +116,6 @@ function Registro() {
           <button type="button" className="btn btn-primary" onClick={onSubmit}>
             Enviar
           </button>
-
-          <pre>
-            {
-              JSON.stringify(watch(), null, 2)
-            }
-          </pre>
         </form>
       </Container>
     </>

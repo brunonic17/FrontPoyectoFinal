@@ -9,15 +9,15 @@ import { Button } from "react-bootstrap";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import ModalEx from "./Modal";
 import iconos from "../helpers/iconos";
-import {routes} from "../helpers/routes"
+// import {routes} from "../helpers/routes"
 
 function NavBarEx() {
   return (
-    <Navbar expand="lg" className="">
+    <Navbar expand="lg" className=" sticky-top bg-info ">
       <Container className="gap-3  d-flex flex-lg-column  ">
         <Navbar className="  col-8 col-lg-12 ">
           <Container className="d-flex justify-content-between ">
-            <Nav.Link as={NavLink} to="/" className="col-2">
+            <Nav.Link as={NavLink} to="/" className="col-3">
               <Image src={LogoYoCampo} className="" roundedCircle />
             </Nav.Link>
             <Form className="d-flex col-6 d-none d-lg-flex ">
@@ -59,8 +59,8 @@ function NavBarEx() {
         <Navbar.Collapse
           id="basic-navbar-nav"
           className="w-100  justify-content-lg-center d-lg-flex  ">
-          <Nav className="text-center">
-            <Form className="d-flex col-6 d-lg-none ">
+          <Nav className="p-2">
+            <Form className="d-flex  d-lg-none ">
               <Form.Control
                 type="search"
                 placeholder="Buscar productos"
