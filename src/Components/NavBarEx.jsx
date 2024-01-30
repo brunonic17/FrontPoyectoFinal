@@ -7,20 +7,22 @@ import Form from "react-bootstrap/Form";
 import LogoYoCampo from "../assets/img/LogoYoCampo.jpg";
 import { Button } from "react-bootstrap";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import ModalEx from "./Modal";
+
 import iconos from "../helpers/iconos";
+import ModalRegister from "./ModalRegistro";
 // import {routes} from "../helpers/routes"
 
 function NavBarEx() {
   return (
     <Navbar expand="lg" className=" sticky-top bg-info ">
-      <Container className="gap-3  d-flex flex-lg-column  ">
-        <Navbar className="  col-8 col-lg-12 ">
-          <Container className="d-flex justify-content-between ">
-            <Nav.Link as={NavLink} to="/" className="col-3">
+      <Container className="  d-flex justify-content-center  flex-lg-column  ">
+        <Navbar className=" bg-danger   col col-lg-12 order-2">
+          <Container className="d-flex justify-content-center ">
+            <Nav.Link as={NavLink} to="/" className="col-lg-3  ">
               <Image src={LogoYoCampo} className="" roundedCircle />
             </Nav.Link>
-            <Form className="d-flex col-6 d-none d-lg-flex ">
+           
+            <Form className=" col-lg-6 d-none d-lg-flex ">
               <Form.Control
                 type="search"
                 placeholder="Buscar productos"
@@ -39,28 +41,48 @@ function NavBarEx() {
                 </svg>
               </Button>
             </Form>
-            <ul className="d-flex justify-content-center gap-3  ">
-            
-              {
-                 iconos.map((s)=> {
-                 return (
-                   
-                   <li key={s.idSvg}>{s.svg}</li>
-
-                 ) 
-                 
-                 })
-              }
+            <ul className="  d-none d-lg-flex col-lg-3 justify-content-around   ">
+              {iconos.map((s) => {
+                return <li key={s.idSvg}>{s.svg}</li>;
+              })}
             </ul>
           </Container>
         </Navbar>
-
-        <Navbar.Toggle aria-controls="basic-navbar-nav" className="" />
+        <div className="dropdown order-3 d-lg-none ">
+          <NavLink
+            className=" dropdown-toggle"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              fill="white"
+              className="bi bi-person"
+              viewBox="0 0 16 16">
+              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+            </svg>
+          </NavLink>
+          <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li>
+              <Nav.Link>
+                <ModalRegister />
+              </Nav.Link>
+            </li>
+            <li>
+            <Nav.Link as={NavLink} to="login">
+              Acceder
+            </Nav.Link>
+            </li>
+          </ul>
+        </div>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className="order-1" />
         <Navbar.Collapse
           id="basic-navbar-nav"
-          className="w-100  justify-content-lg-center d-lg-flex  ">
+          className="w-100  justify-content-lg-center d-lg-flex order-4 ">
           <Nav className="p-2">
-            <Form className="d-flex  d-lg-none ">
+            <Form className="d-flex  d-lg-none w-75  ">
               <Form.Control
                 type="search"
                 placeholder="Buscar productos"
@@ -94,20 +116,18 @@ function NavBarEx() {
                 </NavDropdown.Item>
               </NavDropdown>
             </div>
-           
-             <Nav.Link as={NavLink} to="productos">
-              Productos
-            </Nav.Link>
-             <Nav.Link as={NavLink} to="contacto">
+
+            <Nav.Link as={NavLink} to="contacto">
               Contacto
             </Nav.Link>
-            <Nav.Link  >
-              <ModalEx />
-              {/* Registro */}
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="login">
+            <Nav.Link className="d-none d-lg-block ">
+                <ModalRegister />
+              </Nav.Link>
+            <Nav.Link as={NavLink} to="login" className="d-none d-lg-block ">
               Acceder
-            </Nav.Link> 
+            </Nav.Link>
+            
+           
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -116,8 +136,3 @@ function NavBarEx() {
 }
 
 export default NavBarEx;
-
-
-
-
-

@@ -1,17 +1,14 @@
-import { Container } from "react-bootstrap";
-import { useForm } from "react-hook-form";
+
+import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
-// import { useAuth } from "../Contex/AuthContext";
-import { registerRequest } from "../api/auth";
+// import { registerRequest } from "../api/auth";
+import axios from "axios"
 
 
-function Registro() {
-  
-
- 
- 
-
-  const navigate = useNavigate();
+function ModalRegister() {
 
   const {
     register,
@@ -22,17 +19,37 @@ function Registro() {
     
   } = useForm();
 
+  const navigate = useNavigate();
 
+  const [show, setShow] = useState(false);
+  
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+ 
   const onSubmit = handleSubmit(async (data) => {
     console.log(data)
-    const res = await registerRequest(data)
-    console.log(res)
+    // const res = await registerRequest(data)
+    axios.post(`http://localhost:4040/api/register`, data)
+    // console.log(res)
+    
     reset();
-    navigate("/");
+    setTimeout(() => {
+      handleClose(navigate("/"))
+    }, 2000);
   });
+
   return (
     <>
-      <Container >
+      <p  onClick={handleShow}>
+        Registro
+      </p>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>REGISTRO</Modal.Title>
+        </Modal.Header>
+
         <form className="p-2 bg-secondary " >
           <div className="mb-3">
             <label className="form-label fst-italic ">Nombre</label>
@@ -57,7 +74,7 @@ function Registro() {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
             />
-            {errors.nameUser && <span>{errors.nombre.message}</span>}
+            {errors.nameUser && <span>{errors.nameUser.message}</span>}
           </div>
           <div className="mb-3">
             <label className="form-label fst-italic">Email</label>
@@ -127,13 +144,23 @@ function Registro() {
           </div>
         
 
+        <Modal.Footer>
           <button type="button" className="btn btn-primary" onClick={onSubmit}>
             Enviar
           </button>
+         
+          <Button variant="primary" onClick={handleClose}>
+            Cancelar
+          </Button>
+        </Modal.Footer>
         </form>
-      </Container>
+      
+        
+    
+
+      </Modal>
     </>
   );
 }
 
-export default Registro;
+export default ModalRegister;

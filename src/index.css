@@ -16,7 +16,7 @@ ul {
 }
 
 .bg_404 {
-  background: url(../src/img/dribbble_1.gif);
+  background: url(../src/assets/img/dribbble_1.gif);
   height:400px;
   background-position: center;
  
@@ -47,4 +47,32 @@ span {
   display: block;
   color: tomato;
   font-size: 1.2rem;
+}
+.dropdown-menu[data-bs-popper]
+{
+ 
+  right: 10px !important;
+}
+li {
+  width: auto;
+}
+@media (min-width: 576px) {
+  .modal
+{
+    --bs-modal-margin: 1rem !important;
+
+  }
+  ul {
+    display: none;
+  }
+  .d-noneform {
+    display: none;
+  }
+}
+@media (min-width: 728px) {
+  .modal
+{
+    --bs-modal-margin: 0!important;
+
+  }
 }
