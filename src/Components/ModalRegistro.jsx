@@ -1,56 +1,53 @@
-
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { useForm } from 'react-hook-form';
+import { useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 // import { registerRequest } from "../api/auth";
-import axios from "axios"
-
+// import axios from "axios"
+import { useAuth } from "../Context/AuthContext";
 
 function ModalRegister() {
-
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
     reset,
-    
   } = useForm();
-
   const navigate = useNavigate();
+  const { signup, isAuthenticated, errors: authErrors } = useAuth();
 
   const [show, setShow] = useState(false);
-  
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
  
-  const onSubmit = handleSubmit(async (data) => {
-    console.log(data)
-    // const res = await registerRequest(data)
-    axios.post(`http://localhost:4040/api/register`, data)
-    // console.log(res)
-    
+  useEffect(() => {
+    if (isAuthenticated) ;
     reset();
     setTimeout(() => {
-      handleClose(navigate("/"))
-    }, 2000);
+      handleClose();
+    }, 1000)
+    navigate("/");
+  }, [isAuthenticated, navigate, reset]);
+
+  const onSubmit = handleSubmit(async (data) => {
+    signup(data);
+    // const res = await registerRequest(data)
+    // axios.post(`http://localhost:4040/api/register`, data)
   });
 
   return (
     <>
-      <p  onClick={handleShow}>
-        Registro
-      </p>
+      <p onClick={handleShow}>Registro</p>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>REGISTRO</Modal.Title>
         </Modal.Header>
 
-        <form className="p-2 bg-secondary " >
+        <form className="p-2 bg-secondary ">
           <div className="mb-3">
             <label className="form-label fst-italic ">Nombre</label>
             <input
@@ -74,7 +71,7 @@ function ModalRegister() {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
             />
-            {errors.nameUser && <span>{errors.nameUser.message}</span>}
+            {errors.nameUser && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{errors.nameUser.message}</span>}
           </div>
           <div className="mb-3">
             <label className="form-label fst-italic">Email</label>
@@ -95,7 +92,10 @@ function ModalRegister() {
               className="form-control"
               id="exampleInputPassword1"
             />
-            {errors.email && <span>{errors.email.message}</span>}
+            {errors.email && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{errors.email.message}</span>}
+            
+            
+            { authErrors !== "" && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{authErrors}</span> }
           </div>
           <div className="mb-3">
             <label className="form-label fst-italic">Password</label>
@@ -116,10 +116,11 @@ function ModalRegister() {
                   message: "La contraseña no puede superar",
                 },
               })}
+              
               className="form-control"
               id="exampleInputPassword1"
             />
-            {errors.password && <span>{errors.password.message}</span>}
+            {errors.password && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{errors.password.message}</span>}
           </div>
 
           <div className="mb-3">
@@ -139,25 +140,23 @@ function ModalRegister() {
               id="exampleInputPassword1"
             />
             {errors.confirmarPassword && (
-              <span>{errors.confirmarPassword.message}</span>
+              <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{errors.confirmarPassword.message}</span>
             )}
           </div>
-        
 
-        <Modal.Footer>
-          <button type="button" className="btn btn-primary" onClick={onSubmit}>
-            Enviar
-          </button>
-         
-          <Button variant="primary" onClick={handleClose}>
-            Cancelar
-          </Button>
-        </Modal.Footer>
+          <Modal.Footer>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={onSubmit}>
+              Enviar
+            </button>
+
+            <Button variant="primary" onClick={handleClose}>
+              Cancelar
+            </Button>
+          </Modal.Footer>
         </form>
-      
-        
-    
-
       </Modal>
     </>
   );

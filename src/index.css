@@ -56,6 +56,13 @@ span {
 li {
   width: auto;
 }
+.h-10{
+  max-height: 60vh;
+  border: solid red;
+}
+.img1 {
+  width: 100%;
+}
 @media (min-width: 576px) {
   .modal
 {

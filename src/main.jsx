@@ -12,7 +12,7 @@ import PaginaError from "./Pages/PaginaError";
 import Registro from "./Pages/Registro";
 import Login from "./Pages/Login";
 import Productos from "./Pages/Productos";
-import { ContextAuth } from "./Context/AuthContext";
+import { AuthProvider } from "./Context/AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -79,6 +79,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
