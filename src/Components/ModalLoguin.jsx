@@ -2,21 +2,25 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 // import { registerRequest } from "../api/auth";
 // import axios from "axios"
 import { useAuth } from "../Context/AuthContext";
+import ModalRegister from "./ModalRegistro";
 
-function ModalRegister() {
+
+
+function ModalLoguin() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
     reset,
   } = useForm();
+
   const navigate = useNavigate();
-  const { signup, isAuthenticated, errors: authErrors } = useAuth();
+
+  const { signin, isAuthenticated, errors: signinErrors } = useAuth();
 
   const [show, setShow] = useState(false);
 
@@ -31,48 +35,27 @@ function ModalRegister() {
     }, 1000)
     navigate("/");
   }, [isAuthenticated]);
+ 
 
-  const onSubmit = handleSubmit(async (data) => {
-    signup(data);
-    // const res = await registerRequest(data)
-    // axios.post(`http://localhost:4040/api/register`, data)
+  const onSubmit = handleSubmit( (data) => {
+   signin(data)
   });
+//   const backRegister = ()=> {
+//    navigate( "/")
+//   }
 
   return (
     <>
-      <p onClick={handleShow}>Registro</p>
+      <p onClick={handleShow}>Acceder</p>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>REGISTRO</Modal.Title>
+          <Modal.Title>ACCEDER</Modal.Title>
         </Modal.Header>
 
         <form className="p-2 bg-secondary ">
-          <div className="mb-3">
-            <label className="form-label fst-italic ">Nombre</label>
-            <input
-              type="text"
-              name="nameUser"
-              {...register("nameUser", {
-                required: {
-                  value: true,
-                  message: "Nombre es requerido",
-                },
-                minLength: {
-                  value: 2,
-                  message: "El nombre debe tener al menos dos letras.",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "Tu nombre es demasiado largo, maximo 20 letras.",
-                },
-              })}
-              className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-            />
-            {errors.nameUser && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{errors.nameUser.message}</span>}
-          </div>
+        { signinErrors !== "" && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{signinErrors}</span> }
+
           <div className="mb-3">
             <label className="form-label fst-italic">Email</label>
             <input
@@ -94,8 +77,6 @@ function ModalRegister() {
             />
             {errors.email && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{errors.email.message}</span>}
             
-            
-            { authErrors !== "" && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{authErrors}</span> }
           </div>
           <div className="mb-3">
             <label className="form-label fst-italic">Password</label>
@@ -113,7 +94,7 @@ function ModalRegister() {
                 },
                 maxLength: {
                   value: 20,
-                  message: "La contraseña no puede superar",
+                  message: "La contraseña no puede superar los 20 caracteres",
                 },
               })}
               
@@ -123,26 +104,6 @@ function ModalRegister() {
             {errors.password && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{errors.password.message}</span>}
           </div>
 
-          <div className="mb-3">
-            <label className="form-label fst-italic">Comfirmar Password</label>
-            <input
-              type="password"
-              name="confirmarPassword"
-              {...register("confirmarPassword", {
-                required: {
-                  value: true,
-                  message: "Confirmación de la Contraseña es requerido.",
-                },
-                validate: (value) =>
-                  value === watch("password") || "Las contraseñas no coinciden",
-              })}
-              className="form-control"
-              id="exampleInputPassword1"
-            />
-            {errors.confirmarPassword && (
-              <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{errors.confirmarPassword.message}</span>
-            )}
-          </div>
 
           <Modal.Footer>
             <button
@@ -156,10 +117,18 @@ function ModalRegister() {
               Cancelar
             </Button>
           </Modal.Footer>
+        <div className="d-flex justify-content-between">
+        <p className="d-flex  fw-bold fs-4 text-white fst-italic">No tienes una cuenta?</p>
+        <NavLink className= "btn bg-success text-white "  >
+   <ModalRegister />
+ </NavLink>
+        </div>
+              
         </form>
+
       </Modal>
     </>
   );
 }
 
-export default ModalRegister;
+export default ModalLoguin;

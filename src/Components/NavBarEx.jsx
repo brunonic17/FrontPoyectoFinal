@@ -10,6 +10,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 
 import iconos from "../helpers/iconos";
 import ModalRegister from "./ModalRegistro";
+import ModalLoguin from "./ModalLoguin";
 // import {routes} from "../helpers/routes"
 
 function NavBarEx() {
@@ -71,8 +72,8 @@ function NavBarEx() {
               </Nav.Link>
             </li>
             <li>
-            <Nav.Link as={NavLink} to="login">
-              Acceder
+            <Nav.Link>
+            <ModalLoguin />
             </Nav.Link>
             </li>
           </ul>
@@ -120,12 +121,8 @@ function NavBarEx() {
             <Nav.Link as={NavLink} to="contacto">
               Contacto
             </Nav.Link>
-            <Nav.Link className="d-none d-lg-block ">
-                <ModalRegister />
-              </Nav.Link>
-            <Nav.Link as={NavLink} to="login" className="d-none d-lg-block ">
-              Acceder
-            </Nav.Link>
+          
+          
             
            
           </Nav>

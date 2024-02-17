@@ -9,10 +9,10 @@ import Nosotros from "./Pages/Nosotros";
 import Contacto from "./Pages/Contacto";
 import "../src/index.css";
 import PaginaError from "./Pages/PaginaError";
-import Registro from "./Pages/Registro";
-import Login from "./Pages/Login";
 import Productos from "./Pages/Productos";
 import { AuthProvider } from "./Context/AuthContext";
+import ModalLoguin from "./Components/ModalLoguin";
+import ModalRegister from "./Components/ModalRegistro";
 
 const router = createBrowserRouter([
   {
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
         path: "/registro",
         element: (
           <div>
-            <Registro />
+            <ModalRegister />
           </div>
         ),
       },
@@ -69,7 +69,7 @@ const router = createBrowserRouter([
         path: "/login",
         element: (
           <div>
-            <Login />
+            <ModalLoguin />
           </div>
         ),
       },
