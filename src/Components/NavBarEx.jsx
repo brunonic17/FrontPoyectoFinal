@@ -7,13 +7,19 @@ import Form from "react-bootstrap/Form";
 import LogoYoCampo from "../assets/img/LogoYoCampo.jpg";
 import { Button } from "react-bootstrap";
 import NavDropdown from "react-bootstrap/NavDropdown";
-
 import iconos from "../helpers/iconos";
 import ModalRegister from "./ModalRegistro";
 import ModalLoguin from "./ModalLoguin";
-// import {routes} from "../helpers/routes"
+import { useAuth } from "../Context/AuthContext";
+import { useState } from "react";
+
+const { user } = useAuth;
 
 function NavBarEx() {
+  const [newUser, setNewUser] = useState(user);
+  console.log(newUser)
+
+
   return (
     <Navbar expand="lg" className=" sticky-top bg-info ">
       <Container className="  d-flex justify-content-center  flex-lg-column  ">
@@ -22,7 +28,7 @@ function NavBarEx() {
             <Nav.Link as={NavLink} to="/" className="col-lg-3  ">
               <Image src={LogoYoCampo} className="" roundedCircle />
             </Nav.Link>
-           
+
             <Form className=" col-lg-6 d-none d-lg-flex ">
               <Form.Control
                 type="search"
@@ -72,9 +78,9 @@ function NavBarEx() {
               </Nav.Link>
             </li>
             <li>
-            <Nav.Link>
-            <ModalLoguin />
-            </Nav.Link>
+              <Nav.Link>
+                <ModalLoguin />
+              </Nav.Link>
             </li>
           </ul>
         </div>
@@ -121,10 +127,24 @@ function NavBarEx() {
             <Nav.Link as={NavLink} to="contacto">
               Contacto
             </Nav.Link>
-          
-          
-            
+            <Nav.Link as={NavLink} to="nosotros">
+              Nosotros
+            </Nav.Link>
+
+            <Nav.Link>
+              <ModalRegister />
+            </Nav.Link>
+
            
+            {
+            newUser? (
+              <p>cerrar sesion</p>
+            ) : ( 
+              
+              <Nav.Link>
+                <ModalLoguin />
+              </Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

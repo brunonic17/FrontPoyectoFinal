@@ -13,6 +13,10 @@ import Productos from "./Pages/Productos";
 import { AuthProvider } from "./Context/AuthContext";
 import ModalLoguin from "./Components/ModalLoguin";
 import ModalRegister from "./Components/ModalRegistro";
+import { ProtectedRoute } from "./Components/ProtectedRoute";
+import {useAuth} from './Context/AuthContext';
+
+const {user} = useAuth;
 
 const router = createBrowserRouter([
   {
@@ -36,9 +40,11 @@ const router = createBrowserRouter([
       {
         path: "/nosotros",
         element: (
-          <div>
+          <ProtectedRoute user= {user}>
+            <div>
             <Nosotros />
-          </div>
+            </div>
+          </ProtectedRoute>
         ),
       },
       {

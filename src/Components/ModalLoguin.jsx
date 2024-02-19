@@ -8,8 +8,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import ModalRegister from "./ModalRegistro";
 
-
-
 function ModalLoguin() {
   const {
     register,
@@ -26,23 +24,22 @@ function ModalLoguin() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
- 
+
   useEffect(() => {
-    if (isAuthenticated) ;
+    if (isAuthenticated);
     reset();
     setTimeout(() => {
       handleClose();
-    }, 1000)
+    }, 1000);
     navigate("/");
   }, [isAuthenticated]);
- 
 
-  const onSubmit = handleSubmit( (data) => {
-   signin(data)
+  const onSubmit = handleSubmit((data) => {
+    signin(data);
   });
-//   const backRegister = ()=> {
-//    navigate( "/")
-//   }
+  //   const backRegister = ()=> {
+  //    navigate( "/")
+  //   }
 
   return (
     <>
@@ -54,7 +51,11 @@ function ModalLoguin() {
         </Modal.Header>
 
         <form className="p-2 bg-secondary ">
-        { signinErrors !== "" && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{signinErrors}</span> }
+          {signinErrors !== "" && (
+            <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
+              {signinErrors}
+            </span>
+          )}
 
           <div className="mb-3">
             <label className="form-label fst-italic">Email</label>
@@ -75,8 +76,11 @@ function ModalLoguin() {
               className="form-control"
               id="exampleInputPassword1"
             />
-            {errors.email && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{errors.email.message}</span>}
-            
+            {errors.email && (
+              <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
+                {errors.email.message}
+              </span>
+            )}
           </div>
           <div className="mb-3">
             <label className="form-label fst-italic">Password</label>
@@ -97,13 +101,15 @@ function ModalLoguin() {
                   message: "La contraseña no puede superar los 20 caracteres",
                 },
               })}
-              
               className="form-control"
               id="exampleInputPassword1"
             />
-            {errors.password && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{errors.password.message}</span>}
+            {errors.password && (
+              <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
+                {errors.password.message}
+              </span>
+            )}
           </div>
-
 
           <Modal.Footer>
             <button
@@ -117,15 +123,15 @@ function ModalLoguin() {
               Cancelar
             </Button>
           </Modal.Footer>
-        <div className="d-flex justify-content-between">
-        <p className="d-flex  fw-bold fs-4 text-white fst-italic">No tienes una cuenta?</p>
-        <NavLink className= "btn bg-success text-white "  >
-   <ModalRegister />
- </NavLink>
-        </div>
-              
+          <div className="d-flex justify-content-between">
+            <p className="d-flex  fw-bold fs-4 text-white fst-italic">
+              No tienes una cuenta?
+            </p>
+            <NavLink className="btn bg-success text-white ">
+              <ModalRegister />
+            </NavLink>
+          </div>
         </form>
-
       </Modal>
     </>
   );
