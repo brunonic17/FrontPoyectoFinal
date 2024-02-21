@@ -1,34 +1,18 @@
-
-
 import { Outlet } from "react-router-dom";
 import NavBarEx from "./NavBarEx";
 
-
-
-
-
 function Layout() {
   return (
-
     <>
-   
-   
-    <NavBarEx />
+      <NavBarEx />
 
-    <main>  
-    <div>
-
-      <Outlet />
-      </div>
-      
-
-     
-    </main>
-    
-   
+      <main>
+        <div>
+          <Outlet />
+        </div>
+      </main>
     </>
-
-  )
+  );
 }
 
-export default Layout
+export default Layout;

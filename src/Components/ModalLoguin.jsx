@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 // import { registerRequest } from "../api/auth";
 // import axios from "axios"
 import { useAuth } from "../Context/AuthContext";
@@ -16,7 +16,7 @@ function ModalLoguin() {
     reset,
   } = useForm();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const { signin, isAuthenticated, errors: signinErrors } = useAuth();
 
@@ -31,7 +31,7 @@ function ModalLoguin() {
     setTimeout(() => {
       handleClose();
     }, 1000);
-    navigate("/");
+    // navigate("/");
   }, [isAuthenticated]);
 
   const onSubmit = handleSubmit((data) => {

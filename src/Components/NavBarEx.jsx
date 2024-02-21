@@ -11,15 +11,10 @@ import iconos from "../helpers/iconos";
 import ModalRegister from "./ModalRegistro";
 import ModalLoguin from "./ModalLoguin";
 import { useAuth } from "../Context/AuthContext";
-import { useState } from "react";
-
-const { user } = useAuth;
 
 function NavBarEx() {
-  const [newUser, setNewUser] = useState(user);
-  console.log(newUser)
-
-
+  const { isAuthenticated, user, logout } = useAuth();
+  console.log(isAuthenticated);
   return (
     <Navbar expand="lg" className=" sticky-top bg-info ">
       <Container className="  d-flex justify-content-center  flex-lg-column  ">
@@ -72,16 +67,36 @@ function NavBarEx() {
             </svg>
           </NavLink>
           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li>
-              <Nav.Link>
-                <ModalRegister />
-              </Nav.Link>
-            </li>
-            <li>
-              <Nav.Link>
-                <ModalLoguin />
-              </Nav.Link>
-            </li>
+            {isAuthenticated ? (
+              <>
+                <li>
+                  <Nav.Link>Hola {`${user.nameUser}`}</Nav.Link>
+                </li>
+                <li>
+                  <Nav.Link
+                    className=" btn-danger text-white"
+                    onClick={() => {}}>
+                    Logout
+                  </Nav.Link>
+                </li>
+                <Nav.Link as={NavLink} to="admin">
+                  Admin
+                </Nav.Link>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Nav.Link>
+                    <ModalRegister />
+                  </Nav.Link>
+                </li>
+                <li>
+                  <Nav.Link>
+                    <ModalLoguin />
+                  </Nav.Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="order-1" />
@@ -131,19 +146,38 @@ function NavBarEx() {
               Nosotros
             </Nav.Link>
 
-            <Nav.Link>
-              <ModalRegister />
-            </Nav.Link>
-
-           
-            {
-            newUser? (
-              <p>cerrar sesion</p>
-            ) : ( 
-              
-              <Nav.Link>
-                <ModalLoguin />
-              </Nav.Link>
+            {isAuthenticated ? (
+              <>
+                <li>
+                  <Nav.Link>Hola {`${user.nameUser}`}</Nav.Link>
+                </li>
+                <li>
+                  <NavLink
+                    to="/"
+                    onClick={() => {
+                      logout();
+                      // window.location.reload();
+                    }}>
+                    Logout
+                  </NavLink>
+                </li>
+                <Nav.Link as={NavLink} to="admin">
+                  Admin
+                </Nav.Link>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Nav.Link>
+                    <ModalRegister />
+                  </Nav.Link>
+                </li>
+                <li>
+                  <Nav.Link>
+                    <ModalLoguin />
+                  </Nav.Link>
+                </li>
+              </>
             )}
           </Nav>
         </Navbar.Collapse>

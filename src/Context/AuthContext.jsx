@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { LoguinRequest, registerRequest } from "../api/auth";
+import { LoguinRequest, registerRequest, verifyTokenRequet } from "../api/auth";
+import Cookies from "js-cookie";
 
 export const AuthContext = createContext();
 
@@ -17,6 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setisAuthenticate] = useState(false);
   const [errors, setErrors] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const signup = async (user) => {
     try {
@@ -25,9 +27,8 @@ export const AuthProvider = ({ children }) => {
       setUser(res.data);
       setisAuthenticate(true);
     } catch (error) {
-      console.log(error.response)
-      setErrors(error.response)
-      
+      console.log(error.response);
+      setErrors(error.response);
     }
   };
   const signin = async (user) => {
@@ -37,26 +38,61 @@ export const AuthProvider = ({ children }) => {
       setUser(res.data);
       setisAuthenticate(true);
     } catch (error) {
-      // console.log(error.response.data.msg)
-      setErrors(error.response.data.message)
-      console.log(error.response.data.message)
+      // console.log(error)
+      setErrors(error.response.data.message);
+      console.log(error.response.data.message);
     }
   };
 
-  useEffect(
-    () => {
-      if(errors.length > 0 ){
-       const timer = setTimeout(()=> {
-          setErrors([])
-        }, 3000)
-        return () => clearTimeout(timer)//funcion de js para quitar el timeout para consumir menos recursos
+   const logout = () => {
+    Cookies.remove("token");
+    setisAuthenticate(false);
+    setUser(null);
+   }
+
+  useEffect(() => {
+    if (errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 3000);
+      return () => clearTimeout(timer); //funcion de js para quitar el timeout para consumir menos recursos
+    }
+  }, [errors]);
+
+  useEffect(() => {
+    async function checkLogin() {
+      //funcion EM5
+      const cookies = Cookies.get();
+    
+      if (!cookies.token) {
+        setisAuthenticate(false);
+        setLoading(false);
+        return setUser(null);
       }
-},[errors])
+      try {
+        const res = await verifyTokenRequet(cookies.token);
+        if (!res.data) {
+          setisAuthenticate(false);
+          setLoading(false);
+          return;
+        }
+        setisAuthenticate(true);
+        setUser(res.data);
+        setLoading(false);
+      } catch (error) {
+        setisAuthenticate(false);
+        setUser(null);
+        setLoading(false);
+        console.log("error verify", error)
+      }
+    }
+    checkLogin();
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ signup,signin, user, isAuthenticated, errors}}>
+    <AuthContext.Provider
+      value={{ signup, signin, logout, user, isAuthenticated, errors, loading }}>
       {children}
     </AuthContext.Provider>
   );
 };
-

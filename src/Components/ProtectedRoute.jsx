@@ -1,22 +1,13 @@
-import { NavLink } from "react-router-dom"
-import  { useAuth } from "../Context/AuthContext";
-import ModalLoguin from "./ModalLoguin";
+import { Navigate, Outlet} from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
 
-export const ProtectedRoute = ({children}) => {
+export const ProtectedRoute = () => {
+  const {  loading, isAuthenticated } = useAuth();
+  console.log(loading, isAuthenticated)
+if(loading) return <h1>Loading...</h1>
+  if (!loading && !isAuthenticated) {
 
-  const { user } = useAuth();
-
-    if (!user) {
-      console.log("necesitas loguearte")
-        return  (
-          
-            <ModalLoguin/> 
-        )
-
-    }
-    return children
-
-
-}
-
-
+    return <Navigate to="/loguin" replace />;
+  }
+  return  <Outlet/>
+};
