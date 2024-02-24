@@ -181,9 +181,14 @@ header {
 	border: none;
 	background: none;
 	background-color: #000;
+	min-width: 15%;
 	color: #fff;
 	padding: 15px 10px;
 	cursor: pointer;
+}
+
+.info-product button:hover {
+	background-color: #333;
 }
 
 .cart-empty {
@@ -216,3 +221,22 @@ header {
   transform: scale(1.03);
   border-radius: 0;
 }
+
+.btn-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.btn-fav:hover {
+	color: #ff4a4a;
+}
+
+/* .detail-product button {
+	border: none;
+	background: none;
+	background-color: #000;
+	min-width: 15%;
+	color: #fff;
+	padding: 15px 10px;
+	cursor: pointer;
+} */

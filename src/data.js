@@ -35,5 +35,19 @@ export const data = [
 		price: 20,
 		quantity: 1,
 	},
+	{
+		id: 6,
+		img: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
+		nameProduct: 'Smartwatch',
+		price: 90,
+		quantity: 1,
+	},
+	{
+		id: 7,
+		img: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
+		nameProduct: 'Smartwatch',
+		price: 90,
+		quantity: 1,
+	},
 	// Aquí pueden agregar más o modificar los productos existentes
 ];

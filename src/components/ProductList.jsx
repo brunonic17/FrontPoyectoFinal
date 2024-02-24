@@ -1,4 +1,6 @@
 import { data } from '../data';
+import { MdFavoriteBorder } from "react-icons/md";
+
 
 export const ProductList = ({
 	allProducts,
@@ -36,9 +38,10 @@ export const ProductList = ({
 						<h2>{product.nameProduct}</h2>
                         <p className='desc'>{product.desc}</p>
 						<p className='price'>${product.price}</p>
-						<button onClick={() => onAddProduct(product)}>
-							Añadir al carrito
-						</button>
+						<div className='btn-container'>
+						  <button onClick={() => onAddProduct(product)}>Ver Producto</button>
+						  <button className='btn-fav'><MdFavoriteBorder /></button>
+						</div>
 					</div>
 				</div>
 			))}
