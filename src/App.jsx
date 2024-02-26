@@ -18,8 +18,8 @@ function App() {
 				setTotal={setTotal}
 				countProducts={countProducts}
 				setCountProducts={setCountProducts}
-			/>
-			<ProductList
+			/> */}
+			{/* <ProductList
 				allProducts={allProducts}
 				setAllProducts={setAllProducts}
 				total={total}
@@ -27,8 +27,8 @@ function App() {
 				countProducts={countProducts}
 				setCountProducts={setCountProducts}
 			/> */}
-			{/* <ProductDetail/> */}
-			<CommentSection/>
+			
+			{/* <CommentSection/> */}
 		</>
 	);
 }

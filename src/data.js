@@ -1,6 +1,6 @@
 export const data = [
 	{
-		id: 1,
+		id: "1",
 		img: 'https://static.wixstatic.com/media/36abab_dc2e0a21c53f446db668ac2783f16554~mv2.jpg/v1/fill/w_480,h_320,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/36abab_dc2e0a21c53f446db668ac2783f16554~mv2.jpg',
 		nameProduct: 'Alpargata lisa',
 		desc: 'Alpargata muy comoda y con estilo, para el dia a dia.',
@@ -8,7 +8,7 @@ export const data = [
 		quantity: 1,
 	},
 	{
-		id: 2,
+		id: "2",
 		img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1099&q=80',
 		nameProduct: 'Reloj',
 		price: 50,

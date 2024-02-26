@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 
 
-const ProductDetail = () => {
-  
+const ProductDetail = (nameProduct) => {
+  console.log("hola datail")
   const product = {
-    name: 'Producto Ejemplo',
+    name: '',
     price: 19.99,
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Rojo', 'Verde', 'Azul'],
@@ -47,39 +46,75 @@ const ProductDetail = () => {
   };
 
 
-  return (
-    <div className="product-detail">
-      <div className="image-carousel">
-        {/* carrusel de imágenes */}
-        {product.images.map((image, index) => (
-          <img key={index} src={image} alt={`Imagen ${index}`} />
-        ))}
-      </div>
-      <div className="detail-product">
-        <h2>{product.name}</h2>
-        <p></p>
-        <p>Precio: ${product.price}</p>
-        <label>Talle:</label>
-        <select value={selectedSize} onChange={handleSizeChange}>
-          {product.sizes.map((size, index) => (
-            <option key={index} value={size}>
-              {size}
-            </option>
-          ))}
-        </select>
-        <label>Color:</label>
-        <select value={selectedColor} onChange={handleColorChange}>
-          {product.colors.map((color, index) => (
-            <option key={index} value={color}>
-              {color}
-            </option>
-          ))}
-        </select>
-        <button onClick={addToCart}>Agregar al Carrito</button>
-        <button onClick={addToFavorites}>Agregar a Favoritos</button>
-      </div>
+//   return (
+//     <div className="product-detail">
+//       <div className="image-carousel">
+//         {/* carrusel de imágenes */}
+//         {product.images.map((image, index) => (
+//           <img key={index} src={image} alt={`Imagen ${index}`} />
+//         ))}
+//       </div>
+//       <div className="detail-product">
+//         <h2>{product.name}</h2>
+//         <p></p>
+//         <p>Precio: ${product.price}</p>
+//         <label>Talle:</label>
+//         <select value={selectedSize} onChange={handleSizeChange}>
+//           {product.sizes.map((size, index) => (
+//             <option key={index} value={size}>
+//               {size}
+//             </option>
+//           ))}
+//         </select>
+//         <label>Color:</label>
+//         <select value={selectedColor} onChange={handleColorChange}>
+//           {product.colors.map((color, index) => (
+//             <option key={index} value={color}>
+//               {color}
+//             </option>
+//           ))}
+//         </select>
+//         <button onClick={addToCart}>Agregar al Carrito</button>
+//         <button onClick={addToFavorites}>Agregar a Favoritos</button>
+//       </div>
+//     </div>
+//   );
+// };
+
+return (
+  <div className="product-detail">
+    <div className="image-carousel">
+      {/* carrusel de imágenes */}
+      {data.map((image, index) => (
+        <img key={index} src={image} alt={`Imagen ${index}`} />
+      ))}
     </div>
-  );
+    <div className="detail-product">
+      <h2>{product.name}</h2>
+      <p></p>
+      <p>Precio: ${product.price}</p>
+      <label>Talle:</label>
+      <select value={selectedSize} onChange={handleSizeChange}>
+        {product.sizes.map((size, index) => (
+          <option key={index} value={size}>
+            {size}
+          </option>
+        ))}
+      </select>
+      <label>Color:</label>
+      <select value={selectedColor} onChange={handleColorChange}>
+        {product.colors.map((color, index) => (
+          <option key={index} value={color}>
+            {color}
+          </option>
+        ))}
+      </select>
+      <button onClick={addToCart}>Agregar al Carrito</button>
+      <button onClick={addToFavorites}>Agregar a Favoritos</button>
+    </div>
+  </div>
+);
 };
+
 
 export default ProductDetail;
