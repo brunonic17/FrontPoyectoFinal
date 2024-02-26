@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { LoguinRequest, registerRequest, verifyTokenRequet } from "../api/auth";
 import Cookies from "js-cookie";
+import { Navigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -38,7 +39,7 @@ export const AuthProvider = ({ children }) => {
       setUser(res.data);
       setisAuthenticate(true);
     } catch (error) {
-      // console.log(error)
+      console.log(error)
       setErrors(error.response.data.message);
       console.log(error.response.data.message);
     }
@@ -48,6 +49,7 @@ export const AuthProvider = ({ children }) => {
     Cookies.remove("token");
     setisAuthenticate(false);
     setUser(null);
+    return <Navigate to= "/" />
    }
 
   useEffect(() => {
@@ -79,6 +81,7 @@ export const AuthProvider = ({ children }) => {
         setisAuthenticate(true);
         setUser(res.data);
         setLoading(false);
+        console.log(res.data)
       } catch (error) {
         setisAuthenticate(false);
         setUser(null);

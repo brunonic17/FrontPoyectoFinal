@@ -118,7 +118,7 @@ function ModalRegister() {
               })}
               
               className="form-control"
-              id="exampleInputPassword1"
+              id="exampleInputPassword2"
             />
             {errors.password && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{errors.password.message}</span>}
           </div>
@@ -137,7 +137,7 @@ function ModalRegister() {
                   value === watch("password") || "Las contraseñas no coinciden",
               })}
               className="form-control"
-              id="exampleInputPassword1"
+              id="exampleInputPassword3"
             />
             {errors.confirmarPassword && (
               <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{errors.confirmarPassword.message}</span>

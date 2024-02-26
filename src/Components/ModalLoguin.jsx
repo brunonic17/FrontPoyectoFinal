@@ -30,9 +30,9 @@ function ModalLoguin() {
     reset();
     setTimeout(() => {
       handleClose();
-    }, 1000);
+    }, 10000);
     // navigate("/");
-  }, [isAuthenticated]);
+  }, [isAuthenticated, reset]);
 
   const onSubmit = handleSubmit((data) => {
     signin(data);
@@ -74,7 +74,7 @@ function ModalLoguin() {
                 },
               })}
               className="form-control"
-              id="exampleInputPassword1"
+              id="exampleInputPassword"
             />
             {errors.email && (
               <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">

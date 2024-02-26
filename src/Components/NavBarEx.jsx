@@ -13,8 +13,10 @@ import ModalLoguin from "./ModalLoguin";
 import { useAuth } from "../Context/AuthContext";
 
 function NavBarEx() {
-  const { isAuthenticated, user, logout } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
   console.log(isAuthenticated);
+  console.log(user);
+
   return (
     <Navbar expand="lg" className=" sticky-top bg-info ">
       <Container className="  d-flex justify-content-center  flex-lg-column  ">
@@ -70,14 +72,17 @@ function NavBarEx() {
             {isAuthenticated ? (
               <>
                 <li>
-                  <Nav.Link>Hola {`${user.nameUser}`}</Nav.Link>
+                  <p>Hola {`${user.nameUser}`}</p>
                 </li>
                 <li>
-                  <Nav.Link
-                    className=" btn-danger text-white"
-                    onClick={() => {}}>
+                  <Button
+                    to="/"
+                    onClick={() => {
+                      logout();
+                      // window.location.reload();
+                    }}>
                     Logout
-                  </Nav.Link>
+                  </Button>
                 </li>
                 <Nav.Link as={NavLink} to="admin">
                   Admin
@@ -146,24 +151,36 @@ function NavBarEx() {
               Nosotros
             </Nav.Link>
 
-            {isAuthenticated ? (
+            {isAuthenticated && user.rule === "admin" ? (
               <>
-                <li>
-                  <Nav.Link>Hola {`${user.nameUser}`}</Nav.Link>
-                </li>
-                <li>
-                  <NavLink
-                    to="/"
-                    onClick={() => {
-                      logout();
-                      // window.location.reload();
-                    }}>
-                    Logout
-                  </NavLink>
-                </li>
+                <Nav.Link>Hola soy el admin {`${user.nameUser}`}</Nav.Link>
+
                 <Nav.Link as={NavLink} to="admin">
                   Admin
                 </Nav.Link>
+
+                <Button
+                  to="/"
+                  onClick={() => {
+                    console.log("hola")
+                    // logout();
+                    // window.location.reload();
+                  }}>
+                  Logout
+                </Button>
+              </>
+            ) : isAuthenticated ? (
+              <>
+                <Nav.Link>Hola soy usuario {`${user.email}`}</Nav.Link>
+
+                <Button
+                  to="/"
+                  onClick={() => {
+                    logout();
+                    // window.location.reload();
+                  }}>
+                  Logout
+                </Button>
               </>
             ) : (
               <>
