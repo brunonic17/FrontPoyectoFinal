@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
@@ -37,9 +37,7 @@ function ModalLoguin() {
   const onSubmit = handleSubmit((data) => {
     signin(data);
   });
-  //   const backRegister = ()=> {
-  //    navigate( "/")
-  //   }
+ 
 
   return (
     <>
@@ -119,9 +117,9 @@ function ModalLoguin() {
               Enviar
             </button>
 
-            <Button variant="primary" onClick={handleClose}>
+            {/* <Button variant="primary" onClick={handleClose}>
               Cancelar
-            </Button>
+            </Button> */}
           </Modal.Footer>
           <div className="d-flex justify-content-between">
             <p className="d-flex  fw-bold fs-4 text-white fst-italic">

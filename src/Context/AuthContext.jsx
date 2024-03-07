@@ -11,7 +11,7 @@ export const useAuth = () => {
   if (!context) {
     throw new Error("Use the provider");
   }
-  return context;
+  return context; 
 };
 // eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
@@ -28,18 +28,19 @@ export const AuthProvider = ({ children }) => {
       setUser(res.data);
       setisAuthenticate(true);
     } catch (error) {
-      console.log(error.response);
-      setErrors(error.response);
+      console.log(error.response.data.msg)
+      setErrors(error.response.data.msg);
     }
   };
   const signin = async (user) => {
     try {
       const res = await LoguinRequest(user);
-      console.log(res.data);
+      // console.log(res)
+      // console.log(res.data);
       setUser(res.data);
       setisAuthenticate(true);
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       setErrors(error.response.data.message);
       console.log(error.response.data.message);
     }
@@ -53,7 +54,7 @@ export const AuthProvider = ({ children }) => {
    }
 
   useEffect(() => {
-    if (errors.length > 0) {
+    if (setErrors.length > 0) {
       const timer = setTimeout(() => {
         setErrors([]);
       }, 3000);
@@ -81,7 +82,7 @@ export const AuthProvider = ({ children }) => {
         setisAuthenticate(true);
         setUser(res.data);
         setLoading(false);
-        console.log(res.data)
+        // console.log(res.data)
       } catch (error) {
         setisAuthenticate(false);
         setUser(null);
@@ -91,6 +92,9 @@ export const AuthProvider = ({ children }) => {
     }
     checkLogin();
   }, []);
+  useEffect(()=> {
+console.log(user)
+  }, [user])
 
   return (
     <AuthContext.Provider
