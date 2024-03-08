@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-// import Button from "react-bootstrap/Button";
+import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 // import { registerRequest } from "../api/auth";
 // import axios from "axios"
 import { useAuth } from "../Context/AuthContext";
@@ -16,7 +16,7 @@ function ModalLoguin() {
     reset,
   } = useForm();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const { signin, isAuthenticated, errors: signinErrors } = useAuth();
 
@@ -26,13 +26,13 @@ function ModalLoguin() {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    if (isAuthenticated);
-    reset();
+    if (isAuthenticated)
+    reset()
     setTimeout(() => {
-      handleClose();
+      handleClose()
     }, 10000);
-    // navigate("/");
-  }, [isAuthenticated, reset]);
+    navigate("/")
+  }, [isAuthenticated]);
 
   const onSubmit = handleSubmit((data) => {
     signin(data);
@@ -60,6 +60,7 @@ function ModalLoguin() {
             <input
               type="email"
               name="email"
+              autoComplete="username"
               {...register("email", {
                 required: {
                   value: true,
@@ -85,6 +86,7 @@ function ModalLoguin() {
             <input
               type="password"
               name="password"
+              autoComplete="current-password"
               {...register("password", {
                 required: {
                   value: true,
@@ -117,9 +119,9 @@ function ModalLoguin() {
               Enviar
             </button>
 
-            {/* <Button variant="primary" onClick={handleClose}>
+            <Button variant="primary" onClick={handleClose}>
               Cancelar
-            </Button> */}
+            </Button>
           </Modal.Footer>
           <div className="d-flex justify-content-between">
             <p className="d-flex  fw-bold fs-4 text-white fst-italic">

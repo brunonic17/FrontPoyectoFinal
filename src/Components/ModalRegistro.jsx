@@ -22,14 +22,16 @@ function ModalRegister() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
- 
+
   useEffect(() => {
-    if (isAuthenticated) ;
-    reset();
-    setTimeout(() => {
-      handleClose();
+    if (isAuthenticated)
+    reset()
+   const timer =setTimeout(() => {
+      handleClose()
+      navigate("/")
     }, 1000)
-    navigate("/");
+    return ()=> clearTimeout(timer)
+    
   }, [isAuthenticated]);
 
   const onSubmit = handleSubmit(async (data) => {
@@ -71,13 +73,18 @@ function ModalRegister() {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
             />
-            {errors.nameUser && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{errors.nameUser.message}</span>}
+            {errors.nameUser && (
+              <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
+                {errors.nameUser.message}
+              </span>
+            )}
           </div>
           <div className="mb-3">
             <label className="form-label fst-italic">Email</label>
             <input
               type="email"
               name="email"
+             
               {...register("email", {
                 required: {
                   value: true,
@@ -92,16 +99,24 @@ function ModalRegister() {
               className="form-control"
               id="exampleInputPassword1"
             />
-            {errors.email && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{errors.email.message}</span>}
-            
-            
-            { authErrors !== "" && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{authErrors}</span> }
+            {errors.email && (
+              <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
+                {errors.email.message}
+              </span>
+            )}
+
+            {authErrors !== "" && (
+              <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
+                {authErrors}
+              </span>
+            )}
           </div>
           <div className="mb-3">
             <label className="form-label fst-italic">Password</label>
             <input
               type="password"
               name="password"
+              
               {...register("password", {
                 required: {
                   value: true,
@@ -116,11 +131,14 @@ function ModalRegister() {
                   message: "La contraseña no puede superar",
                 },
               })}
-              
               className="form-control"
               id="exampleInputPassword2"
             />
-            {errors.password && <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{errors.password.message}</span>}
+            {errors.password && (
+              <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
+                {errors.password.message}
+              </span>
+            )}
           </div>
 
           <div className="mb-3">
@@ -140,7 +158,9 @@ function ModalRegister() {
               id="exampleInputPassword3"
             />
             {errors.confirmarPassword && (
-              <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">{errors.confirmarPassword.message}</span>
+              <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
+                {errors.confirmarPassword.message}
+              </span>
             )}
           </div>
 

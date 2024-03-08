@@ -18,13 +18,12 @@ function PaginaRegistro() {
   const { signup, isAuthenticated, errors: authErrors } = useAuth();
 
   useEffect(() => {
-    console.log(isAuthenticated);
-    if (isAuthenticated) navigate("/contacto");
-  }, [isAuthenticated, navigate]);
+    if (isAuthenticated) navigate("/");
+  }, [isAuthenticated]);
 
   const onSubmit = handleSubmit(async (data) => {
     console.log(data);
-    console.log(authErrors)
+    console.log(authErrors);
     signup(data);
     // const res = await registerRequest(data)
     // axios.post(`http://localhost:4040/api/register`, data)
@@ -35,12 +34,12 @@ function PaginaRegistro() {
       <h1 className=" text-center ">Registro</h1>
       <div className="container p-2 ">
         <form className="p-2 bg-secondary ">
-        
           <div className="mb-3">
             <label className="form-label fst-italic ">Nombre</label>
             <input
               type="text"
               name="nameUser"
+              autoComplete="nameUser"
               {...register("nameUser", {
                 required: {
                   value: true,
@@ -70,6 +69,7 @@ function PaginaRegistro() {
             <input
               type="email"
               name="email"
+              autoComplete="username"
               {...register("email", {
                 required: {
                   value: true,
@@ -89,7 +89,7 @@ function PaginaRegistro() {
                 {errors.email.message}
               </span>
             )}
-              {/* {authErrors == [] && (
+            {/* {authErrors == [] && (
             <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
               {authErrors}
             </span>
@@ -106,6 +106,7 @@ function PaginaRegistro() {
             <input
               type="password"
               name="password"
+              autoComplete="current-password"
               {...register("password", {
                 required: {
                   value: true,

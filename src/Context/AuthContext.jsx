@@ -11,7 +11,7 @@ export const useAuth = () => {
   if (!context) {
     throw new Error("Use the provider");
   }
-  return context; 
+  return context;
 };
 // eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
@@ -24,11 +24,9 @@ export const AuthProvider = ({ children }) => {
   const signup = async (user) => {
     try {
       const res = await registerRequest(user);
-      console.log(res.data);
       setUser(res.data);
       setisAuthenticate(true);
     } catch (error) {
-      console.log(error.response.data.msg)
       setErrors(error.response.data.msg);
     }
   };
@@ -42,16 +40,15 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       // console.log(error)
       setErrors(error.response.data.message);
-      console.log(error.response.data.message);
     }
   };
 
-   const logout = () => {
+  const logout = () => {
     Cookies.remove("token");
     setisAuthenticate(false);
     setUser(null);
-    return <Navigate to= "/" />
-   }
+    return <Navigate to="/" />;
+  };
 
   useEffect(() => {
     if (setErrors.length > 0) {
@@ -66,7 +63,7 @@ export const AuthProvider = ({ children }) => {
     async function checkLogin() {
       //funcion EM5
       const cookies = Cookies.get();
-    
+
       if (!cookies.token) {
         setisAuthenticate(false);
         setLoading(false);
@@ -87,18 +84,24 @@ export const AuthProvider = ({ children }) => {
         setisAuthenticate(false);
         setUser(null);
         setLoading(false);
-        console.log("error verify", error)
+        console.log("error verify", error);
       }
     }
     checkLogin();
   }, []);
-  useEffect(()=> {
-console.log(user)
-  }, [user])
+
 
   return (
     <AuthContext.Provider
-      value={{ signup, signin, logout, user, isAuthenticated, errors, loading }}>
+      value={{
+        signup,
+        signin,
+        logout,
+        user,
+        isAuthenticated,
+        errors,
+        loading,
+      }}>
       {children}
     </AuthContext.Provider>
   );

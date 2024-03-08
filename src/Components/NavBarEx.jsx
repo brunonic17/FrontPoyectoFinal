@@ -8,8 +8,8 @@ import LogoYoCampo from "../assets/img/LogoYoCampo.jpg";
 import { Button } from "react-bootstrap";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import iconos from "../helpers/iconos";
-// import ModalRegister from "./ModalRegistro";
-// import ModalLoguin from "./ModalLoguin";
+import ModalRegister from "./ModalRegistro";
+import ModalLoguin from "./ModalLoguin";
 import { useAuth } from "../Context/AuthContext";
 
 function NavBarEx() {
@@ -69,12 +69,24 @@ function NavBarEx() {
             </svg>
           </NavLink>
           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-
-          { isAuthenticated ? (
+            {isAuthenticated && user.rule === "admin" ? (
               <>
-                <p className="p-0">
-                  Hola soy el admin {user.nameUser || user.user.nameUser}
-                </p>
+                <p className="p-0">Hola soy el admin {user.nameUser}</p>
+                <Nav.Link as={NavLink} to="admin">
+                  Admin
+                </Nav.Link>
+
+                <Button
+                  to="/contacto"
+                  onClick={() => {
+                    logout();
+                  }}>
+                  Logout
+                </Button>
+              </>
+            ) : isAuthenticated ? (
+              <>
+                <p className="p-0">Hola soy el admin {user.nameUser}</p>
                 <Nav.Link as={NavLink} to="admin">
                   Admin
                 </Nav.Link>
@@ -89,24 +101,27 @@ function NavBarEx() {
               </>
             ) : (
               <>
-                <li>
+                {/* <li>
                   <Nav.Link as={NavLink} to="registro">
                     Registro
                   </Nav.Link>
-                </li>
+                </li> */}
+                <Nav.Link as={NavLink} to="register">
+                  <ModalRegister />
+                </Nav.Link>
                 <li>
-                  {/* <Nav.Link>
-                      <ModalLoguin />
-                    </Nav.Link> */}
-                  {/* <Nav.Link as={NavLink} to="louin">
+                  <Nav.Link>
+                    <ModalLoguin />
+                  </Nav.Link>
+                  {/* <Nav.Link as={NavLink} to="loguin">
                       Acceder
                     </Nav.Link> */}
                 </li>
-                <li>
+                {/* <li>
                   <Nav.Link as={NavLink} to="loguin">
                     Accederrr
                   </Nav.Link>
-                </li>
+                </li> */}
               </>
             )}
           </ul>
@@ -158,30 +173,24 @@ function NavBarEx() {
               Nosotros
             </Nav.Link>
 
-            {
-isAuthenticated && user.rule === "admin"? (
-  <>
-    <p className="p-0">
-      Hola soy el admin {user.nameUser || user.user.nameUser}
-    </p>
-    <Nav.Link as={NavLink} to="admin">
-      Admin
-    </Nav.Link>
-
-    <Button
-      to="/contacto"
-      onClick={() => {
-        logout();
-      }}>
-      Logout
-    </Button>
-  </>
-) : isAuthenticated ? (
+            {isAuthenticated && user.rule === "admin" ? (
               <>
-                <p className="p-0">
-                  Hola  {user.nameUser || user.user.nameUser}
-                </p>
-                
+                <p className="p-0">Hola soy el admin {user.nameUser}</p>
+                <Nav.Link as={NavLink} to="admin">
+                  Admin
+                </Nav.Link>
+
+                <Button
+                  to="/contacto"
+                  onClick={() => {
+                    logout();
+                  }}>
+                  Logout
+                </Button>
+              </>
+            ) : isAuthenticated ? (
+              <>
+                <p className="p-0">Hola {user.nameUser}</p>
 
                 <Button
                   to="/contacto"
@@ -194,23 +203,23 @@ isAuthenticated && user.rule === "admin"? (
             ) : (
               <>
                 <li>
-                  <Nav.Link as={NavLink} to="registro">
-                    Registro
+                  <Nav.Link as={NavLink} to="">
+                    <ModalRegister />
                   </Nav.Link>
                 </li>
                 <li>
-                  {/* <Nav.Link>
-                      <ModalLoguin />
-                    </Nav.Link> */}
+                  <Nav.Link>
+                    <ModalLoguin />
+                  </Nav.Link>
                   {/* <Nav.Link as={NavLink} to="louin">
                       Acceder
                     </Nav.Link> */}
                 </li>
-                <li>
+                {/* <li>
                   <Nav.Link as={NavLink} to="loguin">
                     Accederrr
                   </Nav.Link>
-                </li>
+                </li> */}
               </>
             )}
           </Nav>
@@ -221,7 +230,6 @@ isAuthenticated && user.rule === "admin"? (
 }
 
 export default NavBarEx;
-
 
 // isAuthenticated ? (
 //   <>

@@ -41,6 +41,7 @@ const PaginaLoguin = () => {
           <input
             type="email"
             name="email"
+            autoComplete="username"
             {...register("email", {
               required: {
                 value: true,
@@ -66,6 +67,7 @@ const PaginaLoguin = () => {
           <input
             type="password"
             name="password"
+            autoComplete="current-password"
             {...register("password", {
               required: {
                 value: true,
