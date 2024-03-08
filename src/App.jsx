@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Table from 'react-bootstrap/Table';
+import GetShoppings from "./fetch/shopping"
 
-function App() {
-  const [count, setCount] = useState(0)
 
+
+const shopping = GetShoppings("13");
+
+console.log(shopping);
+
+
+function ResponsiveExample() {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Table responsive bordered>
+    <tbody>
+      <thead>
+        <td>
+          <th>cod. producto</th>
+          {Array.from({ length: 4 }).map((_, index) => (
+            <tr key={index}>Table heading</tr>
+          ))}
+        </td>
+        <td>
+          <th>Producto</th>
+          {Array.from({ length: 4 }).map((_, index) => (
+            <tr key={index}>Table cell {index}</tr>
+          ))}
+        </td>
+        <td>
+          <th>cantidad</th>
+          {Array.from({ length: 4 }).map((_, index) => (
+            <tr key={index}>Table cell {index}</tr>
+          ))}
+        </td>
+        
+        <td>
+          <th>Precio unitario</th>
+          {Array.from({ length: 4 }).map((_, index) => (
+            <tr key={index}>Table cell {index}</tr>
+          ))}
+        </td>
+        <td>
+          <th>Precio Parcial</th>
+          {Array.from({ length: 4 }).map((_, index) => (
+            <tr key={index}>Table cell {index}</tr>
+          ))}
+        </td>
+      </thead>
+    
+      </tbody>
+    </Table>
+  );
 }
 
-export default App
+export default ResponsiveExample;
