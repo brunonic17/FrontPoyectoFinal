@@ -2,12 +2,13 @@
 
 const GetShoppings = async (id)=> {
 
-    const response=await fetch("http://localhost:5050/api/carrito",{
-        method:"POST",
+    const response=await fetch(`http://localhost:5050/api/carrito/${id}`,{
+        method:"GET",
         headers:{
             "content-type":"aplication/json"
+           
         },
-       body:{IdUsu:id}
+        
     });
 
         const data=response.json();
@@ -15,4 +16,4 @@ const GetShoppings = async (id)=> {
         return data
 }
 
-export default GetShoppings
+export { GetShoppings}
