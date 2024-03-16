@@ -152,17 +152,9 @@ function NavBarEx() {
             </Form>
             <div>
               <NavDropdown title="Categorias" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
+                <Nav.Link as={NavLink} to="productos">
+                  Productos de listas
+                </Nav.Link>
               </NavDropdown>
             </div>
 
@@ -171,6 +163,9 @@ function NavBarEx() {
             </Nav.Link>
             <Nav.Link as={NavLink} to="nosotros">
               Nosotros
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="productos">
+              Productos de listas
             </Nav.Link>
 
             {isAuthenticated && user.rule === "admin" ? (
@@ -230,22 +225,3 @@ function NavBarEx() {
 }
 
 export default NavBarEx;
-
-// isAuthenticated ? (
-//   <>
-//     <p className="p-0">
-//       Hola soy el admin {user.nameUser || user.user.nameUser}
-//     </p>
-//     <Nav.Link as={NavLink} to="admin">
-//       Admin
-//     </Nav.Link>
-
-//     <Button
-//       to="/contacto"
-//       onClick={() => {
-//         logout();
-//       }}>
-//       Logout
-//     </Button>
-//   </>
-// ) :

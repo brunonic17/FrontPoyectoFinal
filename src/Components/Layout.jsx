@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+
 import NavBarEx from "./NavBarEx";
 
 function Layout() {
@@ -7,9 +7,7 @@ function Layout() {
       <NavBarEx />
 
       <main>
-        <div>
-          <Outlet />
-        </div>
+        
       </main>
     </>
   );
