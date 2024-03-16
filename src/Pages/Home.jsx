@@ -1,3 +1,4 @@
+import Publicidad from "../Components/Publicidad";
 import CarouselIndividualIntervals from "../Components/SliderCarousels";
 import Productos from "./Productos";
 
@@ -6,10 +7,12 @@ import Productos from "./Productos";
 function Home() {
   return (
     <>
-      <h1 className="container text-center ">SOY LA PAGINA DE INICIO</h1>
-
-      <CarouselIndividualIntervals />
-      <Productos />
+      <main>
+        <CarouselIndividualIntervals />
+        <Productos />
+      
+        <Publicidad />
+      </main>
     </>
   );
 }

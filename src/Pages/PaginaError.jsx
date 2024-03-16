@@ -11,9 +11,9 @@ function PaginaError() {
           <div>
             <h3>Parece que ocurrio un error</h3>
             <p>La pagina que buscas no se encuentra disponible</p>
-            <a href="/E-commers/index.html" className="volverinicio">
-             <NavLink to="/"> ⏪Volver al inicio</NavLink>
-            </a>
+           
+             <NavLink to="/contacto"> ⏪Volver al inicio</NavLink>
+        
           </div>
         </div>
       </div>

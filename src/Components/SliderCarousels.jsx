@@ -13,14 +13,14 @@ function IndividualIntervalsExample() {
         className="carousel slide"
         data-bs-ride="carousel">
         <div className="carousel-inner h-10 ">
-          <div className="carousel-item active" data-bs-interval="10000">
+          <div className="carousel-item active d-flex justify-content-center bg-warning " data-bs-interval="10000">
             <img src={blog1} className="img1" alt="img1" />
           </div>
           <div className="carousel-item" data-bs-interval="2000">
-            <img src={blog2} className="d-block w-100" alt="logo yo campo" />
+            <img src={blog2} className="img1 d-block w-100" alt="logo yo campo" />
           </div>
           <div className="carousel-item">
-            <img src={blog3} className="d-block w-100" alt="..." />
+            <img src={blog3} className="img1 d-block w-100" alt="..." />
           </div>
         </div>
         <button
