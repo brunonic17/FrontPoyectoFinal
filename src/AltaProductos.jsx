@@ -4,6 +4,32 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
 import T from './ListaProductos.jsx'
+import Especific from './AltaEspecificaciones.jsx';
+import { GetProducts,PostProducts,GetProduct,GetCompleteProduct} from './fetch/Products.js';
+
+
+// const Products1= await GetProduct();
+// console.log(Products1)
+
+const Products0= await GetProducts();
+console.log(Products0.data);
+
+const Ids={id:'65e66c5eea9d3d7580646eae',id2:'65e66ccbea9d3d7580646eb3'};
+const completeProduct=await GetCompleteProduct(Ids);
+console.log(completeProduct.data)
+
+
+// const OneProduct={NombreProducto:"Bombacha",Precio:2020,Detalle:"Perfecto a la medida",Categoria:"Bombacha",IdProduct:"1"};
+// const Post= await PostProducts(OneProduct);
+// console.log(Post.data);
+
+
+
+
+
+
+
+
 
 const Product = {
   
@@ -13,18 +39,10 @@ const Product = {
     UltimoPrecio: '' ,
     Detalle: '' ,
     Categoria: '',
-    UrlImagen:'',
-    Epecificaciones: [
-      {
-        Color: '',
-        CodColor:'',
-        Talle: '',
-        Stock: '',
-        Fecha: '',
-        CodProducto: '',
-       
-      }]
+    UrlImagen: [{file:''}]
 };
+
+
 
 
 const Products = () => (
@@ -47,10 +65,7 @@ const Products = () => (
         <Field name="Precio" placeholder="$99" type= "number"/> 
 
         <label htmlFor="Detalle">Detalle</label>
-        <Field name="Detalle"  type="text" />
-
-        <label htmlFor="Urlimage">UrlImage</label>
-        <Field name="Urlimage"  type="file" />
+        <Field name="Detalle" as="textarea"   />
 
         <label htmlFor="Categoria">Categoria</label>
         <Field name="Categoria" placeholder="Alpargata" component="select" >
@@ -59,95 +74,26 @@ const Products = () => (
              <option value="Bombacha">Bombacha</option>
              
              </Field>
-        <FieldArray name="Epecificaciones">
+        <FieldArray name="UrlImagen">
           {({ insert, remove, push }) => (
             <div>
-              {values.Epecificaciones.length > 0 &&
-                values.Epecificaciones.map((Epecificaciones, index) => (
+              {values.UrlImagen.length > 0 &&
+                values.UrlImagen.map((UrlImagen, index) => (
                   <div className="row" key={index}>
                     <div className="col">
-                      <label htmlFor={`Epecificaciones.${index}.Color`}>Color</label>
+                      <label htmlFor={`UrlImagen.${index}.file`}>file</label>
                       <Field
-                        name={`Epecificaciones.${index}.Color`}
-                        placeholder="Azul"
-                        type="text"
+                        name={`UrlImagen.${index}.file`}
+                        type="file"
                       />
                      
                       <ErrorMessage
-                        name={`Epecificaciones.${index}.Color`}
+                        name={`UrlImagen.${index}.file`}
                         component="div"
                         className="field-error"
                       />
                     </div>
-                    <div className="col">
-                    <label htmlFor={`Epecificaciones.${index}.CodColor`}>CodColor</label>
-                    <Field
-                        name={`Epecificaciones.${index}.CodColor`}
-                        placeholder="asd123"
-                        type="text"
-                      />
-                      <Field
-                        name={`Epecificaciones.${index}.CodColor`}
-                        type="color"
-                      />
-                       <ErrorMessage
-                        name={`Epecificaciones.${index}.Color`}
-                        component="div"
-                        className="field-error"
-                      />
-                    </div>
-                    <div className="col">
-                      <label htmlFor={`Epecificaciones.${index}.Talle`}>Talle</label>
-                      <Field
-                        name={`Epecificaciones.${index}.Talle`}
-                        placeholder="38"
-                        type="text"
-                      />
-                      <ErrorMessage
-                        name={`Epecificaciones.${index}.Talle`}
-                        component="div"
-                        className="field-error"
-                      />
-                    </div>
-                    <div className="col">
-                      <label htmlFor={`Epecificaciones.${index}.Stock`}>Stock</label>
-                      <Field
-                        name={`Epecificaciones.${index}.Stock`}
-                        placeholder="4"
-                        type="number"
-                      />
-                      <ErrorMessage
-                        name={`Epecificaciones.${index}.Stock`}
-                        component="div"
-                        className="field-error"
-                      />
-                    </div> 
-                    <div className="col">
-                      <label htmlFor={`Epecificaciones.${index}.Fecha`}>Fecha</label>
-                      <Field
-                        name={`Epecificaciones.${index}.Fecha`}
-                        placeholder="12-02-2024"
-                        type="date"
-                      />
-                      <ErrorMessage
-                        name={`Epecificaciones.${index}.Fecha`}
-                        component="div"
-                        className="field-error"
-                      />
-                    </div>
-                    <div className="col">
-                      <label htmlFor={`Epecificaciones.${index}.CodProducto`}>CodProducto</label>
-                      <Field
-                        name={`Epecificaciones.${index}.CodProducto`}
-                        placeholder="asd23"
-                        type="text"
-                      />
-                      <ErrorMessage
-                        name={`Epecificaciones.${index}.CodProducto`}
-                        component="div"
-                        className="field-error"
-                      />
-                    </div>
+                    
                     <div className="col">
                       <button
                         type="button"
@@ -163,14 +109,10 @@ const Products = () => (
                 type="button"
                 className="secondary"
                 onClick={() => push({
-                  Color: '',
-                  Talle: '',
-                  Stock: '',
-                  Fecha: '',
-                  CodProducto: ''
+                              
                 })}
               >
-                Add Especificacion
+                Agregar Imagen
               </button>
             </div>
           )}
@@ -183,6 +125,10 @@ const Products = () => (
       )}
     </Formik>
   </div>
+
+<div>
+  <Especific/>
+</div>
 
 
 <div>
