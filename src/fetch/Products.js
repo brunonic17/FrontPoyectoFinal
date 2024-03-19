@@ -47,5 +47,93 @@ const PostProducts=async  (Prod)=>{
   }
  
 
+  const PostEspecificaciones=async  (Especificacion)=>{
+  let ProdString=JSON.stringify(Especificacion)
+    const response= await fetch(`http://localhost:3000/api/Admin/Especificaciones`,{
+      body:ProdString,
+      method:"POST",
+      headers:{"content-type":"application/json"},
+          });
+          const data=response.json();
 
-export {GetProducts,PostProducts,GetProduct,GetCompleteProduct}
+          return data
+  };
+  
+  const UploadProducts=async  (Prod)=>{
+  let ProdString=JSON.stringify(Prod)
+    const response= await fetch(`http://localhost:3000/api/Admin/Product`,{
+      body:ProdString,
+      method:"PUT",
+      headers:{"content-type":"application/json"},
+          });
+          const data=response.json();
+
+          return data
+  };
+
+  const UploadEspecificaciones=async  (Especificacion)=>{
+    let ProdString=JSON.stringify(Especificacion)
+      const response= await fetch(`http://localhost:3000/api/Admin/Especificaciones`,{
+        body:ProdString,
+        method:"PUT",
+        headers:{"content-type":"application/json"},
+            });
+            const data=response.json();
+  
+            return data
+    };
+
+    const UploadImage=async  (Image)=>{
+      let ProdString=JSON.stringify(Image)
+        const response= await fetch(`http://localhost:3000/api/Admin/Picture`,{
+          body:ProdString,
+          method:"PUT",
+          headers:{"content-type":"application/json",
+          'Content-Type': 'application/x-www-form-urlencoded'},
+              });
+              const data=response.json();
+    
+              return data
+      };
+
+      const DeleteProducts=async  (Prod)=>{
+        let ProdString=JSON.stringify(Prod)
+          const response= await fetch(`http://localhost:3000/api/Admin/Product`,{
+            body:ProdString,
+            method:"DELETE",
+            headers:{"content-type":"application/json"},
+                });
+                const data=response.json();
+      
+                return data
+        };
+
+      const DeleteEspecificaciones=async  (Especificacion)=>{
+        let ProdString=JSON.stringify(Especificacion)
+          const response= await fetch(`http://localhost:3000/api/Admin/Especificaciones`,{
+            body:ProdString,
+            method:"DELETE",
+            headers:{"content-type":"application/json"},
+                });
+                const data=response.json();
+      
+                return data
+        };
+
+       const DeleteImage=async  (Image)=>{
+      let ProdString=JSON.stringify(Image)
+        const response= await fetch(`http://localhost:3000/api/Admin/Picture`,{
+          body:ProdString,
+          method:"DELETE",
+          headers:{"content-type":"application/json",
+          'Content-Type': 'application/x-www-form-urlencoded'},
+              });
+              const data=response.json();
+    
+              return data
+      };
+ 
+
+
+
+export {GetProducts,PostProducts,GetProduct,GetCompleteProduct,PostEspecificaciones}
