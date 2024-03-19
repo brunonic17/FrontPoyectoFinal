@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
 import T from './ListaProductos.jsx'
 import Especific from './AltaEspecificaciones.jsx';
-import { GetProducts,PostProducts,GetProduct,GetCompleteProduct} from './fetch/Products.js';
+import { GetProducts,PostProducts,GetProduct,GetCompleteProduct,PostEspecificaciones} from './fetch/Products.js';
 
 
 // const Products1= await GetProduct();
@@ -18,6 +18,7 @@ const Ids={id:'65e66c5eea9d3d7580646eae',id2:'65e66ccbea9d3d7580646eb3'};
 const completeProduct=await GetCompleteProduct(Ids);
 console.log(completeProduct.data)
 
+const Especificacion= await PostEspecificaciones();
 
 // const OneProduct={NombreProducto:"Bombacha",Precio:2020,Detalle:"Perfecto a la medida",Categoria:"Bombacha",IdProduct:"1"};
 // const Post= await PostProducts(OneProduct);
