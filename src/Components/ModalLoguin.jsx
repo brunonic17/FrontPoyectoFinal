@@ -34,6 +34,7 @@ function ModalLoguin() {
     navigate("/")
   }, [isAuthenticated]);
 
+ 
   const onSubmit = handleSubmit((data) => {
     signin(data);
   });
@@ -109,6 +110,11 @@ function ModalLoguin() {
                 {errors.password.message}
               </span>
             )}
+          </div>
+          <div>
+            <h4>
+              <NavLink to="/resetPassword" className= "resetPass">Olvidaste tu Contraseña</NavLink>
+            </h4>
           </div>
 
           <Modal.Footer>

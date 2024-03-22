@@ -5,6 +5,7 @@ import Productos from "./Productos";
 // import IndividualIntervalsExample from "../Components/SliderCarousels"
 
 function Home() {
+  console.log("volviendo")
   return (
     <>
       <main>

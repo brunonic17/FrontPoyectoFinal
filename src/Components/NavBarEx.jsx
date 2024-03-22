@@ -11,6 +11,8 @@ import iconos from "../helpers/iconos";
 import ModalRegister from "./ModalRegistro";
 import ModalLoguin from "./ModalLoguin";
 import { useAuth } from "../Context/AuthContext";
+// import PaginaRegistro from "../Pages/PaginaRegistro";
+// import PaginaLoguin from "../Pages/PaginaLoguin";
 
 function NavBarEx() {
   const { isAuthenticated, logout, user } = useAuth();
@@ -45,7 +47,7 @@ function NavBarEx() {
                 </svg>
               </Button>
             </Form>
-            <ul className="  d-none d-lg-flex col-lg-3 justify-content-around   ">
+            <ul className="  d-none d-lg-flex col-lg-3 justify-content-around mt-0 ">
               {iconos.map((s) => {
                 return <li key={s.idSvg}>{s.svg}</li>;
               })}
@@ -161,6 +163,12 @@ function NavBarEx() {
             <Nav.Link as={NavLink} to="contacto">
               Contacto
             </Nav.Link>
+            <Nav.Link as={NavLink} to="forgotPassword">
+              Cambio  de contraseña
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="resetPassword">
+              Restablecer Contraseña
+            </Nav.Link>
             <Nav.Link as={NavLink} to="nosotros">
               Nosotros
             </Nav.Link>
@@ -198,23 +206,15 @@ function NavBarEx() {
             ) : (
               <>
                 <li>
-                  <Nav.Link as={NavLink} to="">
-                    <ModalRegister />
+                  <Nav.Link as={NavLink} to="/registro">
+                    Registro
                   </Nav.Link>
                 </li>
                 <li>
-                  <Nav.Link>
-                    <ModalLoguin />
+                  <Nav.Link as={NavLink} to="/login">
+                  Acceder
                   </Nav.Link>
-                  {/* <Nav.Link as={NavLink} to="louin">
-                      Acceder
-                    </Nav.Link> */}
-                </li>
-                {/* <li>
-                  <Nav.Link as={NavLink} to="loguin">
-                    Accederrr
-                  </Nav.Link>
-                </li> */}
+                  </li>
               </>
             )}
           </Nav>

@@ -79,6 +79,10 @@ li {
 .cursor {
   cursor: pointer;
 }
+.resetPass {
+  text-decoration:none ;
+  color: #000;
+}
 
 /* CARDS */
 img {

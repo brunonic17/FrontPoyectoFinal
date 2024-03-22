@@ -10,7 +10,6 @@ function PaginaRegistro() {
     handleSubmit,
     formState: { errors },
     watch,
-    // reset,
   } = useForm();
 
   const navigate = useNavigate();
@@ -18,15 +17,12 @@ function PaginaRegistro() {
   const { signup, isAuthenticated, errors: authErrors } = useAuth();
 
   useEffect(() => {
-    if (isAuthenticated) navigate("/");
-  }, [isAuthenticated]);
+    if (isAuthenticated) 
+    navigate("/");
+  }, [isAuthenticated, navigate]);
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
-    console.log(authErrors);
     signup(data);
-    // const res = await registerRequest(data)
-    // axios.post(`http://localhost:4040/api/register`, data)
   });
 
   return (
@@ -39,7 +35,9 @@ function PaginaRegistro() {
             <input
               type="text"
               name="nameUser"
-              autoComplete="nameUser"
+              autoComplete="off"
+              placeholder="Ingrese su nombre"
+
               {...register("nameUser", {
                 required: {
                   value: true,
@@ -69,7 +67,8 @@ function PaginaRegistro() {
             <input
               type="email"
               name="email"
-              autoComplete="username"
+              autoComplete="off"
+              placeholder="ej: juan@gmail.com"
               {...register("email", {
                 required: {
                   value: true,
@@ -106,7 +105,8 @@ function PaginaRegistro() {
             <input
               type="password"
               name="password"
-              autoComplete="current-password"
+              autoComplete="off"
+              placeholder="********"
               {...register("password", {
                 required: {
                   value: true,
@@ -136,6 +136,7 @@ function PaginaRegistro() {
             <input
               type="password"
               name="confirmarPassword"
+              placeholder="********"
               {...register("confirmarPassword", {
                 required: {
                   value: true,
@@ -157,13 +158,15 @@ function PaginaRegistro() {
           <button type="button" onClick={onSubmit} className="btn btn-primary">
             Enviar
           </button>
-
+              <div>
+                
+              </div>
           <div className="d-flex justify-content-between">
             <p className="d-flex  fw-bold fs-4 text-white fst-italic">
               Ya tienes una cuenta?
             </p>
-            <NavLink to="/loguin" className="btn bg-success text-white ">
-              Loguearme
+            <NavLink to="/login" className="btn bg-success text-white ">
+             Acceder
             </NavLink>
             {/* <NavLink className="btn bg-success text-white ">
              <ModalRegister />

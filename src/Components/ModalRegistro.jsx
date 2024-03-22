@@ -34,6 +34,7 @@ function ModalRegister() {
     
   }, [isAuthenticated]);
 
+
   const onSubmit = handleSubmit(async (data) => {
     signup(data);
     // const res = await registerRequest(data)

@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./src/Context/AuthContext";
-import NavBarEx from "./src/Components/NavBarEx";
 import Home from "./src/Pages/Home";
 import Nosotros from "./src/Pages/Nosotros";
 import Contacto from "./src/Pages/Contacto";
@@ -10,6 +9,9 @@ import ModalRegister from "./src/Components/ModalRegistro";
 import Admin from "./src/Pages/Admin";
 import { ProtectedRoute } from "./src/Components/ProtectedRoute";
 import PaginaError from "./src/Pages/PaginaError";
+import Layaout from "./src/Components/Layout";
+import ResetPassword from "./src/Pages/ResetPassword";
+import ForgotPassword from "./src/Pages/ForgotPassword";
 
 // import PaginaLoguin from "./src/Pages/PaginaLoguin";
 // import PaginaRegistro from "./src/Pages/PaginaRegistro";
@@ -18,22 +20,23 @@ const RouterApp = () => {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <main>
-          <NavBarEx />
-        </main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<ModalLoguin />} />
-          <Route path="/register" element={<ModalRegister />} />
-          <Route element={<ProtectedRoute />}>
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/nosotros" element={<Nosotros />} />
-            {/* <Route path="/carrito" element={<Carrito />} /> */}
-          </Route>
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/productos" element={<Productos />} />
-          <Route path="*" element={<PaginaError />} />
-        </Routes>
+        <Layaout>
+          <Routes>
+            <Route index={true} path="/" element={<Home />} />
+            <Route path="/login" element={<ModalLoguin />} />
+            <Route path="/register" element={<ModalRegister />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/nosotros" element={<Nosotros />} />
+              {/* <Route path="/carrito" element={<Carrito />} /> */}
+            </Route>
+            <Route path="/contacto" element={<Contacto />} />
+            <Route path="/productos" element={<Productos />} />
+            <Route path="/resetPassword" element={<ResetPassword />} />
+            <Route path="/forgotPassword" element={<ForgotPassword />} />
+            <Route path="*" element={<PaginaError />} />
+          </Routes>
+        </Layaout>
       </BrowserRouter>
     </AuthProvider>
   );

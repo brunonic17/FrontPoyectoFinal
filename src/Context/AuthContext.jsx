@@ -1,5 +1,10 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { LoguinRequest, registerRequest, verifyTokenRequet } from "../api/auth";
+import {
+  LoguinRequest,
+  registerRequest,
+  verifyTokenRequest,
+  updatePasswordRequest,
+} from "../api/auth";
 import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 
@@ -43,13 +48,21 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  //Cerrar sesion
   const logout = () => {
     Cookies.remove("token");
     setisAuthenticate(false);
     setUser(null);
     return <Navigate to="/" />;
   };
-
+  //Modificar contraseña
+  const updatePassword = async (id, user) => {
+    try {
+      await updatePasswordRequest(id, user);
+    } catch (error) {
+      return console.log(error);
+    }
+  };
   useEffect(() => {
     if (setErrors.length > 0) {
       const timer = setTimeout(() => {
@@ -67,14 +80,15 @@ export const AuthProvider = ({ children }) => {
       if (!cookies.token) {
         setisAuthenticate(false);
         setLoading(false);
-        return setUser(null);
+        setUser(null);
       }
       try {
-        const res = await verifyTokenRequet(cookies.token);
+        const res = await verifyTokenRequest(cookies.token);
+        console.log(res)
         if (!res.data) {
           setisAuthenticate(false);
           setLoading(false);
-          return;
+          console.log("soy el useEffect de verify")
         }
         setisAuthenticate(true);
         setUser(res.data);
@@ -90,13 +104,13 @@ export const AuthProvider = ({ children }) => {
     checkLogin();
   }, []);
 
-
   return (
     <AuthContext.Provider
       value={{
         signup,
         signin,
         logout,
+        updatePassword,
         user,
         isAuthenticated,
         errors,
