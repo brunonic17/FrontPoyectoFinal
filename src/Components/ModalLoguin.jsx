@@ -13,7 +13,6 @@ function ModalLoguin() {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm();
 
   const navigate = useNavigate();
@@ -27,18 +26,15 @@ function ModalLoguin() {
 
   useEffect(() => {
     if (isAuthenticated)
-    reset()
-    setTimeout(() => {
-      handleClose()
-    }, 10000);
-    navigate("/")
+      setTimeout(() => {
+        handleClose();
+      }, 10000);
+    navigate("/");
   }, [isAuthenticated]);
 
- 
   const onSubmit = handleSubmit((data) => {
     signin(data);
   });
- 
 
   return (
     <>
@@ -113,7 +109,9 @@ function ModalLoguin() {
           </div>
           <div>
             <h4>
-              <NavLink to="/resetPassword" className= "resetPass">Olvidaste tu Contraseña</NavLink>
+              <NavLink to="/resetPassword" className="resetPass">
+                Olvidaste tu Contraseña
+              </NavLink>
             </h4>
           </div>
 

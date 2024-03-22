@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+
 // import { registerRequest } from "../api/auth";
 // import axios from "axios"
 import { useAuth } from "../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function ModalRegister() {
   const {
@@ -13,7 +14,7 @@ function ModalRegister() {
     handleSubmit,
     formState: { errors },
     watch,
-    reset,
+   
   } = useForm();
   const navigate = useNavigate();
   const { signup, isAuthenticated, errors: authErrors } = useAuth();
@@ -24,14 +25,13 @@ function ModalRegister() {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    if (isAuthenticated)
-    reset()
-   const timer =setTimeout(() => {
-      handleClose()
-      navigate("/")
-    }, 1000)
-    return ()=> clearTimeout(timer)
     
+    if (isAuthenticated)
+    
+    setTimeout(() => {
+      handleClose()
+    }, 10000);
+    navigate("/")
   }, [isAuthenticated]);
 
 

@@ -79,7 +79,7 @@ function NavBarEx() {
                 </Nav.Link>
 
                 <Button
-                  to="/contacto"
+                  to="/"
                   onClick={() => {
                     logout();
                   }}>
@@ -94,7 +94,7 @@ function NavBarEx() {
                 </Nav.Link>
 
                 <Button
-                  to="/contacto"
+                  to="/"
                   onClick={() => {
                     logout();
                   }}>
@@ -108,17 +108,19 @@ function NavBarEx() {
                     Registro
                   </Nav.Link>
                 </li> */}
-                <Nav.Link as={NavLink} to="register">
-                  <ModalRegister />
-                </Nav.Link>
-                <li>
+                {/* <li>
+                  <Nav.Link>
+                    <ModalRegister />
+                  </Nav.Link>
+                </li> */}
+                {/* <li>
                   <Nav.Link>
                     <ModalLoguin />
                   </Nav.Link>
-                  {/* <Nav.Link as={NavLink} to="loguin">
+                </li> */}
+                {/* <Nav.Link as={NavLink} to="loguin">
                       Acceder
                     </Nav.Link> */}
-                </li>
                 {/* <li>
                   <Nav.Link as={NavLink} to="loguin">
                     Accederrr
@@ -164,7 +166,7 @@ function NavBarEx() {
               Contacto
             </Nav.Link>
             <Nav.Link as={NavLink} to="forgotPassword">
-              Cambio  de contraseña
+              Cambio de contraseña
             </Nav.Link>
             <Nav.Link as={NavLink} to="resetPassword">
               Restablecer Contraseña
@@ -205,16 +207,26 @@ function NavBarEx() {
               </>
             ) : (
               <>
-                <li>
+               {/* <li>
+                  <Nav.Link>
+                    <ModalRegister />
+                  </Nav.Link>
+                </li> */}
+                {/* <li>
+                  <Nav.Link>
+                    <ModalLoguin />
+                  </Nav.Link>
+                </li> */}
+                {/* <li>
                   <Nav.Link as={NavLink} to="/registro">
                     Registro
                   </Nav.Link>
                 </li>
                 <li>
                   <Nav.Link as={NavLink} to="/login">
-                  Acceder
+                    Acceder
                   </Nav.Link>
-                  </li>
+                </li> */}
               </>
             )}
           </Nav>
