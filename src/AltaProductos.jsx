@@ -5,20 +5,21 @@ import ReactDOM from 'react-dom';
 import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
 import T from './ListaProductos.jsx'
 import Especific from './AltaEspecificaciones.jsx';
+import {Image} from './Altaimagen.jsx';
 import { GetProducts,PostProducts,GetProduct,GetCompleteProduct,PostEspecificaciones} from './fetch/Products.js';
 
 
 // const Products1= await GetProduct();
 // console.log(Products1)
 
-const Products0= await GetProducts();
-console.log(Products0.data);
+// const Products0= await GetProducts();
+// console.log(Products0.data);
 
-const Ids={id:'65e66c5eea9d3d7580646eae',id2:'65e66ccbea9d3d7580646eb3'};
-const completeProduct=await GetCompleteProduct(Ids);
-console.log(completeProduct.data)
+// const Ids={id:'65e66c5eea9d3d7580646eae',id2:'65e66ccbea9d3d7580646eb3'};
+// const completeProduct=await GetCompleteProduct(Ids);
+// console.log(completeProduct.data)
 
-const Especificacion= await PostEspecificaciones();
+// const Especificacion= await PostEspecificaciones();
 
 // const OneProduct={NombreProducto:"Bombacha",Precio:2020,Detalle:"Perfecto a la medida",Categoria:"Bombacha",IdProduct:"1"};
 // const Post= await PostProducts(OneProduct);
@@ -40,7 +41,7 @@ const Product = {
     UltimoPrecio: '' ,
     Detalle: '' ,
     Categoria: '',
-    UrlImagen: [{file:''}]
+   
 };
 
 
@@ -75,49 +76,7 @@ const Products = () => (
              <option value="Bombacha">Bombacha</option>
              
              </Field>
-        <FieldArray name="UrlImagen">
-          {({ insert, remove, push }) => (
-            <div>
-              {values.UrlImagen.length > 0 &&
-                values.UrlImagen.map((UrlImagen, index) => (
-                  <div className="row" key={index}>
-                    <div className="col">
-                      <label htmlFor={`UrlImagen.${index}.file`}>file</label>
-                      <Field
-                        name={`UrlImagen.${index}.file`}
-                        type="file"
-                      />
-                     
-                      <ErrorMessage
-                        name={`UrlImagen.${index}.file`}
-                        component="div"
-                        className="field-error"
-                      />
-                    </div>
-                    
-                    <div className="col">
-                      <button
-                        type="button"
-                        className="secondary"
-                        onClick={() => remove(index)}
-                      >
-                        X
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              <button
-                type="button"
-                className="secondary"
-                onClick={() => push({
-                              
-                })}
-              >
-                Agregar Imagen
-              </button>
-            </div>
-          )}
-        </FieldArray>
+       
 
         <button type="submit" >
           Submit
@@ -131,13 +90,17 @@ const Products = () => (
   <Especific/>
 </div>
 
+<div>
+  <Image/>
+  
+</div>
 
+{/* 
 <div>
  <T/>
- </div>
+ </div> */}
  </> 
 );
  
-
  
  export default Products;
