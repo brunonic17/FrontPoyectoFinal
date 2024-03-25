@@ -2,6 +2,7 @@
 import { useAuth } from "../Context/AuthContext";
 import { useForm } from "react-hook-form";
 
+
 const ResetPassword = () => {
   const {
     register,
@@ -12,7 +13,7 @@ const ResetPassword = () => {
   } = useForm();
 
   // const navigate = useNavigate();
-  const { errors: authErrors } = useAuth();
+  const { errors: authErrors, sendEmail } = useAuth();
 
   //   useEffect(() => {
   //     if (isAuthenticated)
@@ -26,15 +27,12 @@ const ResetPassword = () => {
   //   }, [isAuthenticated]);
 
   const onSubmit = handleSubmit(async (data) => {
-    // signup(data);
-    console.log(data);
-    // const res = await registerRequest(data)
-    // axios.post(`http://localhost:4040/api/register`, data)
+    sendEmail(data);
   });
 
   return (
     <div className=" d-flex flex-column align-items-center ">
-    <h1 className=" text-center ">Modificacion de contraseña</h1>
+      <h1 className=" text-center ">Modificacion de contraseña</h1>
       <div className="container row justify-content-center  bg-dark">
         <form className="p-2 bg-secondary w-50  p-4 ">
           <div className="mb-3">

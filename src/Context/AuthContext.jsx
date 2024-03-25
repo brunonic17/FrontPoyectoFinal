@@ -3,6 +3,7 @@ import {
   LoguinRequest,
   registerRequest,
   verifyTokenRequest,
+  sendEmailRequest,
   updatePasswordRequest,
 } from "../api/auth";
 import Cookies from "js-cookie";
@@ -55,6 +56,14 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     return <Navigate to="/" />;
   };
+  //Enviar email cambio de contraseña
+  const sendEmail = async (email,user) => {
+    try {
+      await sendEmailRequest(email, user)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   //Modificar contraseña
   const updatePassword = async (id, user) => {
     try {
@@ -88,7 +97,7 @@ export const AuthProvider = ({ children }) => {
         if (!res.data) {
           setisAuthenticate(false);
           setLoading(false);
-          console.log("soy el useEffect de verify")
+          
         }
         setisAuthenticate(true);
         setUser(res.data);
@@ -111,6 +120,7 @@ export const AuthProvider = ({ children }) => {
         signin,
         logout,
         updatePassword,
+        sendEmail,
         user,
         isAuthenticated,
         errors,

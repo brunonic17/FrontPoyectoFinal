@@ -26,11 +26,14 @@ function ModalLoguin() {
 
   useEffect(() => {
     if (isAuthenticated)
-      setTimeout(() => {
-        handleClose();
-      }, 10000);
-    navigate("/");
+    
+    setTimeout(() => {
+      handleClose()
+    }, 10000);
+    navigate("/")
   }, [isAuthenticated]);
+  
+ 
 
   const onSubmit = handleSubmit((data) => {
     signin(data);

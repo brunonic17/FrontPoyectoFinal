@@ -21,7 +21,7 @@ const ForgotPassword = () => {
       updatePasswordRequest(params.id, data);
     }
     console.log(data);
-    navigate("/contacto");
+    navigate("/login");
   });
   return (
     <div>

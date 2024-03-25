@@ -11,6 +11,9 @@ export const registerRequest= (user) => axios.post(`/register`, user)
 
 export const LoguinRequest= (user) => axios.post(`/login`, user)
 
+export const sendEmailRequest= (email) => axios.post(`/sendEmail`, email)
+
+
 export const updatePasswordRequest= (id, user) => axios.put(`/forgotPassword/${id}`, user)
 
 

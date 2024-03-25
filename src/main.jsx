@@ -20,7 +20,7 @@ import ForgotPassword from "../src/Pages/ForgotPassword";
 import { AuthProvider } from "./Context/AuthContext";
 import PaginaLoguin from "./Pages/PaginaLoguin";
 import PaginaRegistro from "./Pages/PaginaRegistro";
-
+import { ProtectedRoute } from "../src/Components/ProtectedRoute";
 
 // ReactDOM.createRoot(document.getElementById("root")).render(
 //   <React.StrictMode>
@@ -63,15 +63,15 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/productos",
+        path: "/sendEmail",
         element: (
           <div>
-            <Productos />
+            <ResetPassword />
           </div>
         ),
       },
       {
-        path: "/forgotPassword/:id",
+        path: "/forgotPassword/:id/:token",
         element: (
           <div>
             <ForgotPassword />
@@ -79,10 +79,10 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/resetPassword",
+        path: "/productos",
         element: (
           <div>
-            <ResetPassword />
+            <Productos />
           </div>
         ),
       },
@@ -105,9 +105,9 @@ const router = createBrowserRouter([
       {
         path: "/admin",
         element: (
-          <div>
+          <ProtectedRoute>
             <Admin />
-          </div>
+          </ProtectedRoute>
         ),
       },
     ],

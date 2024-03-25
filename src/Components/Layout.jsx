@@ -1,15 +1,16 @@
 import { Outlet } from "react-router-dom";
 import NavBarEx from "./NavBarEx";
 
-const Layout = () => {
+// eslint-disable-next-line react/prop-types
+const Layout = ({ children }) => {
   return (
     <>
       <header>
         <NavBarEx />
       </header>
-      <main>
-        <Outlet />
-      </main>
+
+      <Outlet />
+
       <footer>
         <h1>Soy el footer</h1>
       </footer>

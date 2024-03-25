@@ -8,8 +8,6 @@ import LogoYoCampo from "../assets/img/LogoYoCampo.jpg";
 import { Button } from "react-bootstrap";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import iconos from "../helpers/iconos";
-import ModalRegister from "./ModalRegistro";
-import ModalLoguin from "./ModalLoguin";
 import { useAuth } from "../Context/AuthContext";
 // import PaginaRegistro from "../Pages/PaginaRegistro";
 // import PaginaLoguin from "../Pages/PaginaLoguin";
@@ -36,6 +34,7 @@ function NavBarEx() {
                 aria-label="Search"
               />
               <Button variant="" className="iconoBuscar">
+                
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -103,11 +102,11 @@ function NavBarEx() {
               </>
             ) : (
               <>
-                {/* <li>
+                <li>
                   <Nav.Link as={NavLink} to="registro">
                     Registro
                   </Nav.Link>
-                </li> */}
+                </li>
                 {/* <li>
                   <Nav.Link>
                     <ModalRegister />
@@ -118,9 +117,9 @@ function NavBarEx() {
                     <ModalLoguin />
                   </Nav.Link>
                 </li> */}
-                {/* <Nav.Link as={NavLink} to="loguin">
+                <Nav.Link as={NavLink} to="loguin">
                       Acceder
-                    </Nav.Link> */}
+                    </Nav.Link>
                 {/* <li>
                   <Nav.Link as={NavLink} to="loguin">
                     Accederrr
@@ -168,11 +167,14 @@ function NavBarEx() {
             <Nav.Link as={NavLink} to="forgotPassword">
               Cambio de contraseña
             </Nav.Link>
-            <Nav.Link as={NavLink} to="resetPassword">
+            <Nav.Link as={NavLink} to="sendEmail">
               Restablecer Contraseña
             </Nav.Link>
             <Nav.Link as={NavLink} to="nosotros">
               Nosotros
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="admin">
+              admin
             </Nav.Link>
             <Nav.Link as={NavLink} to="productos">
               Productos de listas
@@ -186,7 +188,7 @@ function NavBarEx() {
                 </Nav.Link>
 
                 <Button
-                  to="/contacto"
+                  to="/"
                   onClick={() => {
                     logout();
                   }}>
@@ -198,7 +200,7 @@ function NavBarEx() {
                 <p className="p-0">Hola {user.nameUser}</p>
 
                 <Button
-                  to="/contacto"
+                  to="/"
                   onClick={() => {
                     logout();
                   }}>
@@ -211,13 +213,13 @@ function NavBarEx() {
                   <Nav.Link>
                     <ModalRegister />
                   </Nav.Link>
-                </li> */}
-                {/* <li>
+                </li>
+                <li>
                   <Nav.Link>
                     <ModalLoguin />
                   </Nav.Link>
                 </li> */}
-                {/* <li>
+                <li>
                   <Nav.Link as={NavLink} to="/registro">
                     Registro
                   </Nav.Link>
@@ -226,7 +228,7 @@ function NavBarEx() {
                   <Nav.Link as={NavLink} to="/login">
                     Acceder
                   </Nav.Link>
-                </li> */}
+                </li>
               </>
             )}
           </Nav>

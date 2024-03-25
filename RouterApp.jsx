@@ -9,9 +9,10 @@ import ModalRegister from "./src/Components/ModalRegistro";
 import Admin from "./src/Pages/Admin";
 import { ProtectedRoute } from "./src/Components/ProtectedRoute";
 import PaginaError from "./src/Pages/PaginaError";
-import Layaout from "./src/Components/Layout";
+
 import ResetPassword from "./src/Pages/ResetPassword";
 import ForgotPassword from "./src/Pages/ForgotPassword";
+import Layout from "./src/Components/Layout";
 
 // import PaginaLoguin from "./src/Pages/PaginaLoguin";
 // import PaginaRegistro from "./src/Pages/PaginaRegistro";
@@ -20,8 +21,8 @@ const RouterApp = () => {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Layaout>
-          <Routes>
+        <Layout>
+        <Routes>
             <Route index={true} path="/" element={<Home />} />
             <Route path="/login" element={<ModalLoguin />} />
             <Route path="/register" element={<ModalRegister />} />
@@ -36,7 +37,9 @@ const RouterApp = () => {
             <Route path="/forgotPassword" element={<ForgotPassword />} />
             <Route path="*" element={<PaginaError />} />
           </Routes>
-        </Layaout>
+        
+        </Layout>
+         
       </BrowserRouter>
     </AuthProvider>
   );

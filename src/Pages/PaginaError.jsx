@@ -12,7 +12,7 @@ function PaginaError() {
             <h3>Parece que ocurrio un error</h3>
             <p>La pagina que buscas no se encuentra disponible</p>
            
-             <NavLink to="/contacto"> ⏪Volver al inicio</NavLink>
+             <NavLink to="/"> ⏪Volver al inicio</NavLink>
         
           </div>
         </div>
