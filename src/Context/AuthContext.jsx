@@ -7,8 +7,6 @@ import {
   updatePasswordRequest,
 } from "../api/auth";
 import Cookies from "js-cookie";
-import { Navigate } from "react-router-dom";
-
 export const AuthContext = createContext();
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -19,6 +17,8 @@ export const useAuth = () => {
   }
   return context;
 };
+// eslint-disable-next-line react-hooks/rules-of-hooks
+
 // eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
   //     //Usuario que podra ser leido en toda la aplicacion
@@ -26,6 +26,8 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setisAuthenticate] = useState(false);
   const [errors, setErrors] = useState("");
   const [loading, setLoading] = useState(true);
+  const [send, setSend] = useState(false);
+
 
   const signup = async (user) => {
     try {
@@ -51,19 +53,25 @@ export const AuthProvider = ({ children }) => {
 
   //Cerrar sesion
   const logout = () => {
-    Cookies.remove("token");
+   Cookies.remove("token");
     setisAuthenticate(false);
     setUser(null);
-    return <Navigate to="/" />;
   };
-  //Enviar email cambio de contraseña
-  const sendEmail = async (email,user) => {
+
+  //Enviar email cambio de contraseña delpradofederico0@gmail.com <Navigate to = "contacto" />
+  const sendEmail = async (email, user) => {
     try {
-      await sendEmailRequest(email, user)
+      const res = await sendEmailRequest(email, user);
+      console.log(res.data);
+      setSend(true);
+     const timer = setTimeout(() => {
+        setSend(false);     
+      }, 3000);
+      return () => clearTimeout(timer)
     } catch (error) {
-      console.log(error)
+      setErrors(error.response.data);
     }
-  }
+  };
   //Modificar contraseña
   const updatePassword = async (id, user) => {
     try {
@@ -93,11 +101,10 @@ export const AuthProvider = ({ children }) => {
       }
       try {
         const res = await verifyTokenRequest(cookies.token);
-        console.log(res)
+        console.log(res);
         if (!res.data) {
           setisAuthenticate(false);
           setLoading(false);
-          
         }
         setisAuthenticate(true);
         setUser(res.data);
@@ -107,7 +114,7 @@ export const AuthProvider = ({ children }) => {
         setisAuthenticate(false);
         setUser(null);
         setLoading(false);
-        console.log("error verify", error);
+        // console.log("error verify", error);
       }
     }
     checkLogin();
@@ -123,6 +130,7 @@ export const AuthProvider = ({ children }) => {
         sendEmail,
         user,
         isAuthenticated,
+        send,
         errors,
         loading,
       }}>

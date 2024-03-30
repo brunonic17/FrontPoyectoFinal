@@ -90,7 +90,7 @@ const PaginaLoguin = () => {
             )}
           </div>
               <div>
-              <NavLink to="/resetPassword" className="  text-white ">Olvidaste tu  Contraseña?</NavLink>
+              <NavLink to="/sendEmail" className="  text-white ">Olvidaste tu  Contraseña?</NavLink>
               </div>
           <button type="submit" className="btn btn-primary mt-2  ">
             Enviar

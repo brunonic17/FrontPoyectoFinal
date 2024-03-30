@@ -9,13 +9,11 @@ import { Button } from "react-bootstrap";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import iconos from "../helpers/iconos";
 import { useAuth } from "../Context/AuthContext";
-// import PaginaRegistro from "../Pages/PaginaRegistro";
-// import PaginaLoguin from "../Pages/PaginaLoguin";
+
 
 function NavBarEx() {
   const { isAuthenticated, logout, user } = useAuth();
-  // console.log(isAuthenticated);
-  // console.log(user);
+  
 
   return (
     <Navbar expand="lg" className=" sticky-top bg-info ">
@@ -34,7 +32,6 @@ function NavBarEx() {
                 aria-label="Search"
               />
               <Button variant="" className="iconoBuscar">
-                
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -72,12 +69,11 @@ function NavBarEx() {
           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             {isAuthenticated && user.rule === "admin" ? (
               <>
-                <p className="p-0">Hola soy el admin {user.nameUser}</p>
                 <Nav.Link as={NavLink} to="admin">
                   Admin
                 </Nav.Link>
 
-                <Button
+                <Button as={NavLink}
                   to="/"
                   onClick={() => {
                     logout();
@@ -87,12 +83,8 @@ function NavBarEx() {
               </>
             ) : isAuthenticated ? (
               <>
-                <p className="p-0">Hola soy el admin {user.nameUser}</p>
-                <Nav.Link as={NavLink} to="admin">
-                  Admin
-                </Nav.Link>
-
-                <Button
+                <p className="p-0">Hola {user.nameUser}</p>
+                <Button as={NavLink}
                   to="/"
                   onClick={() => {
                     logout();
@@ -107,24 +99,11 @@ function NavBarEx() {
                     Registro
                   </Nav.Link>
                 </li>
-                {/* <li>
-                  <Nav.Link>
-                    <ModalRegister />
-                  </Nav.Link>
-                </li> */}
-                {/* <li>
-                  <Nav.Link>
-                    <ModalLoguin />
-                  </Nav.Link>
-                </li> */}
-                <Nav.Link as={NavLink} to="loguin">
-                      Acceder
-                    </Nav.Link>
-                {/* <li>
-                  <Nav.Link as={NavLink} to="loguin">
-                    Accederrr
-                  </Nav.Link>
-                </li> */}
+               
+                <Nav.Link as={NavLink} to="login">
+                  Acceder
+                </Nav.Link>
+               
               </>
             )}
           </ul>
@@ -164,22 +143,6 @@ function NavBarEx() {
             <Nav.Link as={NavLink} to="contacto">
               Contacto
             </Nav.Link>
-            <Nav.Link as={NavLink} to="forgotPassword">
-              Cambio de contraseña
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="sendEmail">
-              Restablecer Contraseña
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="nosotros">
-              Nosotros
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="admin">
-              admin
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="productos">
-              Productos de listas
-            </Nav.Link>
-
             {isAuthenticated && user.rule === "admin" ? (
               <>
                 <p className="p-0">Hola soy el admin {user.nameUser}</p>
@@ -187,7 +150,7 @@ function NavBarEx() {
                   Admin
                 </Nav.Link>
 
-                <Button
+                <Button as={NavLink}
                   to="/"
                   onClick={() => {
                     logout();
@@ -199,7 +162,7 @@ function NavBarEx() {
               <>
                 <p className="p-0">Hola {user.nameUser}</p>
 
-                <Button
+                <Button as={NavLink}
                   to="/"
                   onClick={() => {
                     logout();
@@ -209,16 +172,6 @@ function NavBarEx() {
               </>
             ) : (
               <>
-               {/* <li>
-                  <Nav.Link>
-                    <ModalRegister />
-                  </Nav.Link>
-                </li>
-                <li>
-                  <Nav.Link>
-                    <ModalLoguin />
-                  </Nav.Link>
-                </li> */}
                 <li>
                   <Nav.Link as={NavLink} to="/registro">
                     Registro

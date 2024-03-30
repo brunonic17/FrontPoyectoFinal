@@ -1,7 +1,8 @@
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import { useForm } from "react-hook-form";
-
+import { useEffect } from "react";
+import { Toaster, toast } from "sonner";
 
 const ResetPassword = () => {
   const {
@@ -12,29 +13,35 @@ const ResetPassword = () => {
     // reset,
   } = useForm();
 
-  // const navigate = useNavigate();
-  const { errors: authErrors, sendEmail } = useAuth();
+  const navigate = useNavigate();
+  const { errors: sendErrors, sendEmail, send } = useAuth();
 
-  //   useEffect(() => {
-  //     if (isAuthenticated)
-  //     reset()
-  //    const timer =setTimeout(() => {
-  //       handleClose()
-  //       navigate("/")
-  //     }, 1000)
-  //     return ()=> clearTimeout(timer)
-
-  //   }, [isAuthenticated]);
-
+  const alertas = () => {
+    return toast.success("Correo enviado con éxito");
+  };
   const onSubmit = handleSubmit(async (data) => {
-    sendEmail(data);
+    await sendEmail(data);
   });
+  useEffect(() => {
+    if (send === true) {
+      alertas();
+     const timer = setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+      return () => clearTimeout(timer)
+    }
+  }, [send, navigate]);
 
   return (
     <div className=" d-flex flex-column align-items-center ">
       <h1 className=" text-center ">Modificacion de contraseña</h1>
       <div className="container row justify-content-center  bg-dark">
         <form className="p-2 bg-secondary w-50  p-4 ">
+          {sendErrors !== "" && (
+            <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
+              {sendErrors}
+            </span>
+          )}
           <div className="mb-3">
             <label className="form-label fst-italic">Email</label>
             <input
@@ -60,19 +67,24 @@ const ResetPassword = () => {
                 {errors.email.message}
               </span>
             )}
-
-            {authErrors !== "" && (
-              <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
-                {authErrors}
-              </span>
-            )}
           </div>
 
           <button type="button" className="btn btn-primary" onClick={onSubmit}>
             Enviar
           </button>
+          {/* <Button variant="info" onClick={onSubmit}>
+            Enviar
+          </Button> */}
         </form>
       </div>
+      <Toaster theme="light" position="top-center"
+      duration={2000}
+      
+      toastOptions={{
+        style: { background: 'gren' },
+        className: 'my-toast',
+      }}
+    />
     </div>
   );
 };

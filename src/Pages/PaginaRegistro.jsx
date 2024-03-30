@@ -17,8 +17,7 @@ function PaginaRegistro() {
   const { signup, isAuthenticated, errors: authErrors } = useAuth();
 
   useEffect(() => {
-    if (isAuthenticated) 
-    navigate("/");
+    if (isAuthenticated) navigate("/");
   }, [isAuthenticated, navigate]);
 
   const onSubmit = handleSubmit(async (data) => {
@@ -37,7 +36,6 @@ function PaginaRegistro() {
               name="nameUser"
               autoComplete="off"
               placeholder="Ingrese su nombre"
-
               {...register("nameUser", {
                 required: {
                   value: true,
@@ -158,15 +156,13 @@ function PaginaRegistro() {
           <button type="button" onClick={onSubmit} className="btn btn-primary">
             Enviar
           </button>
-              <div>
-                
-              </div>
+          <div></div>
           <div className="d-flex justify-content-between">
             <p className="d-flex  fw-bold fs-4 text-white fst-italic">
               Ya tienes una cuenta?
             </p>
             <NavLink to="/login" className="btn bg-success text-white ">
-             Acceder
+              Acceder
             </NavLink>
             {/* <NavLink className="btn bg-success text-white ">
              <ModalRegister />

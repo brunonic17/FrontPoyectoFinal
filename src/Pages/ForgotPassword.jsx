@@ -13,15 +13,13 @@ const ForgotPassword = () => {
     // reset,
   } = useForm();
   const params = useParams();
- 
+
   const navigate = useNavigate();
 
-  const onSubmit = handleSubmit((data) => {
-    if (params.id) {
-      updatePasswordRequest(params.id, data);
-    }
-    console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    await updatePasswordRequest(params.id, data);
     navigate("/login");
+    console.log(data);
   });
   return (
     <div>

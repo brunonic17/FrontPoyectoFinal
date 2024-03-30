@@ -154,6 +154,12 @@ img {
 .imgPublicidad {
   max-height: 50vh;
 }
+/* Alertas */
+.my-toast {
+  width: 20rem;
+  background-color: green;
+  color: #fff;
+}
 @delprafede Comment @media (min-width: 576px) {
   .modal {
     --bs-modal-margin: 1rem !important;
