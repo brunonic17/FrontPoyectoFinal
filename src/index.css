@@ -110,7 +110,8 @@ img {
 
 
 .container-img {
-  max-width: 50rem;
+ width: 20rem;
+
 }
 
 .container-img img {

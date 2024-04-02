@@ -7,13 +7,11 @@ import Form from "react-bootstrap/Form";
 import LogoYoCampo from "../assets/img/LogoYoCampo.jpg";
 import { Button } from "react-bootstrap";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import iconos from "../helpers/iconos";
+import iconos, { iconoCarrito, iconoEstrella } from "../helpers/iconos";
 import { useAuth } from "../Context/AuthContext";
-
 
 function NavBarEx() {
   const { isAuthenticated, logout, user } = useAuth();
-  
 
   return (
     <Navbar expand="lg" className=" sticky-top bg-info ">
@@ -72,8 +70,12 @@ function NavBarEx() {
                 <Nav.Link as={NavLink} to="admin">
                   Admin
                 </Nav.Link>
+                <Nav.Link as={NavLink} to="admin">
+                  {iconoCarrito}
+                </Nav.Link>
 
-                <Button as={NavLink}
+                <Button
+                  as={NavLink}
                   to="/"
                   onClick={() => {
                     logout();
@@ -84,7 +86,8 @@ function NavBarEx() {
             ) : isAuthenticated ? (
               <>
                 <p className="p-0">Hola {user.nameUser}</p>
-                <Button as={NavLink}
+                <Button
+                  as={NavLink}
                   to="/"
                   onClick={() => {
                     logout();
@@ -99,11 +102,10 @@ function NavBarEx() {
                     Registro
                   </Nav.Link>
                 </li>
-               
+
                 <Nav.Link as={NavLink} to="login">
                   Acceder
                 </Nav.Link>
-               
               </>
             )}
           </ul>
@@ -111,8 +113,8 @@ function NavBarEx() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="order-1" />
         <Navbar.Collapse
           id="basic-navbar-nav"
-          className="w-100  justify-content-lg-center d-lg-flex order-4 ">
-          <Nav className="p-2">
+          className="w-100  d-lg-flex order-4 justify-content-end ">
+          <Nav className="p-2 w-100">
             <Form className="d-flex  d-lg-none w-75  ">
               <Form.Control
                 type="search"
@@ -132,58 +134,68 @@ function NavBarEx() {
                 </svg>
               </Button>
             </Form>
-            <div>
+            <div className=" d-flex col-8 bg-danger ">
               <NavDropdown title="Categorias" id="basic-nav-dropdown">
                 <Nav.Link as={NavLink} to="productos">
                   Productos de listas
                 </Nav.Link>
               </NavDropdown>
+
+              <Nav.Link as={NavLink} to="contacto">
+                Contacto
+              </Nav.Link>
             </div>
-
-            <Nav.Link as={NavLink} to="contacto">
-              Contacto
-            </Nav.Link>
-            {isAuthenticated && user.rule === "admin" ? (
-              <>
-                <p className="p-0">Hola soy el admin {user.nameUser}</p>
-                <Nav.Link as={NavLink} to="admin">
-                  Admin
-                </Nav.Link>
-
-                <Button as={NavLink}
-                  to="/"
-                  onClick={() => {
-                    logout();
-                  }}>
-                  Logout
-                </Button>
-              </>
-            ) : isAuthenticated ? (
-              <>
-                <p className="p-0">Hola {user.nameUser}</p>
-
-                <Button as={NavLink}
-                  to="/"
-                  onClick={() => {
-                    logout();
-                  }}>
-                  Logout
-                </Button>
-              </>
-            ) : (
-              <>
-                <li>
-                  <Nav.Link as={NavLink} to="/registro">
-                    Registro
+            <div className=" d-flex col-4 text-center bg-body-secondary justify-content-end   ">
+              {isAuthenticated && user.rule === "admin" ? (
+                <>
+                  <Nav.Link >Hola {user.nameUser}!</Nav.Link>
+                  <Nav.Link as={NavLink} to="admin">
+                    Admin
                   </Nav.Link>
-                </li>
-                <li>
-                  <Nav.Link as={NavLink} to="/login">
-                    Acceder
+                  <Nav.Link as={NavLink} to= "favorito">
+                    {iconoEstrella}
                   </Nav.Link>
-                </li>
-              </>
-            )}
+                  <Nav.Link as={NavLink} to="fcarrito">
+                    {iconoCarrito}
+                  </Nav.Link>
+
+                  <Button
+                    as={NavLink}
+                    to="/"
+                    onClick={() => {
+                      logout();
+                    }}>
+                    Logout
+                  </Button>
+                </>
+              ) : isAuthenticated ? (
+                <>
+                  <p className="p-0">Hola {user.nameUser}</p>
+
+                  <Button
+                    as={NavLink}
+                    to="/"
+                    onClick={() => {
+                      logout();
+                    }}>
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Nav.Link as={NavLink} to="/registro">
+                      Registro
+                    </Nav.Link>
+                  </li>
+                  <li>
+                    <Nav.Link as={NavLink} to="/login">
+                      Acceder
+                    </Nav.Link>
+                  </li>
+                </>
+              )}
+            </div>
           </Nav>
         </Navbar.Collapse>
       </Container>
