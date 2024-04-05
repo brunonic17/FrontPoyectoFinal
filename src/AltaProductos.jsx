@@ -95,10 +95,10 @@ const Products = () => (
   
 </div>
 
-{/* 
+
 <div>
  <T/>
- </div> */}
+ </div>
  </> 
 );
  

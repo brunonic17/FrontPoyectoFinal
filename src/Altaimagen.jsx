@@ -162,38 +162,10 @@ import PreviewImagen from './RenderImagen.jsx';
 
 
 
-// function Image() {
-//   const picture= useFormik({
-//     initialValues:{
-//       imagenes:""
-//     },
-//     onSubmit:()=>{
-//       console.log(picture.values)
-//   }})
-   
-//   return(
-//     <>
-//   <div className='Image'>
-//     <form onSubmit={picture.handleSubmit}>
-//     <input
-//     type="file"
-//     name="imagenes"
-//     onChange={(e)=>picture.setFieldValue("imagenes",e.target.files[0])}   />
-//     <button type='Submit'> Cargar Imagen</button>
-// </form>
-// <div>
-// {picture.values.imagenes && <PreviewImagen file={picture.values.imagenes} />}
-// </div>
-//   </div>
-//   </>
-//    )
- 
-// }
-
 function Image() {
   const picture= useFormik({
     initialValues:{
-      imagenes:[]
+      imagenes:""
     },
     onSubmit:()=>{
       console.log(picture.values)
@@ -201,58 +173,86 @@ function Image() {
    
   return(
     <>
-      <div className='Image'>
-      <FormikProvider value={picture}>
-        <form onSubmit={picture.handleSubmit}>
-
-    {/* <input
+  <div className='Image'>
+    <form onSubmit={picture.handleSubmit}>
+    <input
     type="file"
     name="imagenes"
-    onChange={(e)=>picture.setFieldValue("imagenes",e.target.files[0])}   /> */}
-    
-      <FieldArray
-          name="imagenes"
-          render={(arrayHelpers) => (
-            <div>
-              {picture.values.imagenes.map((imagen, index) => (
-                <div key={index}>
-                  {/** both these conventions do the same  */}
-
-                  <input
-                   type="file"
-                   name={`imagenes.${index}.imagen`}
-                   value={picture.values.imagenes[index].imagen}
-                  onChange={(e)=>picture.imagenes[index].setFieldValue(`imagen`,e.target.files[0])}   />
-                
-                 
-                  <button
-                    type="button"
-                    onClick={() => arrayHelpers.remove(index)}
-                  >
-                   Quitar imagen
-                  </button>
-                </div>
-              ))}
-              <button
-                type="button"
-                onClick={() => arrayHelpers.push({ imagen:""})}
-              >
-                Agregar imagen
-              </button>
-            </div>
-          )}/>
-
-      <button type='Submit'> Cargar Imagen</button>
-    </form>
-
-      
-</FormikProvider>
+    onChange={(e)=>picture.setFieldValue("imagenes",e.target.files[0])}   />
+    <button type='Submit'> Cargar Imagen</button>
+</form>
 <div>
-{/* {picture.values.imagenes && <PreviewImagen file={picture.values.imagenes} />} */}
+{picture.values.imagenes && <PreviewImagen file={picture.values.imagenes} />}
 </div>
   </div>
   </>
    )
  
 }
+
+// function Image() {
+//   const picture= useFormik({
+//     initialValues:{
+//       imagenes:[]
+//     },
+//     onSubmit:()=>{
+//       console.log(picture.values)
+//   }})
+   
+//   return(
+//     <>
+//       <div className='Image'>
+//       <FormikProvider value={picture}>
+//         <form onSubmit={picture.handleSubmit}>
+
+//     {/* <input
+//     type="file"
+//     name="imagenes"
+//     onChange={(e)=>picture.setFieldValue("imagenes",e.target.files[0])}   /> */}
+    
+//       <FieldArray
+//           name="imagenes"
+//           render={(arrayHelpers) => (
+//             <div>
+//               {picture.values.imagenes.map((imagen, index) => (
+//                 <div key={index}>
+//                   {/** both these conventions do the same  */}
+
+//                   <input
+//                    type="file"
+//                    name={`imagenes.${index}.imagen`}
+//                    value={picture.values.imagenes[index].imagen}
+//                   onChange={picture.handleChange}   />
+                
+                 
+//                   <button
+//                     type="button"
+//                     onClick={() => arrayHelpers.remove(index)}
+//                   >
+//                    Quitar imagen
+//                   </button>
+//                 </div>
+//               ))}
+//               <button
+//                 type="button"
+//                 onClick={() => arrayHelpers.push({ imagen:""})}
+//               >
+//                 Agregar imagen
+//               </button>
+//             </div>
+//           )}/>
+
+//       <button type='Submit'> Cargar Imagen</button>
+//     </form>
+
+      
+// </FormikProvider>
+// <div>
+// {/* {picture.values.imagenes && <PreviewImagen file={picture.values.imagenes} />} */}
+// </div>
+//   </div>
+//   </>
+//    )
+ 
+// }
   export {Image}
