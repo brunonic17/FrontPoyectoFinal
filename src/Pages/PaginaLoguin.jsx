@@ -39,7 +39,7 @@ const PaginaLoguin = () => {
               name="email"
               autoComplete="username"
               placeholder="Ingresa tu email"
-              {...register("email", {
+              {...register("email", {//name onc
                 required: {
                   value: true,
                   message: "Correo electrónico es requerido",

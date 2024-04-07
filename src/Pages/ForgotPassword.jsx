@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 // import { useAuth } from "../Context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { updatePasswordRequest } from "../api/auth";
+import { useEffect } from "react";
+import { Toaster, toast } from "sonner";
+import { useAuth } from "../Context/AuthContext";
 
 const ForgotPassword = () => {
   const {
@@ -12,15 +15,38 @@ const ForgotPassword = () => {
     watch,
     // reset,
   } = useForm();
-  const params = useParams();
+
+  const params = useParams()
+  
+  const { send } = useAuth();
+
+  useEffect(()=> {
+    console.log(params)
+  },[])
+
+
 
   const navigate = useNavigate();
 
-  const onSubmit = handleSubmit(async (data) => {
-    await updatePasswordRequest(params.id, data);
-    navigate("/login");
+  const alertas = () => {
+    return toast.success("Password reestablecida");
+  };
+  const onSubmit = handleSubmit((data) => {
+    if(params.id){
+      updatePasswordRequest(params.id, data);
+
+    }
     console.log(data);
   });
+  useEffect(() => {
+    if (send === true) {
+      alertas();
+     const timer = setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+      return () => clearTimeout(timer)
+    }
+  }, [send, navigate]);
   return (
     <div>
       <div className="container p-2 ">
@@ -31,7 +57,6 @@ const ForgotPassword = () => {
             <input
               type="password"
               name="password"
-              autoComplete="current-password"
               {...register("password", {
                 required: {
                   value: true,
@@ -84,6 +109,14 @@ const ForgotPassword = () => {
           <button className="btn btn-primary">Cambiar</button>
         </form>
       </div>
+      <Toaster theme="light" position="top-center"
+      duration={2000}
+      
+      toastOptions={{
+        style: { background: 'gren' },
+        className: 'my-toast',
+      }}
+    />
     </div>
   );
 };

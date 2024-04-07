@@ -1,4 +1,4 @@
-import Publicidad from "../Components/Publicidad";
+// import Publicidad from "../Components/Publicidad";
 import CarouselIndividualIntervals from "../Components/SliderCarousels";
 import Productos from "./Productos";
 
@@ -12,7 +12,7 @@ function Home() {
         <CarouselIndividualIntervals />
         <Productos />
       
-        <Publicidad />
+        {/* <Publicidad /> */}
       </main>
     </>
   );

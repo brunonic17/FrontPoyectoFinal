@@ -28,7 +28,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [send, setSend] = useState(false);
 
-
   const signup = async (user) => {
     try {
       const res = await registerRequest(user);
@@ -53,21 +52,21 @@ export const AuthProvider = ({ children }) => {
 
   //Cerrar sesion
   const logout = () => {
-   Cookies.remove("token");
+    Cookies.remove("token");
     setisAuthenticate(false);
     setUser(null);
   };
 
   //Enviar email cambio de contraseña delpradofederico0@gmail.com <Navigate to = "contacto" />
-  const sendEmail = async (email, user) => {
+  const sendEmail = async (email) => {
     try {
-      const res = await sendEmailRequest(email, user);
+      const res = await sendEmailRequest(email);
       console.log(res.data);
       setSend(true);
-     const timer = setTimeout(() => {
-        setSend(false);     
+      const timer = setTimeout(() => {
+        setSend(false);
       }, 3000);
-      return () => clearTimeout(timer)
+      return () => clearTimeout(timer);
     } catch (error) {
       setErrors(error.response.data);
     }
@@ -75,9 +74,14 @@ export const AuthProvider = ({ children }) => {
   //Modificar contraseña
   const updatePassword = async (id, user) => {
     try {
-      await updatePasswordRequest(id, user);
+    await updatePasswordRequest(id, user);
+    setSend(true);
+    const timer = setTimeout(() => {
+      setSend(false);
+    }, 3000);
+    return () => clearTimeout(timer);
     } catch (error) {
-      return console.log(error);
+      return console.log("soy yo el error");
     }
   };
   useEffect(() => {

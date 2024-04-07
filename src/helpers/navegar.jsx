@@ -8,3 +8,9 @@ export const Alertas = ()=> {
     toast("correo enviado")
   )
 }
+export const Success = ()=> {
+  return (
+
+    toast("Cantraseña Reestablecida")
+  )
+}

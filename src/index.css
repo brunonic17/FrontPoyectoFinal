@@ -151,6 +151,37 @@ img {
   cursor: pointer;
   margin-top: auto;
 }
+.btnLogout {
+  width: 70px;
+  height: 30px; 
+  outline: none;
+  border: 1px solid #7a7a7a;
+  border-radius: 75px;
+  color: #515151;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btnLogout:active {
+  background-color: rgba(36, 179, 95, 0.603);
+}
+.contador {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -18px;
+  margin-top: -20px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 14px;
+  background-color: red;
+  color: white;
+}
 /* Publicidad */
 .imgPublicidad {
   max-height: 50vh;

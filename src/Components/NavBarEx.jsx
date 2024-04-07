@@ -145,7 +145,7 @@ function NavBarEx() {
                 Contacto
               </Nav.Link>
             </div>
-            <div className=" d-flex col-4 text-center bg-body-secondary justify-content-end   ">
+            <div className=" d-flex col-4 text-center bg-body-secondary align-items-center  justify-content-end   ">
               {isAuthenticated && user.rule === "admin" ? (
                 <>
                   <Nav.Link >Hola {user.nameUser}!</Nav.Link>
@@ -155,18 +155,18 @@ function NavBarEx() {
                   <Nav.Link as={NavLink} to= "favorito">
                     {iconoEstrella}
                   </Nav.Link>
-                  <Nav.Link as={NavLink} to="fcarrito">
+                  <Nav.Link as={NavLink} to="carrito">
                     {iconoCarrito}
                   </Nav.Link>
-
-                  <Button
+                  <div className="contador">0</div>
+                  <button className="btnLogout"
                     as={NavLink}
                     to="/"
                     onClick={() => {
                       logout();
                     }}>
                     Logout
-                  </Button>
+                  </button>
                 </>
               ) : isAuthenticated ? (
                 <>
