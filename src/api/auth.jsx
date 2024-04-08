@@ -14,7 +14,7 @@ export const LoguinRequest= (user) => axios.post(`/login`, user)
 
 export const sendEmailRequest= (email) => axios.post(`/sendEmail`, email)
 
-export const updatePasswordRequest= (id, user) => axios.put(`/forgotPassword/${id}`, user)
+export const updatePasswordRequest= (id,token, user ) => axios.put(`/forgotPassword/${id}/${token}`, user)
 
 export const verifyTokenRequest = () => axios.get( `/verify` ) 
 

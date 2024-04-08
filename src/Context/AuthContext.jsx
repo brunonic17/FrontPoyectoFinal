@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
   const [errors, setErrors] = useState("");
   const [loading, setLoading] = useState(true);
   const [send, setSend] = useState(false);
+  const [forgot, setForgot] = useState(false);
 
   const signup = async (user) => {
     try {
@@ -72,14 +73,16 @@ export const AuthProvider = ({ children }) => {
     }
   };
   //Modificar contraseña
-  const updatePassword = async (id, user) => {
+  const updatePassword = async (id, token, user) => {
     try {
-    await updatePasswordRequest(id, user);
-    setSend(true);
-    const timer = setTimeout(() => {
-      setSend(false);
-    }, 3000);
-    return () => clearTimeout(timer);
+      const res = await updatePasswordRequest(id, token, user);
+      console.log(res.data);
+      setForgot(true);
+      // window.location.reload();
+      const timer = setTimeout(() => {
+        setSend(false);
+      }, 3000);
+      return () => clearTimeout(timer);
     } catch (error) {
       return console.log("soy yo el error");
     }
@@ -135,6 +138,7 @@ export const AuthProvider = ({ children }) => {
         user,
         isAuthenticated,
         send,
+        forgot,
         errors,
         loading,
       }}>

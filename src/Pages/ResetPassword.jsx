@@ -24,6 +24,7 @@ const ResetPassword = () => {
   });
   useEffect(() => {
     if (send === true) {
+      console.log(send)
       alertas();
      const timer = setTimeout(() => {
         navigate("/login");

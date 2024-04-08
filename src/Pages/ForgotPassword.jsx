@@ -16,15 +16,13 @@ const ForgotPassword = () => {
     // reset,
   } = useForm();
 
-  const params = useParams()
-  
-  const { send } = useAuth();
+  const params = useParams();
 
-  useEffect(()=> {
-    console.log(params)
-  },[])
+  const { forgot } = useAuth();
 
-
+  // useEffect(() => {
+  //   console.log(params);
+  // }, []);
 
   const navigate = useNavigate();
 
@@ -32,21 +30,21 @@ const ForgotPassword = () => {
     return toast.success("Password reestablecida");
   };
   const onSubmit = handleSubmit((data) => {
-    if(params.id){
-      updatePasswordRequest(params.id, data);
-
+    if (params.id, params.token) {
+        updatePasswordRequest(params.id, params.token, data);
+      
     }
-    console.log(data);
   });
   useEffect(() => {
-    if (send === true) {
+    if (forgot === true) {
+      console.log(forgot)
       alertas();
-     const timer = setTimeout(() => {
+      const timer = setTimeout(() => {
         navigate("/login");
       }, 2000);
-      return () => clearTimeout(timer)
+      return () => clearTimeout(timer);
     }
-  }, [send, navigate]);
+  }, [forgot, navigate]);
   return (
     <div>
       <div className="container p-2 ">
@@ -109,14 +107,15 @@ const ForgotPassword = () => {
           <button className="btn btn-primary">Cambiar</button>
         </form>
       </div>
-      <Toaster theme="light" position="top-center"
-      duration={2000}
-      
-      toastOptions={{
-        style: { background: 'gren' },
-        className: 'my-toast',
-      }}
-    />
+      <Toaster
+        theme="light"
+        position="top-center"
+        duration={2000}
+        toastOptions={{
+          style: { background: "gren" },
+          className: "my-toast",
+        }}
+      />
     </div>
   );
 };
