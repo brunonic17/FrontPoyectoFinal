@@ -2,6 +2,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
+import { GetProducts,PostProducts,GetProduct,GetCompleteProduct,PostEspecificaciones} from './fetch/Products.js';
+
 
 
 
@@ -12,6 +14,7 @@ const Especificaciones={
     Stock: '',
     Fecha: '',
     CodProducto: '',
+    id:''
    };
 
 
@@ -21,8 +24,12 @@ const Especificaciones={
        <Formik
          initialValues={Especificaciones}
          onSubmit={async (values) => {
-           await new Promise((r) => setTimeout(r, 500));
-           alert(JSON.stringify(values, null, 2));
+          const Id=JSON.parse(localStorage.getItem('Id'));
+          values.id=Id;
+          const PostE=await PostEspecificaciones(values)
+          console.log(PostE.data);
+          //  await new Promise((r) => setTimeout(r, 500));
+          //  alert(JSON.stringify(values, null, 2));
          }}
        >
     
