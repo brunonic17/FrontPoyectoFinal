@@ -21,6 +21,7 @@ import { AuthProvider } from "./Context/AuthContext";
 import PaginaLoguin from "./Pages/PaginaLoguin";
 import PaginaRegistro from "./Pages/PaginaRegistro";
 import { ProtectedRoute } from "../src/Components/ProtectedRoute";
+import { FavoritesProvider } from "./Context/FavContext";
 
 // ReactDOM.createRoot(document.getElementById("root")).render(
 //   <React.StrictMode>
@@ -117,7 +118,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <FavoritesProvider>
+        <RouterProvider router={router} />
+      </FavoritesProvider>
     </AuthProvider>
   </React.StrictMode>
 );
