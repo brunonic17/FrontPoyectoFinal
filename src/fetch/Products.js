@@ -136,4 +136,4 @@ const PostProducts=async  (Prod)=>{
 
 
 
-export {GetProducts,PostProducts,GetProduct,GetCompleteProduct,PostEspecificaciones}
+export {GetProducts,PostProducts,GetProduct,GetCompleteProduct,PostEspecificaciones,UploadImage}
