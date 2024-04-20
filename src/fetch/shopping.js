@@ -2,7 +2,7 @@
 
 const GetShoppings = async (id)=> {
 
-    const response=await fetch(`http://localhost:5050/api/carrito/${id}`,{
+    const response=await fetch(`http://localhost:5000/api/carrito/${id}`,{
         method:"GET",
 
         headers:{
@@ -21,7 +21,7 @@ const GetShoppings = async (id)=> {
 const PostShoppings = async (Cart)=> {
         let CartJson=JSON.stringify(Cart)
 
-    const response=await fetch(`http://localhost:5050/api/carrito`,{
+    const response=await fetch(`http://localhost:5000/api/carrito`,{
         method:"POST",
         body:CartJson ,
         headers:{
@@ -38,4 +38,41 @@ const PostShoppings = async (Cart)=> {
         return data
 }
 
-export { GetShoppings,PostShoppings}
+const DeleteProduct = async (Product)=> {
+    let ProductJson=JSON.stringify(Product)
+
+    const response=await fetch(`http://localhost:5000/api/carrito`,{
+    method:"DELETE",
+    body:ProductJson ,
+    headers:{
+        "content-type":"application/json"
+       
+    },
+    });
+
+    const data=response.json();
+
+    return data
+}
+
+const PagoPay = async (Carrito)=> {
+    let CarritoJson=JSON.stringify(Carrito)
+
+    const response=await fetch(`http://localhost:5000/api/carrito/confirma`,{
+    method:"POST",
+    body:CarritoJson ,
+    headers:{
+        "content-type":"application/json"
+       
+    },
+
+  
+    
+});
+
+    const data=response.json();
+
+    return data
+}
+
+export { GetShoppings,PostShoppings,DeleteProduct,PagoPay}
