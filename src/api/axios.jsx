@@ -6,9 +6,9 @@ const instance = axios.create({
 });
 export default instance;
 
-export const instanceApiFake = axios.create({
-  baseURL: "https://fakestoreapi.com"
-})
+// export const instanceApiFake = axios.create({
+//   baseURL: "http://localhost:5050/api"
+// })
 
 
 

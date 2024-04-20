@@ -22,6 +22,7 @@ import PaginaLoguin from "./Pages/PaginaLoguin";
 import PaginaRegistro from "./Pages/PaginaRegistro";
 import { ProtectedRoute } from "../src/Components/ProtectedRoute";
 import { FavoritesProvider } from "./Context/FavContext";
+import Favorites from "./Pages/Favorites";
 
 // ReactDOM.createRoot(document.getElementById("root")).render(
 //   <React.StrictMode>
@@ -68,6 +69,14 @@ const router = createBrowserRouter([
         element: (
           <div>
             <ResetPassword />
+          </div>
+        ),
+      },
+      {
+        path: "/favorites",
+        element: (
+          <div>
+            <Favorites />
           </div>
         ),
       },

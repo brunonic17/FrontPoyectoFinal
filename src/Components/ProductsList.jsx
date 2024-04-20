@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import Pagination from "./Pagination";
-import { getProductsApi } from "../api/auth";
-// import axios from "axios";
-import { useForm } from "react-hook-form";
-  import { useFav } from "../Context/FavContext";
-
+import { getProductsApi } from "../api/products";
+import { useFav } from "../Context/FavContext";
+import { createFavRequest } from "../api/favorite";
+import { useAuth } from "../Context/AuthContext";
 
 const ProductsList = () => {
   const [products, setProducts] = useState([]);
@@ -12,16 +11,14 @@ const ProductsList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const totalProducts = products.length;
 
-  const { handleSubmit} = useForm();
+  // const { createFavorite } = useFav();
+  const { user } = useAuth();
 
-  // const {fav} = useFav()
-  // console.log(fav)
 
   const productsList = async () => {
     try {
       const res = await getProductsApi();
       const products = res.data;
-      console.log(products);
       setProducts(products);
     } catch (e) {
       console.log(e);
@@ -34,10 +31,6 @@ const ProductsList = () => {
 
   const lastIndex = currentPage * pageNumber;
   const firstIndex = lastIndex - pageNumber;
-  // const onSubmit =  (product) => {
-    
-  //   console.log(products[product.id])
-  // };
 
   return (
     <>
@@ -45,18 +38,37 @@ const ProductsList = () => {
         {products
           .map((product) => {
             return (
-              <div className=" card-product " key={product.id}>
+              <div className=" card-product " key={product._id}>
                 <figure className="container-img">
-                  <img className="" src={product.image} alt={product.title}/>
+                  <img
+                    className=""
+                    src={product.UrlImagen}
+                    alt={product.NombreProducto}
+                  />
                 </figure>
 
                 <div className="info-product">
-                  <h3>{product.title} </h3>
-                  <p className="price">$ {product.price} </p>
+                  <h3>{product.NombreProducto} </h3>
+                  <p className="price">$ {product.Precio} </p>
 
-                  <button onClick={ ()=> {
-                     console.log(product.id)
-                  }}>Añadir a favoritos</button>
+                  <button type="submit"
+                    onClick={ 
+                    
+                      async() => { 
+                        console.log(product)
+                        const product1={product:product._id,
+                        user: user.id 
+                        }
+                        console.log(product1)
+                    //    const res= await createFavorite(product1);
+                    //  console.log(res)
+                    
+                      const res =  await createFavRequest(product1)
+                      console.log(res)
+
+                    }}>
+                    Añadir a favoritos
+                  </button>
                 </div>
               </div>
             );

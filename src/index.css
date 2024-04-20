@@ -71,10 +71,11 @@ li {
   border: solid red;
 }
 
-.img1 {
-  width: 80%;
-  max-height: 70vh;
-}
+/* .img1 {
+  /* width: 80%; */
+  /* max-height: 70vh; */
+/* }  */
+*/
 
 .cursor {
   cursor: pointer;
