@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import { createFavRequest } from "../api/favorite";
+import { createFavRequest, getFavsRequest } from "../api/favorite";
+import { getProductsApi } from "../api/products";
 
 const FavContex = createContext();
 
@@ -15,11 +16,17 @@ export function FavoritesProvider({ children }) {
   const [fav, useFav] = useState([]);
 
   const createFavorite = async (id) => {
-   
-    const res =  await createFavRequest(id)
-    console.log(res)
-   
-   
+    const res = await createFavRequest(id);
+    console.log(res);
+  };
+
+  const getProductsFavorite = async () => {
+    try {
+      const res = await getFavsRequest();
+      useFav(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -27,6 +34,7 @@ export function FavoritesProvider({ children }) {
       value={{
         fav,
         createFavorite,
+        getProductsFavorite,
       }}>
       {children}
     </FavContex.Provider>

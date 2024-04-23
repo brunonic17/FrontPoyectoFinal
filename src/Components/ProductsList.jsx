@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import Pagination from "./Pagination";
 import { getProductsApi } from "../api/products";
-import { useFav } from "../Context/FavContext";
+// import { useFav } from "../Context/FavContext";
 import { createFavRequest } from "../api/favorite";
 import { useAuth } from "../Context/AuthContext";
+import { Toaster, toast } from "sonner";
+import { iconoCarritoCart, iconofavorito } from "../helpers/iconos";
 
 const ProductsList = () => {
   const [products, setProducts] = useState([]);
@@ -14,15 +16,18 @@ const ProductsList = () => {
   // const { createFavorite } = useFav();
   const { user } = useAuth();
 
-
   const productsList = async () => {
     try {
       const res = await getProductsApi();
       const products = res.data;
+      console.log(products)
       setProducts(products);
     } catch (e) {
       console.log(e);
     }
+  };
+  const alertas = () => {
+    return toast.success("Debes iniciar sesion");
   };
 
   useEffect(() => {
@@ -50,24 +55,56 @@ const ProductsList = () => {
                 <div className="info-product">
                   <h3>{product.NombreProducto} </h3>
                   <p className="price">$ {product.Precio} </p>
+                </div>
 
-                  <button type="submit"
-                    onClick={ 
-                    
-                      async() => { 
-                        console.log(product)
-                        const product1={product:product._id,
-                        user: user.id 
-                        }
-                        console.log(product1)
-                    //    const res= await createFavorite(product1);
-                    //  console.log(res)
-                    
-                      const res =  await createFavRequest(product1)
-                      console.log(res)
+                <div className="btnIcon">
+                  <button
+                    type="submit"
+                    onClick={async () => {
+                      // console.log(product)
 
+                      if (user === null) {
+                        alertas();
+                      } else {
+                        const product1 = {
+                          product: product._id,
+                          user: user.id,
+                        };
+                        console.log(user);
+                        console.log(product1);
+
+                        //    const res= await createFavorite(product1);
+                        //  console.log(res)
+
+                        // const res =  await createFavRequest(product1)
+                        // console.log(res)
+                      }
                     }}>
-                    Añadir a favoritos
+                    {iconoCarritoCart}
+                  </button>
+                  <button
+                    type="submit"
+                    onClick={async () => {
+                      // console.log(product)
+
+                      if (user === null) {
+                        alertas();
+                      } else {
+                        const product1 = {
+                          product: product._id,
+                          user: user.id,
+                        };
+                        console.log(user);
+                        console.log(product1);
+
+                        //    const res= await createFavorite(product1);
+                        //  console.log(res)
+
+                        const res =  await createFavRequest(product1)
+                        console.log(res)
+                      }
+                    }}>
+                    {iconofavorito}
                   </button>
                 </div>
               </div>
@@ -75,7 +112,15 @@ const ProductsList = () => {
           })
           .slice(firstIndex, lastIndex)}
       </div>
-
+      <Toaster
+        theme="light"
+        position="top-center"
+        duration={2000}
+        toastOptions={{
+          style: { background: "red" },
+          className: "my-toast",
+        }}
+      />
       <div>
         <Pagination
           pageNumber={pageNumber}

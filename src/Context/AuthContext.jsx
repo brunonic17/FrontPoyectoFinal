@@ -112,6 +112,7 @@ export const AuthProvider = ({ children }) => {
         if (!res.data) {
           setisAuthenticate(false);
           setLoading(false);
+          console.log("necesitas acceder")
         }
         setisAuthenticate(true);
         setUser(res.data);

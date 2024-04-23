@@ -23,6 +23,7 @@ import PaginaRegistro from "./Pages/PaginaRegistro";
 import { ProtectedRoute } from "../src/Components/ProtectedRoute";
 import { FavoritesProvider } from "./Context/FavContext";
 import Favorites from "./Pages/Favorites";
+import PaginaArticulo from "./Pages/PaginaArticulo";
 
 // ReactDOM.createRoot(document.getElementById("root")).render(
 //   <React.StrictMode>
@@ -77,6 +78,14 @@ const router = createBrowserRouter([
         element: (
           <div>
             <Favorites />
+          </div>
+        ),
+      },
+      {
+        path: "/CartPage",
+        element: (
+          <div>
+            <PaginaArticulo />
           </div>
         ),
       },

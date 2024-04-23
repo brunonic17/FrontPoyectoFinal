@@ -7,7 +7,11 @@ import Form from "react-bootstrap/Form";
 import LogoYoCampo from "../assets/img/LogoYoCampo.jpg";
 import { Button } from "react-bootstrap";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import iconos, { iconoCarrito, iconoEstrella } from "../helpers/iconos";
+import iconos, {
+  iconoCarrito,
+  iconoEstrella,
+  iconofavorito,
+} from "../helpers/iconos";
 import { useAuth } from "../Context/AuthContext";
 
 function NavBarEx() {
@@ -86,6 +90,9 @@ function NavBarEx() {
             ) : isAuthenticated ? (
               <>
                 <p className="p-0">Hola {user.nameUser}</p>
+                <Nav.Link as={NavLink} to="favorites">
+                  {iconoEstrella}
+                </Nav.Link>
                 <Button
                   as={NavLink}
                   to="/"
@@ -100,6 +107,11 @@ function NavBarEx() {
                 <li>
                   <Nav.Link as={NavLink} to="registro">
                     Registro
+                  </Nav.Link>
+                </li>
+                <li>
+                  <Nav.Link as={NavLink} to="favorites">
+                    {iconofavorito}
                   </Nav.Link>
                 </li>
 
@@ -148,18 +160,19 @@ function NavBarEx() {
             <div className=" d-flex col-4 text-center bg-body-secondary align-items-center  justify-content-end   ">
               {isAuthenticated && user.rule === "admin" ? (
                 <>
-                  <Nav.Link >Hola {user.nameUser}!</Nav.Link>
+                  <Nav.Link>Hola {user.nameUser}!</Nav.Link>
                   <Nav.Link as={NavLink} to="admin">
                     Admin
                   </Nav.Link>
-                  <Nav.Link as={NavLink} to= "favorito">
+                  <Nav.Link as={NavLink} to="favorites">
                     {iconoEstrella}
                   </Nav.Link>
                   <Nav.Link as={NavLink} to="carrito">
                     {iconoCarrito}
                   </Nav.Link>
                   <div className="contador">0</div>
-                  <button className="btnLogout"
+                  <button
+                    className="btnLogout"
                     as={NavLink}
                     to="/"
                     onClick={() => {
@@ -171,6 +184,10 @@ function NavBarEx() {
               ) : isAuthenticated ? (
                 <>
                   <p className="p-0">Hola {user.nameUser}</p>
+
+                  <Nav.Link as={NavLink} to="favorites">
+                    {iconoEstrella}
+                  </Nav.Link>
 
                   <Button
                     as={NavLink}
@@ -188,6 +205,9 @@ function NavBarEx() {
                       Registro
                     </Nav.Link>
                   </li>
+                  <Nav.Link as={NavLink} to="favorites">
+                    {iconoEstrella}
+                  </Nav.Link>
                   <li>
                     <Nav.Link as={NavLink} to="/login">
                       Acceder
