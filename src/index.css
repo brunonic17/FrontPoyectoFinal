@@ -5,6 +5,10 @@
 
 
 }
+.myToast {
+  font-size: 1rem;
+  color: white;
+}
 
 * {
   padding: 0;
@@ -135,25 +139,27 @@ img {
 
 
 .price {
-  color: #000;
+  color: white;
   font-weight: 700;
   margin: 15px 0;
 }
 
 .btnIcon {
-
-  color: #000;
- width: 100%;
+  padding: 0 1rem;
+  background-color: #000;
+  width: 100%;
   display: flex;
-  gap: 2rem;;
- 
+  justify-content: space-between;
+  align-items: center;
   margin-top: auto;
- 
+
 }
+
 .btnIcon button {
+  border-radius: 50%;
   color: #fff;
   border: none;
-  padding: 10px 0;
+  padding: 5px;
   cursor: pointer;
 }
 

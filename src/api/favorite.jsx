@@ -1,6 +1,16 @@
-import axios from "axios";
+import instance from "./axios";
 
-// export const createFavRequest = (id)=> axios.post("/favorites", id);
+export const getProductsRequest = () => instance.get(`/products`);
+
+// export const createFavRequest = (product1) => {
+//   instance.post(`/favorites`, product1);
+// };
+
+export const getFavsRequest = () => instance.get("/pageFavorites");
+
+// export const getFavRequest = (id)=> axios.get(`/pageFavorites/${id}`);
+
+export const deleteFavRequest = (id)=> instance.delete(`/pageFavorites/${id}`);
 
 export const createFavRequest = async(id)=> {
                                     console.log(id)
@@ -10,15 +20,9 @@ export const createFavRequest = async(id)=> {
                                 {body:idjson,
                                     method:"POST",
                             headers:{"content-type":"application/json"},
-                            
+
                         });
                         const data=response.json();
                         return data
 
 }
-
-export const getFavsRequest = ()=> axios.get("/pageFavorites");
-
-export const getFavRequest = (id)=> axios.get(`/pageFavorites/${id}`);
-
-export const deleteFavRequest = (id)=> axios.delete(`/favorites/${id}`);

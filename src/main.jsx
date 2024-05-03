@@ -5,16 +5,17 @@ import "bootstrap/dist/js/bootstrap.bundle";
 import "../src/index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // import RouterApp from "../RouterApp";
-import Home from "../src/Pages/Home";
+// import Home from "../src/Pages/Home";
 import Nosotros from "../src/Pages/Nosotros";
 import Contacto from "../src/Pages/Contacto";
-import Productos from "../src/Pages/Productos";
+// import Productos from "../src/Pages/Productos";
 // import ModalLoguin from "../src/Components/ModalLoguin";
 // import ModalRegister from "../src/Components/ModalRegistro";
 import Admin from "../src/Pages/Admin";
 // import { ProtectedRoute } from "./src/Components/ProtectedRoute";
 import PaginaError from "../src/Pages/PaginaError";
 import Layout from "../src/Components/Layout";
+import Home from "../src/Pages/Home";
 import ResetPassword from "../src/Pages/ResetPassword";
 import ForgotPassword from "../src/Pages/ForgotPassword";
 import { AuthProvider } from "./Context/AuthContext";
@@ -24,6 +25,7 @@ import { ProtectedRoute } from "../src/Components/ProtectedRoute";
 import { FavoritesProvider } from "./Context/FavContext";
 import Favorites from "./Pages/Favorites";
 import PaginaArticulo from "./Pages/PaginaArticulo";
+// import ProductsList from "./Components/ProductsList";
 
 // ReactDOM.createRoot(document.getElementById("root")).render(
 //   <React.StrictMode>
@@ -32,7 +34,7 @@ import PaginaArticulo from "./Pages/PaginaArticulo";
 // );
 const router = createBrowserRouter([
   {
-    path: "/",
+    index: "/",
     element: (
       <div>
         <Layout />
@@ -97,14 +99,14 @@ const router = createBrowserRouter([
           </div>
         ),
       },
-      {
-        path: "/productos",
-        element: (
-          <div>
-            <Productos />
-          </div>
-        ),
-      },
+      // {
+      //   path: "/productos",
+      //   element: (
+      //     <div>
+      //       <ProductsList />
+      //     </div>
+      //   ),
+      // },
       {
         path: "/registro",
         element: (

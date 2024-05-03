@@ -22,6 +22,7 @@ const PaginaLoguin = () => {
     signin(data);
   });
   return (
+
     <>
       <h1 className=" text-center ">Acceder</h1>
       <div className=" container justify-content-center align-items-center p-2 ">

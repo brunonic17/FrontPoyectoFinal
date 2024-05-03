@@ -7,7 +7,8 @@ import {
   updatePasswordRequest,
 } from "../api/auth";
 import Cookies from "js-cookie";
-export const AuthContext = createContext();
+
+const AuthContext = createContext();
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
@@ -33,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await registerRequest(user);
       setUser(res.data);
-      setisAuthenticate(true);
+      // setisAuthenticate(true);
     } catch (error) {
       setErrors(error.response.data.msg);
     }
@@ -41,8 +42,6 @@ export const AuthProvider = ({ children }) => {
   const signin = async (user) => {
     try {
       const res = await LoguinRequest(user);
-      // console.log(res)
-      // console.log(res.data);
       setUser(res.data);
       setisAuthenticate(true);
     } catch (error) {
@@ -51,7 +50,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  //Cerrar sesion
+  // Cerrar sesion
   const logout = () => {
     Cookies.remove("token");
     setisAuthenticate(false);
@@ -90,7 +89,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (setErrors.length > 0) {
       const timer = setTimeout(() => {
-        setErrors([]);
+        setErrors("");
       }, 3000);
       return () => clearTimeout(timer); //funcion de js para quitar el timeout para consumir menos recursos
     }
@@ -108,11 +107,11 @@ export const AuthProvider = ({ children }) => {
       }
       try {
         const res = await verifyTokenRequest(cookies.token);
-        console.log(res);
+        // console.log(res);
         if (!res.data) {
           setisAuthenticate(false);
           setLoading(false);
-          console.log("necesitas acceder")
+          console.log("necesitas acceder");
         }
         setisAuthenticate(true);
         setUser(res.data);

@@ -1,62 +1,93 @@
 import { useEffect, useState } from "react";
 
-import { getFavoritesApi } from "../api/favorites";
-// import { useFav } from "../Context/FavContext";
+import { useFav } from "../Context/FavContext";
 // import { getFavsRequest } from "../api/favorite";
-
+import { Toaster, toast } from "sonner";
 import { iconoCarritoCart } from "../helpers/iconos";
 
 export const Favorites = () => {
-  const [favorites, setFavorites] = useState([]);
-
-  // const { createFavorite, fav } = useFav();
- 
-
-  const productsFAv = async () => {
-    try {
-      const res = await getFavoritesApi();
-      const favorites = res.data;
-      setFavorites(favorites);
-    } catch (e) {
-      console.log(e);
-    }
-  };
   
 
+  const { favsPage, getProductsFavorite,remove } = useFav();
+
+ 
+  const alertas = () => {
+    return toast.success("Eliminaste el producto de Mis Favoritos");
+  };
+
   useEffect(() => {
-    productsFAv();
+    getProductsFavorite();
   }, []);
 
   return (
+  //  <h1>HOLA FAVORITOS</h1>
     <>
-      <h1 className=" text-center ">Soy la pagina favoritos</h1>
-      <div className="container-products ">
-        {favorites.map((favorite) => {
-          return (
-            <div className=" card-product " key={favorite.product._id}>
-              <figure className="container-img">
-                <img
-                  className=""
-                  src={favorite.product.UrlImagen}
-                  alt={favorite.product.NombreProducto}
-                />
-              </figure>
+      {favsPage.length === 0 ? (
+        <h1 className=" text-center bg-secondary ">No tienes Favoritos</h1>
+      ) : (
+        <>
+          <h1 className=" text-center ">favoritos</h1>
+          <div className="container-products">
+            {favsPage.map((favorite) => {
+              return (
+                <div className=" card-product " key={favorite.product._id}>
+                  <figure className="container-img">
+                    <img
+                      className=""
+                      src={favorite.product.UrlImagen}
+                      alt={favorite.product.NombreProducto}
+                    />
+                  </figure>
 
-              <div className="info-product">
-                <h3>{favorite.product.NombreProducto} </h3>
-                <p className="price">$ {favorite.product.Precio} </p>
-              </div>
+                  <div className="info-product">
+                    <h3>{favorite.product.NombreProducto} </h3>
+                  </div>
 
-              <div className="btnIcon">
-                <button type="submit" onClick={() => {"agregado a carrito"}}>
-                  {iconoCarritoCart}
-                </button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-     
+                  <div className="btnIcon bg-white ">
+
+                   <div className=" col-4 ">
+                    <p className="price text-danger ">$ {favorite.product.Precio} </p>
+                  </div>
+                  <div className=" d-flex col-8 justify-content-end g-3 ">
+                  <button
+                  className="bg-white"
+                      type="submit"
+                      onClick={() => {
+                        "agregado a carrito";
+                      }}>
+                      {iconoCarritoCart}
+                    </button>
+                    <button
+                    className="text-primary bg-white "
+                      type="submit"
+                      onClick={() => {
+                        // console.log(favorite._id)
+                        remove(favorite._id);
+                        alertas()
+                      }}>
+                     Eliminar
+                    </button>
+                  </div>
+                    
+                  
+                 
+                    
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <Toaster
+        theme="light"
+        position="top-center"
+        duration={2000}
+        toastOptions={{
+          style: { background: "green" },
+          className: "my-toast",
+        }}
+      />
+        </>
+      )}
     </>
   );
 };

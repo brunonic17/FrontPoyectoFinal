@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import NavBarEx from "./NavBarEx";
 import Footer from "./Footer";
 
+
 // eslint-disable-next-line react/prop-types
 const Layout = ({ children }) => {
   return (
@@ -9,11 +10,11 @@ const Layout = ({ children }) => {
       <header>
         <NavBarEx />
       </header>
-
-      <Outlet />
+        <Outlet />
+      
 
       <footer>
-        <Footer/>
+        <Footer />
       </footer>
     </>
   );

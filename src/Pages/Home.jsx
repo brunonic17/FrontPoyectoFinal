@@ -1,21 +1,21 @@
-// import Publicidad from "../Components/Publicidad";
-import CarouselIndividualIntervals from "../Components/SliderCarousels";
-import Productos from "./Productos";
+import ProductsList from "../Components/ProductsList";
+import IndividualIntervalsExample from "../Components/SliderCarousels";
 
-// import IndividualIntervalsExample from "../Components/SliderCarousels"
 
-function Home() {
-
+const Home = () => {
   return (
     <>
       <main>
-        <CarouselIndividualIntervals />
-        <Productos />
-      
-        {/* <Publicidad /> */}
+        <div>
+          <IndividualIntervalsExample />
+        </div>
+        <div>
+          <ProductsList />
+        </div>
+        
       </main>
     </>
   );
-}
+};
 
 export default Home;

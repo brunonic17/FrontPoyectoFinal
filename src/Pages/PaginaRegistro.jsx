@@ -5,6 +5,7 @@ import { useAuth } from "../Context/AuthContext";
 import { NavLink } from "react-router-dom";
 
 function PaginaRegistro() {
+  // console.log("hola registro")
   const {
     register,
     handleSubmit,

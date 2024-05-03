@@ -61,16 +61,17 @@ export const iconoEstrella = <svg xmlns="http://www.w3.org/2000/svg" width="25" 
 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 </svg>
 
-export const iconofavorito =  <svg
-xmlns="http://www.w3.org/2000/svg"
-width="30"
-height="30"
-fill="yellow"
-className="bi bi-star-fill"
-viewBox="0 0 16 16">
-<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+export const iconofavorito = <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-heart-fill" viewBox="0 0 16 16">
+<path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+</svg>
+export const iconoFavoritoAgregado = <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" className="bi bi-heart-fill" viewBox="0 0 16 16">
+<path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
 </svg>
 
-export const iconoCarritoCart = <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="red" className="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+export const iconoCarritoCart = <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" className="bi bi-cart-plus-fill" viewBox="0 0 16 16">
 <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"/>
+</svg>
+
+export const iconCheck = <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="green" className="bi bi-check-lg" viewBox="0 0 16 16">
+<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
 </svg>

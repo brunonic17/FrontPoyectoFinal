@@ -90,9 +90,7 @@ function NavBarEx() {
             ) : isAuthenticated ? (
               <>
                 <p className="p-0">Hola {user.nameUser}</p>
-                <Nav.Link as={NavLink} to="favorites">
-                  {iconoEstrella}
-                </Nav.Link>
+
                 <Button
                   as={NavLink}
                   to="/"
@@ -188,6 +186,9 @@ function NavBarEx() {
                   <Nav.Link as={NavLink} to="favorites">
                     {iconoEstrella}
                   </Nav.Link>
+                  <Nav.Link as={NavLink} to="carrito">
+                    {iconoCarrito}
+                  </Nav.Link>
 
                   <Button
                     as={NavLink}
@@ -205,9 +206,7 @@ function NavBarEx() {
                       Registro
                     </Nav.Link>
                   </li>
-                  <Nav.Link as={NavLink} to="favorites">
-                    {iconoEstrella}
-                  </Nav.Link>
+
                   <li>
                     <Nav.Link as={NavLink} to="/login">
                       Acceder

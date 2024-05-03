@@ -1,13 +1,9 @@
-
-
 import sladerPromos1 from "../assets/img/sladerPromos1.png";
 import sladerPromo2 from "../assets/img/sladerPromo2.png";
-
 
 function IndividualIntervalsExample() {
   return (
     <>
- 
       <div
         id="carouselExampleInterval"
         className="carousel slide"
@@ -19,8 +15,6 @@ function IndividualIntervalsExample() {
           <div className="carousel-item active" data-bs-interval="2000">
             <img src={sladerPromos1} className="img1" alt="img1" />
           </div>
-     
-          
         </div>
         <button
           className="carousel-control-prev"
