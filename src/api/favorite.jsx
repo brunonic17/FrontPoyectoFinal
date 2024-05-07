@@ -1,14 +1,15 @@
 import instance from "./axios";
-
+//productos
 export const getProductsRequest = () => instance.get(`/products`);
 
-// export const createFavRequest = (product1) => {
-//   instance.post(`/favorites`, product1);
-// };
+export const getProductCardRequest = (id)=> instance.get(`/productCart/${id}`);
 
+
+
+
+//Productos favoritos de cada usuario
 export const getFavsRequest = () => instance.get("/pageFavorites");
 
-// export const getFavRequest = (id)=> axios.get(`/pageFavorites/${id}`);
 
 export const deleteFavRequest = (id)=> instance.delete(`/pageFavorites/${id}`);
 
@@ -26,3 +27,6 @@ export const createFavRequest = async(id)=> {
                         return data
 
 }
+// export const createFavRequest = (product1) => {
+//   instance.post(`/favorites`, product1);
+// };

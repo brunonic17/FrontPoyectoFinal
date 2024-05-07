@@ -24,7 +24,8 @@ import PaginaRegistro from "./Pages/PaginaRegistro";
 import { ProtectedRoute } from "../src/Components/ProtectedRoute";
 import { FavoritesProvider } from "./Context/FavContext";
 import Favorites from "./Pages/Favorites";
-import PaginaArticulo from "./Pages/PaginaArticulo";
+import PaginaArticulo from "./Pages/ProductCard";
+import PageProductCard from "./Pages/PageProductCard";
 // import ProductsList from "./Components/ProductsList";
 
 // ReactDOM.createRoot(document.getElementById("root")).render(
@@ -84,10 +85,18 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/CartPage",
+        path: "/cardPage",
         element: (
           <div>
             <PaginaArticulo />
+          </div>
+        ),
+      },
+      {
+        path: "/productCard/:id",
+        element: (
+          <div>
+            <PageProductCard />
           </div>
         ),
       },
