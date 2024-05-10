@@ -2,7 +2,6 @@ import { createContext, useContext, useState } from "react";
 import {
   createFavRequest,
   getFavsRequest,
-  getProductsRequest,
   deleteFavRequest,
 } from "../api/favorite";
 
@@ -18,24 +17,13 @@ export const useFav = () => {
 // eslint-disable-next-line react/prop-types
 export const FavoritesProvider = ({ children }) => {
   const [favsPage, setFavsPage] = useState([]);
-  const [productsPage, setProductsPage] = useState([]);
   const [favsCreate, setFavsCreate] = useState([]);
   const [removeId, setRemoveId] = useState([]);
   const [errors, setErrors] = useState("");
 
-  const getProducts = async () => {
-    try {
-      const res = await getProductsRequest();
-      setProductsPage(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const createFavorite = async (product1) => {
     try {
       const res = await createFavRequest(product1);
-   
     } catch (error) {
       setErrors(error.message);
       console.log(error);
@@ -46,7 +34,6 @@ export const FavoritesProvider = ({ children }) => {
     try {
       const res = await getFavsRequest();
       setFavsPage(res.data);
-     
     } catch (error) {
       console.log(error.response);
     }
@@ -70,8 +57,6 @@ export const FavoritesProvider = ({ children }) => {
   return (
     <FavContext.Provider
       value={{
-        getProducts,
-        productsPage,
         favsPage,
         createFavorite,
         getProductsFavorite,

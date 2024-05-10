@@ -1,30 +1,22 @@
 import { useEffect, useState } from "react";
 import Pagination from "./Pagination";
 import { useFav } from "../Context/FavContext";
-import { useAuth } from "../Context/AuthContext";
-import { Toaster, toast } from "sonner";
+
+import { Toaster } from "sonner";
 // import { iconoCarritoCart, iconofavorito } from "../helpers/iconos";
 // import { createFavRequest } from "../api/favorite";
-import { Link, useParams } from "react-router-dom";
 import PaginaArticulo from "../Pages/ProductCard";
+import { useProducts } from "../Context/ProductsContext";
 
 const ProductsList = () => {
   const [pageNumber, setPageNumber] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [iconActive, setIconActive] = useState(false);
 
-  const { favsPage, getProducts, productsPage } = useFav();
-  const { productId } = useParams();
+  const { favsPage } = useFav();
+  const { getProducts, productsPage } = useProducts();
 
-  const { user } = useAuth();
   const totalProducts = productsPage.length;
-
-  const alertas = () => {
-    return toast.success("Debes iniciar sesion");
-  };
-  const alertas1 = () => {
-    return toast.success("Agregaste a favoritos");
-  };
 
   useEffect(() => {
     getProducts();
@@ -38,14 +30,9 @@ const ProductsList = () => {
       <div className="container-products ">
         {productsPage
           .map((product) => {
-
-          return (
-            <PaginaArticulo product= {product} key= {product._id} />
-          )
+            return <PaginaArticulo product={product} key={product._id} />;
 
             // <>
-
-           
           })
           .slice(firstIndex, lastIndex)}
       </div>

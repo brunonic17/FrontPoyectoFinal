@@ -26,6 +26,7 @@ import { FavoritesProvider } from "./Context/FavContext";
 import Favorites from "./Pages/Favorites";
 import PaginaArticulo from "./Pages/ProductCard";
 import PageProductCard from "./Pages/PageProductCard";
+import { ProductsProvider } from "./Context/ProductsContext";
 // import ProductsList from "./Components/ProductsList";
 
 // ReactDOM.createRoot(document.getElementById("root")).render(
@@ -147,9 +148,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
+      <ProductsProvider>
       <FavoritesProvider>
         <RouterProvider router={router} />
       </FavoritesProvider>
+      </ProductsProvider>
     </AuthProvider>
   </React.StrictMode>
 );
