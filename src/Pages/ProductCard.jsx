@@ -39,7 +39,7 @@ const PaginaArticulo = ({ product }) => {
               <Link to= {`/productCard/${product._id}`}
               onClick={async ()=> {
                 const res = await getProduct(product._id)
-                console.log(res)
+                
               }}
               >Ver Mas</Link>
               <button

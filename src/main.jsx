@@ -148,11 +148,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <ProductsProvider>
       <FavoritesProvider>
+      <ProductsProvider>
         <RouterProvider router={router} />
-      </FavoritesProvider>
       </ProductsProvider>
+      </FavoritesProvider>
     </AuthProvider>
   </React.StrictMode>
 );

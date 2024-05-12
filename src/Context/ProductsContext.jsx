@@ -30,7 +30,7 @@ export const ProductsProvider = ({ children }) => {
       setProductCard(res.data);
       console.log(res.data);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 
