@@ -88,8 +88,7 @@ const PostProducts=async  (Prod)=>{
         const response= await fetch(`http://localhost:3000/api/Admin/Picture`,{
           body:ProdString,
           method:"PUT",
-          headers:{"content-type":"application/json",
-          'Content-Type': 'application/x-www-form-urlencoded'},
+          headers:{'Content-Type': 'form-data'},
               });
               const data=response.json();
     

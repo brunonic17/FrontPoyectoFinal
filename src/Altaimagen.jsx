@@ -15,12 +15,15 @@ function Image() {
       imagenes:""
     },
     onSubmit:()=>{
-      async(values)=>{
+      // async()=>{
       const Id=JSON.parse(localStorage.getItem('Id'));
-      const image=  await UploadImage(Id,values);
-      console.log(picture.values)
+      console.log(Id)
+      const BodyImage={_id:Id,
+    }
+      const image=   UploadImage(BodyImage);
+      console.log(picture.values.imagenes)
       console.log(image)
-      }
+      // }
   }})
    
   return(
