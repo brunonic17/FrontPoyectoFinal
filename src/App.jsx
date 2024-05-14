@@ -1,17 +1,19 @@
 
-import {GetShoppings,DeleteProduct,PagoPay} from "./fetch/shopping";
-import {FormaPago} from "../src/Shopping.jsx";
+import {GetShoppings,DeleteProduct,PagoPay,PostShoppings,GetIdUsu} from "./fetch/shopping";
+// import BottonModificar from "./BotonModificar.jsx";
 import { Table } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
+import { useState } from 'react';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 
 
-let shopping = await GetShoppings('65f59b4fbbd09518d0b7e9f1');
-console.log(shopping.Cart);
-
-
-// const Car={IdUsu:"13",
+const shopping= await GetShoppings('66427a8c1ae245297e67dc43')
+console.log(shopping.Cart._id)
+// const Car={
+// IdUsu:"17",
 // CantProduct:3,
-// FechaCarro:12-12-2012,
+// FechaCarro:6-6-2023,
 // IdProduct:116,
 // eid:'65e66dd6ea9d3d7580646ec3'
 // } 
@@ -26,15 +28,35 @@ let Total = 0;
      }
 
 export const App = () => {
+    const [show, setShow] = useState(false);
+    const [CantProduct, setCantProduct] = useState();
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const handleChange = (event) => {
+      setCantProduct(event.target.value);
+    };
+    const [formapago,setForma]=useState({});
+console.log(formapago)
+  console.log(CantProduct)
+ 
+
+
+
   return (<>
   
   <Table responsive bordered >
 <tbody>
   <thead>
     <td>
-      <th>cod. producto</th>
+      <th>Cod. Producto</th>
       {shopping.Cart.DetalleCarro.map((element,index) => (
-        <tr key={index}>{element.pid.IdProduct}{index}</tr>
+        <tr key={index}>{element.pid.IdProduct}</tr>
+      ))}
+    </td>
+    <td>
+      <th>Cod. Art.</th>
+      {shopping.Cart.DetalleCarro.map((element) => (
+        <tr key={element.IdArtCarro}>{element.IdArtCarro}</tr>
       ))}
     </td>
     <td>
@@ -64,10 +86,63 @@ export const App = () => {
      
     </td>
     <td>
-      <th>Eliminar Producto</th>
+      <th>Acciones Producto</th>
       {shopping.Cart.DetalleCarro.map((element,index) => (
         <tr key={index}> 
-            <Button variant="outline-success">Modificar</Button>{' '}
+
+<Button variant="outline-success" onClick={handleShow}>
+        Modificar
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+           
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlInput1"
+            >
+              <Form.Label>Modificar Cantidad</Form.Label>
+              <Form.Control  type="text" rows={3} onChange={handleChange} placeholder={element.CantProduct} />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={async()=>{
+              let eid =  shopping.Cart.DetalleCarro[index].eid._id;
+              console.log(shopping.Cart.DetalleCarro[index])
+              let IdUsu = shopping.Cart.IdUsu;
+              let IdProduct=shopping.Cart.DetalleCarro[index].pid.IdProduct;
+              let Product = {IdUsu,eid,CantProduct,IdProduct};
+              console.log(Product)
+                
+             await PostShoppings(Product);
+
+              
+                window.location.reload()
+
+
+          }}>
+            Guaradar Cambios
+          </Button>
+        </Modal.Footer>
+      </Modal>
+            {/* <BottonModificar></BottonModificar> */}
+            {/* <Button variant="outline-success" onClick={()=>
+            { let eid =  shopping.Cart.DetalleCarro[index].eid._id;
+              console.log(shopping.Cart.DetalleCarro[index])
+              let IdUsu = shopping.Cart.IdUsu;
+              let Product = {IdUsu,eid};
+                
+              PostShoppings(Product);
+                window.location.reload()}}>Modificar</Button>{' '} */}
+
             <Button variant="outline-danger"
             onClick={()=>
             { let eid =  shopping.Cart.DetalleCarro[index].eid._id;
@@ -75,7 +150,7 @@ export const App = () => {
               let IdUsu = shopping.Cart.IdUsu;
               let Product = {IdUsu,eid};
                 
-                DeleteProduct(Product);
+              DeleteProduct(Product);
                 window.location.reload()}}
             >Eliminar</Button>{' '}
         </tr>
@@ -98,18 +173,30 @@ export const App = () => {
 
   <div>
   <h4>FORMA DE PAGO</h4>
-    <FormaPago/>
-    {console.log({FormaPago})}
+  <Form.Select aria-label="Forma de Pago" onChange={(event) => {
+      setForma(event.target.value)
+    }}>
+      <option disabled  >Seleccione La Forma de Pago</option>
+      <option value="Tarjeta Credito" >Tarjeta Credito</option>
+      <option value="Transferencia">Transferencia</option>
+      <option value="Mercado Pago">Mercado Pago</option>
+    </Form.Select>
+   
   </div>
 
-  <Button variant="outline-primary"
-    // onClick={()=>
-    //   { let cid =  shopping.Cart._id;
-    //     let IdUsu = shopping.Cart.IdUsu;
-    //     let Product = {IdUsu,eid};
+  <Button variant="outline-primary" 
+    onClick={
+      async()=>
+      { const cart={IdUsu:shopping.Cart.IdUsu}
+     
+         let cid =  await GetIdUsu(cart);
+         
+        let PayShopping = {cid:cid.data,PayTipoPay:formapago,TotalCarro:Total};
           
-    //       DeleteProduct(Product);
-    //       window.location.reload()}}
+      const Pay=await  PagoPay(PayShopping);
+      console.log(Pay)
+          // window.location.reload()
+        }}
   >CONFIRMA COMPRA CARRITO</Button>{' '}
   </>
        

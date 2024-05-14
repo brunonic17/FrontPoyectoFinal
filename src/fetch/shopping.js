@@ -38,6 +38,26 @@ const PostShoppings = async (Cart)=> {
         return data
 }
 
+const GetIdUsu = async (Cart)=> {
+    let CartJson=JSON.stringify(Cart)
+
+const response=await fetch(`http://localhost:5000/api/carrito/IdUsu`,{
+    method:"POST",
+    body:CartJson ,
+    headers:{
+        "content-type":"application/json"
+       
+    },
+
+  
+    
+});
+
+    const data=response.json();
+
+    return data
+}
+
 const DeleteProduct = async (Product)=> {
     let ProductJson=JSON.stringify(Product)
 
@@ -75,4 +95,4 @@ const PagoPay = async (Carrito)=> {
     return data
 }
 
-export { GetShoppings,PostShoppings,DeleteProduct,PagoPay}
+export { GetShoppings,PostShoppings,DeleteProduct,PagoPay,GetIdUsu}

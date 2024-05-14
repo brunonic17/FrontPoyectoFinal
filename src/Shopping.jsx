@@ -15,11 +15,13 @@ import Form from 'react-bootstrap/Form';
 import {useState} from 'react';
 
 function FormaPago() {
-  // const [formapago,setForma]=useState({});
-
+  const [formapago,setForma]=useState({});
+console.log(formapago)
   return (
    
-    <Form.Select aria-label="Forma de Pago">
+    <Form.Select aria-label="Forma de Pago" onChange={(event) => {
+      setForma(event.target.value)
+    }}>
       <option disabled  >Seleccione La Forma de Pago</option>
       <option value="Tarjeta Credito" >Tarjeta Credito</option>
       <option value="Transferencia">Transferencia</option>
@@ -29,5 +31,3 @@ function FormaPago() {
   );
   
 }
-
-export {FormaPago}
