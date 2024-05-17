@@ -83,12 +83,12 @@ const PostProducts=async  (Prod)=>{
             return data
     };
 
-    const UploadImage=async  (Image)=>{
-      let ProdString=JSON.stringify(Image)
+    const UploadImage=async  (FormData)=>{
+      // let ProdString=JSON.stringify(Image)
         const response= await fetch(`http://localhost:3000/api/Admin/Picture`,{
-          body:ProdString,
+          body:FormData,
           method:"PUT",
-          headers:{'Content-Type': 'form-data'},
+         
               });
               const data=response.json();
     
