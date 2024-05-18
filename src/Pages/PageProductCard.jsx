@@ -3,17 +3,16 @@ import { useProducts } from "../Context/ProductsContext";
 
 import "./CSS/PageProductCard.css";
 
-
 const PageProductCard = () => {
   const { productCard } = useProducts();
-const img1 = productCard.UrlImagen[0]
-  const [imgs, setImgs] = useState(img1);
 
   useEffect(() => {
-    img1
-    console.log(img1)
+    setImgs(primeraimg);
+    // console.log(primeraimg);
+    // console.log(productCard.UrlImagen[0]);
   }, [productCard]);
-  
+  const primeraimg = productCard.UrlImagen;
+  const [imgs, setImgs] = useState(primeraimg);
 
   return (
     <div className="productDisplay container text-center  ">
@@ -22,46 +21,69 @@ const img1 = productCard.UrlImagen[0]
         <div className=" productDisplayImgList ">
           {productCard.UrlImagen.map((img, index) => {
             return (
-              <div key={index} onClick={()=> {
-                setImgs(img)
-              }}>
-                <img src={img} alt={`imagen ${index}`} />
+              <div key={index}>
+                <btn
+                  onClick={() => {
+                    setImgs(img);
+                  }}>
+                  <img src={img} alt={`imagen ${index}`} />
+                </btn>
               </div>
             );
           })}
         </div>
 
         <figure className="productDisplayImg">
-          <img
-            className="porductDisplayMainImg"
-            src={img1 === imgs ? imgs : img1}
-            alt={`imagen ${productCard.UrlImagen.indexOf(imgs)} `}
-          />
+          <img className="porductDisplayMainImg" src={imgs} alt="" />
         </figure>
         <div className="porductDisplayRight">
           <h1>{productCard.NombreProducto}</h1>
-          <div className="productDisplayRightPrices">
-            <div className="productDisplayRightPrice">
-              ${productCard.Precio}
-            </div>
-            <div className="productDisplayRightDescription">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum,
-              maiores necessitatibus excepturi dolore.
-            </div>
-            <div className="productDisplayRightTalle">
-              <h1>Seleccione un talle</h1>
-              {/* <Form.Select aria-label="Default select example">
-                {productCard.Especificaciones.map((el) => {
-                  // console.log(el.id.Talle)
-                  return <option>{el.id.Talle}</option>;
-                })}
-              </Form.Select> */}
+
+          <div className="productDisplayRightPrice">
+            ${productCard.UltimoPrecio}
+          </div>
+          <div className="productDisplayRightPrice">${productCard.Precio}</div>
+          <div className="productDisplayRightDescription">
+            {productCard.Detalle}
+          </div>
+          <div className="productDisplayRightTalle">
+            <h3>Talle</h3>
+            <select className="form-select" aria-label="Default select example">
+              <option selected>Selecione Talle</option>
+              {productCard.Especificaciones.map((t, index) => {
+                return (
+                  <option key={index} value="1">
+                    {t.id.Talle}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div className="productDisplayRightCantidad">
+            <h3>Cantidad</h3>
+            <input type="number" min={1} max={10} />
+          </div>
+          <div className="productDisplayRightColor">
+            <h3>Seleccione Color</h3>
+            <div className="form-check d-flex gap-5">
+              {productCard.Especificaciones.map((c, index) => {
+                return (
+                  <div key={index}>
+                    <input
+                      className="form-check-input "
+                      type="radio"
+                      name="flexRadioDefault"
+                    />
+                    <label className="form-check-label">{c.id.Color}</label>
+                  </div>
+                );
+              })}
             </div>
           </div>
-        </div>
 
-        <div>
-          <button>AGREAGAR AL CARRITO</button>
+          <div className="productDisplayRightTalleBtn">
+            <btn>AGREAGAR AL CARRITO</btn>
+          </div>
         </div>
       </div>
     </div>
