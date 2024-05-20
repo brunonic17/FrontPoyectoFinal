@@ -32,9 +32,7 @@ export const App = () => {
     const [CantProduct, setCantProduct] = useState();
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const handleChange = (event) => {
-      setCantProduct(event.target.value);
-    };
+    
     const [formapago,setForma]=useState({});
 console.log(formapago)
   console.log(CantProduct)
@@ -90,7 +88,7 @@ console.log(formapago)
       {shopping.Cart.DetalleCarro.map((element,index) => (
         <tr key={index}> 
 
-<Button variant="outline-success" onClick={handleShow}>
+      <Button variant="outline-success" onClick={handleShow}>
         Modificar
       </Button>
 
@@ -106,7 +104,10 @@ console.log(formapago)
               controlId="exampleForm.ControlInput1"
             >
               <Form.Label>Modificar Cantidad</Form.Label>
-              <Form.Control  type="text" rows={3} onChange={handleChange} placeholder={element.CantProduct} />
+              <Form.Control  type="text" rows={3} onChange={(event)=>{
+      setCantProduct(event.target.value);
+      console.log(CantProduct)
+    }}  placeholder={element.CantProduct} />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -116,7 +117,7 @@ console.log(formapago)
           </Button>
           <Button variant="primary" onClick={async()=>{
               let eid =  shopping.Cart.DetalleCarro[index].eid._id;
-              console.log(shopping.Cart.DetalleCarro[index])
+              console.log(index)
               let IdUsu = shopping.Cart.IdUsu;
               let IdProduct=shopping.Cart.DetalleCarro[index].pid.IdProduct;
               let Product = {IdUsu,eid,CantProduct,IdProduct};
@@ -125,11 +126,10 @@ console.log(formapago)
              await PostShoppings(Product);
 
               
-                window.location.reload()
 
 
           }}>
-            Guaradar Cambios
+            Guardar Cambios
           </Button>
         </Modal.Footer>
       </Modal>
