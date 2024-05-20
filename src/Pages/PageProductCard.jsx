@@ -4,10 +4,11 @@ import { useProducts } from "../Context/ProductsContext";
 import "./CSS/PageProductCard.css";
 
 const PageProductCard = () => {
-  const { productCard } = useProducts();
+  const { productCard, getProduct } = useProducts();
 
   useEffect(() => {
     setImgs(primeraimg);
+    getProduct()
     // console.log(primeraimg);
     // console.log(productCard.UrlImagen[0]);
   }, [productCard]);
