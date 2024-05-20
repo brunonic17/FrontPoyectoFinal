@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client'
 
 import './index.css'
 import "bootstrap/dist/css/bootstrap.min.css"
-import { App } from './App'
+import { ShoppingRender } from './ShoppingF.jsx'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById('rootShopping')).render(
   <React.StrictMode>
-    <App />
+    <ShoppingRender />
   </React.StrictMode>,
 )

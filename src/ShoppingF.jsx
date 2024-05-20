@@ -27,7 +27,7 @@ let Total = 0;
         Total =  Total + (shopping.Cart.DetalleCarro[i].CantProduct) * (shopping.Cart.DetalleCarro[i].pid.Precio)
      }
 
-export const App = () => {
+export const ShoppingRender = () => {
     const [show, setShow] = useState(false);
     const [CantProduct, setCantProduct] = useState();
     const handleClose = () => setShow(false);
