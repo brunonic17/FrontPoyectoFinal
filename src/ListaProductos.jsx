@@ -3,6 +3,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
+import { GetProducts,PostProducts,GetProduct,GetCompleteProduct,PostEspecificaciones} from './fetch/Products.js';
+
+const Products0= await GetProducts();
+console.log(Products0.data[0].Especificaciones[0])
+
 
 function ResponsiveExample() {
   return (<>
@@ -64,36 +69,36 @@ function ResponsiveExample() {
     //   </tbody>
     // </Table> */}
 
-    <Table responsive>
+    <Table responsive border="1">
   
       
-        {Array.from({ length: 4 }).map((_, index) => (
+        {Array.from({ length: Products0.data.length}).map((_, index) => (
            <tbody key={index}>
            <tr key={index}>
-            <td colSpan={4} key={index}><h4>Nombre del Producto</h4></td>
+            <td colSpan={4} key={index}><h4>Nombre del Producto:{Products0.data[index].NombreProducto}</h4></td>
             </tr>
             <tr >
-            <td >Id</td>
-            <td >Ult. Precio</td>
-            <td >Precio</td>
-            <td >Categoria</td>
+            <td >Id:{Products0.data[index].IdProduct}</td>
+            <td >Ult. Precio:{Products0.data[index].UltPrecio}</td>
+            <td >Precio:{Products0.data[index].Precio}</td>
+            <td >Categoria:{Products0.data[index].Categoria}</td>
             </tr>
             <tr >
             <td colSpan={4} >Descripcion</td>
             </tr>
             <tr>
-            <td colSpan={4} ><p>Descripcion</p></td>
+            <td colSpan={4} ><p>{Products0.data[index].Detalle}</p></td>
             </tr>
             <tr >
             <td colSpan={4} >Imagenes</td>
             </tr>
             <tr >
-            <td colSpan={1} >
+            <td colSpan={4} >
             <Container>
            <Row>
-            {Array.from({ length: 3 }).map((_, index) => (
-              <Col key={index}>
-           <Image  src="holder.js/171x180" fluid />
+            {Array.from({ length: Products0.data[index].UrlImagen.length }).map((_, indeex) => (
+              <Col key={indeex}>
+           <Image  src={Products0.data[index].UrlImagen[indeex]} fluid />
            </Col>
           ))}
           </Row>
@@ -106,28 +111,28 @@ function ResponsiveExample() {
             <tr>
               
 
-              {Array.from({ length: 4 }).map((_, index) => (
-                <td colSpan={1} key={index}>
+              {Array.from({ length: Products0.data[index].Especificaciones.length }).map((_, indeeex) => (
+                <td colSpan={1} key={indeeex}>
                        <tr>
-                       <td >Cod. Producto</td>
+                       <td >Cod. Producto:{Products0.data[index].Especificaciones[indeeex].id.CodProducto}</td>
                        </tr>
                        <tr>
-                       <td >Color</td>
+                       <td >Color:{Products0.data[index].Especificaciones[indeeex].id.Color}</td>
                       </tr>
                       <tr>
-                       <td >Cod. Color</td>
+                       <td >Cod. Color:{Products0.data[index].Especificaciones[indeeex].id.CodColor}</td>
                       </tr>
                       <tr>
-                       <td >Talle</td>
+                       <td >Talle:{Products0.data[index].Especificaciones[indeeex].id.Talle}</td>
                       </tr>
                       <tr>
-                       <td >Stock</td>
+                       <td >Stock:{Products0.data[index].Especificaciones[indeeex].id.Stock}</td>
                       </tr>
                       <tr>
-                       <td >Fecha de Alta</td>
+                       <td >Fecha de Alta:{Products0.data[index].Especificaciones[indeeex].id.Fecha}</td>
                       </tr>
                       <tr>
-                       <td >Estado</td>
+                       <td >Estado:{Products0.data[index].Especificaciones[indeeex].id.Estado}</td>
                       </tr>
      
                </td>
