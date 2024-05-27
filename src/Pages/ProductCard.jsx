@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {  iconofavorito } from "../helpers/iconos";
 import {  toast } from "sonner";
 import { useAuth } from "../Context/AuthContext";
 import { createFavRequest } from "../api/favorite";
 import { useProducts } from "../Context/ProductsContext";
 
-
+//Renderizada cada uno de los productos
 const PaginaArticulo = ({ product }) => {
   const { user } = useAuth();
   const {getProduct}  = useProducts()
+  const navigate = useNavigate()
   const alertas = () => {
     return toast.success("Debes iniciar sesion");
   };
@@ -36,12 +37,13 @@ const PaginaArticulo = ({ product }) => {
               <p className="price">$ {product.Precio} </p>
             </div>
             <div className=" d-flex col-8 justify-content-end g-3 ">
-              <Link to= {`/productCard/${product._id}`}
+              <button
               onClick={async ()=> {
-                const res = await getProduct(product._id)
-                
+              await getProduct(product._id)
+                navigate(`/productCard/${product._id}`)
+                console.log(product._id)
               }}
-              >Ver Mas</Link>
+              >Ver Mas</button>
               <button
           className="text-white "
           type="submit"

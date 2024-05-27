@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
 import { useProducts } from "../Context/ProductsContext";
+import { useForm } from "react-hook-form";
 
 import "./CSS/PageProductCard.css";
+import { Form, FormCheck } from "react-bootstrap";
 
 const PageProductCard = () => {
   const { productCard, getProduct } = useProducts();
-
+  const { register, handleSubmit } = useForm();
   useEffect(() => {
     setImgs(primeraimg);
-    getProduct()
+    getProduct();
     // console.log(primeraimg);
     // console.log(productCard.UrlImagen[0]);
   }, [productCard]);
   const primeraimg = productCard.UrlImagen;
   const [imgs, setImgs] = useState(primeraimg);
-
+  const onSubmit = handleSubmit(async (data) => {
+    console.log(data);
+  });
   return (
     <div className="productDisplay container text-center  ">
       <h1>{productCard.NombreProducto}</h1>
@@ -40,7 +44,7 @@ const PageProductCard = () => {
         <div className="porductDisplayRight">
           <h1>{productCard.NombreProducto}</h1>
 
-          <div className="productDisplayRightPrice">
+          <div className="productDisplayRightPriceLast">
             ${productCard.UltimoPrecio}
           </div>
           <div className="productDisplayRightPrice">${productCard.Precio}</div>
@@ -49,11 +53,15 @@ const PageProductCard = () => {
           </div>
           <div className="productDisplayRightTalle">
             <h3>Talle</h3>
-            <select className="form-select" aria-label="Default select example">
-              <option selected>Selecione Talle</option>
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              {...register("talle", {
+                required: true,
+              })}>
               {productCard.Especificaciones.map((t, index) => {
                 return (
-                  <option key={index} value="1">
+                  <option key={index} name="talle" className={index}>
                     {t.id.Talle}
                   </option>
                 );
@@ -62,28 +70,48 @@ const PageProductCard = () => {
           </div>
           <div className="productDisplayRightCantidad">
             <h3>Cantidad</h3>
-            <input type="number" min={1} max={10} />
+            <input
+              type="number"
+              name="cantidad"
+              min={1}
+              max={10}
+              {...register("cantidad", {
+                required: true,
+              })}
+            />
           </div>
           <div className="productDisplayRightColor">
             <h3>Seleccione Color</h3>
             <div className="form-check d-flex gap-5">
               {productCard.Especificaciones.map((c, index) => {
                 return (
-                  <div key={index}>
-                    <input
-                      className="form-check-input "
-                      type="radio"
-                      name="flexRadioDefault"
-                    />
-                    <label className="form-check-label">{c.id.Color}</label>
-                  </div>
+                  <>
+                     <div>
+    <input type="radio" id="huey" name="color" value={c.id.Color} checked {...register("color", {
+                required: true,
+              })} />
+    <label htmlFor={c.id.Color}>{c.id.Color}</label>
+  </div>
+                  </>
+                  // <div key={index}>
+                  //   <input
+                  //     className="form-check-input "
+                  //     type="radio"
+                  //     name="color"
+                  //     id={c.id.Color}
+                  //     {...register ("color", {
+                  //       required: true,
+                  //     })}
+                  //   />
+                  //   <label className="form-check-label" for={c.id.Color}>{c.id.Color}</label>
+                  // </div>
                 );
               })}
             </div>
           </div>
 
           <div className="productDisplayRightTalleBtn">
-            <btn>AGREAGAR AL CARRITO</btn>
+            <btn onClick={onSubmit}>AGREAGAR AL CARRITO</btn>
           </div>
         </div>
       </div>

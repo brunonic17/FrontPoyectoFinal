@@ -1,11 +1,6 @@
-
-
-
-
-
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ShoppingRender } from './ShoppingF.jsx'
+// import { ShoppingRender } from "./ShoppingF.jsx";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
@@ -42,12 +37,11 @@ import { ProductsProvider } from "./Context/ProductsContext";
 //   </React.StrictMode>
 // );
 
-
-ReactDOM.createRoot(document.getElementById('rootShopping')).render(
-  <React.StrictMode>
-    <ShoppingRender />
-  </React.StrictMode>,
-)
+// ReactDOM.createRoot(document.getElementById("rootShopping")).render(
+//   <React.StrictMode>
+//     <ShoppingRender />
+//   </React.StrictMode>
+// );
 const router = createBrowserRouter([
   {
     index: "/",
@@ -163,11 +157,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
       <FavoritesProvider>
-      <ProductsProvider>
-        <RouterProvider router={router} />
-      </ProductsProvider>
+        <ProductsProvider>
+          <RouterProvider router={router} />
+        </ProductsProvider>
       </FavoritesProvider>
     </AuthProvider>
   </React.StrictMode>
 );
-

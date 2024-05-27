@@ -77,7 +77,7 @@ export const AuthProvider = ({ children }) => {
       const res = await updatePasswordRequest(id, token, user);
       console.log(res.data);
       setForgot(true);
-      // window.location.reload();
+      
       const timer = setTimeout(() => {
         setSend(false);
       }, 3000);
