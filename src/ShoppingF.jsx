@@ -1,6 +1,6 @@
 
 // import {GetShoppings,DeleteProduct,PagoPay,PostShoppings,GetIdUsu} from "./fetch/shopping";
-// // import BottonModificar from "./BotonModificar.jsx";
+// import BottonModificar from "../src/BotonModificar";
 // import { Table } from "react-bootstrap";
 // import Button from 'react-bootstrap/Button';
 // import { useState } from 'react';
@@ -10,16 +10,16 @@
 
 // const shopping= await GetShoppings('66427a8c1ae245297e67dc43')
 // console.log(shopping.Cart._id)
-// // const Car={
-// // IdUsu:"17",
-// // CantProduct:3,
-// // FechaCarro:6-6-2023,
-// // IdProduct:116,
-// // eid:'65e66dd6ea9d3d7580646ec3'
-// // } 
+// const Car={
+// IdUsu:"17",
+// CantProduct:3,
+// FechaCarro:6-6-2023,
+// IdProduct:116,
+// eid:'65e66dd6ea9d3d7580646ec3'
+// } 
 
-// // let Post=await PostShoppings(Car)
-// // console.log(Post.data);
+// let Post=await PostShoppings(Car)
+// console.log(Post.data);
 
 
 // let Total = 0;
@@ -40,7 +40,8 @@
 
 
 
-//   return (<>
+//   return (
+//   <>
   
 //   <Table responsive bordered >
 // <tbody>
@@ -133,15 +134,15 @@
 //           </Button>
 //         </Modal.Footer>
 //       </Modal>
-//             {/* <BottonModificar></BottonModificar> */}
-//             {/* <Button variant="outline-success" onClick={()=>
+//             <BottonModificar></BottonModificar> 
+//             <Button variant="outline-success" onClick={()=>
 //             { let eid =  shopping.Cart.DetalleCarro[index].eid._id;
 //               console.log(shopping.Cart.DetalleCarro[index])
 //               let IdUsu = shopping.Cart.IdUsu;
 //               let Product = {IdUsu,eid};
                 
 //               PostShoppings(Product);
-//                 window.location.reload()}}>Modificar</Button>{' '} */}
+//                 window.location.reload()}}>Modificar</Button>{' '}
 
 //             <Button variant="outline-danger"
 //             onClick={()=>
@@ -169,7 +170,7 @@
 //   </thead>
  
 //   </tbody>
-// </Table>
+// </Table> 
 
 //   <div>
 //   <h4>FORMA DE PAGO</h4>

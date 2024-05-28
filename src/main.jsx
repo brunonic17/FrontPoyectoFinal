@@ -29,6 +29,8 @@ import Favorites from "./Pages/Favorites";
 import PaginaArticulo from "./Pages/ProductCard";
 import PageProductCard from "./Pages/PageProductCard";
 import { ProductsProvider } from "./Context/ProductsContext";
+import Carrito from "./Pages/Carrito.jsx";
+// import { ShoppingRender } from "./ShoppingF.jsx";
 // import ProductsList from "./Components/ProductsList";
 
 // ReactDOM.createRoot(document.getElementById("root")).render(
@@ -138,6 +140,14 @@ const router = createBrowserRouter([
         element: (
           <div>
             <PaginaLoguin />
+          </div>
+        ),
+      },
+      {
+        path: "/carrito",
+        element: (
+          <div>
+            <Carrito />
           </div>
         ),
       },

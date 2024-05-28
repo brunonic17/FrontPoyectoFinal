@@ -1,27 +1,27 @@
 
 
-const GetShoppings = async (id)=> {
+// const GetShoppings = async (id)=> {
 
-    const response=await fetch(`http://localhost:5000/api/carrito/${id}`,{
-        method:"GET",
+//     const response=await fetch(`http://localhost:5000/api/carrito/${id}`,{
+//         method:"GET",
 
-        headers:{
-            "content-type":"aplication/json"
+//         headers:{
+//             "content-type":"aplication/json"
            
-        },
+//         },
         
-    });
+//     });
 
-        const data=response.json();
+//         const data=response.json();
 
-        return data
-}
+//         return data
+// }
 
 
-const PostShoppings = async (Cart)=> {
+export const PostShoppings = async (Cart)=> {
         let CartJson=JSON.stringify(Cart)
 
-    const response=await fetch(`http://localhost:5000/api/carrito`,{
+    const response=await fetch(`http://localhost:5050/api/carrito`,{
         method:"POST",
         body:CartJson ,
         headers:{
@@ -38,61 +38,61 @@ const PostShoppings = async (Cart)=> {
         return data
 }
 
-const GetIdUsu = async (Cart)=> {
-    let CartJson=JSON.stringify(Cart)
+// const GetIdUsu = async (Cart)=> {
+//     let CartJson=JSON.stringify(Cart)
 
-const response=await fetch(`http://localhost:5000/api/carrito/IdUsu`,{
-    method:"POST",
-    body:CartJson ,
-    headers:{
-        "content-type":"application/json"
+// const response=await fetch(`http://localhost:5000/api/carrito/IdUsu`,{
+//     method:"POST",
+//     body:CartJson ,
+//     headers:{
+//         "content-type":"application/json"
        
-    },
+//     },
 
   
     
-});
+// });
 
-    const data=response.json();
+//     const data=response.json();
 
-    return data
-}
+//     return data
+// }
 
-const DeleteProduct = async (Product)=> {
-    let ProductJson=JSON.stringify(Product)
+// const DeleteProduct = async (Product)=> {
+//     let ProductJson=JSON.stringify(Product)
 
-    const response=await fetch(`http://localhost:5000/api/carrito`,{
-    method:"DELETE",
-    body:ProductJson ,
-    headers:{
-        "content-type":"application/json"
+//     const response=await fetch(`http://localhost:5000/api/carrito`,{
+//     method:"DELETE",
+//     body:ProductJson ,
+//     headers:{
+//         "content-type":"application/json"
        
-    },
-    });
+//     },
+//     });
 
-    const data=response.json();
+//     const data=response.json();
 
-    return data
-}
+//     return data
+// }
 
-const PagoPay = async (Carrito)=> {
-    let CarritoJson=JSON.stringify(Carrito)
+// const PagoPay = async (Carrito)=> {
+//     let CarritoJson=JSON.stringify(Carrito)
 
-    const response=await fetch(`http://localhost:5000/api/carrito/confirma`,{
-    method:"POST",
-    body:CarritoJson ,
-    headers:{
-        "content-type":"application/json"
+//     const response=await fetch(`http://localhost:5000/api/carrito/confirma`,{
+//     method:"POST",
+//     body:CarritoJson ,
+//     headers:{
+//         "content-type":"application/json"
        
-    },
+//     },
 
   
     
-});
+// });
 
-    const data=response.json();
+//     const data=response.json();
 
-    return data
-}
+//     return data
+// }
 
-export { GetShoppings,PostShoppings,DeleteProduct,PagoPay,GetIdUsu}
+// export { GetShoppings,PostShoppings,DeleteProduct,PagoPay,GetIdUsu}

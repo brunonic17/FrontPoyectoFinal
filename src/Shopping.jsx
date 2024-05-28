@@ -1,15 +1,15 @@
 
-// // import {GetShoppings} from "./fetch/shopping";
+// import {GetShoppings} from "./fetch/shopping";
 
-// // let shopping = await GetShoppings('65e8d4a09f78ed1bc62d2aa8');
+// let shopping = await GetShoppings('65e8d4a09f78ed1bc62d2aa8');
 
 
-// // function TablaCarrito(){
-// // <> 
+// function TablaCarrito(){
+// <> 
 
-// // </>} 
+// </>} 
 
-// // export {TablaCarrito}
+// export {TablaCarrito}
 
 // import Form from 'react-bootstrap/Form';
 // import {useState} from 'react';

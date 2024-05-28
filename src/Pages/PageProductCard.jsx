@@ -1,24 +1,38 @@
 import { useEffect, useState } from "react";
 import { useProducts } from "../Context/ProductsContext";
 import { useForm } from "react-hook-form";
-
+import { useAuth } from "../Context/AuthContext";
 import "./CSS/PageProductCard.css";
-import { Form, FormCheck } from "react-bootstrap";
+import { getEspecificaciones } from "../api/products";
+import { PostShoppings } from "../fetch/shopping";
+// import { Form, FormCheck } from "react-bootstrap";
 
 const PageProductCard = () => {
   const { productCard, getProduct } = useProducts();
   const { register, handleSubmit } = useForm();
+  const { user } = useAuth();
   useEffect(() => {
     setImgs(primeraimg);
     getProduct();
-    // console.log(primeraimg);
+    console.log(productCard);
     // console.log(productCard.UrlImagen[0]);
   }, [productCard]);
+
   const primeraimg = productCard.UrlImagen;
   const [imgs, setImgs] = useState(primeraimg);
+
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
+    data.IdProduct = productCard.IdProduct;
+    data.IdUsu = user.id;
+      const res = await getEspecificaciones(data)
+
+    data.eid=res._id
+
+    const resshopping= await PostShoppings(data)
+      console.log(data, res._id, resshopping);
+    
   });
+
   return (
     <div className="productDisplay container text-center  ">
       <h1>{productCard.NombreProducto}</h1>
@@ -83,28 +97,24 @@ const PageProductCard = () => {
           <div className="productDisplayRightColor">
             <h3>Seleccione Color</h3>
             <div className="form-check d-flex gap-5">
-              {productCard.Especificaciones.map((c, index) => {
+              {productCard.Especificaciones.map((c) => {
                 return (
                   <>
-                     <div>
-    <input type="radio" id="huey" name="color" value={c.id.Color} checked {...register("color", {
-                required: true,
-              })} />
-    <label htmlFor={c.id.Color}>{c.id.Color}</label>
-  </div>
+                    <div>
+                      <input
+                        type="radio"
+                        id="huey"
+                        name="color"
+                        value={c.id.Color}
+                        checked
+                        {...register("color", {
+                          required: true,
+                        })}
+                        
+                      />
+                      <label htmlFor={c.id.Color}>{c.id.Color}</label>
+                    </div>
                   </>
-                  // <div key={index}>
-                  //   <input
-                  //     className="form-check-input "
-                  //     type="radio"
-                  //     name="color"
-                  //     id={c.id.Color}
-                  //     {...register ("color", {
-                  //       required: true,
-                  //     })}
-                  //   />
-                  //   <label className="form-check-label" for={c.id.Color}>{c.id.Color}</label>
-                  // </div>
                 );
               })}
             </div>
