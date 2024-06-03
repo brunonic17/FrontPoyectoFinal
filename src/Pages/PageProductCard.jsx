@@ -3,7 +3,7 @@ import { useProducts } from "../Context/ProductsContext";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../Context/AuthContext";
 import "./CSS/PageProductCard.css";
-import { getEspecificaciones } from "../api/products";
+import { getEspecificaciones, getProductsRequest } from "../api/products";
 import { PostShoppings } from "../fetch/shopping";
 // import { Form, FormCheck } from "react-bootstrap";
 
@@ -24,12 +24,16 @@ const PageProductCard = () => {
   const onSubmit = handleSubmit(async (data) => {
     data.IdProduct = productCard.IdProduct;
     data.IdUsu = user.id;
-      const res = await getEspecificaciones(data)
+      const res = await getEspecificaciones(data);
 
-    data.eid=res._id
+    data.eid=res._id;
 
-    const resshopping= await PostShoppings(data)
-      console.log(data, res._id, resshopping);
+    const resshopping= await PostShoppings(data);
+      console.log(data, 
+        res._id, 
+        resshopping
+      );
+      console.log(await getProductsRequest())
     
   });
 
@@ -74,10 +78,13 @@ const PageProductCard = () => {
                 required: true,
               })}>
               {productCard.Especificaciones.map((t, index) => {
+                // <option htmlFor="">Elementos</option>
                 return (
+                  <>
                   <option key={index} name="talle" className={index}>
                     {t.id.Talle}
                   </option>
+                  </>
                 );
               })}
             </select>
