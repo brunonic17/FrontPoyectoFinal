@@ -1,21 +1,21 @@
 
 
-// const GetShoppings = async (id)=> {
+const GetShoppings = async ()=> {
 
-//     const response=await fetch(`http://localhost:5000/api/carrito/${id}`,{
-//         method:"GET",
+    const response=await fetch(`http://localhost:5050/api/carritos`,{
+        method:"GET",
 
-//         headers:{
-//             "content-type":"aplication/json"
+        headers:{
+            "content-type":"aplication/json"
            
-//         },
+        },
         
-//     });
+    });
 
-//         const data=response.json();
+        const data=response.json();
 
-//         return data
-// }
+        return data
+}
 
 
 export const PostShoppings = async (Cart)=> {

@@ -33,7 +33,7 @@ const PageProductCard = () => {
         res._id, 
         resshopping
       );
-      console.log(await getProductsRequest())
+      // console.log(await getProductsRequest())
     
   });
 
@@ -48,7 +48,8 @@ const PageProductCard = () => {
                 <btn
                   onClick={() => {
                     setImgs(img);
-                  }}>
+                  }}
+                >
                   <img src={img} alt={`imagen ${index}`} />
                 </btn>
               </div>
@@ -74,16 +75,15 @@ const PageProductCard = () => {
             <select
               className="form-select"
               aria-label="Default select example"
-              {...register("talle", {
-                required: true,
-              })}>
+              {...register("talle")}
+            >
               {productCard.Especificaciones.map((t, index) => {
                 // <option htmlFor="">Elementos</option>
                 return (
                   <>
-                  <option key={index} name="talle" className={index}>
-                    {t.id.Talle}
-                  </option>
+                    <option key={index} name="talle" className={index}>
+                      {t.id.Talle}
+                    </option>
                   </>
                 );
               })}
@@ -96,9 +96,7 @@ const PageProductCard = () => {
               name="cantidad"
               min={1}
               max={10}
-              {...register("cantidad", {
-                required: true,
-              })}
+              {...register("cantidad")}
             />
           </div>
           <div className="productDisplayRightColor">
@@ -114,10 +112,7 @@ const PageProductCard = () => {
                         name="color"
                         value={c.id.Color}
                         checked
-                        {...register("color", {
-                          required: true,
-                        })}
-                        
+                        {...register("color")}
                       />
                       <label htmlFor={c.id.Color}>{c.id.Color}</label>
                     </div>

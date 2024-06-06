@@ -189,6 +189,7 @@ function NavBarEx() {
                   <Nav.Link as={NavLink} to="carrito">
                     {iconoCarrito}
                   </Nav.Link>
+                  <div className="contador">0</div>
 
                   <Button
                     as={NavLink}

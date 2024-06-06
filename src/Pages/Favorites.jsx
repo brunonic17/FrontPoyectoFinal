@@ -6,11 +6,8 @@ import { Toaster, toast } from "sonner";
 import { iconoCarritoCart } from "../helpers/iconos";
 
 export const Favorites = () => {
-  
+  const { favsPage, getProductsFavorite, remove } = useFav();
 
-  const { favsPage, getProductsFavorite,remove } = useFav();
-
- 
   const alertas = () => {
     return toast.success("Eliminaste el producto de Mis Favoritos");
   };
@@ -18,9 +15,9 @@ export const Favorites = () => {
   useEffect(() => {
     getProductsFavorite();
   }, []);
-
+ 
   return (
-  //  <h1>HOLA FAVORITOS</h1>
+    //  <h1>HOLA FAVORITOS</h1>
     <>
       {favsPage.length === 0 ? (
         <h1 className=" text-center bg-secondary ">No tienes Favoritos</h1>
@@ -44,48 +41,47 @@ export const Favorites = () => {
                   </div>
 
                   <div className="btnIcon bg-white ">
-
-                   <div className=" col-4 ">
-                    <p className="price text-danger ">$ {favorite.product.Precio} </p>
-                  </div>
-                  <div className=" d-flex col-8 justify-content-end g-3 ">
-                  <button
-                  className="bg-white"
-                      type="submit"
-                      onClick={() => {
-                        "agregado a carrito";
-                      }}>
-                      {iconoCarritoCart}
-                    </button>
-                    <button
-                    className="text-primary bg-white "
-                      type="submit"
-                      onClick={() => {
-                        // console.log(favorite._id)
-                        remove(favorite._id);
-                        alertas()
-                      }}>
-                     Eliminar
-                    </button>
-                  </div>
-                    
-                  
-                 
-                    
+                    <div className=" col-4 ">
+                      <p className="price text-danger ">
+                        $ {favorite.product.Precio}{" "}
+                      </p>
+                    </div>
+                    <div className=" d-flex col-8 justify-content-end g-3 ">
+                      <button
+                        className="bg-white"
+                        type="submit"
+                        onClick={() => {
+                          "agregado a carrito";
+                        }}
+                      >
+                        {iconoCarritoCart}
+                      </button>
+                      <button
+                        className="text-primary bg-white "
+                        type="submit"
+                        onClick={() => {
+                          // console.log(favorite._id)
+                          remove(favorite._id);
+                          alertas();
+                        }}
+                      >
+                        Eliminar
+                      </button>
+                    </div>
                   </div>
                 </div>
               );
             })}
           </div>
           <Toaster
-        theme="light"
-        position="top-center"
-        duration={2000}
-        toastOptions={{
-          style: { background: "green" },
-          className: "my-toast",
-        }}
-      />
+            theme="light"
+            position="top-center"
+            duration={2000}
+            toastOptions={{
+              style: { background: "green" },
+              className: "my-toast",
+            }}
+          />
         </>
       )}
     </>

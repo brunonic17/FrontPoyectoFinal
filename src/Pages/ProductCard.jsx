@@ -55,7 +55,7 @@ const PaginaArticulo = ({ product }) => {
                 product: product._id,
                 user: user.id,
               };
-
+              console.log(user)
               const res = await createFavRequest(product1);
               console.log(res)
               alertas1();
