@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { getProductsRequest, getProductCardRequest } from "../api/products";
+import { getProductsRequest, getProductCardRequest, getProductsShoppingRequest } from "../api/products";
 
 const ProductsContext = createContext();
 
@@ -14,6 +14,7 @@ export const useProducts = () => {
 export const ProductsProvider = ({ children }) => {
   const [productsPage, setProductsPage] = useState([]);
   const [productCard, setProductCard] = useState();
+  const [productShopping, setProductShopping] = useState();
 
   const getProducts = async () => {
     try {
@@ -33,6 +34,15 @@ export const ProductsProvider = ({ children }) => {
       console.log(error.response.data);
     }
   };
+  const getProductShopping = async () => {
+    try {
+      const res = await getProductsShoppingRequest();
+      setProductShopping(res.data);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
 
   return (
     <ProductsContext.Provider
@@ -40,8 +50,11 @@ export const ProductsProvider = ({ children }) => {
         getProducts,
         productsPage,
         getProduct,
-        productCard
-      }}>
+        productShopping,
+        productCard,
+        getProductShopping
+      }}
+    >
       {children}
     </ProductsContext.Provider>
   );
