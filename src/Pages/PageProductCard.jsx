@@ -5,12 +5,15 @@ import { useAuth } from "../Context/AuthContext";
 import "./CSS/PageProductCard.css";
 import { getEspecificaciones, getProductsRequest } from "../api/products";
 import { PostShoppings } from "../fetch/shopping";
+import { useNavigate } from "react-router-dom";
 // import { Form, FormCheck } from "react-bootstrap";
 
 const PageProductCard = () => {
   const { productCard, getProduct } = useProducts();
   const { register, handleSubmit } = useForm();
   const { user } = useAuth();
+  const navigate = useNavigate();
+  
   useEffect(() => {
     setImgs(primeraimg);
     getProduct();
@@ -22,6 +25,7 @@ const PageProductCard = () => {
   const [imgs, setImgs] = useState(primeraimg);
 
   const onSubmit = handleSubmit(async (data) => {
+    if(user=== null) navigate("/login")
     data.IdProduct = productCard.IdProduct;
     data.IdUsu = user.id;
       const res = await getEspecificaciones(data);

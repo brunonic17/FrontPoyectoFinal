@@ -24,7 +24,7 @@ const response=await fetch(`http://localhost:5050/api/productCardE`,{
     return data
 }
 
-
+export const getProductsShoppingRequest = () => instance.get(`/carritos`);
 
 
 
