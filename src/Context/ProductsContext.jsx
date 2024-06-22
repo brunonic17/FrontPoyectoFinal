@@ -1,5 +1,9 @@
 import { createContext, useContext, useState } from "react";
-import { getProductsRequest, getProductCardRequest, getProductsShoppingRequest } from "../api/products";
+import {
+  getProductsRequest,
+  getProductCardRequest,
+  getProductsShoppingRequest,
+} from "../api/products";
 
 const ProductsContext = createContext();
 
@@ -38,7 +42,7 @@ export const ProductsProvider = ({ children }) => {
     try {
       const res = await getProductsShoppingRequest();
       setProductShopping(res.data);
-      console.log(res.data);
+      // console.log(productShopping);
     } catch (error) {
       console.log(error.response.data);
     }
@@ -52,7 +56,7 @@ export const ProductsProvider = ({ children }) => {
         getProduct,
         productShopping,
         productCard,
-        getProductShopping
+        getProductShopping,
       }}
     >
       {children}
