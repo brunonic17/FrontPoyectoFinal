@@ -1,21 +1,21 @@
 
 
-const GetShoppings = async ()=> {
+// const GetShoppings = async ()=> {
 
-    const response=await fetch(`http://localhost:5050/api/carritos`,{
-        method:"GET",
+//     const response=await fetch(`http://localhost:5050/api/carritos`,{
+//         method:"GET",
 
-        headers:{
-            "content-type":"aplication/json"
+//         headers:{
+//             "content-type":"aplication/json"
            
-        },
+//         },
         
-    });
+//     });
 
-        const data=response.json();
+//         const data=response.json();
 
-        return data
-}
+//         return data
+// }
 
 
  const PostShoppings = async (Cart)=> {
@@ -95,4 +95,4 @@ const PagoPay = async (Carrito)=> {
     return data
 }
 
-export { GetShoppings,PostShoppings,DeleteProduct,PagoPay,GetIdUsu}
+export { PostShoppings,DeleteProduct,PagoPay,GetIdUsu}
