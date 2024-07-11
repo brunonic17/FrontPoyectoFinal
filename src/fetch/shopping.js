@@ -16,6 +16,21 @@
 
 //         return data
 // }
+ export  async function GetShoppings (IdUsu) {
+    const IdUsuS = JSON.stringify(IdUsu);
+    const response = await fetch(`http://localhost:5050/api/carritos`, {
+      method: "POST",
+      body: IdUsuS,
+  
+      headers: {
+        "content-type": "aplication/json",
+      },
+    });
+  
+    const data = response.json();
+  
+    return data;
+  }
 
 
  const PostShoppings = async (Cart)=> {
