@@ -1,106 +1,147 @@
 // import BottonModificar from "./BotonModificar.jsx";
 import { Table } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Modal from "react-bootstrap/Modal";
+// import Button from "react-bootstrap/Button";
+// import Form from "react-bootstrap/Form";
+// import Modal from "react-bootstrap/Modal";
 import { useProducts } from "../Context/ProductsContext";
 import { useEffect } from "react";
+import { useAuth } from "../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
+// import {
+//   DeleteProduct,
+//   PagoPay,
+//   PostShoppings,
+//   GetIdUsu,
+// } from "../fetch/shopping";
+// import BottonModificar from "../BotonModificar";
 
 const Carrito = () => {
-  const { productShopping,getProductShopping } = useProducts();
+  const { getProductShopping, productShopping } = useProducts();
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  //  console.log(user);
+  // let repuesta = await GetShoppings(user);
 
   useEffect(() => {
-    getProductShopping()
-   console.log(productShopping.DetalleCarro[0].IdProductCarro)
+    getProductShopping();
+    if (!isAuthenticated) navigate("/");
   }, []);
+  // useEffect(() => {
+  //   getProductShopping();
+  // }, []);
+  console.log(productShopping);
+
+  let Total = 0;
+  for (let i = 0; i < productShopping.length; i++) {
+    Total =
+      Total + productShopping[i].CantProduct * productShopping[i].pid.Precio;
+  }
+  console.log(Total);
 
   return (
-    <div>
-      <Table responsive bordered>
+    <>
+      <h1 className=" text-center">Carrito</h1>
+      {productShopping.length === 0 ? (
+        <h1 className=" text-center bg-secondary ">No tienes Carrito</h1>
+      ) : (
+        <Table responsive bordered>
+          <tbody>
+            <thead>
+              <td>
+                <th>Cod. Producto</th>
+                {productShopping.map((element, index) => (
+                  <tr key={index}>{element.pid.IdProduct}</tr>
+                ))}
+              </td>
+
+              <td>
+                <th>Cod. Art.</th>
+                {productShopping.map((element) => (
+                  <tr key={element.IdArtCarro}>{element.IdArtCarro}</tr>
+                ))}
+              </td>
+              <td>
+                <th>Producto</th>
+                {productShopping.map((element) => (
+                  <tr key={element.pid.NombreProducto}>
+                    {element.pid.NombreProducto}
+                  </tr>
+                ))}
+              </td>
+              <td>
+                <th>cantidad</th>
+                {productShopping.map((element) => (
+                  <tr key={element.CantProduct}>{element.CantProduct}</tr>
+                ))}
+              </td>
+              <td>
+                <th>Precio unitario</th>
+                {productShopping.map((element) => (
+                  <tr key={element.pid.Precio}>{element.pid.Precio}</tr>
+                ))}
+              </td>
+              <td>
+                <th>Precio Parcial</th>
+                {productShopping.map((element) => (
+                  <tr key={element.CantProduct}>
+                    {element.CantProduct * element.pid.Precio}
+                  </tr>
+                ))}
+              </td>
+            </thead>
+          </tbody>
+        </Table>
+      )}
+    </>
+  );
+};
+{
+  /* <Table responsive bordered>
         <tbody>
           <thead>
             <td>
               <th>Cod. Producto</th>
-
-              <tr></tr>
+              {productShopping.map((element, index) => (
+                <tr key={index}>{element.pid.IdProduct}</tr>
+              ))}
             </td>
+
             <td>
               <th>Cod. Art.</th>
-
-              <tr>hola</tr>
+              {productShopping.map((element) => (
+                <tr key={element.IdArtCarro}>{element.IdArtCarro}</tr>
+              ))}
             </td>
             <td>
               <th>Producto</th>
-
-              <tr></tr>
+              {productShopping.map((element) => (
+                <tr key={element.pid.NombreProducto}>
+                  {element.pid.NombreProducto}
+                </tr>
+              ))}
             </td>
             <td>
               <th>cantidad</th>
-
-              <tr></tr>
+              {productShopping.map((element) => (
+                <tr key={element.CantProduct}>{element.CantProduct}</tr>
+              ))}
             </td>
-
             <td>
               <th>Precio unitario</th>
-
-              <tr></tr>
+              {productShopping.map((element) => (
+                <tr key={element.pid.Precio}>{element.pid.Precio}</tr>
+              ))}
             </td>
             <td>
               <th>Precio Parcial</th>
-
-              <tr></tr>
+              {productShopping.map((element) => (
+                <tr key={element.CantProduct}>
+                  {element.CantProduct * element.pid.Precio}
+                </tr>
+              ))}
             </td>
-            <td>
-              <th>Acciones Producto</th>
-
-              <tr>
-                <Button variant="outline-success">Modificar</Button>
-                <Modal>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <Form>
-                      <Form.Group
-                        className="mb-3"
-                        controlId="exampleForm.ControlInput1"
-                      >
-                        <Form.Label>Modificar Cantidad</Form.Label>
-                        <Form.Control type="text" rows={3} />
-                      </Form.Group>
-                    </Form>
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary">Close</Button>
-                    <Button variant="primary">Guardar Cambios</Button>
-                  </Modal.Footer>
-                </Modal>
-                <Button variant="outline-success">Modificar</Button>{" "}
-                <Button variant="outline-danger">Eliminar</Button>{" "}
-              </tr>
-            </td>
-            <tr>
-              <td colSpan={4}>Total</td>
-              <td>total</td>
-              <Button variant="outline-warning">
-                Eliminar El Carrito
-              </Button>{" "}
-            </tr>
           </thead>
         </tbody>
-      </Table>
-      <div>
-        <h4>FORMA DE PAGO</h4>
-        <Form.Select aria-label="Forma de Pago">
-          <option disabled>Seleccione La Forma de Pago</option>
-          <option value="Tarjeta Credito">Tarjeta Credito</option>
-          <option value="Transferencia">Transferencia</option>
-          <option value="Mercado Pago">Mercado Pago</option>
-        </Form.Select>
-      </div>
-      <Button variant="outline-primary">CONFIRMA COMPRA CARRITO</Button>{" "}
-    </div>
-  );
-};
-
+      </Table> */
+}
 export default Carrito;

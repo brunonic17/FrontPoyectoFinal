@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { useFav } from "../Context/FavContext";
 // import { getFavsRequest } from "../api/favorite";
 import { Toaster, toast } from "sonner";
 import { iconoCarritoCart } from "../helpers/iconos";
+import { useAuth } from "../Context/AuthContext";
 
-export const Favorites = () => {
-  const { favsPage, getProductsFavorite, remove } = useFav();
-
+ const Favorites = () => {
+  const { favsPage, getProductsFavorite, deleteProductFavorites } = useFav();
+  const { user} = useAuth()
+  // console.log(user);
   const alertas = () => {
     return toast.success("Eliminaste el producto de Mis Favoritos");
   };
@@ -15,9 +17,10 @@ export const Favorites = () => {
   useEffect(() => {
     getProductsFavorite();
   }, []);
- 
+  
+  
   return (
-    //  <h1>HOLA FAVORITOS</h1>
+    
     <>
       {favsPage.length === 0 ? (
         <h1 className=" text-center bg-secondary ">No tienes Favoritos</h1>
@@ -51,7 +54,7 @@ export const Favorites = () => {
                         className="bg-white"
                         type="submit"
                         onClick={() => {
-                          "agregado a carrito";
+                          
                         }}
                       >
                         {iconoCarritoCart}
@@ -60,8 +63,8 @@ export const Favorites = () => {
                         className="text-primary bg-white "
                         type="submit"
                         onClick={() => {
-                          // console.log(favorite._id)
-                          remove(favorite._id);
+                          // console.log(favorite.product._id)
+                          deleteProductFavorites(favorite.product._id);
                           alertas();
                         }}
                       >
