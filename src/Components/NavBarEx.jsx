@@ -13,12 +13,17 @@ import iconos, {
   iconofavorito,
 } from "../helpers/iconos";
 import { useAuth } from "../Context/AuthContext";
+import { useFav } from "../Context/FavContext";
+
 
 function NavBarEx() {
   const { isAuthenticated, logout, user } = useAuth();
+  const {quantity, favsPage} = useFav();
+  console.log(quantity);
+  console.log(favsPage.length);
 
   return (
-    <Navbar expand="lg" className=" sticky-top bg-info ">
+    <Navbar expand="lg" className=" bg-info ">
       <Container className="  d-flex justify-content-center  flex-lg-column  ">
         <Navbar className=" bg-danger   col col-lg-12 order-2">
           <Container className="d-flex justify-content-center ">
@@ -144,7 +149,7 @@ function NavBarEx() {
                 </svg>
               </Button>
             </Form>
-            <div className=" d-flex col-8 bg-danger ">
+            <div className=" d-flex col bg-danger ">
               <NavDropdown title="Categorias" id="basic-nav-dropdown">
                 <Nav.Link as={NavLink} to="productos">
                   Productos de listas
@@ -155,7 +160,7 @@ function NavBarEx() {
                 Contacto
               </Nav.Link>
             </div>
-            <div className=" d-flex col-4 text-center bg-body-secondary align-items-center  justify-content-end   ">
+            <div className=" d-flex col text-center bg-body-secondary align-items-center  justify-content-end   ">
               {isAuthenticated && user.rule === "admin" ? (
                 <>
                   <Nav.Link>Hola {user.nameUser}!</Nav.Link>
@@ -163,21 +168,23 @@ function NavBarEx() {
                     Admin
                   </Nav.Link>
                   <Nav.Link as={NavLink} to="favorites">
-                    {iconoEstrella}
+                    Favoritos
+                  </Nav.Link>
+                  <Nav.Link as={NavLink} to="favorites">
+                    Favoritos
                   </Nav.Link>
                   <Nav.Link as={NavLink} to="carrito">
                     {iconoCarrito}
                   </Nav.Link>
-                  <div className="contador">0</div>
-                  <button
-                    className="btnLogout"
+                  <div className="contador">{favsPage.length}</div>
+                  <Button
                     as={NavLink}
                     to="/"
                     onClick={() => {
                       logout();
                     }}>
                     Logout
-                  </button>
+                  </Button>
                 </>
               ) : isAuthenticated ? (
                 <>

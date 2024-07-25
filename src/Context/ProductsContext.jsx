@@ -4,6 +4,7 @@ import {
   getProductCardRequest,
   getProductsShoppingRequest,
 } from "../api/products";
+import { useFav } from "./FavContext";
 
 const ProductsContext = createContext();
 
@@ -18,7 +19,10 @@ export const useProducts = () => {
 export const ProductsProvider = ({ children }) => {
   const [productsPage, setProductsPage] = useState([]);
   const [productCard, setProductCard] = useState();
-  const [productShopping, setProductShopping] = useState();
+  const [productShopping, setProductShopping] = useState([]);
+ 
+
+  
 
   const getProducts = async () => {
     try {
@@ -41,8 +45,8 @@ export const ProductsProvider = ({ children }) => {
   const getProductShopping = async () => {
     try {
       const res = await getProductsShoppingRequest();
-      setProductShopping(res.data);
-      // console.log(productShopping);
+      setProductShopping(res.data.DetalleCarro);
+      console.log(res.data.DetalleCarro);
     } catch (error) {
       console.log(error.response.data);
     }
@@ -52,11 +56,12 @@ export const ProductsProvider = ({ children }) => {
     <ProductsContext.Provider
       value={{
         getProducts,
-        productsPage,
         getProduct,
+        getProductShopping,
+        productsPage,
         productShopping,
         productCard,
-        getProductShopping,
+       
       }}
     >
       {children}

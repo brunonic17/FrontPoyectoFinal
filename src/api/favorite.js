@@ -14,9 +14,9 @@ export const getFavsRequest = () => instance.get("/pageFavorites");
 export const deleteFavRequest = (id)=> instance.delete(`/pageFavorites/${id}`);
 
 export const createFavRequest = async(id)=> {
-                                    console.log(id)
+                                    // console.log(id)
                                     let idjson=JSON.stringify(id);
-                                    console.log(idjson)
+                                    // console.log(idjson)
                                     const response=await fetch(`http://localhost:5050/api/favorites`,
                                 {body:idjson,
                                     method:"POST",

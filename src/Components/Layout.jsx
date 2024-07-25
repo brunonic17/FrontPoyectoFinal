@@ -7,7 +7,7 @@ import Footer from "./Footer";
 const Layout = ({ children }) => {
   return (
     <>
-      <header>
+      <header className="sticky-top">
         <NavBarEx />
       </header>
         <Outlet />

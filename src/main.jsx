@@ -29,7 +29,10 @@ import Favorites from "./Pages/Favorites";
 import PaginaArticulo from "./Pages/ProductCard";
 import PageProductCard from "./Pages/PageProductCard";
 import { ProductsProvider } from "./Context/ProductsContext";
-import Carrito from "./Pages/Carrito.jsx";
+import  Carrito  from "./Pages/Carrito";
+
+// import { ShoppingRender } from "./ShoppingF";
+
 // import { ShoppingRender } from "./ShoppingF.jsx";
 // import ProductsList from "./Components/ProductsList";
 
@@ -164,13 +167,13 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  
     <AuthProvider>
-      <FavoritesProvider>
-        <ProductsProvider>
+      <ProductsProvider>
+        <FavoritesProvider>
           <RouterProvider router={router} />
-        </ProductsProvider>
-      </FavoritesProvider>
+        </FavoritesProvider>
+      </ProductsProvider>
     </AuthProvider>
-  </React.StrictMode>
+  
 );

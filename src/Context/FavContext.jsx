@@ -20,7 +20,17 @@ export const FavoritesProvider = ({ children }) => {
   const [favsCreate, setFavsCreate] = useState([]);
   const [removeId, setRemoveId] = useState([]);
   const [errors, setErrors] = useState("");
+  const [quantity, setQuantity] = useState(favsPage.length);
 
+  const DecrementQty = () => {
+    if (favsPage.length > 0) {
+      setQuantity((prevCont) => prevCont - 1);
+    }
+  };
+
+  const IncrementQty = () => {
+    setQuantity((prevCont) => prevCont + 1);
+  };
   const createFavorite = async (product1) => {
     try {
       const res = await createFavRequest(product1);
@@ -34,6 +44,7 @@ export const FavoritesProvider = ({ children }) => {
     try {
       const res = await getFavsRequest();
       setFavsPage(res.data);
+      // console.log(favsPage);
     } catch (error) {
       console.log(error.response);
     }
@@ -44,14 +55,10 @@ export const FavoritesProvider = ({ children }) => {
       const res = await deleteFavRequest(id);
 
       if (res.status === 204)
-        setFavsPage(favsPage.filter((product) => product._id !== id));
+        setFavsPage(favsPage.filter((product) => product.product._id !== id));
     } catch (error) {
       console.log(error);
     }
-  };
-  const remove = (id) => {
-    // console.log(favorite._id)
-    deleteProductFavorites(id);
   };
 
   return (
@@ -61,11 +68,15 @@ export const FavoritesProvider = ({ children }) => {
         createFavorite,
         getProductsFavorite,
         deleteProductFavorites,
-        remove,
+        // remove,
         favsCreate,
         removeId,
         errors,
-      }}>
+        quantity,
+        DecrementQty,
+        IncrementQty,
+      }}
+    >
       {children}
     </FavContext.Provider>
   );
