@@ -11,13 +11,14 @@ import { useNavigate } from "react-router-dom";
 const PageProductCard = () => {
   const { productCard, getProduct } = useProducts();
   const { register, handleSubmit } = useForm();
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   
   useEffect(() => {
     setImgs(primeraimg);
     getProduct();
-    console.log(productCard);
+    if(!isAuthenticated) navigate("/login")
+    // console.log(productCard);
     // console.log(productCard.UrlImagen[0]);
   }, [productCard]);
 
@@ -25,7 +26,7 @@ const PageProductCard = () => {
   const [imgs, setImgs] = useState(primeraimg);
 
   const onSubmit = handleSubmit(async (data) => {
-    if(user=== null) navigate("/login")
+    if(!isAuthenticated) navigate("/login")
     data.IdProduct = productCard.IdProduct;
     data.IdUsu = user.id;
       const res = await getEspecificaciones(data);
@@ -99,7 +100,7 @@ const PageProductCard = () => {
               type="number"
               name="cantidad"
               min={1}
-              max={10}
+              max={20}
               {...register("cantidad")}
             />
           </div>

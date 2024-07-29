@@ -7,7 +7,7 @@ import { iconoCarritoCart } from "../helpers/iconos";
 import { useAuth } from "../Context/AuthContext";
 
  const Favorites = () => {
-  const { favsPage, getProductsFavorite, deleteProductFavorites } = useFav();
+  const { favsPage, getProductsFavorite, deleteProductFavorites, DecrementQty } = useFav();
   const { user} = useAuth()
   // console.log(user);
   const alertas = () => {
@@ -66,6 +66,7 @@ import { useAuth } from "../Context/AuthContext";
                           // console.log(favorite.product._id)
                           deleteProductFavorites(favorite.product._id);
                           alertas();
+                          DecrementQty()
                         }}
                       >
                         Eliminar

@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await registerRequest(user);
       setUser(res.data);
-      // setisAuthenticate(true);
+      setisAuthenticate(true);
     } catch (error) {
       setErrors(error.response.data.msg);
     }

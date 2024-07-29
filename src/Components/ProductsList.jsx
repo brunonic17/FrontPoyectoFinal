@@ -24,6 +24,7 @@ const ProductsList = () => {
 
   const lastIndex = currentPage * pageNumber;
   const firstIndex = lastIndex - pageNumber;
+
   const alertas = () => {
     return toast.success("Debes iniciar sesion");
   };
