@@ -5,14 +5,9 @@ import { useFav } from "../Context/FavContext";
 import { Toaster, toast } from "sonner";
 import { iconoCarritoCart } from "../helpers/iconos";
 
-const Favorites = () => {
-  const {
-    favsPage,
-    getProductsFavorite,
-    deleteProductFavorites,
-    DecrementQty,
-  } = useFav();
-
+ const Favorites = () => {
+  const { favsPage, getProductsFavorite, deleteProductFavorites } = useFav();
+  const { user} = useAuth()
   // console.log(user);
   const alertas = () => {
     return toast.success("Eliminaste el producto de Mis Favoritos");
@@ -67,7 +62,6 @@ const Favorites = () => {
                           // console.log(favorite.product._id)
                           deleteProductFavorites(favorite.product._id);
                           alertas();
-                          DecrementQty();
                         }}
                       >
                         Eliminar
