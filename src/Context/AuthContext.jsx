@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await registerRequest(user);
       setUser(res.data);
-      // setisAuthenticate(true);
+      setisAuthenticate(true);
     } catch (error) {
       setErrors(error.response.data.msg);
     }
@@ -55,6 +55,7 @@ export const AuthProvider = ({ children }) => {
     Cookies.remove("token");
     setisAuthenticate(false);
     setUser(null);
+    window.location.reload()
   };
 
   //Enviar email cambio de contraseña delpradofederico0@gmail.com <Navigate to = "contacto" />

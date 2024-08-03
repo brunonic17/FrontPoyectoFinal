@@ -31,6 +31,7 @@ export const FavoritesProvider = ({ children }) => {
   const IncrementQty = () => {
     setQuantity((prevCont) => prevCont + 1);
   };
+  
   const createFavorite = async (product1) => {
     try {
       const res = await createFavRequest(product1);

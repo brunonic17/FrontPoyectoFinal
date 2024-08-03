@@ -4,7 +4,7 @@ import {
   getProductCardRequest,
   getProductsShoppingRequest,
 } from "../api/products";
-import { useFav } from "./FavContext";
+
 
 const ProductsContext = createContext();
 
@@ -42,6 +42,8 @@ export const ProductsProvider = ({ children }) => {
       console.log(error.response.data);
     }
   };
+
+  // TRAER TODOS LOS PRODUCTOS DEL CARRRITO
   const getProductShopping = async () => {
     try {
       const res = await getProductsShoppingRequest();
