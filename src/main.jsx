@@ -29,7 +29,7 @@ import Favorites from "./Pages/Favorites";
 import PaginaArticulo from "./Pages/ProductCard";
 import PageProductCard from "./Pages/PageProductCard";
 import { ProductsProvider } from "./Context/ProductsContext";
-import  Carrito  from "./Pages/Carrito";
+import  {Carrito}  from "./Pages/Carrito";
 
 // import { ShoppingRender } from "./ShoppingF";
 

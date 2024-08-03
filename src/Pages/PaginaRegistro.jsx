@@ -19,7 +19,7 @@ function PaginaRegistro() {
 
   useEffect(() => {
     if (isAuthenticated) navigate("/");
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated]);
 
   const onSubmit = handleSubmit(async (data) => {
     signup(data);

@@ -16,6 +16,8 @@
 
 //         return data
 // }
+
+//API QUE TRAE DEL BACK LOS PRODUCTOS DEL CARRITO
  export  async function GetShoppings (IdUsu) {
     const IdUsuS = JSON.stringify(IdUsu);
     const response = await fetch(`http://localhost:5050/api/carritos`, {
@@ -53,25 +55,25 @@
         return data
 }
 
-const GetIdUsu = async (Cart)=> {
-    let CartJson=JSON.stringify(Cart)
+// const GetIdUsu = async (Cart)=> {
+//     let CartJson=JSON.stringify(Cart)
 
-const response=await fetch(`http://localhost:5000/api/carrito/IdUsu`,{
-    method:"POST",
-    body:CartJson ,
-    headers:{
-        "content-type":"application/json"
+// const response=await fetch(`http://localhost:5000/api/carrito/IdUsu`,{
+//     method:"POST",
+//     body:CartJson ,
+//     headers:{
+//         "content-type":"application/json"
        
-    },
+//     },
 
   
     
-});
+// });
 
-    const data=response.json();
+//     const data=response.json();
 
-    return data
-}
+//     return data
+// }
 
 const DeleteProduct = async (Product)=> {
     let ProductJson=JSON.stringify(Product)
@@ -110,4 +112,6 @@ const PagoPay = async (Carrito)=> {
     return data
 }
 
-export { PostShoppings,DeleteProduct,PagoPay,GetIdUsu}
+export { PostShoppings,DeleteProduct,PagoPay,
+    // GetIdUsu
+}

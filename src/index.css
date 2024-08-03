@@ -28,6 +28,9 @@ ul {
   background-position: center;
 
 }
+.btnImg {
+  cursor: pointer;
+}
 
 .border {
   border: solid .1rem gray !important;
