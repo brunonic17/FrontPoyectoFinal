@@ -9,29 +9,6 @@ import {Image} from './Altaimagen.jsx';
 import { GetProducts,PostProducts,GetProduct,GetCompleteProduct,PostEspecificaciones} from './fetch/Products.js';
 
 
-// const Products1= await GetProduct();
-// console.log(Products1)
-
-// const Products0= await GetProducts();
-// console.log(Products0.data[Products0.data.length-1]);
-
-// const Ids={id:'65e66c5eea9d3d7580646eae',id2:'65e66ccbea9d3d7580646eb3'};
-// const completeProduct=await GetCompleteProduct(Ids);
-// console.log(completeProduct.data)
-
-// const Especificacion= await PostEspecificaciones();
-
-// const OneProduct={NombreProducto:"Bombacha",Precio:2020,Detalle:"Perfecto a la medida",Categoria:"Bombacha",IdProduct:"1"};
-// const Post= await PostProducts(OneProduct);
-// console.log(Post.data);
-
-
-
-
-
-
-
-
 
 const Product = {
   
@@ -54,8 +31,8 @@ const Products = () => (
       initialValues={Product}
       onSubmit={
         async (values) => {
-          const Products0= await GetProducts();
-          const IdAterior=Products0.data[Products0.data.length-1].IdProduct
+          const Products0= JSON.parse(localStorage.getItem("Products"));
+          const IdAterior=Products0[Products0.data.length-1].IdProduct
           const IdNuevo= parseInt(IdAterior)+1
           values.IdProduct=IdNuevo
           console.log(values.IdProduct)

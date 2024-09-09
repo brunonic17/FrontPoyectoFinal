@@ -14,7 +14,7 @@ const Especificaciones={
     Stock: '',
     Fecha: '',
     CodProducto: '',
-    id:''
+    _IdProduct:''
    };
 
 
@@ -25,7 +25,8 @@ const Especificaciones={
          initialValues={Especificaciones}
          onSubmit={async (values) => {
           const Id=JSON.parse(localStorage.getItem('Id'));
-          values.id=Id;
+          console.log(Id)
+          values._IdProduct=Id;
           const PostE=await PostEspecificaciones(values)
           console.log(PostE.data);
           //  await new Promise((r) => setTimeout(r, 500));
@@ -52,7 +53,7 @@ const Especificaciones={
            <Field name="Fecha"  type="Date" />
 
            <label htmlFor="CodProducto">CodProducto</label>
-           <Field name="CodProducto"  type="tex" />
+           <Field name="CodProducto"  type="text" />
          
    
            <button type="submit" >
