@@ -45,12 +45,13 @@ export const FavoritesProvider = ({ children }) => {
     try {
       const res = await getFavsRequest();
       setFavsPage(res.data);
-      // console.log(favsPage);
+      console.log(favsPage);
     } catch (error) {
       console.log(error.response);
     }
   };
 
+  
   const deleteProductFavorites = async (id) => {
     try {
       const res = await deleteFavRequest(id);
@@ -61,7 +62,7 @@ export const FavoritesProvider = ({ children }) => {
       console.log(error);
     }
   };
-
+ 
   return (
     <FavContext.Provider
       value={{
@@ -76,6 +77,7 @@ export const FavoritesProvider = ({ children }) => {
         quantity,
         DecrementQty,
         IncrementQty,
+
       }}
     >
       {children}

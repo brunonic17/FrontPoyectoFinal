@@ -1,4 +1,4 @@
-import React from "react";
+
 import ReactDOM from "react-dom/client";
 // import { ShoppingRender } from "./ShoppingF.jsx";
 
@@ -29,7 +29,7 @@ import Favorites from "./Pages/Favorites";
 import PaginaArticulo from "./Pages/ProductCard";
 import PageProductCard from "./Pages/PageProductCard";
 import { ProductsProvider } from "./Context/ProductsContext";
-import  Carrito  from "./Pages/Carrito";
+import { Carrito } from "./Pages/Carrito";
 
 // import { ShoppingRender } from "./ShoppingF";
 
@@ -167,13 +167,11 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  
-    <AuthProvider>
-      <ProductsProvider>
-        <FavoritesProvider>
-          <RouterProvider router={router} />
-        </FavoritesProvider>
-      </ProductsProvider>
-    </AuthProvider>
-  
+  <AuthProvider>
+    <ProductsProvider>
+      <FavoritesProvider>
+        <RouterProvider router={router} />
+      </FavoritesProvider>
+    </ProductsProvider>
+  </AuthProvider>
 );

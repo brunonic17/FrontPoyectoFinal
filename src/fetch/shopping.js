@@ -16,22 +16,42 @@
 
 //         return data
 // }
- export  async function GetShoppings (IdUsu) {
-    const IdUsuS = JSON.stringify(IdUsu);
-    const response = await fetch(`http://localhost:5050/api/carritos`, {
-      method: "POST",
-      body: IdUsuS,
-  
-      headers: {
-        "content-type": "aplication/json",
-      },
-    });
-  
-    const data = response.json();
-  
-    return data;
-  }
 
+//API QUE TRAE DEL BACK LOS PRODUCTOS DEL CARRITO
+//  export  async function GetShoppings (IdUsu) {
+//     const IdUsuS = JSON.stringify(IdUsu);
+//     const response = await fetch(`http://localhost:5050/api/carritos`, {
+//       method: "POST",
+//       body: IdUsuS,
+  
+//       headers: {
+//         "content-type": "aplication/json",
+//       },
+//     });
+  
+//     const data = response.json();
+  
+//     return data;
+//   }
+export  const GetIdUsu = async (Cart)=> {
+    let CartJson=JSON.stringify(Cart)
+
+const response=await fetch(`http://localhost:5050/api/carritos/IdUsu`,{
+    method:"POST",
+    body:CartJson ,
+    headers:{
+        "content-type":"application/json"
+       
+    },
+
+  
+    
+});
+
+    const data=response.json();
+
+    return data
+}
 
  const PostShoppings = async (Cart)=> {
         let CartJson=JSON.stringify(Cart)
@@ -53,30 +73,30 @@
         return data
 }
 
-const GetIdUsu = async (Cart)=> {
-    let CartJson=JSON.stringify(Cart)
+// const GetIdUsu = async (Cart)=> {
+//     let CartJson=JSON.stringify(Cart)
 
-const response=await fetch(`http://localhost:5000/api/carrito/IdUsu`,{
-    method:"POST",
-    body:CartJson ,
-    headers:{
-        "content-type":"application/json"
+// const response=await fetch(`http://localhost:5000/api/carrito/IdUsu`,{
+//     method:"POST",
+//     body:CartJson ,
+//     headers:{
+//         "content-type":"application/json"
        
-    },
+//     },
 
   
     
-});
+// });
 
-    const data=response.json();
+//     const data=response.json();
 
-    return data
-}
+//     return data
+// }
 
 const DeleteProduct = async (Product)=> {
     let ProductJson=JSON.stringify(Product)
 
-    const response=await fetch(`http://localhost:5000/api/carrito`,{
+    const response=await fetch(`http://localhost:5050/api/carrito`,{
     method:"DELETE",
     body:ProductJson ,
     headers:{
@@ -110,4 +130,6 @@ const PagoPay = async (Carrito)=> {
     return data
 }
 
-export { PostShoppings,DeleteProduct,PagoPay,GetIdUsu}
+export { PostShoppings,DeleteProduct,PagoPay,
+    // GetIdUsu
+}

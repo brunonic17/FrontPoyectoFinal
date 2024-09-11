@@ -14,9 +14,14 @@ import { createFavRequest } from "../api/favorite";
 const ProductsList = () => {
   const [pageNumber, setPageNumber] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
-  const [iconActive, setIconActive] = useState(false);
   const { user, isAuthenticated } = useAuth();
-  const { favsPage, getProductsFavorite, deleteProductFavorites, DecrementQty, IncrementQty } = useFav();
+  const {
+    favsPage,
+    getProductsFavorite,
+    deleteProductFavorites,
+    DecrementQty,
+    IncrementQty,
+  } = useFav();
   const { getProducts, productsPage, getProduct } = useProducts();
   const [cambiar, setCambiar] = useState(false);
   const navigate = useNavigate();
@@ -24,6 +29,7 @@ const ProductsList = () => {
 
   const lastIndex = currentPage * pageNumber;
   const firstIndex = lastIndex - pageNumber;
+
   const alertas = () => {
     return toast.success("Debes iniciar sesion");
   };
@@ -33,15 +39,16 @@ const ProductsList = () => {
 
   const handclick = (product) => {
     setCambiar((cambiar) => !cambiar);
-    deleteProductFavorites(product._id)
+    deleteProductFavorites(product._id);
   };
-  
+
   useEffect(() => {
     getProductsFavorite();
     getProducts();
+   
   }, [cambiar]);
-  console.log(favsPage.length)
 
+console.log(favsPage);
   return (
     <>
       <div className="container-products ">
@@ -51,9 +58,9 @@ const ProductsList = () => {
               <>
                 <div className=" card-product" key={index}>
                   <figure className="container-img">
-                    <img
+                    <img key={index}
                       className=""
-                      src={product.UrlImagen}
+                      src={product.UrlImagen[0]}
                       alt={product.NombreProducto}
                     />
                   </figure>
@@ -70,7 +77,6 @@ const ProductsList = () => {
                         onClick={async () => {
                           await getProduct(product._id);
                           navigate(`/productCard/${product._id}`);
-                          console.log(product._id);
                         }}
                       >
                         Ver Mas
@@ -80,13 +86,12 @@ const ProductsList = () => {
                         .map((f) => f.product._id)
                         .includes(product._id) ? (
                         <button
+                        key={product._id}
                           className="CorazonRed"
                           type="submit"
                           onClick={() => {
-                           
                             handclick(product);
-                            DecrementQty()
-                            
+                            DecrementQty();
                           }}
                         >
                           {iconoFavoritoAgregado}
@@ -95,6 +100,7 @@ const ProductsList = () => {
                         <button
                           className=""
                           type="submit"
+                          key={product._id}
                           onClick={async () => {
                             if (!isAuthenticated) {
                               alertas();
@@ -104,13 +110,13 @@ const ProductsList = () => {
                                 user: user.id,
                               };
 
-                              const res = await createFavRequest(product1);
+                             await createFavRequest(product1);
 
                               alertas1();
                             }
                             // handclick();
-                            setCambiar(!cambiar)
-                            IncrementQty()
+                            setCambiar(!cambiar);
+                            IncrementQty();
                           }}
                         >
                           {iconofavorito}
@@ -129,7 +135,7 @@ const ProductsList = () => {
         position="top-center"
         duration={2000}
         toastOptions={{
-          style: { background: "black" },
+          style: { background: "blue" },
           className: "myToast",
         }}
       />

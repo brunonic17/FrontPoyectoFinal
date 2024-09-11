@@ -1,23 +1,28 @@
-// import BottonModificar from "./BotonModificar.jsx";
-import { Table } from "react-bootstrap";
-// import Button from "react-bootstrap/Button";
-// import Form from "react-bootstrap/Form";
-// import Modal from "react-bootstrap/Modal";
 import { useProducts } from "../Context/ProductsContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
-// import {
-//   DeleteProduct,
-//   PagoPay,
-//   PostShoppings,
-//   GetIdUsu,
-// } from "../fetch/shopping";
-// import BottonModificar from "../BotonModificar";
+import { Table } from "react-bootstrap";
+import { EditModal } from "../Components/Modal";
+import {
+  DeleteProduct,
+  // PagoPay,
+  PostShoppings,
+} from "../fetch/shopping";
+import EditModalCarrito from "../Components/ModalEditCarrito";
 
-const Carrito = () => {
+import Button from "react-bootstrap/Button";
+
+import Card from "react-bootstrap/Card";
+import { useFav } from "../Context/FavContext";
+
+export const Carrito = () => {
+  const [show, setShow] = useState(false);
+  const [EditProduct, setEditProduct] = useState();
+  const { user, isAuthenticated } = useAuth();
+
   const { getProductShopping, productShopping } = useProducts();
-  const { isAuthenticated } = useAuth();
+  const { DeleteCarProduct } = useFav();
   const navigate = useNavigate();
   //  console.log(user);
   // let repuesta = await GetShoppings(user);
@@ -26,17 +31,13 @@ const Carrito = () => {
     getProductShopping();
     if (!isAuthenticated) navigate("/");
   }, []);
-  // useEffect(() => {
-  //   getProductShopping();
-  // }, []);
-  console.log(productShopping);
 
-  let Total = 0;
-  for (let i = 0; i < productShopping.length; i++) {
-    Total =
-      Total + productShopping[i].CantProduct * productShopping[i].pid.Precio;
-  }
-  console.log(Total);
+  // const [cantidad, setCantidad] = useState(
+  //   productShopping.map((e) => {
+  //     return e.CantProduct;
+  //   })
+  // );
+  console.log(productShopping);
 
   return (
     <>
@@ -48,16 +49,16 @@ const Carrito = () => {
           <tbody>
             <thead>
               <td>
-                <th>Cod. Producto</th>
+                <th>Color</th>
                 {productShopping.map((element, index) => (
-                  <tr key={index}>{element.pid.IdProduct}</tr>
+                  <tr key={index}>{element.eid.Color}</tr>
                 ))}
               </td>
 
               <td>
-                <th>Cod. Art.</th>
+                <th>Talle</th>
                 {productShopping.map((element) => (
-                  <tr key={element.IdArtCarro}>{element.IdArtCarro}</tr>
+                  <tr key={element.eid}>{element.eid.Talle}</tr>
                 ))}
               </td>
               <td>
@@ -69,11 +70,16 @@ const Carrito = () => {
                 ))}
               </td>
               <td>
-                <th>cantidad</th>
-                {productShopping.map((element) => (
-                  <tr key={element.CantProduct}>{element.CantProduct}</tr>
-                ))}
+                <th>Cantidad</th>
+                {productShopping.map((c, index) => {
+                  return (
+                    <>
+                      <tr key={index}>{productShopping[index].CantProduct}</tr>
+                    </>
+                  );
+                })}
               </td>
+
               <td>
                 <th>Precio unitario</th>
                 {productShopping.map((element) => (
@@ -88,6 +94,29 @@ const Carrito = () => {
                   </tr>
                 ))}
               </td>
+
+              <td>
+                <th>Acciones Producto</th>
+                {productShopping.map((element, index) => (
+                  <tr key={index}>
+                    <EditModalCarrito element={element} />
+
+                    <Button
+                      variant="outline-danger"
+                      onClick={async () => {
+                        let eid = productShopping[index].eid._id;
+                        console.log(productShopping[index]);
+                        let IdUsu = user.id;
+                        let Product = { IdUsu, eid };
+
+                        await DeleteProduct(Product);
+                      }}
+                    >
+                      Eliminar
+                    </Button>
+                  </tr>
+                ))}
+              </td>
             </thead>
           </tbody>
         </Table>
@@ -95,53 +124,3 @@ const Carrito = () => {
     </>
   );
 };
-{
-  /* <Table responsive bordered>
-        <tbody>
-          <thead>
-            <td>
-              <th>Cod. Producto</th>
-              {productShopping.map((element, index) => (
-                <tr key={index}>{element.pid.IdProduct}</tr>
-              ))}
-            </td>
-
-            <td>
-              <th>Cod. Art.</th>
-              {productShopping.map((element) => (
-                <tr key={element.IdArtCarro}>{element.IdArtCarro}</tr>
-              ))}
-            </td>
-            <td>
-              <th>Producto</th>
-              {productShopping.map((element) => (
-                <tr key={element.pid.NombreProducto}>
-                  {element.pid.NombreProducto}
-                </tr>
-              ))}
-            </td>
-            <td>
-              <th>cantidad</th>
-              {productShopping.map((element) => (
-                <tr key={element.CantProduct}>{element.CantProduct}</tr>
-              ))}
-            </td>
-            <td>
-              <th>Precio unitario</th>
-              {productShopping.map((element) => (
-                <tr key={element.pid.Precio}>{element.pid.Precio}</tr>
-              ))}
-            </td>
-            <td>
-              <th>Precio Parcial</th>
-              {productShopping.map((element) => (
-                <tr key={element.CantProduct}>
-                  {element.CantProduct * element.pid.Precio}
-                </tr>
-              ))}
-            </td>
-          </thead>
-        </tbody>
-      </Table> */
-}
-export default Carrito;

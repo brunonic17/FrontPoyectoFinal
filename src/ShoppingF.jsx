@@ -4,29 +4,16 @@ import {
   PostShoppings,
   GetIdUsu,
 } from "../src/fetch/shopping";
-import BottonModificar from "../src/BotonModificar";
+// import BottonModificar from "../src/BotonModificar";
 import { Table } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { useProducts } from "../src/Context/ProductsContext";
-
-// const shopping= await GetShoppings('66427a8c1ae245297e67dc43')
-// console.log(shopping.Cart._id)
-// const Car={
-// IdUsu:"17",
-// CantProduct:3,
-// FechaCarro:6-6-2023,
-// IdProduct:116,
-// eid:'65e66dd6ea9d3d7580646ec3'
-// }
-
-// let Post=await PostShoppings(Car)
-// console.log(Post.data);
+import { useFav } from "../src/Context/FavContext";
 
 export const ShoppingRender = () => {
-    
   const [show, setShow] = useState(false);
   const [CantProduct, setCantProduct] = useState();
   const handleClose = () => setShow(false);
@@ -36,8 +23,11 @@ export const ShoppingRender = () => {
   useEffect(() => {
     getProductShopping();
   }, []);
-console.log(productShopping)
+  console.log(productShopping);
   const [formapago, setForma] = useState({});
+
+  const { DeleteCarProduct } = useFav();
+
   console.log(formapago);
   console.log(CantProduct);
 
@@ -147,7 +137,7 @@ console.log(productShopping)
                       </Button>
                     </Modal.Footer>
                   </Modal>
-                  <BottonModificar></BottonModificar>
+                  {/* <BottonModificar></BottonModificar> */}
                   <Button
                     variant="outline-success"
                     onClick={() => {
@@ -157,7 +147,7 @@ console.log(productShopping)
                       let Product = { IdUsu, eid };
 
                       PostShoppings(Product);
-                      window.location.reload();
+                      // window.location.reload();
                     }}
                   >
                     Modificar
@@ -170,8 +160,10 @@ console.log(productShopping)
                       let IdUsu = productShopping.IdUsu;
                       let Product = { IdUsu, eid };
 
-                      DeleteProduct(Product);
-                      window.location.reload();
+                      // DeleteProduct(Product);
+                      // DeleteCarProduct(Product);
+                      // window.location.reload();
+                      console.log(Product)
                     }}
                   >
                     Eliminar

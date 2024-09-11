@@ -4,11 +4,15 @@ import { useFav } from "../Context/FavContext";
 // import { getFavsRequest } from "../api/favorite";
 import { Toaster, toast } from "sonner";
 import { iconoCarritoCart } from "../helpers/iconos";
-import { useAuth } from "../Context/AuthContext";
 
- const Favorites = () => {
-  const { favsPage, getProductsFavorite, deleteProductFavorites } = useFav();
-  const { user} = useAuth()
+const Favorites = () => {
+  const {
+    favsPage,
+    getProductsFavorite,
+    deleteProductFavorites,
+    DecrementQty,
+  } = useFav();
+
   // console.log(user);
   const alertas = () => {
     return toast.success("Eliminaste el producto de Mis Favoritos");
@@ -17,10 +21,9 @@ import { useAuth } from "../Context/AuthContext";
   useEffect(() => {
     getProductsFavorite();
   }, []);
-  
-  
+  console.log(favsPage);
+
   return (
-    
     <>
       {favsPage.length === 0 ? (
         <h1 className=" text-center bg-secondary ">No tienes Favoritos</h1>
@@ -53,9 +56,7 @@ import { useAuth } from "../Context/AuthContext";
                       <button
                         className="bg-white"
                         type="submit"
-                        onClick={() => {
-                          
-                        }}
+                        onClick={() => {}}
                       >
                         {iconoCarritoCart}
                       </button>
@@ -66,6 +67,7 @@ import { useAuth } from "../Context/AuthContext";
                           // console.log(favorite.product._id)
                           deleteProductFavorites(favorite.product._id);
                           alertas();
+                          DecrementQty();
                         }}
                       >
                         Eliminar
@@ -79,7 +81,7 @@ import { useAuth } from "../Context/AuthContext";
           <Toaster
             theme="light"
             position="top-center"
-            duration={2000}
+            duration={5000}
             toastOptions={{
               style: { background: "green" },
               className: "my-toast",

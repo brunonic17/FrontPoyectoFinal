@@ -6,6 +6,7 @@ import {
 } from "../api/products";
 
 
+
 const ProductsContext = createContext();
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -53,6 +54,17 @@ export const ProductsProvider = ({ children }) => {
       console.log(error.response.data);
     }
   };
+  // const DeleteCarProduct = async (id) => {
+  //   try {
+  //     const res = await deleteFavRequest(id);
+
+  //     if (res.status === 204)
+  //       setFavsPage(favsPage.filter((product) => product.product._id !== id));
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
 
   return (
     <ProductsContext.Provider
@@ -63,7 +75,7 @@ export const ProductsProvider = ({ children }) => {
         productsPage,
         productShopping,
         productCard,
-       
+ 
       }}
     >
       {children}
