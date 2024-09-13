@@ -7,10 +7,13 @@ import Image from 'react-bootstrap/Image';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { GetProducts,UploadProducts,GetProduct,GetCompleteProduct,PostEspecificaciones,} from './fetch/Products.js';
 import { useState,useEffect } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import EditProd from './EditProduct.jsx';
-import EditEsp from './EditEspecific.jsx';
+// import Modal from 'react-bootstrap/Modal';
+// import EditProd from './EditProduct.jsx';
+// import EditEsp from './EditEspecific.jsx';
 import { UseEdit } from './fetch/EditContext.jsx';
+import ModalEdit from "./ModalEditProduct.jsx";
+import ModalEditEspecific from "./ModalEditEspecific.jsx"
+
 
 
 
@@ -37,25 +40,7 @@ function ResponsiveExample() {
     
    console.log(Product);
 
-  //  const Edit= async(product)=>{
-  //   var count=0;
-  //   var array=Product;
-  //   array.map(async(element)=>{
-  //     if(element._id==product._id){
-  //      const Prod=new Object;
-  //      Prod.NombreProducto=element.NombreProducto;
-  //      Prod.UltPrecio=array[count].Precio;
-  //      Prod.Precio=element.Precio;
-  //      Prod.Detalle=element.Detalle;
-  //      Prod.id=element._id;
-      
-  //      const res= await UploadProducts(Prod);
-  //      console.log(res)
-  //     }
-
-  //   })
-
-  //  };
+ 
     
     
     
@@ -97,50 +82,11 @@ return i
             <td colSpan={4} ><p>{Product[index].Detalle}</p></td>
             </tr>
             <tr>
+            <ModalEdit element={Product[index]}></ModalEdit>
 
 
 
-  <Button variant="primary"
-   onClick={ async ()=>{
-    handleShow();
-    const EditProduct=Product[index];
-setNewEditProduct({
-  ...NewEditProduct,
-     id:EditProduct._id,
-     UltimoPrecio:EditProduct.Precio
-   })
-   console.log(FindProd(EditProduct))
-   setEdiProduct(FindProd(EditProduct));
-}}>
-Editar Producto 
-</Button>
 
-<Modal show={show} onHide={handleClose}>
-<Modal.Header closeButton>
-<Modal.Title>Editar Producto</Modal.Title>
-</Modal.Header>
-<Modal.Body>
-<EditProd
-element={EdiProduct}
-></EditProd>
-</Modal.Body>
-<Modal.Footer>
-<Button variant="secondary" onClick={handleClose}>
-Cerrar
-</Button>
-<Button variant="primary" onClick={async()=>{
-handleClose();
-
-const ProductEdit=await UploadProducts(NewEditProduct);
-console.log(ProductEdit)
-
-
-
-}}>
-Guardar Cambios
-</Button>
-</Modal.Footer>
-</Modal>
 </tr>
             <tr >
             <td colSpan={4} >Imagenes</td>
@@ -188,8 +134,11 @@ Guardar Cambios
                        <td >Estado:{Product[index].Especificaciones[indeeex].id.Estado}</td>
                       </tr>
                       <tr>
-                      <Button   variant="danger" onClick={()=>{console.log(indeeex)}}>Eliminar</Button>{' '}
-                      {/* <Button variant="primary"
+
+                      <ModalEditEspecific element={Product[index].Especificaciones[indeeex].id}></ModalEditEspecific>
+
+                      {/* <Button   variant="danger" onClick={()=>{console.log(indeeex)}}>Eliminar</Button>{' '}
+                      <Button variant="primary"
                            onClick={ async ()=>{
                             handleShow();
                             const EditEsp=Product[index].Especificaciones[indeeex].id;
