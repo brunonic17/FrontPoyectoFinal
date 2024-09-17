@@ -10,7 +10,6 @@ const Favorites = () => {
     favsPage,
     getProductsFavorite,
     deleteProductFavorites,
-    DecrementQty,
   } = useFav();
 
   // console.log(user);
@@ -67,7 +66,7 @@ const Favorites = () => {
                           // console.log(favorite.product._id)
                           deleteProductFavorites(favorite.product._id);
                           alertas();
-                          DecrementQty();
+                        
                         }}
                       >
                         Eliminar

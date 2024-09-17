@@ -19,8 +19,7 @@ const ProductsList = () => {
     favsPage,
     getProductsFavorite,
     deleteProductFavorites,
-    DecrementQty,
-    IncrementQty,
+   
   } = useFav();
   const { getProducts, productsPage, getProduct } = useProducts();
   const [cambiar, setCambiar] = useState(false);
@@ -91,7 +90,7 @@ console.log(favsPage);
                           type="submit"
                           onClick={() => {
                             handclick(product);
-                            DecrementQty();
+                            
                           }}
                         >
                           {iconoFavoritoAgregado}
@@ -116,7 +115,7 @@ console.log(favsPage);
                             }
                             // handclick();
                             setCambiar(!cambiar);
-                            IncrementQty();
+                            
                           }}
                         >
                           {iconofavorito}

@@ -108,6 +108,7 @@ const DeleteProduct = async (Product)=> {
     const data=response.json();
 
     return data
+    // console.log(data)
 }
 
 const PagoPay = async (Carrito)=> {

@@ -9,16 +9,23 @@ import { Button } from "react-bootstrap";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import iconos, { iconoCarrito, iconofavorito } from "../helpers/iconos";
 import { useAuth } from "../Context/AuthContext";
-import { useFav } from "../Context/FavContext";
+
+import { useProducts } from "../Context/ProductsContext";
+import { useEffect } from "react";
 
 
 
 
 function NavBarEx() {
   const { isAuthenticated, logout, user } = useAuth();
-  const { favsPage } = useFav();
- 
+  const { productShopping, getProductShopping,quantity } = useProducts();
 
+
+  useEffect(() => {
+    getProductShopping();
+  }, [quantity]);
+ 
+console.log(productShopping.length);
  
 
   return (
@@ -188,7 +195,7 @@ function NavBarEx() {
                       <Nav.Link as={NavLink} to="carrito">
                         {iconoCarrito}
                       </Nav.Link>
-                      <div className="contador">{favsPage.length}</div>
+                      <div className="contador">{productShopping.length}</div>
                       <Button
                         as={NavLink}
                         to="/"

@@ -20,17 +20,7 @@ export const FavoritesProvider = ({ children }) => {
   const [favsCreate, setFavsCreate] = useState([]);
   const [removeId, setRemoveId] = useState([]);
   const [errors, setErrors] = useState("");
-  const [quantity, setQuantity] = useState(favsPage.length);
-
-  const DecrementQty = () => {
-    if (favsPage.length > 0) {
-      setQuantity((prevCont) => prevCont - 1);
-    }
-  };
-
-  const IncrementQty = () => {
-    setQuantity((prevCont) => prevCont + 1);
-  };
+  
   
   const createFavorite = async (product1) => {
     try {
@@ -74,9 +64,7 @@ export const FavoritesProvider = ({ children }) => {
         favsCreate,
         removeId,
         errors,
-        quantity,
-        DecrementQty,
-        IncrementQty,
+       
 
       }}
     >

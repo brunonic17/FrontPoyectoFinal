@@ -27,7 +27,7 @@ const PaginaLoguin = () => {
       <h1 className=" text-center ">Acceder</h1>
       <div className=" container justify-content-center align-items-center p-2 ">
         <form className=" bg-secondary p-2 " onSubmit={onSubmit}>
-          {signinErrors !== "" && (
+          {signinErrors === "" && (
             <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
               {signinErrors}
             </span>

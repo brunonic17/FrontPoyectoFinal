@@ -43,10 +43,13 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await LoguinRequest(user);
       setUser(res.data);
+      // console.log(res)
       setisAuthenticate(true);
     } catch (error) {
       // console.log(error)
       setErrors(error.response.data.message);
+      console.log(errors)
+
     }
   };
 
@@ -88,7 +91,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
   useEffect(() => {
-    if (setErrors.length > 0) {
+    if (errors.length > 0) {
       const timer = setTimeout(() => {
         setErrors("");
       }, 3000);

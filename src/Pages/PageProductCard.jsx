@@ -11,17 +11,22 @@ import spinnerLoading from "../assets/img/spinnerLoading.svg";
 // import { Form, FormCheck } from "react-bootstrap";
 
 const PageProductCard = () => {
-  const { productCard, getProduct } = useProducts();
-  const { register, handleSubmit } = useForm();
-  const { user, isAuthenticated } = useAuth();
+  const { productCard, getProduct,IncrementQty, } = useProducts();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const { errors: setErrorsEspecificaciones } = useAuth();
   const params = useParams();
   const navigate = useNavigate();
   const [imgs, setImgs] = useState("");
   const [spinner, setSpinner] = useState(true);
-  const [spinnerColors, setSpinnerColors] = useState(false);
+  const [spinnerColors, setSpinnerColors] = useState(true);
   const [talle, setTalle] = useState(0);
   const [talleOk, setTalleOk] = useState(true);
-
+  const { user } = useAuth();
   useEffect(() => {
     if (params.id) {
       getProduct(params.id);
@@ -42,42 +47,42 @@ const PageProductCard = () => {
       setImgs(productCard.UrlImagen[0]);
     }, 2000);
     return () => clearTimeout(timer);
-    
   }, [productCard, talle]);
 
   useEffect(() => {
- 
-
     const timerColor = setTimeout(() => {
       setTalleOk(false);
       setSpinnerColors(false);
-    }, 2000);
+    }, 500);
     return () => clearTimeout(timerColor);
-    
   }, [talle]);
 
   const onSubmit = handleSubmit(async (data) => {
     // if (!isAuthenticated) navigate("/login");
-    // data.IdProduct = productCard.IdProduct;
-    // data.IdUsu = user.id;
+    data.IdProduct = productCard.IdProduct;
+    data.IdUsu = user.id;
 
-    // const res = await getEspecificaciones(data);
+    const res = await getEspecificaciones(data);
 
-    // data.eid = res._id;
-    // const resshopping = await PostShoppings(data);
+    data.eid = res._id;
+    const resshopping = await PostShoppings(data);
+    IncrementQty();
     // console.log(data, res, res._id, resshopping);
     // console.log(await getProductsRequest())
+
     console.log(data);
   });
   const cambioIndexColor = (colorIndex) => {
     setTalle(colorIndex);
     setTalleOk(true);
     setSpinnerColors(true);
-
-    console.log(colorIndex);
+    const timerColor = setTimeout(() => {
+      setSpinnerColors(false);
+    }, 500);
+    return () => clearTimeout(timerColor);
   };
+  console.log(spinnerColors);
   // console.log(productCard.Especificaciones[0].id.Color);
-  console.log(talle);
   return (
     <>
       {spinner ? (
@@ -120,9 +125,16 @@ const PageProductCard = () => {
               </div>
               <div className="productDisplayRightTalle">
                 <h3>Talle</h3>
+                {/* {setErrorsEspecificaciones !== "" && (
+                  <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
+                    {setErrorsEspecificaciones}
+                  </span>
+                )}*/}
                 <select
                   className="form-select"
                   aria-label="Default select example"
+                  // {...register("talle")}
+                  name="talle"
                   {...register("talle")}
                   // onChange={() => {
 
@@ -149,60 +161,42 @@ const PageProductCard = () => {
                     );
                   })}
                 </select>
+
+                {/* {errors.talle && (
+                  <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
+                    {errors.talle.message}
+                  </span>
+                )} */}
               </div>
 
               <div className="productDisplayRightColor">
+                <h3>Seleccione un Color</h3>
                 {spinnerColors ? (
-        <img src={spinnerLoading} />
-                ) : (
-                  <div className="form-check d-flex gap-5">
-                    <h3>Seleccione un Color</h3>
+                  <img src={spinnerLoading} className="spinner" />
+                ) : ( 
+                  <div className=" d-flex flex-column ">
                     <div>
                       <input
                         type="radio"
                         id="huey"
-                        name="color"
+                        // name="color"
                         value={productCard.Especificaciones[talle].id.Color}
                         {...register("color")}
-                      />
+                        />
+                        
                       <label
                         htmlFor={productCard.Especificaciones[talle].id.Color}
                       >
+                        
                         {productCard.Especificaciones[talle].id.Color}
                       </label>
                     </div>
                   </div>
                 )}
 
-                {/* <div>
-    <input type="radio" id="dewey" name="color" value="dewey"  disabled {...register("color")} />
-    <label htmlFor="dewey">Dewey</label>
-  </div>
+   
 
-  <div>
-    <input type="radio" id="louie" name="color" value="louie"  {...register("color")} disabled/>
-    <label htmlFor="louie">Louie</label>
-  </div> */}
-
-                {/* {productCard.Especificaciones.map((c, index) => {
-                    return (
-                      <>
-                        <div>
-                          <input
-                            type="radio"
-                            id="huey"
-                            name="color"
-                            value={c.id.Color}
-                            
-                            {...register("color")}
-                          />
-                          <label htmlFor={c.id.Color[index]}>
-                            {c.id.Color}
-                          </label>
-                        </div>
-                      </>
-                    );
-                  })} */}
+              
 
                 <div className="productDisplayRightCantidad">
                   <h3>Cantidad</h3>

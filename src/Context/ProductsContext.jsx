@@ -4,8 +4,7 @@ import {
   getProductCardRequest,
   getProductsShoppingRequest,
 } from "../api/products";
-
-
+import { DeleteProduct, PostShoppings } from "../fetch/shopping";
 
 const ProductsContext = createContext();
 
@@ -21,9 +20,17 @@ export const ProductsProvider = ({ children }) => {
   const [productsPage, setProductsPage] = useState([]);
   const [productCard, setProductCard] = useState();
   const [productShopping, setProductShopping] = useState([]);
- 
+  const [quantity, setQuantity] = useState(productShopping.length);
+  const [cantidad, setCantProduct] = useState();
+  const DecrementQty = () => {
+    if (productShopping.length > 0) {
+      setQuantity((prevCont) => prevCont - 1);
+    }
+  };
 
-  
+  const IncrementQty = () => {
+    setQuantity((prevCont) => prevCont + 1);
+  };
 
   const getProducts = async () => {
     try {
@@ -54,18 +61,37 @@ export const ProductsProvider = ({ children }) => {
       console.log(error.response.data);
     }
   };
-  // const DeleteCarProduct = async (id) => {
-  //   try {
-  //     const res = await deleteFavRequest(id);
+  const DeleteShoppingProduct = async (Product) => {
+    try {
+      const res = await DeleteProduct(Product);
+      
 
-  //     if (res.status === 204)
-  //       setFavsPage(favsPage.filter((product) => product.product._id !== id));
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+      if (res.status === "ok")
+        setProductShopping(
+          productShopping.filter((shopping) => shopping.eid._id !== Product.eid)
+        );
+      console.log(Product.eid);
+      console.log(productShopping);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  const ModificarCantidadShopinng = async (Product) => {
+    try {
+    
+      const res = await PostShoppings(Product);
+      console.log(res);
 
+      if (res.status === "ok")
+        setProductShopping(res.data.DetalleCarro)
+
+      
+    } catch (error) {
+      console.log(error, "no me estoy aplicando");
+    }
+  };
+// porducto = porductoss
   return (
     <ProductsContext.Provider
       value={{
@@ -75,7 +101,13 @@ export const ProductsProvider = ({ children }) => {
         productsPage,
         productShopping,
         productCard,
- 
+        DeleteShoppingProduct,
+        quantity,
+        DecrementQty,
+        IncrementQty,
+        cantidad,
+        setCantProduct,
+        ModificarCantidadShopinng,
       }}
     >
       {children}

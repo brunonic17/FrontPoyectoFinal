@@ -1,43 +1,40 @@
 import { useProducts } from "../Context/ProductsContext";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Table } from "react-bootstrap";
-import { EditModal } from "../Components/Modal";
-import {
-  DeleteProduct,
-  // PagoPay,
-  PostShoppings,
-} from "../fetch/shopping";
+
+import // DeleteProduct,
+// PagoPay,
+// PostShoppings,
+"../fetch/shopping";
 import EditModalCarrito from "../Components/ModalEditCarrito";
 
 import Button from "react-bootstrap/Button";
 
-import Card from "react-bootstrap/Card";
-import { useFav } from "../Context/FavContext";
-
 export const Carrito = () => {
-  const [show, setShow] = useState(false);
-  const [EditProduct, setEditProduct] = useState();
+  // const [show, setShow] = useState(false);
+  // const [EditProduct, setEditProduct] = useState();
   const { user, isAuthenticated } = useAuth();
 
-  const { getProductShopping, productShopping } = useProducts();
-  const { DeleteCarProduct } = useFav();
+  const {
+    getProductShopping,
+    productShopping,
+    DeleteShoppingProduct,
+    DecrementQty,
+    cantidad,
+
+  } = useProducts();
+
   const navigate = useNavigate();
-  //  console.log(user);
-  // let repuesta = await GetShoppings(user);
 
   useEffect(() => {
     getProductShopping();
+    console.log("me renderizo")
     if (!isAuthenticated) navigate("/");
-  }, []);
+  }, [cantidad]);
 
-  // const [cantidad, setCantidad] = useState(
-  //   productShopping.map((e) => {
-  //     return e.CantProduct;
-  //   })
-  // );
-  console.log(productShopping);
+  console.log(cantidad);
 
   return (
     <>
@@ -109,7 +106,10 @@ export const Carrito = () => {
                         let IdUsu = user.id;
                         let Product = { IdUsu, eid };
 
-                        await DeleteProduct(Product);
+                        await DeleteShoppingProduct(Product);
+                        DecrementQty();
+                        console.log(Product.eid);
+                        console.log(productShopping);
                       }}
                     >
                       Eliminar
