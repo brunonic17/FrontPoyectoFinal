@@ -13,6 +13,7 @@ import { useState,useEffect } from 'react';
 import { UseEdit } from './fetch/EditContext.jsx';
 import ModalEdit from "./ModalEditProduct.jsx";
 import ModalEditEspecific from "./ModalEditEspecific.jsx"
+import ModalCreateEspecific from "./ModalCreateEspecific.jsx"
 
 
 
@@ -41,20 +42,7 @@ function ResponsiveExample() {
    console.log(Product);
 
  
-    
-    
-    
-    const FindProd= (product)=>{
-
-    var array=Product;
-     console.log(array)
-
-   let i= array.find((element)=>element._id===product._id
-    )
-return i
-   };
-
-  
+   
 
   return (<>
    
@@ -75,7 +63,9 @@ return i
             <td >Categoria:{Product[index].Categoria}</td>
             </tr>
             <tr >
-            <td colSpan={4} >Descripcion</td>
+            <td colSpan={4} >
+              <h4>Descripcion</h4>Descripcion
+              </td>
             </tr>
            
             <tr>
@@ -89,7 +79,9 @@ return i
 
 </tr>
             <tr >
-            <td colSpan={4} >Imagenes</td>
+            <td colSpan={4} >
+             <h4>Imagenes</h4>
+              </td>
             </tr>
             <tr >
             <td colSpan={4} >
@@ -105,7 +97,14 @@ return i
             </td>
             </tr>
             <tr>
-              <td colSpan={4}>Especificaciones</td>
+              <td colSpan={4}>
+                <h4>Especificaciones</h4>
+              </td>
+              <td colSpan={4}>
+               <ModalCreateEspecific
+                Id={Product[index]._id}
+                ></ModalCreateEspecific>
+              </td>
             </tr>
             <tr>
               
@@ -137,64 +136,6 @@ return i
 
                       <ModalEditEspecific element={Product[index].Especificaciones[indeeex].id}></ModalEditEspecific>
 
-                      {/* <Button   variant="danger" onClick={()=>{console.log(indeeex)}}>Eliminar</Button>{' '}
-                      <Button variant="primary"
-                           onClick={ async ()=>{
-                            handleShow();
-                            const EditEsp=Product[index].Especificaciones[indeeex].id;
-                           
-                            const ids={
-                              id2:EditEsp._id,
-                              id:EditEsp._IdProduct
-                            }
-                            const GetEspecificProduct=await GetCompleteProduct(ids)
-                          setEditEspecific(GetEspecificProduct) 
-                        setNewEditEspecific({
-                          ...NewEditEspecific,
-                             id:EditEsp._id,
-                             
-                           })
-                           console.log(EditEspecific)
-                          
-                        }}>
-                        Editar Especificacion 
-                         </Button>
-
-                      <Modal show={show} 
-                      onHide={handleClose}
-                      >
-                        <Modal.Header closeButton>
-                        <Modal.Title>Editar Especificacion</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                        <EditEsp
-                        element={EditEspecific}
-                        ></EditEsp>
-                        </Modal.Body>
-                        <Modal.Footer>
-                        <Button variant="secondary"
-                         onClick={handleClose}
-                         >
-                        Cerrar
-                        </Button>
-                        <Button variant="primary" onClick={async()=>{
-                        handleClose();
-                        
-                        
-                        
-                        
-                        
-                        // console.log(NewEditProduct);
-                        const ProductEdit=await UploadProducts(NewEditProduct);
-                        console.log(ProductEdit)
-                        
-                        
-                        
-                        }}>
-                        Guardar Cambios
-                        </Button>
-                        </Modal.Footer>
-                      </Modal> */}
                       </tr>
      
                </td>
@@ -210,31 +151,7 @@ return i
           
         ))}
          
-         {/* {Array.from({ length: 1 }).map((_, index) => (
-           
-        ))}
-      */}
-       
-      
-      
-    
-     {/* <tr>
-          {Array.from({ length: 1 }).map((_, index) => (
-         <td key={index}>Especificaciones</td>
-       ))}
-       {Array.from({ length: 1 }).map((_, index) => (
-         <td key={index}>Id</td>
-       ))}
-        {Array.from({ length: 1 }).map((_, index) => (
-         <td key={index}>Ult. Precio</td>
-       ))} 
-       {Array.from({ length: 1 }).map((_, index) => (
-         <td key={index}>Precio</td>
-       ))} 
-       {Array.from({ length: 1 }).map((_, index) => (
-         <td key={index}>Categoria</td>
-       ))}
-     </tr> */}
+         
    
   </Table>
  

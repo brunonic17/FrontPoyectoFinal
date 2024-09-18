@@ -135,4 +135,4 @@ const PostProducts=async  (Prod)=>{
 
 
 
-export {GetProducts,PostProducts,GetProduct,GetCompleteProduct,PostEspecificaciones,UploadImage,DeleteEspecificaciones,UploadProducts}
+export {GetProducts,PostProducts,GetProduct,GetCompleteProduct,PostEspecificaciones,UploadImage,DeleteEspecificaciones,UploadProducts,UploadEspecificaciones}

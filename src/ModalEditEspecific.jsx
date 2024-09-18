@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import {UseEdit } from './fetch/EditContext.jsx';
-import {GetCompleteProduct} from './fetch/Products.js';
+import {GetCompleteProduct,UploadEspecificaciones} from './fetch/Products.js';
 
 
 function Example({element}) {
@@ -33,6 +33,19 @@ function Example({element}) {
         <Modal.Body>
        
         <Form>
+              
+             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Color</Form.Label>
+              <Form.Control type="text" name="Color" Value={element.Color}  />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Talle</Form.Label>
+              <Form.Control type="text" name="Talle" value={element.Talle}  />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Codigo de producto</Form.Label>
+              <Form.Control type="text" name="CodProducto" placeholder={element.CodProducto} onChange={ChangeEdit} />
+            </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Stock</Form.Label>
               <Form.Control type="text" name="Stock" placeholder={element.Stock} onChange={ChangeEdit} />
@@ -62,7 +75,7 @@ function Example({element}) {
             Close
           </Button>
           <Button variant="primary" onClick={ async ()=>{
-                            handleShow();
+                          
                             const EditEsp=element;
                            
                             const ids={
@@ -76,11 +89,13 @@ function Example({element}) {
                         setNewEditEspecific({
                           ...NewEditEspecific,
                              id:EditEsp._id,
-                             
                            })
+
+                           const ModificEspeficific=await UploadEspecificaciones(NewEditEspecific)
                            console.log(GetEspecificProduct)
                            console.log(NewEditEspecific)
-                          
+                           console.log(ModificEspeficific)
+                           handleClose();
                         }}>
             Guardar Cambios
           </Button>

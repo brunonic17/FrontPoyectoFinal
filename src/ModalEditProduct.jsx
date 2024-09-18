@@ -21,7 +21,7 @@ function Example({element}) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button  onClick={handleShow}>
         Modificar Producto
       </Button>
 
