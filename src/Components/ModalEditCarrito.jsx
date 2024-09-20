@@ -18,7 +18,7 @@ function Example(element) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="outline-primary" onClick={handleShow}>
         Modificar
       </Button>
 

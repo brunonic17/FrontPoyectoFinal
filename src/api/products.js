@@ -22,6 +22,8 @@ export const getEspecificaciones = async (Cart) => {
 
 export const getProductsShoppingRequest = () => instance.get(`/carritos`);
 
+export const deleteShoppingRequest = (id)=> instance.delete(`/elimina/${id}`);
+
 // export const GetShoppings = async () => {
 //   const response = await fetch(`http://localhost:5050/api/carritos`, {
 //     method: "GET",

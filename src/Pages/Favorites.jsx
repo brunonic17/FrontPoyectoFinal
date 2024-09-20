@@ -1,16 +1,24 @@
 import { useEffect } from "react";
 
 import { useFav } from "../Context/FavContext";
-// import { getFavsRequest } from "../api/favorite";
+
 import { Toaster, toast } from "sonner";
 import { iconoCarritoCart } from "../helpers/iconos";
+import { useAuth } from "../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
+
 
 const Favorites = () => {
+
+  const navigate = useNavigate();
+
   const {
     favsPage,
     getProductsFavorite,
     deleteProductFavorites,
   } = useFav();
+  const  { isAuthenticated } = useAuth();
+
 
   // console.log(user);
   const alertas = () => {
@@ -19,6 +27,7 @@ const Favorites = () => {
 
   useEffect(() => {
     getProductsFavorite();
+    if (!isAuthenticated) navigate("/");
   }, []);
   console.log(favsPage);
 
@@ -63,7 +72,7 @@ const Favorites = () => {
                         className="text-primary bg-white "
                         type="submit"
                         onClick={() => {
-                          // console.log(favorite.product._id)
+                          console.log(favorite.product._id)
                           deleteProductFavorites(favorite.product._id);
                           alertas();
                         

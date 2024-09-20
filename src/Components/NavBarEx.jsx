@@ -23,9 +23,11 @@ function NavBarEx() {
 
   useEffect(() => {
     getProductShopping();
-  }, [quantity]);
+  }, [quantity, isAuthenticated]);
+
+  
+  console.log(productShopping.length);
  
-console.log(productShopping.length);
  
 
   return (
@@ -216,7 +218,7 @@ console.log(productShopping.length);
                       <Nav.Link as={NavLink} to="carrito">
                         {iconoCarrito}
                       </Nav.Link>
-                      <div className="contador">{favsPage.length}</div>
+                      <div className="contador">{productShopping.length}</div>
 
                       <Button
                         as={NavLink}

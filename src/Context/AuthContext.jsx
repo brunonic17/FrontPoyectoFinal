@@ -55,10 +55,10 @@ export const AuthProvider = ({ children }) => {
 
   // Cerrar sesion
   const logout = () => {
+    window.location.reload()
     Cookies.remove("token");
     setisAuthenticate(false);
     setUser(null);
-    window.location.reload()
   };
 
   //Enviar email cambio de contraseña delpradofederico0@gmail.com <Navigate to = "contacto" />

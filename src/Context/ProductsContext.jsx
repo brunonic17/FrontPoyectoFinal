@@ -3,6 +3,7 @@ import {
   getProductsRequest,
   getProductCardRequest,
   getProductsShoppingRequest,
+  deleteShoppingRequest,
 } from "../api/products";
 import { DeleteProduct, PostShoppings } from "../fetch/shopping";
 
@@ -12,12 +13,14 @@ const ProductsContext = createContext();
 export const useProducts = () => {
   const context = useContext(ProductsContext);
 
-  if (!context) throw new Error("useFav must be used within the FavProvider");
+  if (!context)
+    throw new Error("useProducts debe utilizarse dentro del ProductsProvider");
   return context;
 };
 // eslint-disable-next-line react/prop-types
 export const ProductsProvider = ({ children }) => {
   const [productsPage, setProductsPage] = useState([]);
+  const [getCarroId, setGetCarroId] = useState("");
   const [productCard, setProductCard] = useState();
   const [productShopping, setProductShopping] = useState([]);
   const [quantity, setQuantity] = useState(productShopping.length);
@@ -56,42 +59,43 @@ export const ProductsProvider = ({ children }) => {
     try {
       const res = await getProductsShoppingRequest();
       setProductShopping(res.data.DetalleCarro);
-      console.log(res.data.DetalleCarro);
+      setGetCarroId(res.data._id);
     } catch (error) {
       console.log(error.response.data);
     }
   };
+
   const DeleteShoppingProduct = async (Product) => {
     try {
       const res = await DeleteProduct(Product);
-      
 
       if (res.status === "ok")
         setProductShopping(
           productShopping.filter((shopping) => shopping.eid._id !== Product.eid)
         );
-      console.log(Product.eid);
-      console.log(productShopping);
     } catch (error) {
       console.log(error);
     }
   };
-
+  const deleteShopping = async (id) => {
+    try {
+      const res = await deleteShoppingRequest(id);
+      if (res.status === 204) setProductShopping([]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const ModificarCantidadShopinng = async (Product) => {
     try {
-    
       const res = await PostShoppings(Product);
       console.log(res);
 
-      if (res.status === "ok")
-        setProductShopping(res.data.DetalleCarro)
-
-      
+      if (res.status === "ok") setProductShopping(res.data.DetalleCarro);
     } catch (error) {
       console.log(error, "no me estoy aplicando");
     }
   };
-// porducto = porductoss
+  // porducto = porductoss
   return (
     <ProductsContext.Provider
       value={{
@@ -100,8 +104,10 @@ export const ProductsProvider = ({ children }) => {
         getProductShopping,
         productsPage,
         productShopping,
+        getCarroId,
         productCard,
         DeleteShoppingProduct,
+        deleteShopping,
         quantity,
         DecrementQty,
         IncrementQty,

@@ -3,10 +3,12 @@ import NavBarEx from "./NavBarEx";
 import Footer from "./Footer";
 import spinnerLoading from "../assets/img/spinnerLoading.svg";
 import { useEffect, useState } from "react";
+// import { useProducts } from "../Context/ProductsContext";
 
 // eslint-disable-next-line react/prop-types
 const Layout = ({ children }) => {
   const [spinner, setSpinner] = useState(true);
+  // const { productShopping, getProductShopping,quantity } = useProducts();
   useEffect(() => {
     setTimeout(() => {
       setSpinner(false);
@@ -22,12 +24,11 @@ const Layout = ({ children }) => {
             <NavBarEx />
           </header>
           <Outlet />
-      
 
-      <footer>
-        <Footer />
-      </footer>
-      </>
+          <footer>
+            <Footer />
+          </footer>
+        </>
       )}
     </>
   );
