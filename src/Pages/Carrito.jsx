@@ -1,50 +1,42 @@
 import { useProducts } from "../Context/ProductsContext";
 import { useEffect, useState } from "react";
 import { useAuth } from "../Context/AuthContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import EditModalCarrito from "../Components/ModalEditCarrito";
 import Button from "react-bootstrap/Button";
-import { GetIdUsu } from "../fetch/shopping";
-
+import { PagoPay } from "../fetch/shopping";
 
 export const Carrito = () => {
-  // const [show, setShow] = useState(false);
-  // const [EditProduct, setEditProduct] = useState();
   const { user, isAuthenticated } = useAuth();
-
   const {
     getProductShopping,
     productShopping,
     DeleteShoppingProduct,
     DecrementQty,
     getCarroId,
-    deleteShopping
+    deleteShopping,
   } = useProducts();
   const [formapago, setForma] = useState({});
 
   const navigate = useNavigate();
   useEffect(() => {
     getProductShopping();
-   
+
     if (!isAuthenticated) navigate("/");
   }, []);
-  
-  // console.log(Total);
-  console.log(productShopping.length)
+
+  console.log(productShopping.length);
   let Total = 0;
   for (let i = 0; i < productShopping.length; i++) {
     Total =
-      Total +
-      productShopping[i].CantProduct *
-        productShopping[i].pid.Precio;
+      Total + productShopping[i].CantProduct * productShopping[i].pid.Precio;
   }
-
 
   return (
     <>
-    <h1 className=" text-center">Carrito</h1>
+      <h1 className=" text-center">Carrito</h1>
       {productShopping.length === 0 ? (
         <h1 className=" text-center bg-secondary ">No tienes Carrito</h1>
       ) : (
@@ -129,10 +121,15 @@ export const Carrito = () => {
                 <tr>
                   <td colSpan={4}>Total</td>
                   <td>{Total}</td>
-                  <Button variant="outline-warning" onClick={ ()=> {
-                    
-                    deleteShopping(getCarroId)
-                  }}>Eliminar El Carrito</Button>
+                  <Button
+                    variant="outline-warning"
+                    onClick={() => {
+                      deleteShopping(getCarroId);
+                      console.log(getCarroId)
+                    }}
+                  >
+                    Eliminar El Carrito
+                  </Button>
                 </tr>
               </thead>
             </tbody>
@@ -153,25 +150,27 @@ export const Carrito = () => {
             </Form.Select>
           </div>
           <Button
-        variant="outline-primary"
-        onClick={async () => {
-          const cart = { IdUsu: user._id };
+            variant="outline-primary"
+            onClick={async () => {
 
-          let cid = await GetIdUsu(cart);
+              let PayShopping = {
+                cid: getCarroId,//
+                PayTipoPay: formapago,
+                TotalCarro: Total,
+                
+            
+              };
 
-          let PayShopping = {
-            cid: cid.data,
-            PayTipoPay: formapago,
-            TotalCarro: Total,
-          };
-
-          // const Pay = await PagoPay(PayShopping);
-          console.log(PayShopping);
-          // window.location.reload()
-        }}
-      >
-        CONFIRMA COMPRA CARRITO
-      </Button>{" "}
+              const Pay = await PagoPay(PayShopping);
+              console.log(PayShopping);console.log(Pay)
+              // deleteShopping(getCarroId);
+            }}
+          >
+            CONFIRMA COMPRA CARRITO
+          </Button>{" "}
+          <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+data-preference-id="1273324264-f92cada3-65b7-4a53-a55b-af7cfb015eb6" data-source="button">
+</script>
         </>
       )}
     </>

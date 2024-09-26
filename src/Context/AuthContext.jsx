@@ -46,9 +46,10 @@ export const AuthProvider = ({ children }) => {
       // console.log(res)
       setisAuthenticate(true);
     } catch (error) {
-      // console.log(error)
+      console.log(error.response.data.message)
       setErrors(error.response.data.message);
-      console.log(errors)
+      console.log(errors.length)
+    
 
     }
   };

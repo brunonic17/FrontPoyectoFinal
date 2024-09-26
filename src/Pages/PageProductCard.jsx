@@ -3,7 +3,7 @@ import { useProducts } from "../Context/ProductsContext";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../Context/AuthContext";
 import "./CSS/PageProductCard.css";
-import { getEspecificaciones } from "../api/products";
+import { getEspecificaciones, getEspecificacionesT } from "../api/products";
 import { PostShoppings } from "../fetch/shopping";
 import { useNavigate, useParams } from "react-router-dom";
 import spinnerLoading from "../assets/img/spinnerLoading.svg";
@@ -11,7 +11,7 @@ import { Toaster, toast } from "sonner";
 // import { Form, FormCheck } from "react-bootstrap";
 
 const PageProductCard = () => {
-  const { productCard, getProduct,IncrementQty, } = useProducts();
+  const { productCard, getProduct, IncrementQty } = useProducts();
   const {
     register,
     handleSubmit,
@@ -24,7 +24,8 @@ const PageProductCard = () => {
   const [imgs, setImgs] = useState("");
   const [spinner, setSpinner] = useState(true);
   const [spinnerColors, setSpinnerColors] = useState(true);
-  const [talle, setTalle] = useState(0);
+  const [talle, setTalle] = useState([]);
+  const [talleDuplicado, setTalleDuplicado] = useState([]);
   const [talleOk, setTalleOk] = useState(true);
   const { user } = useAuth();
   useEffect(() => {
@@ -63,6 +64,7 @@ const PageProductCard = () => {
   const onSubmit = handleSubmit(async (data) => {
     // if (!isAuthenticated) navigate("/login");
     data.IdProduct = productCard.IdProduct;
+
     data.IdUsu = user.id;
 
     const res = await getEspecificaciones(data);
@@ -70,8 +72,11 @@ const PageProductCard = () => {
     data.eid = res._id;
     const resshopping = await PostShoppings(data);
     IncrementQty();
-    alertas()
-    // console.log(data, res, res._id, resshopping);
+    alertas();
+    // console.log(data,
+    //   //  res, res._id,
+    //   //  resshopping
+    //   );
     // console.log(await getProductsRequest())
 
     console.log(data);
@@ -86,6 +91,21 @@ const PageProductCard = () => {
     return () => clearTimeout(timerColor);
   };
   console.log(spinnerColors);
+
+  // const busqueda =productCard.Especificaciones.reduce((acc, persona) => {
+  //   acc[persona.id.Talle] = ++acc[persona.id.Talle] || 0;
+  //   return acc;
+  // }, {});
+
+  // const duplicados = productCard.Especificaciones.filter( (persona) => {
+  //   return busqueda[persona.id.Talle];
+  // });
+
+  // console.log(duplicados);
+
+  console.log(talleDuplicado);
+  let talleD = [];
+  let arrayColors = []
   // console.log(productCard.Especificaciones[0].id.Color);
   return (
     <>
@@ -144,24 +164,31 @@ const PageProductCard = () => {
 
                   // }}
                 >
-                  <option value="" selected disabled>
+                  <option
+                    value=""
+                    // selected disabled
+                  >
                     Seleccione su talle
                   </option>
 
-                  {productCard.Especificaciones.map((t, index) => {
+                  {productCard.Especificaciones.map((t) => {
+                    talleDuplicado.push(t.id.Talle);
+                    // console.log(talleDuplicado);
+                  })}
+                  {(talleD = [...new Set(talleDuplicado)])}
+                  {console.log(talleD)}
+                  {talleD.map((t) => {
                     return (
-                      <>
-                        <option
-                          onClick={() => {
-                            cambioIndexColor(index);
-                          }}
-                          key={t.id}
-                          name="talle"
-                          value={t.id.Talle}
-                        >
-                          <button key={t.id.Stock}>{t.id.Talle}</button>
-                        </option>
-                      </>
+                      <option
+                        onClick={() => {
+                          cambioIndexColor(t);
+                        }}
+                        key={t.id}
+                        name="talle"
+                        value={t}
+                      >
+                        <button key={t}>{t}</button>
+                      </option>
                     );
                   })}
                 </select>
@@ -169,6 +196,20 @@ const PageProductCard = () => {
                 {/* {errors.talle && (
                   <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
                     {errors.talle.message}
+                     return (
+                        <>
+                          <option
+                            onClick={() => {
+                              cambioIndexColor(index);
+                            }}
+                            key={t.id}
+                            name="talle"
+                            value={t.id.Talle}
+                          >
+                            <button key={t.id.Stock}>{t.id.Talle}</button>
+                          </option>
+                        </>
+                      );
                   </span>
                 )} */}
               </div>
@@ -177,30 +218,39 @@ const PageProductCard = () => {
                 <h3>Seleccione un Color</h3>
                 {spinnerColors ? (
                   <img src={spinnerLoading} className="spinner" />
-                ) : ( 
+                ) : (
                   <div className=" d-flex flex-column ">
                     <div>
-                      <input
+                      {/* <input
                         type="radio"
                         id="huey"
                         // name="color"
-                        value={productCard.Especificaciones[talle].id.Color}
+                        // value={}
                         {...register("color")}
-                        />
-                        
-                      <label
-                        htmlFor={productCard.Especificaciones[talle].id.Color}
-                      >
-                        
-                        {productCard.Especificaciones[talle].id.Color}
-                      </label>
+                      /> */}
+                      {productCard.Especificaciones.find((e) => {
+                       if( e.id.Talle === talle) {
+                        arrayColors.push(e.id.Color)
+                       }
+                       {console.log(arrayColors)} 
+                      })}
+                      {arrayColors.map(e => {
+                        return (
+                          <label key={e} htmlFor={`huey-${e}`}>
+                            <input
+                              type="radio"
+                              id={`huey-${e}`}
+                              name="color"
+                              value={e}
+                              {...register("color")}
+                            />
+                            <span>{e}</span>
+                          </label>
+                        );
+                      })}
                     </div>
                   </div>
                 )}
-
-   
-
-              
 
                 <div className="productDisplayRightCantidad">
                   <h3>Cantidad</h3>
@@ -224,17 +274,16 @@ const PageProductCard = () => {
         </div>
       )}
       <Toaster
-      theme="light"
-      position="top-center"
-      duration={5000}
-      toastOptions={{
-        style: { background: "green" },
-        className: "my-toast",
-      }}
-    />
+        theme="light"
+        position="top-center"
+        duration={5000}
+        toastOptions={{
+          style: { background: "green" },
+          className: "my-toast",
+        }}
+      />
     </>
   );
 };
 
 export default PageProductCard;
-

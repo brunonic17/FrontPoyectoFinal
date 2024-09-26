@@ -203,7 +203,7 @@ export const ShoppingRender = () => {
           let cid = await GetIdUsu(cart);
 
           let PayShopping = {
-            cid: cid.data,
+            cid: cid.data,//id del usuario
             PayTipoPay: formapago,
             TotalCarro: Total,
           };

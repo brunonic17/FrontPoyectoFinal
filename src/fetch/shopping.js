@@ -120,7 +120,7 @@ const DeleteProduct = async (Product) => {
 const PagoPay = async (Carrito) => {
   let CarritoJson = JSON.stringify(Carrito);
 
-  const response = await fetch(`http://localhost:5000/api/carrito/confirma`, {
+  const response = await fetch(`http://localhost:5050/api/carrito/confirma`, {
     method: "POST",
     body: CarritoJson,
     headers: {

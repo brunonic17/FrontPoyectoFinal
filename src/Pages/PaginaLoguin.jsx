@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../Context/AuthContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { iconEyes } from "../helpers/iconos";
+
 
 const PaginaLoguin = () => {
   const {
@@ -12,24 +14,27 @@ const PaginaLoguin = () => {
   } = useForm();
   const navigate = useNavigate();
 
-  const { signin, errors: signinErrors, isAuthenticated } = useAuth();
+  const { signin, errors: setErrors, isAuthenticated } = useAuth();
 
   useEffect(() => {
     if (isAuthenticated) navigate("/");
   }, [isAuthenticated, navigate]);
 
+
   const onSubmit = handleSubmit((data) => {
     signin(data);
   });
+  console.log(setErrors);
+  console.log(setErrors.length)
   return (
 
     <>
       <h1 className=" text-center ">Acceder</h1>
       <div className=" container justify-content-center align-items-center p-2 ">
         <form className=" bg-secondary p-2 " onSubmit={onSubmit}>
-          {signinErrors === "" && (
+          {setErrors.length > 0 && (
             <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
-              {signinErrors}
+              {setErrors}
             </span>
           )}
 
@@ -61,7 +66,9 @@ const PaginaLoguin = () => {
             )}
           </div>
           <div className="mb-3">
-            <label className="form-label fst-italic">Password</label>
+            <label className="form-label fst-italic bg-body-secondary d-flex">Password</label>
+            <div  className="d-flex">
+
             <input
               type="password"
               name="password"
@@ -83,12 +90,20 @@ const PaginaLoguin = () => {
               })}
               className="form-control"
               id="exampleInputPassword1"
-            />
+              />
+             <div>
+             {iconEyes}
+             </div>
+            </div>
+            
+              
+              
             {errors.password && (
               <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
                 {errors.password.message}
               </span>
             )}
+             
           </div>
               <div>
               <NavLink to="/sendEmail" className="  text-white ">Olvidaste tu  Contraseña?</NavLink>

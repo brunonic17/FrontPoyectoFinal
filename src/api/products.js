@@ -20,6 +20,22 @@ export const getEspecificaciones = async (Cart) => {
   return data;
 };
 
+export const getEspecificacionesT = async (Talle) => {
+  let TalleJson = JSON.stringify(Talle);
+
+  const response = await fetch(`http://localhost:5050/api/productCardT`, {
+    method: "POST",
+    body: TalleJson,
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+
+  const data = response.json();
+
+  return data;
+};
+
 export const getProductsShoppingRequest = () => instance.get(`/carritos`);
 
 export const deleteShoppingRequest = (id)=> instance.delete(`/elimina/${id}`);

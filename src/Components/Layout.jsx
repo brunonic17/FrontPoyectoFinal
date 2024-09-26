@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
   useEffect(() => {
     setTimeout(() => {
       setSpinner(false);
-    }, 3000);
+    }, 1000);
   }, []);
   return (
     <>
