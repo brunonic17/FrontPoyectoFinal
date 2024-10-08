@@ -18,7 +18,6 @@ const PageProductCard = () => {
     formState: { errors },
   } = useForm();
 
-  const { errors: setErrorsEspecificaciones } = useAuth();
   const params = useParams();
   const navigate = useNavigate();
   const [imgs, setImgs] = useState("");
@@ -73,13 +72,13 @@ const PageProductCard = () => {
     const resshopping = await PostShoppings(data);
     IncrementQty();
     alertas();
-    // console.log(data,
-    //   //  res, res._id,
-    //   //  resshopping
-    //   );
+    console.log(
+      data
+      //  res,
+      // res._id,
+      //  resshopping
+    );
     // console.log(await getProductsRequest())
-
-    console.log(data);
   });
   const cambioIndexColor = (colorIndex) => {
     setTalle(colorIndex);
@@ -92,21 +91,10 @@ const PageProductCard = () => {
   };
   console.log(spinnerColors);
 
-  // const busqueda =productCard.Especificaciones.reduce((acc, persona) => {
-  //   acc[persona.id.Talle] = ++acc[persona.id.Talle] || 0;
-  //   return acc;
-  // }, {});
-
-  // const duplicados = productCard.Especificaciones.filter( (persona) => {
-  //   return busqueda[persona.id.Talle];
-  // });
-
-  // console.log(duplicados);
-
   console.log(talleDuplicado);
   let talleD = [];
-  let arrayColors = []
-  // console.log(productCard.Especificaciones[0].id.Color);
+  let arrayColors = [];
+
   return (
     <>
       {spinner ? (
@@ -147,33 +135,23 @@ const PageProductCard = () => {
               <div className="productDisplayRightDescription">
                 {productCard.Detalle}
               </div>
-              <div className="productDisplayRightTalle">
+              <form
+                action=""
+                className="productDisplayRightTalle d-flex flex-column gap-2"
+              >
                 <h3>Talle</h3>
-                {/* {setErrorsEspecificaciones !== "" && (
-                  <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
-                    {setErrorsEspecificaciones}
-                  </span>
-                )}*/}
+
                 <select
                   className="form-select"
                   aria-label="Default select example"
-                  // {...register("talle")}
-                  name="talle"
-                  {...register("talle")}
-                  // onChange={() => {
-
-                  // }}
+                  // name="talle"
                 >
-                  <option
-                    value=""
-                    // selected disabled
-                  >
+                  <option value="" selected disabled>
                     Seleccione su talle
                   </option>
 
                   {productCard.Especificaciones.map((t) => {
                     talleDuplicado.push(t.id.Talle);
-                    // console.log(talleDuplicado);
                   })}
                   {(talleD = [...new Set(talleDuplicado)])}
                   {console.log(talleD)}
@@ -185,7 +163,8 @@ const PageProductCard = () => {
                         }}
                         key={t.id}
                         name="talle"
-                        value={t}
+                        // value={t.Talle}
+                        {...register("talle")}
                       >
                         <button key={t}>{t}</button>
                       </option>
@@ -193,82 +172,87 @@ const PageProductCard = () => {
                   })}
                 </select>
 
-                {/* {errors.talle && (
+                {errors.talle && (
                   <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
-                    {errors.talle.message}
-                     return (
-                        <>
-                          <option
-                            onClick={() => {
-                              cambioIndexColor(index);
-                            }}
-                            key={t.id}
-                            name="talle"
-                            value={t.id.Talle}
-                          >
-                            <button key={t.id.Stock}>{t.id.Talle}</button>
-                          </option>
-                        </>
-                      );
+                    {console.log(errors.talle.message)}
                   </span>
-                )} */}
-              </div>
-
-              <div className="productDisplayRightColor">
-                <h3>Seleccione un Color</h3>
-                {spinnerColors ? (
-                  <img src={spinnerLoading} className="spinner" />
-                ) : (
-                  <div className=" d-flex flex-column ">
-                    <div>
-                      {/* <input
-                        type="radio"
-                        id="huey"
-                        // name="color"
-                        // value={}
-                        {...register("color")}
-                      /> */}
-                      {productCard.Especificaciones.find((e) => {
-                       if( e.id.Talle === talle) {
-                        arrayColors.push(e.id.Color)
-                       }
-                       {console.log(arrayColors)} 
-                      })}
-                      {arrayColors.map(e => {
-                        return (
-                          <label key={e} htmlFor={`huey-${e}`}>
-                            <input
-                              type="radio"
-                              id={`huey-${e}`}
-                              name="color"
-                              value={e}
-                              {...register("color")}
-                            />
-                            <span>{e}</span>
-                          </label>
-                        );
-                      })}
-                    </div>
-                  </div>
                 )}
 
-                <div className="productDisplayRightCantidad">
-                  <h3>Cantidad</h3>
-                  <input
-                    type="number"
-                    name="cantidad"
-                    min={1}
-                    max={productCard.Especificaciones.map((c) => {
-                      return c.id.Stock;
-                    })}
-                    {...register("cantidad")}
-                  />
-                </div>
-              </div>
+                <div className="productDisplayRightColor">
+                  <h3>Seleccione un Color</h3>
+                  {spinnerColors ? (
+                    <img src={spinnerLoading} className="spinner" />
+                  ) : (
+                    <div className=" d-flex ">
+                      <div className="d-flex bg-body-secondary w-100 gap-3">
+                        {productCard.Especificaciones.find((e) => {
+                          if (e.id.Talle === talle) {
+                            arrayColors.push(e.id.Color);
+                          }
+                          // {
+                          //   console.log(arrayColors);
+                          // }
+                        })}
+                        {arrayColors.map((e) => {
+                          return (
+                            <div
+                              className=" d-flex justify-content-center align-items-center gap-2"
+                              key={e}
+                            >
+                              <label htmlFor={e}></label>
+                              <input
+                                type="radio"
+                                // name="color"
+                                value={e}
+                                {...register("color", {
+                                  required: true,
+                                  value: { e },
+                                  message: "color es requerido",
+                                })}
+                              />
+                              <span>{e}</span>
+                              {errors.color && (
+                                <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
+                                  {console.log(errors.color.message)}
+                                </span>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
 
-              <div className="productDisplayRightTalleBtn">
-                <btn onClick={onSubmit}>AGREAGAR AL CARRITO</btn>
-              </div>
+                  <div className="productDisplayRightCantidad">
+                    <h3>Cantidad</h3>
+                    <input
+                      type="number"
+                      // name="cantidad"
+                      min={1}
+                      // max={productCard.Especificaciones.map((c) => {
+                      //   return c.id.Stock;
+                      // })}
+                      {...register("cantidad", {
+                        required: true,
+                        value: true,
+                        message: "cantidad es requerida.",
+                        // validate: (value) =>
+                        //   value >= 1 && value <= productCard.Especificaciones.map(
+                        //     (c) => c.id.Stock
+                        //   ) ||
+                        //   "La cantidad debe estar entre 1 y el stock disponible",
+                      })}
+                    />
+                    {errors.cantidad && (
+                      <span className=" fs-4 text-center mt-1  text-white  bg-danger  "></span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="productDisplayRightTalleBtn">
+                  <btn onClick={onSubmit}>AGREAGAR AL CARRITO</btn>
+                </div>
+              </form>
             </div>
           </div>
         </div>

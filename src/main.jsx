@@ -150,7 +150,15 @@ const router = createBrowserRouter([
         path: "/carrito",
         element: (
           <div>
-            <Carrito />
+           <Carrito />
+          </div>
+        ),
+      },
+      {
+        path: "/create-order",
+        element: (
+          <div>
+            <h1>pagando carrito</h1>
           </div>
         ),
       },

@@ -134,7 +134,7 @@ export const Carrito = () => {
               </thead>
             </tbody>
           </Table>
-          <div>
+          {/* <div>
             <h4>FORMA DE PAGO</h4>
             <Form.Select
               aria-label="Forma de Pago"
@@ -148,14 +148,13 @@ export const Carrito = () => {
               <option value="Transferencia">Transferencia</option>
               <option value="Mercado Pago">Mercado Pago</option>
             </Form.Select>
-          </div>
+          </div> */}
           <Button
             variant="outline-primary"
             onClick={async () => {
 
               let PayShopping = {
-                cid: getCarroId,//
-                PayTipoPay: formapago,
+                cid: getCarroId,
                 TotalCarro: Total,
                 
             
@@ -168,9 +167,7 @@ export const Carrito = () => {
           >
             CONFIRMA COMPRA CARRITO
           </Button>{" "}
-          <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
-data-preference-id="1273324264-f92cada3-65b7-4a53-a55b-af7cfb015eb6" data-source="button">
-</script>
+
         </>
       )}
     </>
