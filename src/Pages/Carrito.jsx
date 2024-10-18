@@ -1,15 +1,20 @@
 import { useProducts } from "../Context/ProductsContext";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Table } from "react-bootstrap";
-import Form from "react-bootstrap/Form";
+// import Form from "react-bootstrap/Form";
 import EditModalCarrito from "../Components/ModalEditCarrito";
 import Button from "react-bootstrap/Button";
-import { PagoPay } from "../fetch/shopping";
+// // import { PagoPay } from "../fetch/shopping";
+import { useShoppingContext } from "../Context/ShoppingContext";
+
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
 export const Carrito = () => {
+  initMercadoPago("APP_USR-ee7c2a9d-4725-4e64-bf91-ad5ba9a3c2a2", { locale: "es-AR" });
   const { user, isAuthenticated } = useAuth();
+  const { createOrderPayment, payment, paymentId } = useShoppingContext();
   const {
     getProductShopping,
     productShopping,
@@ -18,22 +23,28 @@ export const Carrito = () => {
     getCarroId,
     deleteShopping,
   } = useProducts();
-  const [formapago, setForma] = useState({});
+
+  // const [formapago, setForma] = useState({});
 
   const navigate = useNavigate();
   useEffect(() => {
     getProductShopping();
-
+   
     if (!isAuthenticated) navigate("/");
   }, []);
 
-  console.log(productShopping.length);
+  console.log(user.email)
   let Total = 0;
   for (let i = 0; i < productShopping.length; i++) {
     Total =
       Total + productShopping[i].CantProduct * productShopping[i].pid.Precio;
   }
-
+  let cantidadTotal = 0;
+  for (let i = 0; i < productShopping.length; i++) {
+    cantidadTotal = cantidadTotal + productShopping[i].CantProduct;
+  }
+  console.log(cantidadTotal);
+  console.log(paymentId);
   return (
     <>
       <h1 className=" text-center">Carrito</h1>
@@ -103,13 +114,16 @@ export const Carrito = () => {
                         variant="outline-danger"
                         onClick={async () => {
                           let eid = productShopping[index].eid._id;
-                          console.log(productShopping[index]);
+                          console.log(
+                            productShopping[index].pid.NombreProducto
+                          );
                           let IdUsu = user.id;
                           let Product = { IdUsu, eid };
 
-                          await DeleteShoppingProduct(Product);
+                          // await DeleteShoppingProduct(Product);
                           DecrementQty();
-                          // console.log(Product.eid);
+                          console.log(Product.eid);
+
                           // console.log(productShopping.DetalleCarro);
                         }}
                       >
@@ -124,8 +138,9 @@ export const Carrito = () => {
                   <Button
                     variant="outline-warning"
                     onClick={() => {
-                      deleteShopping(getCarroId);
-                      console.log(getCarroId)
+                      console.log(productShopping);
+                      // deleteShopping(getCarroId);
+                      // console.log(getCarroId);
                     }}
                   >
                     Eliminar El Carrito
@@ -151,23 +166,42 @@ export const Carrito = () => {
           </div> */}
           <Button
             variant="outline-primary"
-            onClick={async () => {
-
-              let PayShopping = {
-                cid: getCarroId,
+            onClick={() => {
+              const carrito = {
+                user: user.nameUser,
+                userEmail: user.email,
                 TotalCarro: Total,
-                
-            
               };
+              createOrderPayment(carrito);
+              // let PayShopping = {
+              //   cid: getCarroId,
+              //   TotalCarro: Total,
+              // };
+              // window.location.href = payment;
+              console.log(payment);
+              console.log(paymentId);
 
-              const Pay = await PagoPay(PayShopping);
-              console.log(PayShopping);console.log(Pay)
+              // const Pay = await PagoPay(PayShopping);
+              // console.log(PayShopping);console.log(Pay)
               // deleteShopping(getCarroId);
             }}
           >
             CONFIRMA COMPRA CARRITO
-          </Button>{" "}
+            </Button>
+            {paymentId && 
+          <Button
+          onClick={() => {
+            deleteShopping(getCarroId);
 
+          }}>
+         <Wallet
+            initialization={{ preferenceId: paymentId }}
+            customization={{ texts: { valueProp: "smart_option" } }}
+            // deleteShopping(getCarroId);
+            /> 
+            </Button>
+            }
+          
         </>
       )}
     </>

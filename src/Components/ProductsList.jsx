@@ -9,7 +9,7 @@ import { iconofavorito, iconoFavoritoAgregado } from "../helpers/iconos";
 import { useProducts } from "../Context/ProductsContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
-import { createFavRequest } from "../api/favorite";
+// import { createFavRequest } from "../api/favorite";
 
 const ProductsList = () => {
   const [pageNumber, setPageNumber] = useState(5);
@@ -19,7 +19,7 @@ const ProductsList = () => {
     favsPage,
     getProductsFavorite,
     deleteProductFavorites,
-   
+    createFavorite
   } = useFav();
   const { getProducts, productsPage, getProduct } = useProducts();
   const [cambiar, setCambiar] = useState(false);
@@ -109,7 +109,8 @@ console.log(favsPage);
                                 user: user.id,
                               };
 
-                             await createFavRequest(product1);
+                            //  await createFavRequest(product1);
+                            await createFavorite(product1)
 
                               alertas1();
                             }

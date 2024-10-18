@@ -24,6 +24,7 @@ export const FavoritesProvider = ({ children }) => {
   const createFavorite = async (product1) => {
     try {
       const res = await createFavRequest(product1);
+      // console.log(product1)
     } catch (error) {
       setErrors(error.message);
       console.log(error);
