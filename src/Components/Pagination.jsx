@@ -46,14 +46,14 @@ const Pagination = ({
 
           {pageNumbers.map((numberPage) => {
             return (
-              <li key={numberPage} className="page-item cursor  ">
+              <li key={numberPage} className="page-item cursor">
                 <a
                   onClick={() => {
                     onSepecificPage(numberPage);
                   }}
                   className={`page-link ${
                     numberPage === currentPage ? "active" : " "
-                  }`}>
+                  } pointer`}>
                   {numberPage}
                 </a>
               </li>

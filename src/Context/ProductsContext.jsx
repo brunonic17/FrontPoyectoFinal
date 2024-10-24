@@ -25,6 +25,9 @@ export const ProductsProvider = ({ children }) => {
   const [productShopping, setProductShopping] = useState([]);
   const [quantity, setQuantity] = useState(productShopping.length);
   const [cantidad, setCantProduct] = useState();
+  const [results, setResults] = useState([]);
+  const [search, setSearch] = useState("");
+
   const DecrementQty = () => {
     if (productShopping.length > 0) {
       setQuantity((prevCont) => prevCont - 1);
@@ -33,6 +36,10 @@ export const ProductsProvider = ({ children }) => {
 
   const IncrementQty = () => {
     setQuantity((prevCont) => prevCont + 1);
+  };
+  const searcher = (e) => {
+    setSearch(e.target.value);
+    // console.log(e.target.value);
   };
 
   const getProducts = async () => {
@@ -99,10 +106,16 @@ export const ProductsProvider = ({ children }) => {
   return (
     <ProductsContext.Provider
       value={{
+        search,
+        searcher,
+        setSearch,
+        results,
+        setResults,
         getProducts,
         getProduct,
         getProductShopping,
         productsPage,
+        setProductsPage,
         productShopping,
         getCarroId,
         productCard,

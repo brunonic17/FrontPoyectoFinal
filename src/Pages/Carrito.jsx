@@ -197,7 +197,7 @@ export const Carrito = () => {
          <Wallet
             initialization={{ preferenceId: paymentId }}
             customization={{ texts: { valueProp: "smart_option" } }}
-            // deleteShopping(getCarroId);
+
             /> 
             </Button>
             }

@@ -3,6 +3,7 @@ import NavBarEx from "./NavBarEx";
 import Footer from "./Footer";
 import spinnerLoading from "../assets/img/spinnerLoading.svg";
 import { useEffect, useState } from "react";
+
 // import { useProducts } from "../Context/ProductsContext";
 
 // eslint-disable-next-line react/prop-types
@@ -22,6 +23,7 @@ const Layout = ({ children }) => {
         <>
           <header className="sticky-top">
             <NavBarEx />
+           
           </header>
           <Outlet />
 
