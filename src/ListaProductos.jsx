@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { GetProducts,UploadProducts,GetProduct,GetCompleteProduct,PostEspecificaciones,} from './fetch/Products.js';
+import { GetProducts,UploadProducts,GetProduct,GetCompleteProduct,PostEspecificaciones,DeleteEspecificaciones} from './fetch/Products.js';
 import { useState,useEffect } from 'react';
 // import Modal from 'react-bootstrap/Modal';
 // import EditProd from './EditProduct.jsx';
@@ -64,7 +64,7 @@ function ResponsiveExample() {
             </tr>
             <tr >
             <td colSpan={4} >
-              <h4>Descripcion</h4>Descripcion
+              <h4>Descripcion</h4>
               </td>
             </tr>
            
@@ -131,6 +131,21 @@ function ResponsiveExample() {
                       </tr>
                       <tr>
                        <td >Estado:{Product[index].Especificaciones[indeeex].id.Estado}</td>
+                      </tr>
+                      <tr>
+                       <td >
+                        <Button variant="danger" onClick={
+                          async()=>{
+                            const Esp={
+                              id:Product[index]._id,
+                              id2:Product[index].Especificaciones[indeeex].id._id
+                            };
+                            const Delete= await DeleteEspecificaciones(Esp)
+                            console.log(Delete)
+                            
+                          }}
+                          >Eliminar Especificacion</Button>
+                        </td>
                       </tr>
                       <tr>
 
