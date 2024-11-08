@@ -39,7 +39,6 @@ export const ProductsProvider = ({ children }) => {
   };
   const searcher = (e) => {
     setSearch(e.target.value);
-    // console.log(e.target.value);
   };
 
   const getProducts = async () => {

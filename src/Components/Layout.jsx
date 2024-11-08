@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
   useEffect(() => {
     setTimeout(() => {
       setSpinner(false);
-    }, 1000);
+    }, 500);
   }, []);
   return (
     <>
@@ -25,9 +25,12 @@ const Layout = ({ children }) => {
             <NavBarEx />
            
           </header>
+          <div className=" container">
+            
           <Outlet />
+          </div>
 
-          <footer>
+          <footer className=" container bg-body-secondary">
             <Footer />
           </footer>
         </>

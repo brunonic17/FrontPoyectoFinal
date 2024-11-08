@@ -1,7 +1,11 @@
 import { useEffect } from "react";
+
 import { useForm } from "react-hook-form";
+
 import { useNavigate } from "react-router-dom";
+
 import { useAuth } from "../Context/AuthContext";
+
 import { NavLink } from "react-router-dom";
 
 function PaginaRegistro() {
@@ -20,7 +24,10 @@ function PaginaRegistro() {
   useEffect(() => {
     if (isAuthenticated) navigate("/");
   }, [isAuthenticated]);
-
+  const cambiarVista = () => {
+    setEyes(!eyes);
+    console.log(eyes);
+  };
   const onSubmit = handleSubmit(async (data) => {
     signup(data);
   });
@@ -28,10 +35,10 @@ function PaginaRegistro() {
   return (
     <>
       <h1 className=" text-center ">Registro</h1>
-      <div className="container p-2 ">
-        <form className="p-2 bg-secondary ">
+      <div className=" container  d-flex justify-content-center  align-items-center p-2 maxW ">
+        <form className=" p-2 bg-gradient w-100 ">
           <div className="mb-3">
-            <label className="form-label fst-italic ">Nombre</label>
+            <label className="form-label fst-italic fw-bold">Nombre</label>
             <input
               type="text"
               name="nameUser"
@@ -62,7 +69,7 @@ function PaginaRegistro() {
             )}
           </div>
           <div className="mb-3">
-            <label className="form-label fst-italic">Email</label>
+            <label className="form-label fst-italic fw-bold">Email</label>
             <input
               type="email"
               name="email"
@@ -100,7 +107,7 @@ function PaginaRegistro() {
             )}
           </div>
           <div className="mb-3">
-            <label className="form-label fst-italic">Password</label>
+            <label className="form-label fst-italic fw-bold">Password</label>
             <input
               type="password"
               name="password"
@@ -131,7 +138,9 @@ function PaginaRegistro() {
           </div>
 
           <div className="mb-3">
-            <label className="form-label fst-italic">Comfirmar Password</label>
+            <label className="form-label fst-italic fw-bold">
+              Comfirmar Password
+            </label>
             <input
               type="password"
               name="confirmarPassword"
@@ -154,12 +163,17 @@ function PaginaRegistro() {
             )}
           </div>
 
-          <button type="button" onClick={onSubmit} className="btn btn-primary">
-            Enviar
-          </button>
-          <div></div>
+          <div className="w-100 d-flex justify-content-center">
+            <button
+              type="submit"
+              className="btn btn-primary mt-2 mb-2  d-flex w-100 justify-content-center"
+            >
+              Registrarme
+            </button>
+          </div>
+
           <div className="d-flex justify-content-between">
-            <p className="d-flex  fw-bold fs-4 text-white fst-italic">
+            <p className="d-flex  fw-bold fs-4 text-black fst-italic">
               Ya tienes una cuenta?
             </p>
             <NavLink to="/login" className="btn bg-success text-white ">

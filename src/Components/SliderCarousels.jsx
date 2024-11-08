@@ -1,10 +1,13 @@
 import sladerPromos1 from "../assets/img/sladerPromos1.png";
 import sladerPromo2 from "../assets/img/sladerPromo2.png";
+import { useProducts } from "../Context/ProductsContext";
 
 function IndividualIntervalsExample() {
+const {search}=useProducts()
+
   return (
     <>
-      <div
+    {!search ? <div
         id="carouselExampleInterval"
         className="carousel slide"
         data-bs-ride="carousel">
@@ -36,7 +39,8 @@ function IndividualIntervalsExample() {
             aria-hidden="true"></span>
           <span className="visually-hidden">Next</span>
         </button>
-      </div>
+      </div> : null}
+     
     </>
   );
 }

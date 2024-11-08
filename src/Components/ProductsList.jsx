@@ -66,7 +66,7 @@ const ProductsList = () => {
   return (
     <>
       <div className="container-products">
-        <div className=" d-flex flex-wrap justify-content-between p-2">
+        <div className=" d-flex flex-wrap justify-content-center gap-2 p-2">
           {
             !search
               ? productsPage
@@ -235,7 +235,7 @@ const ProductsList = () => {
           />
         </div>
       ) : null}
-      
+
       <Toaster
         theme="light"
         position="top-center"
