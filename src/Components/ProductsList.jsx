@@ -241,7 +241,7 @@ const ProductsList = () => {
         position="top-center"
         duration={2000}
         toastOptions={{
-          style: { background: "blue" },
+          style: { background: "green" },
           className: "myToast",
         }}
       />

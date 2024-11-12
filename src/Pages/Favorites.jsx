@@ -83,7 +83,7 @@ const Favorites = () => {
             position="top-center"
             duration={5000}
             toastOptions={{
-              style: { background: "green" },
+              style: { background: "red" },
               className: "my-toast",
             }}
           />
