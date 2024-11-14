@@ -59,3 +59,14 @@
 .form-select {
     width: 80% !important;
 }
+.publicidadPageProduct{
+    background-image: url("../../assets/img/publicidadadidas.png");
+    height: 70rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .borderBotton {
+    
+    border-bottom: 2px solid black ;
+    width: 90%;
+  }

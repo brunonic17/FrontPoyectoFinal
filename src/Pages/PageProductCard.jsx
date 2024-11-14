@@ -8,9 +8,11 @@ import { PostShoppings } from "../fetch/shopping";
 import { useNavigate, useParams } from "react-router-dom";
 import spinnerLoading from "../assets/img/spinnerLoading.svg";
 import { Toaster, toast } from "sonner";
+
 // import { Form, FormCheck } from "react-bootstrap";
 
 const PageProductCard = () => {
+ 
   const { productCard, getProduct, IncrementQty } = useProducts();
   const {
     register,
@@ -78,6 +80,9 @@ const PageProductCard = () => {
       // res._id,
       //  resshopping
     );
+    const handleComentarios = handleSubmit((data) => {
+      console.log(data)
+    })
     // console.log(await getProductsRequest())
   });
   const cambioIndexColor = (colorIndex) => {
@@ -100,162 +105,204 @@ const PageProductCard = () => {
       {spinner ? (
         <img src={spinnerLoading} />
       ) : (
-        <div className="productDisplay container text-center  ">
-          <h1>{productCard.NombreProducto}</h1>
-          <div className="productDisplayLeft ">
-            <div className=" productDisplayImgList ">
-              {productCard.UrlImagen.map((img, index) => {
-                return (
-                  <div key={index}>
-                    <btn
-                      className="btnImg"
-                      onClick={() => {
-                        setImgs(img);
-                      }}
-                    >
-                      <img src={img} alt={`imagen ${index}`} />
-                    </btn>
-                  </div>
-                );
-              })}
-            </div>
-
-            <figure className="productDisplayImg">
-              <img className="porductDisplayMainImg" src={imgs} alt="" />
-            </figure>
-            <div className="porductDisplayRight">
-              <h1>{productCard.NombreProducto}</h1>
-
-              <div className="productDisplayRightPriceLast">
-                ${productCard.UltimoPrecio}
-              </div>
-              <div className="productDisplayRightPrice">
-                ${productCard.Precio}
-              </div>
-              <div className="productDisplayRightDescription">
-                {productCard.Detalle}
-              </div>
-              <form
-                action=""
-                className="productDisplayRightTalle d-flex flex-column gap-2"
-              >
-                <h3>Talle</h3>
-
-                <select
-                  className="form-select"
-                  aria-label="Default select example"
-                  // name="talle"
-                >
-                  <option value="" selected disabled>
-                    Seleccione su talle
-                  </option>
-
-                  {productCard.Especificaciones.map((t) => {
-                    talleDuplicado.push(t.id.Talle);
-                  })}
-                  {(talleD = [...new Set(talleDuplicado)])}
-                  {console.log(talleD)}
-                  {talleD.map((t) => {
-                    return (
-                      <option
+        <>
+          <div className="productDisplay container text-center  ">
+            <h1>{productCard.NombreProducto}</h1>
+            <div className="productDisplayLeft ">
+              <div className=" productDisplayImgList ">
+                {productCard.UrlImagen.map((img, index) => {
+                  return (
+                    <div key={index}>
+                      <btn
+                        className="btnImg"
                         onClick={() => {
-                          cambioIndexColor(t);
+                          setImgs(img);
                         }}
-                        key={t.id}
-                        name="talle"
-                        // value={t.Talle}
-                        {...register("talle")}
                       >
-                        <button key={t}>{t}</button>
-                      </option>
-                    );
-                  })}
-                </select>
-
-                {errors.talle && (
-                  <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
-                    {console.log(errors.talle.message)}
-                  </span>
-                )}
-
-                <div className="productDisplayRightColor">
-                  <h3>Seleccione un Color</h3>
-                  {spinnerColors ? (
-                    <img src={spinnerLoading} className="spinner" />
-                  ) : (
-                    <div className=" d-flex ">
-                      <div className="d-flex bg-body-secondary w-100 gap-3">
-                        {productCard.Especificaciones.find((e) => {
-                          if (e.id.Talle === talle) {
-                            arrayColors.push(e.id.Color);
-                          }
-                          // {
-                          //   console.log(arrayColors);
-                          // }
-                        })}
-                        {arrayColors.map((e) => {
-                          return (
-                            <div
-                              className=" d-flex justify-content-center align-items-center gap-2"
-                              key={e}
-                            >
-                              <label htmlFor={e}></label>
-                              <input
-                                type="radio"
-                                // name="color"
-                                value={e}
-                                {...register("color", {
-                                  required: true,
-                                  value: { e },
-                                  message: "color es requerido",
-                                })}
-                              />
-                              <span>{e}</span>
-                              {errors.color && (
-                                <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
-                                  {console.log(errors.color.message)}
-                                </span>
-                              )}
-                            </div>
-                          );
-                        })}
-                      </div>
+                        <img src={img} alt={`imagen ${index}`} />
+                      </btn>
                     </div>
+                  );
+                })}
+              </div>
+
+              <figure className="productDisplayImg">
+                <img className="porductDisplayMainImg" src={imgs} alt="" />
+              </figure>
+              <div className="porductDisplayRight">
+                <h1>{productCard.NombreProducto}</h1>
+
+                <div className="productDisplayRightPriceLast">
+                  ${productCard.UltimoPrecio}
+                </div>
+                <div className="productDisplayRightPrice">
+                  ${productCard.Precio}
+                </div>
+                <div className="productDisplayRightDescription">
+                  {productCard.Detalle}
+                </div>
+                <form
+                  action=""
+                  className="productDisplayRightTalle d-flex flex-column gap-2"
+                >
+                  <h3>Talle</h3>
+
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    // name="talle"
+                  >
+                    <option value="" selected disabled>
+                      Seleccione su talle
+                    </option>
+
+                    {productCard.Especificaciones.map((t) => {
+                      talleDuplicado.push(t.id.Talle);
+                    })}
+                    {(talleD = [...new Set(talleDuplicado)])}
+                    {console.log(talleD)}
+                    {talleD.map((t) => {
+                      return (
+                        <option
+                          onClick={() => {
+                            cambioIndexColor(t);
+                          }}
+                          key={t.id}
+                          name="talle"
+                          // value={t.Talle}
+                          {...register("talle")}
+                        >
+                          <button key={t}>{t}</button>
+                        </option>
+                      );
+                    })}
+                  </select>
+
+                  {errors.talle && (
+                    <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
+                      {console.log(errors.talle.message)}
+                    </span>
                   )}
 
-                  <div className="productDisplayRightCantidad">
-                    <h3>Cantidad</h3>
-                    <input
-                      type="number"
-                      // name="cantidad"
-                      min={1}
-                      // max={productCard.Especificaciones.map((c) => {
-                      //   return c.id.Stock;
-                      // })}
-                      {...register("cantidad", {
-                        required: true,
-                        value: true,
-                        message: "cantidad es requerida.",
-                        // validate: (value) =>
-                        //   value >= 1 && value <= productCard.Especificaciones.map(
-                        //     (c) => c.id.Stock
-                        //   ) ||
-                        //   "La cantidad debe estar entre 1 y el stock disponible",
-                      })}
-                    />
-                    {errors.cantidad && (
-                      <span className=" fs-4 text-center mt-1  text-white  bg-danger  "></span>
+                  <div className="productDisplayRightColor">
+                    <h3>Seleccione un Color</h3>
+                    {spinnerColors ? (
+                      <img src={spinnerLoading} className="spinner" />
+                    ) : (
+                      <div className=" d-flex ">
+                        <div className="d-flex bg-body-secondary w-100 gap-3">
+                          {productCard.Especificaciones.find((e) => {
+                            if (e.id.Talle === talle) {
+                              arrayColors.push(e.id.Color);
+                            }
+                            // {
+                            //   console.log(arrayColors);
+                            // }
+                          })}
+                          {arrayColors.map((e) => {
+                            return (
+                              <div
+                                className=" d-flex justify-content-center align-items-center gap-2"
+                                key={e}
+                              >
+                                <label htmlFor={e}></label>
+                                <input
+                                  type="radio"
+                                  // name="color"
+                                  value={e}
+                                  {...register("color", {
+                                    required: true,
+                                    value: { e },
+                                    message: "color es requerido",
+                                  })}
+                                />
+                                <span>{e}</span>
+                                {errors.color && (
+                                  <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
+                                    {console.log(errors.color.message)}
+                                  </span>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
                     )}
-                  </div>
-                </div>
 
-                <div className="productDisplayRightTalleBtn">
-                  <btn onClick={onSubmit}>AGREAGAR AL CARRITO</btn>
-                </div>
-              </form>
+                    <div className="productDisplayRightCantidad">
+                      <h3>Cantidad</h3>
+                      <input
+                        type="number"
+                        // name="cantidad"
+                        min={1}
+                        // max={productCard.Especificaciones.map((c) => {
+                        //   return c.id.Stock;
+                        // })}
+                        {...register("cantidad", {
+                          required: true,
+                          value: true,
+                          message: "cantidad es requerida.",
+                          // validate: (value) =>
+                          //   value >= 1 && value <= productCard.Especificaciones.map(
+                          //     (c) => c.id.Stock
+                          //   ) ||
+                          //   "La cantidad debe estar entre 1 y el stock disponible",
+                        })}
+                      />
+                      {errors.cantidad && (
+                        <span className=" fs-4 text-center mt-1  text-white  bg-danger  "></span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="productDisplayRightTalleBtn">
+                    <btn onClick={onSubmit}>AGREAGAR AL CARRITO</btn>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
+          <div className=" container mt-3">
+            <h2 className=" text-center">Comentarios</h2>
+            <div className=" w-50 bg-body-secondary p-3">
+              <form  className=" container d-flex justify-content-around align-items-center gap-2">
+                <textarea
+                  className="form-control"
+                  placeholder="Descripcion"
+                  rows="1"
+                  name="textArea"
+                  {...register("textArea")}
+                  autoFocus
+                ></textarea>
+
+                <button onClick={()=> {
+                  handleSubmit((data)=>{
+                    console.log(data);
+                  });
+                }} className="btn btn-primary">
+                  Enviar
+                </button>
+              </form>
+            </div>
+
+            <div className=" d-flex gap-2 mt-4 ">
+              <div className=" col-6">
+
+              <p >
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis
+                quasi, atque eligendi illo error accusantium veritatis fuga,
+                quia assumenda excepturi tempora quas aut dolorum accusamus
+                consectetur hic porro itaque velit.
+              </p>
+              <span className="borderBotton text-center">fechas de creacion</span>
+           
+              </div>
+            
+
+              <aside className="publicidadPageProduct col-6"></aside>
+            </div>
+          </div>
+        </>
       )}
       <Toaster
         theme="light"

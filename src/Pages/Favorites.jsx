@@ -6,10 +6,11 @@ import { Toaster, toast } from "sonner";
 import { iconoCarritoCart } from "../helpers/iconos";
 import { useAuth } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useProducts } from "../Context/ProductsContext";
 
 const Favorites = () => {
   const navigate = useNavigate();
-
+  const { getProduct } = useProducts();
   const { favsPage, getProductsFavorite, deleteProductFavorites } = useFav();
   const { isAuthenticated } = useAuth();
 
@@ -54,13 +55,22 @@ const Favorites = () => {
                       </p>
                     </div>
                     <div className=" d-flex col-8 justify-content-end g-3 ">
-                      <button
-                        className="bg-white"
+                      {/* <button
+                       
                         type="submit"
                         onClick={() => {}}
                       >
-                        {iconoCarritoCart}
-                      </button>
+                        
+                      </button> */}
+                      <button
+                       className="bg-white"
+                              onClick={async () => {
+                                await getProduct(favorite.product._id);
+                                navigate(`/productCard/${favorite.product._id}`);
+                              }}
+                            >
+                             {iconoCarritoCart}
+                            </button>
                       <button
                         className="text-primary bg-white "
                         type="submit"

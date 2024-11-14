@@ -92,6 +92,7 @@ const ProductsList = () => {
                             </div>
                             <div className=" d-flex col-8 justify-content-end g-3 ">
                               <button
+                              
                                 onClick={async () => {
                                   await getProduct(product._id);
                                   navigate(`/productCard/${product._id}`);
