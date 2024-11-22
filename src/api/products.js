@@ -38,8 +38,30 @@ export const getEspecificacionesT = async (Talle) => {
 
 export const getProductsShoppingRequest = () => instance.get(`/carritos`);
 
-export const deleteShoppingRequest = (id)=> instance.delete(`/elimina/${id}`);
+export const deleteShoppingRequest = (id) => instance.delete(`/elimina/${id}`);
 
+export const createComentriesRequest = (comentries) =>
+  instance.post(`/comentrie`, comentries);
+
+// export const getComentriesRequest = (id) => {
+//   instance.get(`/comentries/${id}`);
+
+// }
+export const getComentriesRequest = async (id) => {
+  // let idProduct = JSON.stringify(id);
+
+  const response = await fetch(`http://localhost:5050/api/comentries/${id}`, {
+    method: "GET",
+    // body: idProduct,
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+
+  const data =  response.json();
+  // console.log(data)
+  return data;
+};
 // export const GetShoppings = async () => {
 //   const response = await fetch(`http://localhost:5050/api/carritos`, {
 //     method: "GET",

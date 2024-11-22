@@ -8,12 +8,12 @@ import { PostShoppings } from "../fetch/shopping";
 import { useNavigate, useParams } from "react-router-dom";
 import spinnerLoading from "../assets/img/spinnerLoading.svg";
 import { Toaster, toast } from "sonner";
+import { Comentarios } from "../Components/Comentarios";
 
 // import { Form, FormCheck } from "react-bootstrap";
 
 const PageProductCard = () => {
- 
-  const { productCard, getProduct, IncrementQty } = useProducts();
+  const { productCard, getProduct, IncrementQty, Comentries } = useProducts();
   const {
     register,
     handleSubmit,
@@ -33,7 +33,7 @@ const PageProductCard = () => {
     if (params.id) {
       getProduct(params.id);
     }
-
+    
     const time = setTimeout(() => {
       setSpinner(false);
     }, 1000);
@@ -43,7 +43,7 @@ const PageProductCard = () => {
   }, []);
 
   useEffect(() => {
-    getProduct();
+    // getProduct();
 
     const timer = setTimeout(() => {
       setImgs(productCard.UrlImagen[0]);
@@ -80,11 +80,12 @@ const PageProductCard = () => {
       // res._id,
       //  resshopping
     );
-    const handleComentarios = handleSubmit((data) => {
-      console.log(data)
-    })
+   
     // console.log(await getProductsRequest())
   });
+  // const handleComentarios = handleSubmit((data) => {
+  //   console.log(data);
+  // });
   const cambioIndexColor = (colorIndex) => {
     setTalle(colorIndex);
     setTalleOk(true);
@@ -263,44 +264,7 @@ const PageProductCard = () => {
             </div>
           </div>
           <div className=" container mt-3">
-            <h2 className=" text-center">Comentarios</h2>
-            <div className=" w-50 bg-body-secondary p-3">
-              <form  className=" container d-flex justify-content-around align-items-center gap-2">
-                <textarea
-                  className="form-control"
-                  placeholder="Descripcion"
-                  rows="1"
-                  name="textArea"
-                  {...register("textArea")}
-                  autoFocus
-                ></textarea>
-
-                <button onClick={()=> {
-                  handleSubmit((data)=>{
-                    console.log(data);
-                  });
-                }} className="btn btn-primary">
-                  Enviar
-                </button>
-              </form>
-            </div>
-
-            <div className=" d-flex gap-2 mt-4 ">
-              <div className=" col-6">
-
-              <p >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis
-                quasi, atque eligendi illo error accusantium veritatis fuga,
-                quia assumenda excepturi tempora quas aut dolorum accusamus
-                consectetur hic porro itaque velit.
-              </p>
-              <span className="borderBotton text-center">fechas de creacion</span>
-           
-              </div>
-            
-
-              <aside className="publicidadPageProduct col-6"></aside>
-            </div>
+           <Comentarios productCard= {productCard}/>
           </div>
         </>
       )}

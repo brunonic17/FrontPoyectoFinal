@@ -4,6 +4,8 @@ import {
   getProductCardRequest,
   getProductsShoppingRequest,
   deleteShoppingRequest,
+  getComentriesRequest,
+  createComentriesRequest,
 } from "../api/products";
 import { DeleteProduct, PostShoppings } from "../fetch/shopping";
 
@@ -27,6 +29,7 @@ export const ProductsProvider = ({ children }) => {
   const [cantidad, setCantProduct] = useState();
   const [results, setResults] = useState([]);
   const [search, setSearch] = useState("");
+  const [comentries, setComentries] = useState([]);
 
   const DecrementQty = () => {
     if (productShopping.length > 0) {
@@ -101,6 +104,21 @@ export const ProductsProvider = ({ children }) => {
       console.log(error, "no me estoy aplicando");
     }
   };
+
+  const CreateComentries = async (comentrie) => {
+    const res = await createComentriesRequest(comentrie);
+    console.log(res);
+  };
+  const getComentries = async (id) => {
+    try {
+      const res = await getComentriesRequest(id);
+      console.log(res);
+      setComentries(res);
+    } catch (error) {
+      console.log(error, "no me estoy aplicando");
+    }
+  };
+
   // porducto = porductoss
   return (
     <ProductsContext.Provider
@@ -126,6 +144,9 @@ export const ProductsProvider = ({ children }) => {
         cantidad,
         setCantProduct,
         ModificarCantidadShopinng,
+        CreateComentries,
+        getComentries,
+        comentries,
       }}
     >
       {children}
