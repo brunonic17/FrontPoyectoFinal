@@ -4,7 +4,6 @@ import Footer from "./Footer";
 import spinnerLoading from "../assets/img/spinnerLoading.svg";
 import { useEffect, useState } from "react";
 
-// import { useProducts } from "../Context/ProductsContext";
 
 // eslint-disable-next-line react/prop-types
 const Layout = ({ children }) => {
@@ -16,7 +15,7 @@ const Layout = ({ children }) => {
     }, 500);
   }, []);
   return (
-    <>
+    <div className="contenedor">
       {spinner ? (
         <img src={spinnerLoading} />
       ) : (
@@ -25,17 +24,17 @@ const Layout = ({ children }) => {
             <NavBarEx />
            
           </header>
-          <div className=" container">
+          <main className=" container">
             
           <Outlet />
-          </div>
+          </main>
 
-          <footer className=" container bg-body-secondary">
+          <footer className=" bg-body-secondary">
             <Footer />
           </footer>
         </>
       )}
-    </>
+    </div>
   );
 };
 

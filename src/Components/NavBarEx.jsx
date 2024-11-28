@@ -30,12 +30,12 @@ function NavBarEx() {
       <Navbar expand="lg" className=" bg-body-secondary ">
         <Container className="  d-flex justify-content-center  flex-lg-column  ">
           <Navbar className="col col-lg-12 order-2 order-lg-0">
-            <Container className="d-flex justify-content-center container ">
+            <Container className="d-flex justify-content-center  p-2 ">
               <Nav.Link as={NavLink} to="/" className="col-lg-3  ">
                 <Image src={LogoYoCampo} className="" roundedCircle />
               </Nav.Link>
 
-              <div className=" col-lg-6 d-none d-lg-block order-lg-0 bg-warning">
+              <div className=" col-lg-6 d-none d-lg-block order-lg-0">
                 <Buscador buscar={search} />
               </div>
               <div className="d-none d-lg-flex col-lg-3 justify-content-end mt-0">

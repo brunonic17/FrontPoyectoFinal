@@ -73,8 +73,22 @@ const ProductsList = () => {
                   .map((product, index) => {
                     return (
                       <>
-                        <div className=" card-product" key={index}>
-                          <figure className="container-img">
+                        <div key={index} className="card">
+                            <img src={product.UrlImagen[0]} className="card-img-top" alt={product.NombreProducto} />
+                            <div className="card-body">
+                              <h5 className="card-title">{product.NombreProducto}</h5>
+                              <p className="card-text">
+                                Some quick example text to build on the card
+                                title and make up the bulk of the
+                                content.
+                              </p>
+                              <a  className="btn btn-primary">
+                                Go somewhere
+                              </a>
+                            </div>
+                          </div>
+                        {/* <div className=" card-product" key={index}>
+                          <figure className="container-img bg-danger w-100 ">
                             <img
                               key={index}
                               className=""
@@ -92,7 +106,6 @@ const ProductsList = () => {
                             </div>
                             <div className=" d-flex col-8 justify-content-end g-3 ">
                               <button
-                              
                                 onClick={async () => {
                                   await getProduct(product._id);
                                   navigate(`/productCard/${product._id}`);
@@ -142,7 +155,7 @@ const ProductsList = () => {
                               )}
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                       </>
                     );
                   })

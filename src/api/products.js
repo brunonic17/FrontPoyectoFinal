@@ -48,17 +48,14 @@ export const createComentriesRequest = (comentries) =>
 
 // }
 export const getComentriesRequest = async (id) => {
-  // let idProduct = JSON.stringify(id);
-
   const response = await fetch(`http://localhost:5050/api/comentries/${id}`, {
     method: "GET",
-    // body: idProduct,
     headers: {
       "content-type": "application/json",
     },
   });
 
-  const data =  response.json();
+  const data = response.json();
   // console.log(data)
   return data;
 };

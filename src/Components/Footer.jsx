@@ -8,8 +8,9 @@ import QRCode from "react-qr-code";
 const Footer = () => {
   return (
     <>
-      <div className="row align-items-center justify-content-center p-2 d-flex flex-column">
-        <div className="col  d-flex justify-content-center">
+      <div className=" align-items-center justify-content-center p-2 d-flex flex-column ">
+      <div className=" d-lg-flex w-100 justify-content-center align-items-center ">
+      <div className="col  d-flex justify-content-center">
           <Nav.Link as={NavLink} to="/" className="col-lg-3  ">
             <Image src={LogoYoCampo} className="" roundedCircle />
           </Nav.Link>
@@ -39,12 +40,14 @@ const Footer = () => {
           </div>
         </div>
         <div className="col mt-2">
-          <ul className=" d-flex mt-0 mb-0 ps-0 justify-content-around ">
+          <ul className=" d-flex mt-0 mb-0 ps-0 justify-content-center gap-3 justify-content-lg-around
+           ">
             {iconos.map((i) => {
               return <li key={i.idSvg}>{i.svg}</li>;
             })}
           </ul>
         </div>
+      </div>
         <div className="col bg-body-secondary text-dark p-2 text-center mt-2">
           <p>Copyright Todos los Derechos Reservados - Grupo Shifu</p>
         </div>

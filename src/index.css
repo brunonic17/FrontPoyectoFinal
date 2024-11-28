@@ -3,7 +3,12 @@
   line-height: 1.5;
   font-weight: 400;
 }
+.contenedor {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 
+}
 .myToast {
   font-size: 1rem;
   color: white;
@@ -37,9 +42,9 @@ ul {
   border: solid 0.1rem gray !important;
 }
 
-.navbar {
+/* .navbar {
   padding: 0 !important;
-}
+} */
 .iconoBuscar {
   position: absolute;
   margin-left: 450px;
@@ -114,8 +119,8 @@ img {
 .card-product {
   display: flex;
   flex-direction: column;
-  max-width: 20rem;
-}
+  max-width: 300px !important;
+ }
 .pointer {
   cursor: pointer;
 }
