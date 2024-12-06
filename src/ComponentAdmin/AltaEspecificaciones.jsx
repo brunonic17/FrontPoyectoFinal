@@ -1,8 +1,7 @@
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
-import { GetProducts,PostProducts,GetProduct,GetCompleteProduct,PostEspecificaciones} from './fetch/Products.js';
+import { PostEspecificaciones} from '../FetchAdmin/Products.js';
 
 
 

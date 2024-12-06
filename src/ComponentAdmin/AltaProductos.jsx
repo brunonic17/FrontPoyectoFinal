@@ -1,12 +1,9 @@
 
 
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
-import T from './ListaProductos.jsx'
-import Especific from './AltaEspecificaciones.jsx';
-import {Image} from './Altaimagen.jsx';
-import { GetProducts,PostProducts,GetProduct,GetCompleteProduct,PostEspecificaciones} from './fetch/Products.js';
+
+import {PostProducts} from '../FetchAdmin/Products.js';
 
 
 
@@ -79,7 +76,7 @@ const Products = () => (
     </Formik>
   </div>
 
-<div>
+{/* <div>
   <Especific/>
 </div>
 
@@ -91,7 +88,7 @@ const Products = () => (
 
 <div>
  <T/>
- </div> 
+ </div>  */}
  </> 
 );
  

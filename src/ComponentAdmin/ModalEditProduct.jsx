@@ -2,8 +2,8 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import {UseEdit } from './fetch/EditContext.jsx';
-import {UploadProducts} from './fetch/Products.js';
+import {UseEdit } from '../ContextAdmin/EditContext.jsx';
+import {UploadProducts} from '../FetchAdmin/Products.js';
 
 
 function Example({element}) {

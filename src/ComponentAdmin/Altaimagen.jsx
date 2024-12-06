@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Formik, Field, Form, ErrorMessage, FieldArray ,useFormik,FormikProvider} from 'formik';
 import React, {Component,useState} from 'react';
 import PreviewImagen from './RenderImagen.jsx';
-import {UploadImage} from './fetch/Products.js'
+import {UploadImage} from '../FetchAdmin/Products.js'
 
 
 

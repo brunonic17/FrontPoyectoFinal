@@ -5,12 +5,12 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { GetProducts,UploadProducts,GetProduct,GetCompleteProduct,PostEspecificaciones,DeleteEspecificaciones} from './fetch/Products.js';
+import { GetProducts,DeleteEspecificaciones} from '../FetchAdmin/Products.js';
 import { useState,useEffect } from 'react';
 // import Modal from 'react-bootstrap/Modal';
 // import EditProd from './EditProduct.jsx';
 // import EditEsp from './EditEspecific.jsx';
-import { UseEdit } from './fetch/EditContext.jsx';
+import { UseEdit } from '../ContextAdmin/EditContext.jsx';
 import ModalEdit from "./ModalEditProduct.jsx";
 import ModalEditEspecific from "./ModalEditEspecific.jsx"
 import ModalCreateEspecific from "./ModalCreateEspecific.jsx"
