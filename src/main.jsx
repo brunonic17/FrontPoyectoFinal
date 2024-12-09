@@ -1,4 +1,8 @@
-import ReactDOM from "react-dom/client";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import Admin from './PagesAdmin/PageAdmin.jsx'
+import {EditProvider} from "./ContextAdmin/EditContext.jsx"
+import { BrowserRouter,Route,Routes } from 'react-router-dom'
 // import { ShoppingRender } from "./ShoppingF.jsx";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -35,6 +39,10 @@ import { ShoppingProvider } from "./Context/ShoppingContext";
 
 // import { ShoppingRender } from "./ShoppingF.jsx";
 // import ProductsList from "./Components/ProductsList";
+
+
+
+
 
 // ReactDOM.createRoot(document.getElementById("root")).render(
 //   <React.StrictMode>
@@ -163,7 +171,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/admin",
+        path: "/Admin",
         element: (
           <ProtectedRoute>
             <Admin />
