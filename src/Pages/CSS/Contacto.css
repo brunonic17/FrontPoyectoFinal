@@ -1,0 +1,22 @@
+.contactoBg {
+  background-image: url("../../assets/img/nosotros.jpg");
+  height: 30rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.formulario {
+  background-color: white;
+  margin: -3rem auto 0 auto;
+  width: 95%;
+  padding: 2rem;
+}
+.campoLabel {
+  flex: 0 0 5rem !important;
+  margin-right: 2rem;
+}
+.campoField {
+  flex: 1;
+}
+.texArea{
+  height: 15rem;
+}
