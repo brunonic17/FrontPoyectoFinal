@@ -9,6 +9,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import spinnerLoading from "../assets/img/spinnerLoading.svg";
 import { Toaster, toast } from "sonner";
 import { Comentarios } from "../Components/Comentarios";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 // import { Form, FormCheck } from "react-bootstrap";
 
@@ -33,10 +35,10 @@ const PageProductCard = () => {
     if (params.id) {
       getProduct(params.id);
     }
-    
+
     const time = setTimeout(() => {
       setSpinner(false);
-    }, 1000);
+    }, 2500);
     return () => clearTimeout(time);
 
     // if (!isAuthenticated) navigate("/login");
@@ -80,7 +82,7 @@ const PageProductCard = () => {
       // res._id,
       //  resshopping
     );
-   
+
     // console.log(await getProductsRequest())
   });
   // const handleComentarios = handleSubmit((data) => {
@@ -104,11 +106,39 @@ const PageProductCard = () => {
   return (
     <>
       {spinner ? (
-        <img src={spinnerLoading} />
+        <>
+          {/* // <img src={spinnerLoading} /> */}
+          <div className="productDisplay container text-center mt-3">
+            <div className=" d-flex  justify-content-around">
+              <figure className="productDisplayImg">
+                <Skeleton width={360} height={350} />
+              </figure>
+              <div className="porductDisplayRight w-50 ">
+                <h1 className="mb-3">
+                  <Skeleton width={450} height={50} direction="rtl" />
+                </h1>
+
+                <div className="productDisplayRightPriceLast">
+                  <Skeleton count={5} />
+                </div>
+                <div className="productDisplayRightPrice">
+                  <Skeleton count={3} />
+                </div>
+
+                <div className="productDisplayRightTalle d-flex flex-column gap-2">
+                  <Skeleton />
+
+                  <div className="productDisplayRightCantidad">
+                    <Skeleton />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
       ) : (
         <>
-          <div className="productDisplay container text-center  ">
-            <h1>{productCard.NombreProducto}</h1>
+          <div className="productDisplay container text-center  mt-4 ">
             <div className="productDisplayLeft ">
               <div className=" productDisplayImgList ">
                 {productCard.UrlImagen.map((img, index) => {
@@ -264,7 +294,7 @@ const PageProductCard = () => {
             </div>
           </div>
           <div className=" container mt-3">
-           <Comentarios productCard= {productCard}/>
+            <Comentarios productCard={productCard} />
           </div>
         </>
       )}

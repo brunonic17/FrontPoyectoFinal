@@ -6,7 +6,7 @@ const Admin = () => {
  
   return (
     <div>
-      <h1>Soy la pagina de admin(private)</h1>
+      <h1>Soy la pagina de admin(privatsse)</h1>
     </div>
   )
 }

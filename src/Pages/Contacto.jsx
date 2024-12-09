@@ -38,8 +38,8 @@ function Contacto() {
       <main className="container">
         <h1 className="text-success text-center ">SOY LA PAGINA CONCTACTO</h1>
         <div className="contactoBg"></div>
-
         <form className=" formulario">
+      <h5>Dejanos tu mensaje y te responderemos lo más pronto posible.</h5>
           <div className=" mb-3 d-flex">
             <label className="col-sm-2 col-form-label text-end campoLabel">
               Nombre

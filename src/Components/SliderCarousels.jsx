@@ -9,9 +9,9 @@ const {search}=useProducts()
     <>
     {!search ? <div
         id="carouselExampleInterval"
-        className="carousel slide"
+        className="carousel slide container-fluid"
         data-bs-ride="carousel">
-        <div className="carousel-inner h-10 ">
+        <div className="carousel-inner ">
           <div className="carousel-item active" data-bs-interval="10000">
             <img src={sladerPromo2} className="img1" alt="img1" />
           </div>

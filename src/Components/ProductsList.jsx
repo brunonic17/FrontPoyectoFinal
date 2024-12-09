@@ -9,6 +9,7 @@ import { iconofavorito, iconoFavoritoAgregado } from "../helpers/iconos";
 import { useProducts } from "../Context/ProductsContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
+
 // import  Buscador  from "./Buscador";
 // import { createFavRequest } from "../api/favorite";
 
@@ -63,30 +64,87 @@ const ProductsList = () => {
   //     item.NombreProducto.toLowerCase().includes(search.toLowerCase())
   //   );
   // }
+  
   return (
     <>
-      <div className="container-products">
-        <div className=" d-flex flex-wrap justify-content-center gap-2 p-2">
+      <div className=" container-products mt-4">
+        <div className=" d-flex flex-wrap gap-3 justify-content-center">
           {
             !search
               ? productsPage
-                  .map((product, index) => {
+                  .map((product) => {
                     return (
                       <>
-                        <div key={index} className="card">
-                            <img src={product.UrlImagen[0]} className="card-img-top" alt={product.NombreProducto} />
+                        <div className=" card mb-4 boxShadow containerCard">
+                          <div
+                            key={product.id}
+                            className="card h-100 text-center wCard"
+                          >
+                            <img
+                              src={product.UrlImagen[0]}
+                              className="  imgCard"
+                              alt={product.NombreProducto}
+                             
+                            />
                             <div className="card-body">
-                              <h5 className="card-title">{product.NombreProducto}</h5>
-                              <p className="card-text">
-                                Some quick example text to build on the card
-                                title and make up the bulk of the
-                                content.
+                              <h5 className="card-title mb-0">
+                                {product.NombreProducto.substring(0, 12)}...
+                              </h5>
+                              <p className="card-text lead fw-bold">
+                                $ {product.Precio}
                               </p>
-                              <a  className="btn btn-primary">
-                                Go somewhere
+                              <a
+                                className="btn btn-outline-dark"
+                                onClick={async () => {
+                                  await getProduct(product._id);
+                                  navigate(`/productCard/${product._id}`);
+                                }}
+                              >
+                                Ver más
                               </a>
+                              {favsPage
+                                .map((f) => f.product._id)
+                                .includes(product._id) ? (
+                                <button
+                                  key={product._id}
+                                  className=" btn CorazonRed"
+                                  type="submit"
+                                  onClick={() => {
+                                    handclick(product);
+                                  }}
+                                >
+                                  {iconoFavoritoAgregado}
+                                </button>
+                              ) : (
+                                <button
+                                  className="btn "
+                                  type="submit"
+                                  key={product._id}
+                                  onClick={async () => {
+                                    if (!isAuthenticated) {
+                                      alertas();
+                                    } else {
+                                      const product1 = {
+                                        product: product._id,
+                                        user: user.id,
+                                      };
+
+                                      //  await createFavRequest(product1);
+                                      await createFavorite(product1);
+
+                                      alertas1();
+                                    }
+                                    // handclick();
+                                    setCambiar(!cambiar);
+                                  }}
+                                >
+                                  {iconofavorito}
+                                </button>
+                              )}
                             </div>
                           </div>
+                        </div>
+
                         {/* <div className=" card-product" key={index}>
                           <figure className="container-img bg-danger w-100 ">
                             <img

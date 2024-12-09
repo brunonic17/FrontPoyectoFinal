@@ -2,7 +2,7 @@
 
 
 const GetProducts=async  ()=>{
-  const response= await  fetch(`http://localhost:3000/api/Admin`,{
+  const response= await  fetch(`http://localhost:5050/api/Admin`,{
     method:"GET",
     headers:{"content-type":"application/json"},
     })
@@ -12,7 +12,7 @@ const GetProducts=async  ()=>{
 };
 
 const GetProduct=async  (id)=>{
-  const response= await  fetch(`http://localhost:3000/api/Admin/${id}`,{
+  const response= await  fetch(`http://localhost:5050/api/Admin/${id}`,{
     method:"GET",
     headers:{"content-type":"application/json"},
     })
@@ -23,7 +23,7 @@ const GetProduct=async  (id)=>{
 
 const GetCompleteProduct=async  (Prod)=>{
   let ProdString=JSON.stringify(Prod)
-    const response= await fetch(`http://localhost:3000/api/Admin/Product`,{
+    const response= await fetch(`http://localhost:5050/api/Admin/Product`,{
       body:ProdString,
       method:"POST",
       headers:{"content-type":"application/json"},
@@ -36,7 +36,7 @@ const GetCompleteProduct=async  (Prod)=>{
 
 const PostProducts=async  (Prod)=>{
   let ProdString=JSON.stringify(Prod)
-    const response= await fetch(`http://localhost:3000/api/Admin`,{
+    const response= await fetch(`http://localhost:5050/api/Admin`,{
       body:ProdString,
       method:"POST",
       headers:{"content-type":"application/json"},
@@ -49,7 +49,7 @@ const PostProducts=async  (Prod)=>{
 
   const PostEspecificaciones=async  (Especificacion)=>{
   let ProdString=JSON.stringify(Especificacion)
-    const response= await fetch(`http://localhost:3000/api/Admin/Especificaciones`,{
+    const response= await fetch(`http://localhost:5050/api/Admin/Especificaciones`,{
       body:ProdString,
       method:"POST",
       headers:{"content-type":"application/json"},
@@ -61,7 +61,7 @@ const PostProducts=async  (Prod)=>{
   
   const UploadProducts=async  (Prod)=>{
   let ProdString=JSON.stringify(Prod)
-    const response= await fetch(`http://localhost:3000/api/Admin/Product`,{
+    const response= await fetch(`http://localhost:5050/api/Admin/Product`,{
       body:ProdString,
       method:"PUT",
       headers:{"content-type":"application/json"},
@@ -73,7 +73,7 @@ const PostProducts=async  (Prod)=>{
 
   const UploadEspecificaciones=async  (Especificacion)=>{
     let ProdString=JSON.stringify(Especificacion)
-      const response= await fetch(`http://localhost:3000/api/Admin/Especificaciones`,{
+      const response= await fetch(`http://localhost:5050/api/Admin/Especificaciones`,{
         body:ProdString,
         method:"PUT",
         headers:{"content-type":"application/json"},
@@ -85,7 +85,7 @@ const PostProducts=async  (Prod)=>{
 
     const UploadImage=async  (FormData)=>{
       // let ProdString=JSON.stringify(Image)
-        const response= await fetch(`http://localhost:3000/api/Admin/Picture`,{
+        const response= await fetch(`http://localhost:5050/api/Admin/Picture`,{
           body:FormData,
           method:"PUT",
          
@@ -97,7 +97,7 @@ const PostProducts=async  (Prod)=>{
 
       const DeleteProducts=async  (Prod)=>{
         let ProdString=JSON.stringify(Prod)
-          const response= await fetch(`http://localhost:3000/api/Admin/Product`,{
+          const response= await fetch(`http://localhost:5050/api/Admin/Product`,{
             body:ProdString,
             method:"DELETE",
             headers:{"content-type":"application/json"},
@@ -109,7 +109,7 @@ const PostProducts=async  (Prod)=>{
 
       const DeleteEspecificaciones=async  (Especificacion)=>{
         let ProdString=JSON.stringify(Especificacion)
-          const response= await fetch(`http://localhost:3000/api/Admin/Especificaciones`,{
+          const response= await fetch(`http://localhost:5050/api/Admin/Especificaciones`,{
             body:ProdString,
             method:"DELETE",
             headers:{"content-type":"application/json"},
@@ -121,7 +121,7 @@ const PostProducts=async  (Prod)=>{
 
        const DeleteImage=async  (Image)=>{
       let ProdString=JSON.stringify(Image)
-        const response= await fetch(`http://localhost:3000/api/Admin/Picture`,{
+        const response= await fetch(`http://localhost:5050/api/Admin/Picture`,{
           body:ProdString,
           method:"DELETE",
           headers:{"content-type":"application/json",

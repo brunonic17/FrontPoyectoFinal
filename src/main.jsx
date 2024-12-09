@@ -1,8 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import Admin from './PagesAdmin/PageAdmin.jsx'
-import {EditProvider} from "./ContextAdmin/EditContext.jsx"
-import { BrowserRouter,Route,Routes } from 'react-router-dom'
+import React from "react";
+import ReactDOM from "react-dom/client";
+// import Admin from './PagesAdmin/PageAdmin.jsx'
+import { EditProvider } from "./ContextAdmin/EditContext.jsx";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import { ShoppingRender } from "./ShoppingF.jsx";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,7 +16,7 @@ import Contacto from "../src/Pages/Contacto";
 // import Productos from "../src/Pages/Productos";
 // import ModalLoguin from "../src/Components/ModalLoguin";
 // import ModalRegister from "../src/Components/ModalRegistro";
-import Admin from "../src/Pages/Admin";
+// import Admin from "../src/Pages/Admin";
 // import { ProtectedRoute } from "./src/Components/ProtectedRoute";
 import PaginaError from "../src/Pages/PaginaError";
 import Layout from "../src/Components/Layout";
@@ -34,15 +34,12 @@ import PageProductCard from "./Pages/PageProductCard";
 import { ProductsProvider } from "./Context/ProductsContext";
 import { Carrito } from "./Pages/Carrito";
 import { ShoppingProvider } from "./Context/ShoppingContext";
+import PageAdmin from "./PagesAdmin/PageAdmin.jsx";
 
 // import { ShoppingRender } from "./ShoppingF";
 
 // import { ShoppingRender } from "./ShoppingF.jsx";
 // import ProductsList from "./Components/ProductsList";
-
-
-
-
 
 // ReactDOM.createRoot(document.getElementById("root")).render(
 //   <React.StrictMode>
@@ -171,10 +168,10 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/Admin",
+        path: "/admin",
         element: (
           <ProtectedRoute>
-            <Admin />
+            <PageAdmin />
           </ProtectedRoute>
         ),
       },
@@ -186,9 +183,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <ShoppingProvider>
     <AuthProvider>
       <ProductsProvider>
-        <FavoritesProvider>
-          <RouterProvider router={router} />
-        </FavoritesProvider>
+        <EditProvider>
+          <FavoritesProvider>
+            <RouterProvider router={router} />
+          </FavoritesProvider>
+        </EditProvider>
       </ProductsProvider>
     </AuthProvider>
   </ShoppingProvider>

@@ -11,7 +11,7 @@ const FavContext = createContext();
 export const useFav = () => {
   const context = useContext(FavContext);
 
-  if (!context) throw new Error("useFav must be used within the FavProvider");
+  if (!context) throw new Error("error debes usar el context de la FavContext");
   return context;
 };
 // eslint-disable-next-line react/prop-types
