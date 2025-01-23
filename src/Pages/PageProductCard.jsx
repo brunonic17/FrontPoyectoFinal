@@ -48,7 +48,7 @@ const PageProductCard = () => {
     // getProduct();
 
     const timer = setTimeout(() => {
-      setImgs(productCard.UrlImagen[0]);
+      setImgs(productCard.UrlImagen[0].secure_url);
     }, 2000);
     return () => clearTimeout(timer);
   }, [productCard, talle]);
@@ -140,24 +140,25 @@ const PageProductCard = () => {
         <>
           <div className="productDisplay container text-center  mt-4 ">
             <div className="productDisplayLeft ">
-              <div className=" productDisplayImgList ">
+              <div className=" productDisplayImgList d-flex ">
                 {productCard.UrlImagen.map((img, index) => {
                   return (
-                    <div key={index}>
-                      <btn
-                        className="btnImg"
+                    <div key={index} className="btnImg rounded-2 shadow-lg">
+                      <btn className="  "
+                        
                         onClick={() => {
                           setImgs(img);
+                        
                         }}
                       >
-                        <img src={img} alt={`imagen ${index}`} />
+                        <img src={img.secure_url} alt={`imagen ${index}`} />
                       </btn>
                     </div>
                   );
                 })}
               </div>
 
-              <figure className="productDisplayImg">
+              <figure className="">
                 <img className="porductDisplayMainImg" src={imgs} alt="" />
               </figure>
               <div className="porductDisplayRight">

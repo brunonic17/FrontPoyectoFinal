@@ -1,8 +1,8 @@
-import React from "react";
+// import React from "react";
 import ReactDOM from "react-dom/client";
 // import Admin from './PagesAdmin/PageAdmin.jsx'
 import { EditProvider } from "./ContextAdmin/EditContext.jsx";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import { ShoppingRender } from "./ShoppingF.jsx";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -29,7 +29,7 @@ import PaginaRegistro from "./Pages/PaginaRegistro";
 import { ProtectedRoute } from "../src/Components/ProtectedRoute";
 import { FavoritesProvider } from "./Context/FavContext";
 import Favorites from "./Pages/Favorites";
-import PaginaArticulo from "./Pages/ProductCard";
+// import PaginaArticulo from "./Pages/ProductCard";
 import PageProductCard from "./Pages/PageProductCard";
 import { ProductsProvider } from "./Context/ProductsContext";
 import { Carrito } from "./Pages/Carrito";
@@ -103,14 +103,14 @@ const router = createBrowserRouter([
           </div>
         ),
       },
-      {
-        path: "/cardPage",
-        element: (
-          <div>
-            <PaginaArticulo />
-          </div>
-        ),
-      },
+      // {
+      //   path: "/cardPage",
+      //   element: (
+      //     <div>
+      //       <PaginaArticulo />
+      //     </div>
+      //   ),
+      // },
       {
         path: "/productCard/:id",
         element: (

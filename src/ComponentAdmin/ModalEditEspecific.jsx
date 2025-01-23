@@ -19,7 +19,7 @@ function Example({element}) {
       [e.target.name]:e.target.value
       
   })};
- 
+  console.log(element);
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
@@ -36,11 +36,11 @@ function Example({element}) {
               
              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Color</Form.Label>
-              <Form.Control type="text" name="Color" Value={element.Color}  />
+              <Form.Control type="text" name="Color" Value={element.Color}  disabled />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Talle</Form.Label>
-              <Form.Control type="text" name="Talle" value={element.Talle}  />
+              <Form.Control type="text" name="Talle" value={element.Talle} disabled />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Codigo de producto</Form.Label>

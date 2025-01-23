@@ -23,7 +23,7 @@ const Favorites = () => {
     getProductsFavorite();
     if (!isAuthenticated) navigate("/");
   }, []);
-  console.log(favsPage);
+  // console.log(favsPage);
 
   return (
     <>
@@ -39,9 +39,10 @@ const Favorites = () => {
                   <figure className="container-img">
                     <img
                       className=""
-                      src={favorite.product.UrlImagen}
+                      src={favorite.product.UrlImagen[0].secure_url}
                       alt={favorite.product.NombreProducto}
                     />
+                    
                   </figure>
 
                   <div className="info-product">

@@ -64,6 +64,8 @@ const ProductsList = () => {
   //     item.NombreProducto.toLowerCase().includes(search.toLowerCase())
   //   );
   // }
+
+  
   
   return (
     <>
@@ -81,7 +83,7 @@ const ProductsList = () => {
                             className="card h-100 text-center wCard"
                           >
                             <img
-                              src={product.UrlImagen[0]}
+                              src={product.UrlImagen[0].secure_url}
                               className="  imgCard"
                               alt={product.NombreProducto}
                              

@@ -49,13 +49,14 @@ const PostProducts=async  (Prod)=>{
 
   const PostEspecificaciones=async  (Especificacion)=>{
   let ProdString=JSON.stringify(Especificacion)
+  console.log(ProdString)
     const response= await fetch(`http://localhost:5050/api/Admin/Especificaciones`,{
       body:ProdString,
       method:"POST",
       headers:{"content-type":"application/json"},
           });
           const data=response.json();
-
+// console.log(data)
           return data
   };
   

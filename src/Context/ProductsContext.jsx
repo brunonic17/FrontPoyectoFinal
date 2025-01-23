@@ -70,7 +70,7 @@ export const ProductsProvider = ({ children }) => {
       setProductShopping(res.data.DetalleCarro);
       setGetCarroId(res.data._id);
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error.response);
     }
   };
 
