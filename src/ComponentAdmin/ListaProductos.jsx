@@ -3,7 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-import Image from 'react-bootstrap/Image';
+// import Image from 'react-bootstrap/Image';
+import ModalImage from './ModalImagen.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { GetProducts,DeleteEspecificaciones} from '../FetchAdmin/Products.js';
 import { useState,useEffect } from 'react';
@@ -84,12 +85,16 @@ function ResponsiveExample() {
               </td>
             </tr>
             <tr >
+              <td> <ModalImage element={Product[index]._id}></ModalImage></td>
             <td colSpan={4} >
+           
             <Container>
            <Row>
             {Array.from({ length: Product[index].UrlImagen.length }).map((_, indeex) => (
               <Col key={indeex}>
-           <Image  src={Product[index].UrlImagen[indeex]} fluid />
+                
+           {/* <Image  src={Product[index].UrlImagen[indeex]} fluid /> */}
+
            </Col>
           ))}
           </Row>

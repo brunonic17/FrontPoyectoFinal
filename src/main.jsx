@@ -7,7 +7,10 @@ import { BrowserRouter,Route,Routes } from 'react-router-dom'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
      <EditProvider>
-    <BrowserRouter>
+    <BrowserRouter  future={{
+    v7_relativeSplatPath: true,
+  }}>
+    
       <Routes>
        
     <Route path="Admin" element={<Admin/>}></Route>

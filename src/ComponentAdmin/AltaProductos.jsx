@@ -29,7 +29,15 @@ const Products = () => (
       onSubmit={
         async (values) => {
           const Products0= JSON.parse(localStorage.getItem("Products"));
-          const IdAterior=Products0[Products0.data.length-1].IdProduct
+          console.log(Products0.length)
+          if(Products0.length == 0 ){
+            values.IdProduct=1
+            const Post=await PostProducts(values)
+             console.log(Post.data)
+          }
+          else{
+          const IdAterior=Products0[Products0.length-1].IdProduct
+          console.log(IdAterior)
           const IdNuevo= parseInt(IdAterior)+1
           values.IdProduct=IdNuevo
           console.log(values.IdProduct)
@@ -39,6 +47,8 @@ const Products = () => (
     
       const Id=Post.data._id
       localStorage.setItem('Id', JSON.stringify(Id));
+          }
+    
       
     }
         
@@ -60,7 +70,7 @@ const Products = () => (
 
         <label htmlFor="Categoria">Categoria</label>
         <Field name="Categoria" placeholder="Alpargata" component="select" >
-             <option disabled>Seleccione una categoria</option>
+             <option  >Seleccione una categoria</option>
              <option value="Boina">Boina</option>
              <option value="Alpargata">Alpargata</option>
              <option value="Bombacha">Bombacha</option>
