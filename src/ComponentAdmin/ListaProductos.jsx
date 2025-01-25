@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-// import Image from 'react-bootstrap/Image';
+import Image from 'react-bootstrap/Image';
 import ModalImage from './ModalImagen.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { GetProducts,DeleteEspecificaciones} from '../FetchAdmin/Products.js';
@@ -93,7 +93,7 @@ function ResponsiveExample() {
             {Array.from({ length: Product[index].UrlImagen.length }).map((_, indeex) => (
               <Col key={indeex}>
                 
-           {/* <Image  src={Product[index].UrlImagen[indeex]} fluid /> */}
+           <Image  src={Product[index].UrlImagen[indeex]} fluid />
 
            </Col>
           ))}

@@ -7,19 +7,21 @@ import {UploadImage} from '../FetchAdmin/Products.js'
 
 
 
-function Image() {
+function Image(Id) {
   const picture= useFormik({
     initialValues:{
       file:""
     },
     onSubmit:async(values)=>{
+      console.log(Id.values.element)
+    const _id=Id.values.element
       const FormD=new FormData();
-      const Id=JSON.parse(localStorage.getItem('Id'));
-     FormD.append('_id',Id);
+     FormD.append('_id',_id);
      FormD.append('file',picture.values.file);
       const image=await  UploadImage(FormD);
       console.log(picture.values.file)
       console.log(image)
+      console.log(FormD)
     
   }})
    
@@ -43,4 +45,4 @@ function Image() {
 }
 
 
-  export {Image}
+  export default Image

@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import {UseEdit } from '../ContextAdmin/EditContext.jsx';
 import {UploadImage} from '../FetchAdmin/Products.js';
+import FormImage from './Altaimagen.jsx'
 
 
 function Example(element) {
@@ -12,10 +13,9 @@ function Example(element) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const{NewEditProduct,setNewEditProduct}=UseEdit()
+  const{NewEditProduct,setNewEditProduct}=UseEdit()  ;
 
-  
-  ;
+  console.log(element)
   const ChangeEdit=(e)=>{
    setNewEditProduct({
     ...NewEditProduct,
@@ -33,19 +33,21 @@ function Example(element) {
           <Modal.Title> Agregar Imagen</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form>
+
+            <FormImage values={element}></FormImage>
+        {/* <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Imagen</Form.Label>
               <Form.Control type="file" name="file"  onChange={ChangeEdit} />
             </Form.Group>
           
-          </Form>
+          </Form> */}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={
+          {/* <Button variant="primary" onClick={
             
             async()=>{
                 handleClose();
@@ -70,7 +72,7 @@ function Example(element) {
                 }
           }>
             Guardar Cambios
-          </Button>
+          </Button> */}
         </Modal.Footer>
       </Modal>
     </>

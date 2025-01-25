@@ -36,7 +36,7 @@ const Products = () => (
              console.log(Post.data)
           }
           else{
-          const IdAterior=Products0[Products0.length-1].IdProduct
+          const IdAterior=Products0[Products0 .length-1].IdProduct
           console.log(IdAterior)
           const IdNuevo= parseInt(IdAterior)+1
           values.IdProduct=IdNuevo
@@ -45,8 +45,8 @@ const Products = () => (
        const Post=await PostProducts(values)
       console.log(Post.data)
     
-      const Id=Post.data._id
-      localStorage.setItem('Id', JSON.stringify(Id));
+      // const Id=Post.data._id
+      // localStorage.setItem('Id', JSON.stringify(Id));
           }
     
       
