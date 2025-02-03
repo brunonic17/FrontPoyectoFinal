@@ -34,17 +34,17 @@ const GetCompleteProduct=async  (Prod)=>{
   };
 
 
-const PostProducts=async  (Prod)=>{
-  let ProdString=JSON.stringify(Prod)
-    const response= await fetch(`http://localhost:5050/api/Admin`,{
-      body:ProdString,
-      method:"POST",
-      headers:{"content-type":"application/json"},
-          });
-          const data=response.json();
+// const PostProducts=async  (Prod)=>{
+//   let ProdString=JSON.stringify(Prod)
+//     const response= await fetch(`http://localhost:5050/api/Admin`,{
+//       body:ProdString,
+//       method:"POST",
+//       headers:{"content-type":"application/json"},
+//           });
+//           const data=response.json();
 
-          return data
-  }
+//           return data
+//   }
  
 
   const PostEspecificaciones=async  (Especificacion)=>{
@@ -136,4 +136,6 @@ const PostProducts=async  (Prod)=>{
 
 
 
-export {GetProducts,PostProducts,GetProduct,GetCompleteProduct,PostEspecificaciones,UploadImage,DeleteEspecificaciones,UploadProducts,UploadEspecificaciones}
+export {GetProducts
+  // PostProducts
+  ,GetProduct,GetCompleteProduct,PostEspecificaciones,UploadImage,DeleteEspecificaciones,UploadProducts,UploadEspecificaciones}

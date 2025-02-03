@@ -1,7 +1,6 @@
-
 import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
 
-import { PostProducts } from "../FetchAdmin/Products.js";
+// import { PostProducts } from "../FetchAdmin/Products.js";
 
 const Product = {
   IdProduct: "",
@@ -21,22 +20,24 @@ const Products = () => {
           initialValues={Product}
           onSubmit={async (values) => {
             const Products0 = JSON.parse(localStorage.getItem("Products"));
-            
-            if (Products0.data === undefined) {
-              const IdAterior = Products0[Products0.data.length - 1].IdProduct;
-              const IdNuevo = parseInt(IdAterior) + 1;
-              values.IdProduct = IdNuevo;
-              console.log(values.IdProduct);
-              const Post = await PostProducts(values);
-              console.log(Post.data);
-              const Id = Post.data._id;
-              localStorage.setItem("Id", JSON.stringify(Id));
-            } else {
+
+            if (Products0.length == 0) {
               values.IdProduct = 1;
               const Post = await PostProducts(values);
               console.log(Post.data);
+            } else {
+              const IdAterior = Products0[Products0.length - 1].IdProduct;
+              console.log(IdAterior);
+              const IdNuevo = parseInt(IdAterior) + 1;
+              values.IdProduct = IdNuevo;
+              console.log(values.IdProduct);
+
+              const Post = await PostProducts(values);
+              console.log(Post.data);
+
+              const Id = Post.data._id;
+              localStorage.setItem("Id", JSON.stringify(Id));
             }
-            console.log(Products0)
           }}
         >
           {({ values }) => (
@@ -67,13 +68,15 @@ const Products = () => {
                 placeholder="Alpargata"
                 component="select"
               >
-                <option disabled>Seleccione una categoria</option>
+                <option >Seleccione una categoria</option>
                 <option value="Boina">Boina</option>
                 <option value="Alpargata">Alpargata</option>
                 <option value="Bombacha">Bombacha</option>
               </Field>
-              <button type="button" className="btn btn-success w-50 mt-4">Enviar</button>
-              {/* <button className= " w-50 mt-4 btn btn-oline-black" type="submit">Submit</button> */}
+
+              <button className=" w-50 mt-4 btn btn-oline-black" type="submit">
+                Submit
+              </button>
             </Form>
           )}
         </Formik>

@@ -56,7 +56,7 @@ const ProductsList = () => {
           item.NombreProducto.toLowerCase().includes(search.toLowerCase())
         ));
   }
-
+console.log(productsPage[2].UrlImagen[0].secure_url)
   // if (!search) {
   // results= productsPage;
   // } else {

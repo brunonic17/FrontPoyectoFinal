@@ -1,4 +1,5 @@
 import AltaProducts from "../ComponentAdmin/AltaProductos.jsx";
+import FormAdminProduct from "../Components/FormAdminProduct.jsx";
 import ListaProducts from "../ComponentAdmin/ListaProductos.jsx";
 import Especific from "../ComponentAdmin/AltaEspecificaciones.jsx";
 import { Image } from "../ComponentAdmin/Altaimagen.jsx";
@@ -8,23 +9,18 @@ import { useEffect } from "react";
 const PageAdmin = () => {
   const { productsPage, getProducts } = useProducts();
 
-  useEffect(() => {
-    // getProducts();
-    localStorage.setItem("Products", JSON.stringify(productsPage));
+useEffect(() => {
+ 
+}, [productsPage.length, getProducts])
 
-  }, [productsPage]);
-  
-  console.log(productsPage)
   return (
     <>
-      <div className=" d-flex ">
-        <div className="col">
-          <AltaProducts />
-        </div>
-        <div className="col">
-          <Especific />
-        </div>
+      <div className=" container">
+        <h2 className=" text-center fw-bold my-5">Carga de Productos</h2>
+        {/* <AltaProducts /> */}
+        <FormAdminProduct />
       </div>
+
       <div>
         <Image />
       </div>

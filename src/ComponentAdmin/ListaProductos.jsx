@@ -35,9 +35,10 @@ function ResponsiveExample() {
   const { productsPage, getProducts } = useProducts();
 
   useEffect(() => {
-    getProducts();
+    // getProducts();
+    console.log("hoal mundo")
     // localStorage.setItem("Products", JSON.stringify(productsPage));
-  }, []);
+  }, [productsPage]);
 
 
   console.log(productsPage);
