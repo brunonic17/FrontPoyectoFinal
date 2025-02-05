@@ -93,7 +93,7 @@ function ResponsiveExample() {
             {Array.from({ length: Product[index].UrlImagen.length }).map((_, indeex) => (
               <Col key={indeex}>
                 
-           <Image  src={Product[index].UrlImagen[indeex]} fluid />
+           <Image  src={Product[index].UrlImagen[indeex].url} fluid />
 
            </Col>
           ))}

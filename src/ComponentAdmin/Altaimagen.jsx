@@ -33,11 +33,12 @@ function Image(Id) {
     type="file"
     name="file"
     onChange={(e)=>picture.setFieldValue("file",e.target.files[0])}   />
-    <button type='Submit'> Cargar Imagen</button>
-</form>
-<div>
+    <div>
 {picture.values.file && <PreviewImagen file={picture.values.file} />}
 </div>
+    <button type='Submit'> Cargar Imagen</button>
+</form>
+
   </div>
   </>
    )
