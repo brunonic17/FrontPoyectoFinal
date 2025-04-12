@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState } from "react";
 import { ShoppingPaymentRequest } from "../api/shopping";
 
@@ -13,16 +12,17 @@ export const useShoppingContext = () => {
 };
 // eslint-disable-next-line react/prop-types
 export const ShoppingProvider = ({ children }) => {
-  const [payment, setPayment ]  = useState([]);
-  const [paymentId, setPaymentID ]  = useState(null);
+  const [payment, setPayment] = useState("");
+  const [paymentId, setPaymentID] = useState("");
+  const [total, setTotal] = useState(0);
 
   const createOrderPayment = async (carrito) => {
     try {
       const res = await ShoppingPaymentRequest(carrito);
-      setPayment(res);
-      setPaymentID(res.data.id)
-    console.log(payment)
-    console.log(paymentId)
+      setPayment(res.id);
+      setPaymentID(res.data.id);
+      console.log(res);
+      console.log(res.data.id);
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +33,9 @@ export const ShoppingProvider = ({ children }) => {
       value={{
         createOrderPayment,
         payment,
-        paymentId
+        paymentId,
+        setTotal,
+        total,
       }}
     >
       {children}

@@ -34,7 +34,11 @@ import PageProductCard from "./Pages/PageProductCard";
 import { ProductsProvider } from "./Context/ProductsContext";
 import { Carrito } from "./Pages/Carrito";
 import { ShoppingProvider } from "./Context/ShoppingContext";
-import PageAdmin from "./PagesAdmin/PageAdmin.jsx";
+import PageAdmin from "./Pages/PageAdmin.jsx";
+// import PageSuccess from "./Pages/pageSuccess.jsx";
+import Ayuda from "./Pages/Ayuda.jsx";
+import SuccesPassword from "./Pages/SuccesPassword.jsx";
+
 
 // import { ShoppingRender } from "./ShoppingF";
 
@@ -103,6 +107,31 @@ const router = createBrowserRouter([
           </div>
         ),
       },
+      // {
+      {
+        path: "/help",
+        element: (
+          <div>
+            <Ayuda />
+          </div>
+        ),
+      },
+      {
+        path: "/succesPassword",
+        element: (
+          <div>
+            <SuccesPassword />
+          </div>
+        ),
+      },
+      // {
+      //   path: "/favorites",
+      //   element: (
+      //     <div>
+      //       <PageSuccess />
+      //     </div>
+      //   ),
+      // },
       // {
       //   path: "/cardPage",
       //   element: (
@@ -174,6 +203,7 @@ const router = createBrowserRouter([
             <PageAdmin />
           </ProtectedRoute>
         ),
+     
       },
     ],
   },

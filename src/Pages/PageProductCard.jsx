@@ -3,19 +3,19 @@ import { useProducts } from "../Context/ProductsContext";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../Context/AuthContext";
 import "./CSS/PageProductCard.css";
-import { getEspecificaciones, getEspecificacionesT } from "../api/products";
+import { getEspecificaciones } from "../api/products";
 import { PostShoppings } from "../fetch/shopping";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import spinnerLoading from "../assets/img/spinnerLoading.svg";
 import { Toaster, toast } from "sonner";
 import { Comentarios } from "../Components/Comentarios";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 // import { Form, FormCheck } from "react-bootstrap";
 
 const PageProductCard = () => {
-  const { productCard, getProduct, IncrementQty, Comentries } = useProducts();
+  const { productCard, getProduct, IncrementQty } = useProducts();
   const {
     register,
     handleSubmit,
@@ -23,13 +23,16 @@ const PageProductCard = () => {
   } = useForm();
 
   const params = useParams();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [imgs, setImgs] = useState("");
   const [spinner, setSpinner] = useState(true);
   const [spinnerColors, setSpinnerColors] = useState(true);
-  const [talle, setTalle] = useState([]);
+  const [spinnerCantidad, setSpinnerCantidad] = useState(false);
+  const [talle, setTalle] = useState();
   const [talleDuplicado, setTalleDuplicado] = useState([]);
-  const [talleOk, setTalleOk] = useState(true);
+  const [talleOk, setTalleOk] = useState(false);
+  const [quantityMax, setQuantityMax] = useState([]);
+  const [color, setColor] = useState("");
   const { user } = useAuth();
   useEffect(() => {
     if (params.id) {
@@ -40,18 +43,14 @@ const PageProductCard = () => {
       setSpinner(false);
     }, 2500);
     return () => clearTimeout(time);
-
-    // if (!isAuthenticated) navigate("/login");
   }, []);
 
   useEffect(() => {
-    // getProduct();
-
     const timer = setTimeout(() => {
       setImgs(productCard.UrlImagen[0].secure_url);
     }, 2000);
     return () => clearTimeout(timer);
-  }, [productCard, talle]);
+  }, [productCard]);
 
   useEffect(() => {
     const timerColor = setTimeout(() => {
@@ -65,29 +64,19 @@ const PageProductCard = () => {
   };
 
   const onSubmit = handleSubmit(async (data) => {
-    // if (!isAuthenticated) navigate("/login");
     data.IdProduct = productCard.IdProduct;
 
     data.IdUsu = user.id;
+    data.talle = talle;
 
     const res = await getEspecificaciones(data);
 
     data.eid = res._id;
-    const resshopping = await PostShoppings(data);
+    await PostShoppings(data);
     IncrementQty();
     alertas();
-    console.log(
-      data
-      //  res,
-      // res._id,
-      //  resshopping
-    );
-
-    // console.log(await getProductsRequest())
   });
-  // const handleComentarios = handleSubmit((data) => {
-  //   console.log(data);
-  // });
+
   const cambioIndexColor = (colorIndex) => {
     setTalle(colorIndex);
     setTalleOk(true);
@@ -97,12 +86,28 @@ const PageProductCard = () => {
     }, 500);
     return () => clearTimeout(timerColor);
   };
-  console.log(spinnerColors);
+  console.log(talle);
 
-  console.log(talleDuplicado);
+  const quantityMaxCantidad = (color) => {
+    setColor(color);
+    setSpinnerCantidad(true);
+
+    productCard.Especificaciones.find((elem) => {
+      if (elem.id.Color === color) {
+        setQuantityMax(elem.id.Stock);
+      }
+    });
+    const timerColor = setTimeout(() => {
+      setSpinnerCantidad(false);
+    }, 500);
+    return () => clearTimeout(timerColor);
+  };
+  // console.log(spinnerColors);
+
+  // console.log(talleDuplicado);
   let talleD = [];
   let arrayColors = [];
-
+  // console.log(talle);
   return (
     <>
       {spinner ? (
@@ -144,11 +149,10 @@ const PageProductCard = () => {
                 {productCard.UrlImagen.map((img, index) => {
                   return (
                     <div key={index} className="btnImg rounded-2 shadow-lg">
-                      <btn className="  "
-                        
+                      <btn
+                        className="  "
                         onClick={() => {
-                          setImgs(img);
-                        
+                          setImgs(img.secure_url);
                         }}
                       >
                         <img src={img.secure_url} alt={`imagen ${index}`} />
@@ -159,7 +163,11 @@ const PageProductCard = () => {
               </div>
 
               <figure className="">
-                <img className="porductDisplayMainImg" src={imgs} alt="" />
+                <img
+                  className="porductDisplayMainImg"
+                  src={imgs}
+                  alt={` ${imgs}`}
+                />
               </figure>
               <div className="porductDisplayRight">
                 <h1>{productCard.NombreProducto}</h1>
@@ -173,38 +181,42 @@ const PageProductCard = () => {
                 <div className="productDisplayRightDescription">
                   {productCard.Detalle}
                 </div>
-                <form
-                  action=""
-                  className="productDisplayRightTalle d-flex flex-column gap-2"
-                >
+                <form className="productDisplayRightTalle d-flex flex-column gap-2">
                   <h3>Talle</h3>
 
-                  <select
-                    className="form-select"
-                    aria-label="Default select example"
-                    // name="talle"
-                  >
-                    <option value="" selected disabled>
+                  <select className="form-select">
+                    <option selected disabled>
                       Seleccione su talle
                     </option>
+                    {/* <option 
+                    {...register("talle")}
+                    >1</option>
+                    <option
+                    {...register("talle")}
+                    >2</option>
+                    <option value="tree">3</option> */}
 
                     {productCard.Especificaciones.map((t) => {
                       talleDuplicado.push(t.id.Talle);
                     })}
                     {(talleD = [...new Set(talleDuplicado)])}
-                    {console.log(talleD)}
+
                     {talleD.map((t) => {
                       return (
                         <option
                           onClick={() => {
                             cambioIndexColor(t);
+                            setTalle(t);
+                            console.log(t);
                           }}
                           key={t.id}
                           name="talle"
-                          // value={t.Talle}
-                          {...register("talle")}
+                          // value={talle}
+                          // {...register("talle", {
+                          //   value: {t},
+                          // })}
                         >
-                          <button key={t}>{t}</button>
+                          {t}
                         </option>
                       );
                     })}
@@ -237,10 +249,13 @@ const PageProductCard = () => {
                                 className=" d-flex justify-content-center align-items-center gap-2"
                                 key={e}
                               >
-                                <label htmlFor={e}></label>
+                                {/* <label htmlFor={e}>dd</label> */}
                                 <input
                                   type="radio"
                                   // name="color"
+                                  onClick={() => {
+                                    quantityMaxCantidad(e);
+                                  }}
                                   value={e}
                                   {...register("color", {
                                     required: true,
@@ -248,7 +263,7 @@ const PageProductCard = () => {
                                     message: "color es requerido",
                                   })}
                                 />
-                                <span>{e}</span>
+                                <label>{e}</label>
                                 {errors.color && (
                                   <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
                                     {console.log(errors.color.message)}
@@ -263,31 +278,37 @@ const PageProductCard = () => {
 
                     <div className="productDisplayRightCantidad">
                       <h3>Cantidad</h3>
-                      <input
-                        type="number"
-                        // name="cantidad"
-                        min={1}
-                        // max={productCard.Especificaciones.map((c) => {
-                        //   return c.id.Stock;
-                        // })}
-                        {...register("cantidad", {
-                          required: true,
-                          value: true,
-                          message: "cantidad es requerida.",
-                          // validate: (value) =>
-                          //   value >= 1 && value <= productCard.Especificaciones.map(
-                          //     (c) => c.id.Stock
-                          //   ) ||
-                          //   "La cantidad debe estar entre 1 y el stock disponible",
-                        })}
-                      />
+                      {spinnerCantidad ? (
+                        <img src={spinnerLoading} className="spinner" />
+                      ) : (
+                        <input
+                          className=" w-50"
+                          type="number"
+                          placeholder={
+                            quantityMax === 0 ? "sin stock" : quantityMax
+                          }
+                          min={1}
+                          max={quantityMax}
+                          {...register("cantidad", {
+                            required: true,
+                            // value: true,
+                            message: "cantidad es requerida.",
+                            // validate: (value) =>
+                            //   value >= 1 && value <= productCard.Especificaciones.map(
+                            //     (c) => c.id.Stock
+                            //   ) ||
+                            //   "La cantidad debe estar entre 1 y el stock disponible",
+                          })}
+                        />
+                      )}
+
                       {errors.cantidad && (
                         <span className=" fs-4 text-center mt-1  text-white  bg-danger  "></span>
                       )}
                     </div>
                   </div>
 
-                  <div className="productDisplayRightTalleBtn">
+                  <div className="productDisplayRightTalleBtn hover">
                     <btn onClick={onSubmit}>AGREAGAR AL CARRITO</btn>
                   </div>
                 </form>

@@ -15,42 +15,94 @@ import ModalEdit from "./ModalEditProduct.jsx";
 import ModalEditEspecific from "./ModalEditEspecific.jsx";
 import ModalCreateEspecific from "./ModalCreateEspecific.jsx";
 import { useProducts } from "../Context/ProductsContext.jsx";
+import { useAuth } from "../Context/AuthContext.jsx";
 
 // const ProductDb= await GetProducts();
 // console.log(ProductDb.data);
 
-function ResponsiveExample() {
-  // const {
-  //   NewEditProduct,
-  //   setNewEditProduct,
-  //   NewEditEspecific,
-  //   setNewEditEspecific,
-  // } = UseEdit();
-  // const [show, setShow] = useState(false);
-  // const [EdiProduct, setEdiProduct] = useState();
-  // const [EditEspecific, setEditEspecific] = useState();
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
-
+function GetListaProductos() {
+  
   const { productsPage, getProducts } = useProducts();
 
-  useEffect(() => {
-    // getProducts();
-    console.log("hoal mundo")
-    // localStorage.setItem("Products", JSON.stringify(productsPage));
-  }, [productsPage]);
 
 
-  console.log(productsPage);
+ 
+
+  
   return (
     <>
-      <Table responsive border="4" className="mt-4 container">
+
+      {productsPage.map((product, index) => {
+        return (
+          <Table striped bordered hover key={index}>
+            <thead className=" text-center">
+              <tr>
+                <th className=" w-25">Imagen</th>
+                <th>Id Producto</th>
+                <th>Nombre del Producto</th>
+                <th>Descripcion</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody className=" text-center h-100 ">
+              <tr className=" h-100">
+                <td>
+                  <img
+                    className="card w-50"
+                    src={product.UrlImagen[0].secure_url}
+                    alt={`imagen ${index}`}
+                  />
+                </td>
+                <td>{product.IdProduct}</td>
+                <td>{product.NombreProducto}</td>
+                <td>{product.Detalle}</td>
+                <td className=" d-flex  h-100 justify-content-center ">
+                  <div className=" d-flex flex-column justify-content-center gap-2 ">
+                    <button className="btn btn-secondary"> Modificar</button>
+                    <button className="btn btn-danger"> Eliminar</button>
+                    <button className="btn btn-success"> Ver más</button>
+                  </div>
+                </td>
+                {/* <td className="">
+                </td> */}
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colSpan={2}  className="">
+                  <ModalCreateEspecific
+                    Id={product._id}
+                  ></ModalCreateEspecific>
+                  {/* <Button variant="primary">Agregar Imagen</Button> */}
+                </td>
+                <td colSpan={3}  className="">
+                  <Button variant="primary">Agregar Imagenes</Button>
+                  {/* <Button variant="primary">Agregar Imagen</Button> */}
+                </td>
+               
+              </tr>
+            </tfoot>
+          </Table>
+        );
+      })}
+    </>
+    // productsPage.map((product) => {
+
+    // })
+  );
+}
+
+export default GetListaProductos;
+{
+  /* <Table responsive border="4" className="mt-4 container">
         {Array.from({ length: productsPage.length }).map((_, index) => (
           <>
             <tbody key={index} className=" shadow">
               <tr key={index}>
                 <td colSpan={4} key={index}>
-                  <h4>Nombre del Producto:{productsPage[index].NombreProducto}</h4>
+                  <h4>
+                    Nombre del Producto:{productsPage[index].NombreProducto}
+                  </h4>
                 </td>
               </tr>
               <tr>
@@ -132,7 +184,10 @@ function ResponsiveExample() {
                     <tr>
                       <td>
                         Cod. Color:
-                        {productsPage[index].Especificaciones[indeeex].id.CodColor}
+                        {
+                          productsPage[index].Especificaciones[indeeex].id
+                            .CodColor
+                        }
                       </td>
                     </tr>
                     <tr>
@@ -156,7 +211,10 @@ function ResponsiveExample() {
                     <tr>
                       <td>
                         Estado:
-                        {productsPage[index].Especificaciones[indeeex].id.Estado}
+                        {
+                          productsPage[index].Especificaciones[indeeex].id
+                            .Estado
+                        }
                       </td>
                     </tr>
                     <tr>
@@ -166,8 +224,8 @@ function ResponsiveExample() {
                           onClick={async () => {
                             const Esp = {
                               id: productsPage[index]._id,
-                              id2: productsPage[index].Especificaciones[indeeex].id
-                                ._id,
+                              id2: productsPage[index].Especificaciones[indeeex]
+                                .id._id,
                             };
                             const Delete = await DeleteEspecificaciones(Esp);
                             console.log(Delete);
@@ -179,7 +237,9 @@ function ResponsiveExample() {
                     </tr>
                     <tr>
                       <ModalEditEspecific
-                        element={productsPage[index].Especificaciones[indeeex].id}
+                        element={
+                          productsPage[index].Especificaciones[indeeex].id
+                        }
                       ></ModalEditEspecific>
                     </tr>
                   </td>
@@ -190,9 +250,5 @@ function ResponsiveExample() {
             <hr className=" border-4 w-100" />
           </>
         ))}
-      </Table>
-    </>
-  );
+      </Table> */
 }
-
-export default ResponsiveExample;

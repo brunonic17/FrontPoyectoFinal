@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import LogoYoCampo from "../assets/img/LogoYoCampo.jpg";
+import logoAdidas from "../assets/img/logoAdidas.png";
 import Nav from "react-bootstrap/Nav";
 import Image from "react-bootstrap/Image";
 import iconos from "../helpers/iconos";
@@ -8,11 +8,11 @@ import QRCode from "react-qr-code";
 const Footer = () => {
   return (
     <>
-      <div className=" d-flex align-items-center justify-content-center p-2 flex-column ">
-        <div className=" d-lg-flex w-100 justify-content-center align-items-center ">
+      <div className=" d-flex align-items-center justify-content-center p-4 flex-column ">
+        <div className=" d-lg-flex w-100 justify-content-center  align-items-lg-baseline ">
           <div className="col  d-flex justify-content-center">
             <Nav.Link as={NavLink} to="/" className="col-lg-3  ">
-              <Image src={LogoYoCampo} className="" roundedCircle />
+              <Image src={logoAdidas} className=""  />
             </Nav.Link>
           </div>
           <li className="col d-flex  flex-column justify-content-center align-items-center">
@@ -54,7 +54,7 @@ const Footer = () => {
               <NavLink>About us</NavLink>
             </ul>
           </li>
-          <li className="col d-flex  flex-column justify-content-center align-items-center">
+          <li className="col d-flex  flex-column justify-content-center align-items-center gap-2">
             <h4 className=" text-uppercase text-dark text-xl-center fw-semibold">
               Siguenos
             </h4>

@@ -24,19 +24,20 @@ function PaginaRegistro() {
   useEffect(() => {
     if (isAuthenticated) navigate("/");
   }, [isAuthenticated]);
-  const cambiarVista = () => {
-    setEyes(!eyes);
-    console.log(eyes);
-  };
+  // const cambiarVista = () => {
+  //   setEyes(!eyes);
+  //   console.log(eyes);
+  // };
   const onSubmit = handleSubmit(async (data) => {
     signup(data);
+    // console.log("registrandome")
   });
 
   return (
     <>
       <h1 className=" text-center ">Registro</h1>
       <div className=" container  d-flex justify-content-center  align-items-center p-2 maxW ">
-        <form className=" p-2 bg-gradient w-100 ">
+        <form className=" p-2 bg-gradient w-100 " onSubmit={onSubmit}>
           <div className="mb-3">
             <label className="form-label fst-italic fw-bold">Nombre</label>
             <input

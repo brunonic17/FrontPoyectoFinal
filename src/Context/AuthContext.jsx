@@ -35,6 +35,7 @@ export const AuthProvider = ({ children }) => {
       const res = await registerRequest(user);
       setUser(res.data);
       setisAuthenticate(true);
+      console.log(res.data);
     } catch (error) {
       setErrors(error.response.data.msg);
     }
@@ -81,7 +82,11 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await updatePasswordRequest(id, token, user);
       console.log(res.data);
-      setForgot(true);
+      if (res.data.status === "Success") {
+        setForgot(true)
+     
+      }
+      // setForgot(true);
       
       const timer = setTimeout(() => {
         setSend(false);

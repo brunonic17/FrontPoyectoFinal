@@ -17,7 +17,7 @@ const ResetPassword = () => {
   const { errors: sendErrors, sendEmail, send } = useAuth();
 
   const alertas = () => {
-    return toast.success("Correo enviado con éxito");
+    return toast.success("Pedido enviado con éxito, verifique su correo");
   };
   const onSubmit = handleSubmit(async (data) => {
     await sendEmail(data);
@@ -36,15 +36,15 @@ const ResetPassword = () => {
   return (
     <div className=" d-flex flex-column align-items-center ">
       <h1 className=" text-center ">Modificacion de contraseña</h1>
-      <div className="container row justify-content-center  bg-dark">
-        <form className="p-2 bg-secondary w-50  p-4 ">
+      <div className=" container  d-flex justify-content-center  align-items-center p-2 maxW ">
+        <form className="p-2 p-2 bg-gradient w-100 p-4 ">
           {sendErrors !== "" && (
             <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
               {sendErrors}
             </span>
           )}
           <div className="mb-3">
-            <label className="form-label fst-italic">Email</label>
+            <label className="form-label fst-italic fw-bold">Email</label>
             <input
               type="email"
               name="email"
@@ -70,12 +70,10 @@ const ResetPassword = () => {
             )}
           </div>
 
-          <button type="button" className="btn btn-primary" onClick={onSubmit}>
+          <button type="button" className="btn btn-primary mt-2 mb-2  d-flex w-100 justify-content-center" onClick={onSubmit}>
             Enviar
           </button>
-          {/* <Button variant="info" onClick={onSubmit}>
-            Enviar
-          </Button> */}
+         
         </form>
       </div>
       <Toaster theme="light" position="top-center"

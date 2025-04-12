@@ -38,7 +38,7 @@ export const Comentarios = (props) => {
   }, [spinner]);
 
 
-  console.log(comentries);
+  // console.log(comentries);
 
   return (
     <div>
@@ -84,7 +84,7 @@ export const Comentarios = (props) => {
                   <hr />
                 </>
               );
-            })
+            }).reverse()
           )}
         </div>
 

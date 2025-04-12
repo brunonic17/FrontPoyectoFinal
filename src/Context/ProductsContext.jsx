@@ -54,6 +54,7 @@ export const ProductsProvider = ({ children }) => {
   };
 
   const getProduct = async (id) => {
+    console.log(id)
     try {
       const res = await getProductCardRequest(id);
       setProductCard(res.data);
@@ -67,16 +68,19 @@ export const ProductsProvider = ({ children }) => {
   const getProductShopping = async () => {
     try {
       const res = await getProductsShoppingRequest();
+      console.log(res)
       setProductShopping(res.data.DetalleCarro);
+     
       setGetCarroId(res.data._id);
     } catch (error) {
       console.log(error.response);
     }
   };
-
+// ELIMINA PRODUCTOS DEL CARRITO
   const DeleteShoppingProduct = async (Product) => {
     try {
       const res = await DeleteProduct(Product);
+      console.log(res.data);
 
       if (res.status === "ok")
         setProductShopping(
@@ -86,9 +90,12 @@ export const ProductsProvider = ({ children }) => {
       console.log(error);
     }
   };
+
+  // ELIMINA EL CARRITO DEL USUAERIO
   const deleteShopping = async (id) => {
     try {
       const res = await deleteShoppingRequest(id);
+      console.log(res);
       if (res.status === 204) setProductShopping([]);
     } catch (error) {
       console.log(error);

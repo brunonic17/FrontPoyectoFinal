@@ -4,8 +4,11 @@ import { useAuth } from "../Context/AuthContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { iconEyesBlock, iconEyes } from "../helpers/iconos";
+// ----------------------------------------------------------------
 
 const PaginaLoguin = () => {
+  // const [show, setShow] = useState(false);
+
   const [eyes, setEyes] = useState(false);
   const {
     register,
@@ -32,7 +35,6 @@ const PaginaLoguin = () => {
   return (
     <>
       <h1 className=" text-center ">Acceder</h1>
-
       <div className=" container  d-flex justify-content-center  align-items-center p-2 maxW ">
         <form className=" p-2 bg-gradient w-100 " onSubmit={onSubmit}>
           {setErrors.length > 0 && (
@@ -49,7 +51,6 @@ const PaginaLoguin = () => {
               autoComplete="username"
               placeholder="Ingresa tu email"
               {...register("email", {
-                
                 required: {
                   value: true,
                   message: "Correo electrónico es requerido",
@@ -116,11 +117,11 @@ const PaginaLoguin = () => {
               Iniciar sesión
             </button>
           </div>
-          <div>
+          <btn>
             <NavLink to="/sendEmail" className=" text-black ">
               Olvidaste tu Contraseña?
             </NavLink>
-          </div>
+          </btn>
           <div className="d-flex justify-content-between align-items-center">
             <p className="d-flex  fw-bold text-black fst-italic">
               No tienes una cuenta?

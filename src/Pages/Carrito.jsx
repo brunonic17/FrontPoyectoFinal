@@ -1,20 +1,24 @@
 import { useProducts } from "../Context/ProductsContext";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Table } from "react-bootstrap";
 // import Form from "react-bootstrap/Form";
 import EditModalCarrito from "../Components/ModalEditCarrito";
 import Button from "react-bootstrap/Button";
-// // import { PagoPay } from "../fetch/shopping";
+import { PagoPay } from "../fetch/shopping";
 import { useShoppingContext } from "../Context/ShoppingContext";
 
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+import { formatCurrency } from "../utils";
 
 export const Carrito = () => {
-  initMercadoPago("APP_USR-ee7c2a9d-4725-4e64-bf91-ad5ba9a3c2a2", { locale: "es-AR" });
+  initMercadoPago("APP_USR-ee7c2a9d-4725-4e64-bf91-ad5ba9a3c2a2", {
+    locale: "es-AR",
+  });
+  //---
   const { user, isAuthenticated } = useAuth();
-  const { createOrderPayment, payment, paymentId } = useShoppingContext();
+  const { createOrderPayment, payment, paymentId, setTotal } = useShoppingContext();
   const {
     getProductShopping,
     productShopping,
@@ -29,22 +33,31 @@ export const Carrito = () => {
   const navigate = useNavigate();
   useEffect(() => {
     getProductShopping();
-   
-    if (!isAuthenticated) navigate("/");
+    console.log("renderizando")
+    // if (!isAuthenticated) navigate("/carrito");
   }, []);
-
-  console.log(user.email)
+ console.log(productShopping)
+  // console.log(productShopping[0].pid.Precio);
   let Total = 0;
   for (let i = 0; i < productShopping.length; i++) {
-    Total =
-      Total + productShopping[i].CantProduct * productShopping[i].pid.Precio;
+    Total = Total + productShopping[i].cantidad * productShopping[i].pid.Precio;
   }
-  let cantidadTotal = 0;
-  for (let i = 0; i < productShopping.length; i++) {
-    cantidadTotal = cantidadTotal + productShopping[i].CantProduct;
-  }
-  console.log(cantidadTotal);
-  console.log(paymentId);
+
+  const resultTotal = useMemo(
+    () =>
+      productShopping.reduce(
+        (acum, element) => acum + element.cantidad * element.pid.Precio,
+        0
+      ),
+    [productShopping]
+  );
+  //usar useMemo
+  // let cantidadTotal = 0;
+  // for (let i = 0; i < productShopping.length; i++) {
+  //   cantidadTotal = +productShopping[i].cantidad;
+  // }
+ 
+
   return (
     <>
       <h1 className=" text-center">Carrito</h1>
@@ -52,103 +65,110 @@ export const Carrito = () => {
         <h1 className=" text-center bg-secondary ">No tienes Carrito</h1>
       ) : (
         <>
-          <Table responsive bordered className=" d-flex justify-content-center">
-            <tbody>
-              <thead>
-                <td>
-                  <th>Color</th>
-                  {productShopping.map((element, index) => (
-                    <tr key={index}>{element.eid.Color}</tr>
-                  ))}
-                </td>
+          <Table striped bordered hover className=" container">
+            <thead>
+              <tr className=" text-center">
+                <th>Color</th>
+                <th>Talle</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Precio Parcial</th>
+                <th>Acciones de Productos</th>
+              </tr>
+            </thead>
+            <tbody className=" text-center">
+              {productShopping.map((item, index) => (
+                <>
+                  <tr key={index}>
+                    <td>{item.eid.Color}</td>
 
-                <td>
-                  <th>Talle</th>
-                  {productShopping.map((element) => (
-                    <tr key={element.eid}>{element.eid.Talle}</tr>
-                  ))}
-                </td>
-                <td>
-                  <th>Producto</th>
-                  {productShopping.map((element) => (
-                    <tr key={element.pid.NombreProducto}>
-                      {element.pid.NombreProducto}
-                    </tr>
-                  ))}
-                </td>
-                <td>
-                  <th>Cantidad</th>
-                  {productShopping.map((c, index) => {
-                    return (
-                      <>
-                        <tr key={index}>
-                          {productShopping[index].CantProduct}
-                        </tr>
-                      </>
-                    );
-                  })}
-                </td>
+                    <td>{item.eid.Talle}</td>
+                    <td>{item.pid.NombreProducto}</td>
+                    <td>{item.cantidad}</td>
+                    <td>{formatCurrency(item.pid.Precio)}</td>
+                    <td>{formatCurrency(item.cantidad * item.pid.Precio)}</td>
+                    <td className=" d-flex flex-column flex-lg-row justify-content-center gap-2">
+                      <div>
+                        <button
+                          className="btn btn-success "
+                          onClick={() => {
+                            console.log(item.cantidad);
+                          }}
+                        >
+                          <EditModalCarrito element={item} />
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          className="btn btn-danger"
+                          onClick={async () => {
+                            let eid = productShopping[index].eid._id;
+                            console.log(
+                              productShopping[index].pid.NombreProducto
+                            );
+                            console.log(eid);
+                            let IdUsu = user.id;
+                            let Product = { IdUsu, eid };
 
-                <td>
-                  <th>Precio unitario</th>
-                  {productShopping.map((element) => (
-                    <tr key={element.pid.Precio}>{element.pid.Precio}</tr>
-                  ))}
-                </td>
-                <td>
-                  <th>Precio Parcial</th>
-                  {productShopping.map((element) => (
-                    <tr key={element.CantProduct}>
-                      {element.CantProduct * element.pid.Precio}
-                    </tr>
-                  ))}
-                </td>
-
-                <td>
-                  <th>Acciones Producto</th>
-                  {productShopping.map((element, index) => (
-                    <tr key={index}>
-                      <EditModalCarrito element={element} />
-
-                      <Button
-                        variant="outline-danger"
-                        onClick={async () => {
-                          let eid = productShopping[index].eid._id;
-                          console.log(
-                            productShopping[index].pid.NombreProducto
-                          );
-                          let IdUsu = user.id;
-                          let Product = { IdUsu, eid };
-
-                          // await DeleteShoppingProduct(Product);
-                          DecrementQty();
-                          console.log(Product.eid);
-
-                          // console.log(productShopping.DetalleCarro);
-                        }}
-                      >
-                        Eliminar
-                      </Button>
-                    </tr>
-                  ))}
-                </td>
-                <tr>
-                  <td colSpan={4}>Total</td>
-                  <td>{Total}</td>
-                  <Button
-                    variant="outline-warning"
-                    onClick={() => {
-                      console.log(productShopping);
-                      // deleteShopping(getCarroId);
-                      // console.log(getCarroId);
-                    }}
-                  >
-                    Eliminar El Carrito
-                  </Button>
-                </tr>
-              </thead>
+                            await DeleteShoppingProduct(Product);
+                            DecrementQty();
+                          }}
+                        >
+                          Eliminar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </>
+              ))}
             </tbody>
+            <tfoot>
+              <tr>
+                <th className="text-center">Total</th>
+                <th colSpan={4}></th>
+                <th className="text-center">{formatCurrency(resultTotal)}</th>
+                <td
+                  colSpan={1}
+                  className=" d-flex justify-content-center gap-2"
+                >
+                  <div>
+                    <button
+                      className="btn btn-warning"
+                      onClick={() => {
+                        console.log(productShopping);
+                        deleteShopping(getCarroId);
+                        console.log(getCarroId);
+                      }}
+                    >
+                      {" "}
+                      Eliminar El Carrito
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tfoot>
+            {/* <tfoot colSpan={7} className=" p-2">
+              <tr>
+                <td className=" d-flex justify-content-center gap-2">
+                  <div>
+                    <button
+                      className="btn btn-success"
+                      onClick={() => {
+                        console.log(productShopping);
+                        // deleteShopping(getCarroId);
+                        // console.log(getCarroId);
+                      }}
+                    >
+                      {" "}
+                      Eliminar El Carrito
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tfoot> */}
           </Table>
+
           {/* <div>
             <h4>FORMA DE PAGO</h4>
             <Form.Select
@@ -166,42 +186,49 @@ export const Carrito = () => {
           </div> */}
           <Button
             variant="outline-primary"
-            onClick={() => {
+            onClick={async () => {
               const carrito = {
                 user: user.nameUser,
                 userEmail: user.email,
                 TotalCarro: Total,
               };
+              console.log(carrito);
               createOrderPayment(carrito);
+              setTotal(Total)
+
               // let PayShopping = {
               //   cid: getCarroId,
               //   TotalCarro: Total,
               // };
-              // window.location.href = payment;
-              console.log(payment);
-              console.log(paymentId);
+              // console.log(PayShopping);
+              // // console.log(payment);
+              // console.log(paymentId);
 
               // const Pay = await PagoPay(PayShopping);
-              // console.log(PayShopping);console.log(Pay)
+
+              // console.log(Pay);
               // deleteShopping(getCarroId);
             }}
           >
             CONFIRMA COMPRA CARRITO
-            </Button>
-            {paymentId && 
-          <Button
-          onClick={() => {
-            deleteShopping(getCarroId);
-
-          }}>
-         <Wallet
-            initialization={{ preferenceId: paymentId }}
-            customization={{ texts: { valueProp: "smart_option" } }}
-
-            /> 
-            </Button>
-            }
+          </Button>
+          {paymentId && (
+            <btn
+              className="btn btn-primary"
+              onClick={() => {
+            
+                window.location.href = payment.data.init_point;
+              }}
+            >
+              <Wallet
+                initialization={{ preferenceId: paymentId,
+                  redirectMode: "target_blank" 
+                 }}
           
+                customization={{ texts: { valueProp: "smart_option" } }}
+              />
+            </btn>
+          )}
         </>
       )}
     </>

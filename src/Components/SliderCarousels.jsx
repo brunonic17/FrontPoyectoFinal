@@ -1,46 +1,101 @@
-import sladerPromos1 from "../assets/img/sladerPromos1.png";
-import sladerPromo2 from "../assets/img/sladerPromo2.png";
+import banner4 from "../assets/img/banner4.png";
+import banner2 from "../assets/img/banner2.png";
+import banner3 from "../assets/img/banner3.png";
 import { useProducts } from "../Context/ProductsContext";
 
 function IndividualIntervalsExample() {
-const {search}=useProducts()
+  const { search } = useProducts();
 
   return (
     <>
-    {!search ? <div
-        id="carouselExampleInterval"
-        className="carousel slide container-fluid"
-        data-bs-ride="carousel">
-        <div className="carousel-inner ">
-          <div className="carousel-item active" data-bs-interval="10000">
-            <img src={sladerPromo2} className="img1" alt="img1" />
+      {!search ? (
+        <div
+          id="carouselExampleInterval"
+          className="carousel slide"
+          data-bs-ride="carousel"
+        >
+          <div className="carousel-inner">
+            <div className="carousel-item active" data-bs-interval="5000">
+              <img
+                src={banner4}
+                className="d-block w-100"
+                alt={banner4}
+              />
+            </div>
+            <div className="carousel-item" data-bs-interval="5000">
+              <img src={banner2} className="d-block w-100" alt={banner2} />
+            </div>
+            <div className="carousel-item" data-bs-interval="5000">
+              <img src={banner3} className="d-block w-100" alt={banner3} />
+            </div>
           </div>
+          <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleInterval"
+            data-bs-slide="prev"
+          >
+            <span
+              className="carousel-control-prev-icon bg-body-secondary p-4 rounded-circle "
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleInterval"
+            data-bs-slide="next"
+          >
+            <span
+              className="carousel-control-next-icon bg-body-secondary p-4 rounded-circle "
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Next</span>
+          </button>
+        </div>
+      ) : null}
+      {/* <div
+        id="carouselExampleInterval"
+        className="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div className="carousel-inner">
           <div className="carousel-item active" data-bs-interval="2000">
-            <img src={sladerPromos1} className="img1" alt="img1" />
+            <img src={bannerPrueba} className="d-block w-100" alt={bannerPrueba} />
+          </div>
+          <div className="carousel-item" data-bs-interval="2000">
+            <img src={bannerPrueba} className="d-block w-100" alt={bannerPrueba}/>
+          </div>
+          <div className="carousel-item" data-bs-interval="2000">
+            <img src="..." className="d-block w-100" alt="..." />
           </div>
         </div>
         <button
           className="carousel-control-prev"
           type="button"
           data-bs-target="#carouselExampleInterval"
-          data-bs-slide="prev">
+          data-bs-slide="prev"
+        >
           <span
-            className="carousel-control-prev-icon bg-body-secondary p-4 rounded-circle "
-            aria-hidden="true"></span>
+            className="carousel-control-prev-icon"
+            aria-hidden="true"
+          ></span>
           <span className="visually-hidden">Previous</span>
         </button>
         <button
           className="carousel-control-next"
           type="button"
           data-bs-target="#carouselExampleInterval"
-          data-bs-slide="next">
+          data-bs-slide="next"
+        >
           <span
-            className="carousel-control-next-icon bg-body-secondary p-4 rounded-circle "
-            aria-hidden="true"></span>
+            className="carousel-control-next-icon"
+            aria-hidden="true"
+          ></span>
           <span className="visually-hidden">Next</span>
         </button>
-      </div> : null}
-     
+      </div> */}
     </>
   );
 }

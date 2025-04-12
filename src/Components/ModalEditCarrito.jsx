@@ -6,8 +6,8 @@ import { useAuth } from "../Context/AuthContext";
 // import { PostShoppings } from "../fetch/shopping";
 import { useProducts } from "../Context/ProductsContext";
 
-function Example(element) {
-  console.log(element);
+function ModalEditCarrito({element}) {
+
   const [show, setShow] = useState(false);
   // const [cantidad,setCantProduct]=useState();
   const { user, isAuthenticated } = useAuth();
@@ -18,9 +18,7 @@ function Example(element) {
 
   return (
     <>
-      <Button variant="outline-primary" onClick={handleShow}>
-        Modificar
-      </Button>
+      <p onClick={handleShow}>Modificar</p>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -32,7 +30,7 @@ function Example(element) {
               <Form.Label>Cantidad Nueva</Form.Label>
               <Form.Control
                 type="number"
-                placeholder={element.element.CantProduct}
+                placeholder={element.cantidad}
                 onChange={(e) => {
                   setCantProduct(e.target.value);
                 }}
@@ -45,12 +43,12 @@ function Example(element) {
           <Button
             variant="secondary"
             onClick={async () => {
-              let eid = element.element.eid._id;
+              let eid = element.eid._id;
               let IdUsu = user.id;
-              let IdProduct = element.element.pid.IdProduct;
+              let IdProduct = element.pid.IdProduct;
               let Product = { IdUsu, eid, IdProduct, cantidad };
 
-              // const Modific = 
+              // const Modific =
               await ModificarCantidadShopinng(Product);
               handleClose();
               console.log(cantidad);
@@ -68,4 +66,4 @@ function Example(element) {
   );
 }
 
-export default Example;
+export default ModalEditCarrito;

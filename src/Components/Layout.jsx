@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import NavBarEx from "./NavBarEx";
 import Footer from "./Footer";
+import { useEffect } from "react";
 // import spinnerLoading from "../assets/img/spinnerLoading.svg";
 
 
@@ -9,11 +10,7 @@ import Footer from "./Footer";
 const Layout = ({ children }) => {
   
   // const { productShopping, getProductShopping,quantity } = useProducts();
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setSpinner(false);
-  //   }, 500);
-  // }, []);
+ 
   return (
     <div className="contenedor">
       

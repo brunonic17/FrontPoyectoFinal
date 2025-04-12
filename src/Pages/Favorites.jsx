@@ -31,11 +31,11 @@ const Favorites = () => {
         <h1 className=" text-center bg-secondary ">No tienes Favoritos</h1>
       ) : (
         <>
-          <h1 className=" text-center ">favoritos</h1>
+          <h1 className=" text-center ">Favoritos</h1>
           <div className="container-products">
             {favsPage.map((favorite) => {
               return (
-                <div className=" card-product " key={favorite.product._id}>
+                <div className=" card-product bg-danger " key={favorite.product._id}>
                   <figure className="container-img">
                     <img
                       className=""

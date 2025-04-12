@@ -35,7 +35,7 @@ function Example(Id) {
       _IdProduct: id,
     });
           handleShow();
-          // console.log(NewEditEspecific)
+          console.log(NewEditEspecific)
         }}
       >
         Agregar una Especificacion

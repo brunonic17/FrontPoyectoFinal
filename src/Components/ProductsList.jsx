@@ -3,7 +3,7 @@ import Pagination from "./Pagination";
 import { useFav } from "../Context/FavContext";
 import { toast } from "sonner";
 import { Toaster } from "sonner";
-import { iconofavorito, iconoFavoritoAgregado } from "../helpers/iconos";
+import { iconoFavorito, iconoFavoritoAgregado } from "../helpers/iconos";
 // import { createFavRequest } from "../api/favorite";
 // import PaginaArticulo from "../Pages/ProductCard";
 import { useProducts } from "../Context/ProductsContext";
@@ -56,7 +56,7 @@ const ProductsList = () => {
           item.NombreProducto.toLowerCase().includes(search.toLowerCase())
         ));
   }
-console.log(productsPage[2].UrlImagen[0].secure_url)
+
   // if (!search) {
   // results= productsPage;
   // } else {
@@ -65,8 +65,8 @@ console.log(productsPage[2].UrlImagen[0].secure_url)
   //   );
   // }
 
-  
-  
+  console.log(productsPage);
+
   return (
     <>
       <div className=" container-products mt-4">
@@ -77,17 +77,18 @@ console.log(productsPage[2].UrlImagen[0].secure_url)
                   .map((product) => {
                     return (
                       <>
-                        <div className=" card mb-4 boxShadow containerCard">
+                        <div className=" card mb-4 boxShadow containerCard overflow-hidden">
                           <div
                             key={product.id}
                             className="card h-100 text-center wCard"
                           >
-                            <img
-                              src={product.UrlImagen[0].secure_url}
-                              className="  imgCard"
-                              alt={product.NombreProducto}
-                             
-                            />
+                            <div className=" overflow-hidden">
+                              <img
+                                src={product.UrlImagen[0].secure_url}
+                                className="  imgCard"
+                                alt={product.NombreProducto}
+                              />
+                            </div>
                             <div className="card-body">
                               <h5 className="card-title mb-0">
                                 {product.NombreProducto.substring(0, 12)}...
@@ -140,7 +141,7 @@ console.log(productsPage[2].UrlImagen[0].secure_url)
                                     setCambiar(!cambiar);
                                   }}
                                 >
-                                  {iconofavorito}
+                                  {iconoFavorito}
                                 </button>
                               )}
                             </div>
@@ -228,7 +229,7 @@ console.log(productsPage[2].UrlImagen[0].secure_url)
                           <img
                             key={index}
                             className=""
-                            src={product.UrlImagen[0]}
+                            src={product.UrlImagen[0].secure_url}
                             alt={product.NombreProducto}
                           />
                         </figure>
@@ -243,8 +244,9 @@ console.log(productsPage[2].UrlImagen[0].secure_url)
                           <div className=" d-flex col-8 justify-content-end g-3 ">
                             <button
                               onClick={async () => {
-                                await getProduct(product._id);
-                                navigate(`/productCard/${product._id}`);
+                                // await getProduct(product._id);
+                                // navigate(`/productCard/${product._id}`);
+                                console.log("nas");
                               }}
                             >
                               Ver Mas
@@ -286,7 +288,7 @@ console.log(productsPage[2].UrlImagen[0].secure_url)
                                   setCambiar(!cambiar);
                                 }}
                               >
-                                {iconofavorito}
+                                {iconoFavorito}
                               </button>
                             )}
                           </div>
