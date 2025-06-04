@@ -28,8 +28,7 @@ const ProductsList = () => {
   const navigate = useNavigate();
   const totalProducts = productsPage.length;
 
-  const lastIndex = currentPage * pageNumber;
-  const firstIndex = lastIndex - pageNumber;
+
 
   const alertas = () => {
     return toast.success("Debes iniciar sesion");
@@ -48,22 +47,10 @@ const ProductsList = () => {
     getProducts();
   }, [cambiar]);
 
-  let results = [];
-  {
-    !search
-      ? productsPage
-      : (results = productsPage.filter((item) =>
-          item.NombreProducto.toLowerCase().includes(search.toLowerCase())
-        ));
-  }
+  
+  
 
-  // if (!search) {
-  // results= productsPage;
-  // } else {
-  //   results = productsPage.filter((item) =>
-  //     item.NombreProducto.toLowerCase().includes(search.toLowerCase())
-  //   );
-  // }
+  
 
   console.log(productsPage);
 
@@ -71,234 +58,82 @@ const ProductsList = () => {
     <>
       <div className=" container-products mt-4">
         <div className=" d-flex flex-wrap gap-3 justify-content-center">
-          {
-            !search
-              ? productsPage
-                  .map((product) => {
-                    return (
-                      <>
-                        <div className=" card mb-4 boxShadow containerCard overflow-hidden">
-                          <div
-                            key={product.id}
-                            className="card h-100 text-center wCard"
-                          >
-                            <div className=" overflow-hidden">
-                              <img
-                                src={product.UrlImagen[0].secure_url}
-                                className="  imgCard"
-                                alt={product.NombreProducto}
-                              />
-                            </div>
-                            <div className="card-body">
-                              <h5 className="card-title mb-0">
-                                {product.NombreProducto.substring(0, 12)}...
-                              </h5>
-                              <p className="card-text lead fw-bold">
-                                $ {product.Precio}
-                              </p>
-                              <a
-                                className="btn btn-outline-dark"
-                                onClick={async () => {
-                                  await getProduct(product._id);
-                                  navigate(`/productCard/${product._id}`);
-                                }}
-                              >
-                                Ver más
-                              </a>
-                              {favsPage
-                                .map((f) => f.product._id)
-                                .includes(product._id) ? (
-                                <button
-                                  key={product._id}
-                                  className=" btn CorazonRed"
-                                  type="submit"
-                                  onClick={() => {
-                                    handclick(product);
-                                  }}
-                                >
-                                  {iconoFavoritoAgregado}
-                                </button>
-                              ) : (
-                                <button
-                                  className="btn "
-                                  type="submit"
-                                  key={product._id}
-                                  onClick={async () => {
-                                    if (!isAuthenticated) {
-                                      alertas();
-                                    } else {
-                                      const product1 = {
-                                        product: product._id,
-                                        user: user.id,
-                                      };
+          {productsPage.map((product) => {
+            return (
+              <>
+                <div className=" card mb-4 boxShadow containerCard overflow-hidden">
+                  <div
+                    key={product.id}
+                    className="card h-100 text-center wCard"
+                  >
+                    <div className=" overflow-hidden">
+                      <img
+                        src={product.UrlImagen[0].secure_url}
+                        className="  imgCard"
+                        alt={product.NombreProducto}
+                      />
+                    </div>
+                    <div className="card-body">
+                      <h5 className="card-title mb-0">
+                        {product.NombreProducto.substring(0, 12)}...
+                      </h5>
+                      <p className="card-text lead fw-bold">
+                        $ {product.Precio}
+                      </p>
+                      <a
+                        className="btn btn-outline-dark"
+                        onClick={async () => {
+                          await getProduct(product._id);
+                          navigate(`/productCard/${product._id}`);
+                        }}
+                      >
+                        Ver más
+                      </a>
+                      {favsPage
+                        .map((f) => f.product._id)
+                        .includes(product._id) ? (
+                        <button
+                          key={product._id}
+                          className=" btn CorazonRed"
+                          type="submit"
+                          onClick={() => {
+                            handclick(product);
+                          }}
+                        >
+                          {iconoFavoritoAgregado}
+                        </button>
+                      ) : (
+                        <button
+                          className="btn "
+                          type="submit"
+                          key={product._id}
+                          onClick={async () => {
+                            if (!isAuthenticated) {
+                              alertas();
+                            } else {
+                              const product1 = {
+                                product: product._id,
+                                user: user.id,
+                              };
 
-                                      //  await createFavRequest(product1);
-                                      await createFavorite(product1);
+                              //  await createFavRequest(product1);
+                              await createFavorite(product1);
 
-                                      alertas1();
-                                    }
-                                    // handclick();
-                                    setCambiar(!cambiar);
-                                  }}
-                                >
-                                  {iconoFavorito}
-                                </button>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* <div className=" card-product" key={index}>
-                          <figure className="container-img bg-danger w-100 ">
-                            <img
-                              key={index}
-                              className=""
-                              src={product.UrlImagen[0]}
-                              alt={product.NombreProducto}
-                            />
-                          </figure>
-
-                          <div className="info-product">
-                            <h3>{product.NombreProducto} </h3>
-                          </div>
-                          <div className="btnIcon">
-                            <div className=" col-4 ">
-                              <p className="price">$ {product.Precio} </p>
-                            </div>
-                            <div className=" d-flex col-8 justify-content-end g-3 ">
-                              <button
-                                onClick={async () => {
-                                  await getProduct(product._id);
-                                  navigate(`/productCard/${product._id}`);
-                                }}
-                              >
-                                Ver Mas
-                              </button>
-
-                              {favsPage
-                                .map((f) => f.product._id)
-                                .includes(product._id) ? (
-                                <button
-                                  key={product._id}
-                                  className="CorazonRed"
-                                  type="submit"
-                                  onClick={() => {
-                                    handclick(product);
-                                  }}
-                                >
-                                  {iconoFavoritoAgregado}
-                                </button>
-                              ) : (
-                                <button
-                                  className=""
-                                  type="submit"
-                                  key={product._id}
-                                  onClick={async () => {
-                                    if (!isAuthenticated) {
-                                      alertas();
-                                    } else {
-                                      const product1 = {
-                                        product: product._id,
-                                        user: user.id,
-                                      };
-
-                                      //  await createFavRequest(product1);
-                                      await createFavorite(product1);
-
-                                      alertas1();
-                                    }
-                                    // handclick();
-                                    setCambiar(!cambiar);
-                                  }}
-                                >
-                                  {iconofavorito}
-                                </button>
-                              )}
-                            </div>
-                          </div>
-                        </div> */}
-                      </>
-                    );
-                  })
-                  .slice(firstIndex, lastIndex)
-              : results.map((product, index) => {
-                  return (
-                    <>
-                      <div className=" card-product" key={index}>
-                        <figure className="container-img">
-                          <img
-                            key={index}
-                            className=""
-                            src={product.UrlImagen[0].secure_url}
-                            alt={product.NombreProducto}
-                          />
-                        </figure>
-
-                        <div className="info-product">
-                          <h3>{product.NombreProducto} </h3>
-                        </div>
-                        <div className="btnIcon">
-                          <div className=" col-4 ">
-                            <p className="price">$ {product.Precio} </p>
-                          </div>
-                          <div className=" d-flex col-8 justify-content-end g-3 ">
-                            <button
-                              onClick={async () => {
-                                // await getProduct(product._id);
-                                // navigate(`/productCard/${product._id}`);
-                                console.log("nas");
-                              }}
-                            >
-                              Ver Mas
-                            </button>
-
-                            {favsPage
-                              .map((f) => f.product._id)
-                              .includes(product._id) ? (
-                              <button
-                                key={product._id}
-                                className="CorazonRed"
-                                type="submit"
-                                onClick={() => {
-                                  handclick(product);
-                                }}
-                              >
-                                {iconoFavoritoAgregado}
-                              </button>
-                            ) : (
-                              <button
-                                className=""
-                                type="submit"
-                                key={product._id}
-                                onClick={async () => {
-                                  if (!isAuthenticated) {
-                                    alertas();
-                                  } else {
-                                    const product1 = {
-                                      product: product._id,
-                                      user: user.id,
-                                    };
-
-                                    //  await createFavRequest(product1);
-                                    await createFavorite(product1);
-
-                                    alertas1();
-                                  }
-                                  // handclick();
-                                  setCambiar(!cambiar);
-                                }}
-                              >
-                                {iconoFavorito}
-                              </button>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </>
-                  );
-                })
-            // .slice(firstIndex, lastIndex)
-          }
+                              alertas1();
+                            }
+                            // handclick();
+                            setCambiar(!cambiar);
+                          }}
+                        >
+                          {iconoFavorito}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </>
+            );
+          })}
         </div>
       </div>
       {!search ? (

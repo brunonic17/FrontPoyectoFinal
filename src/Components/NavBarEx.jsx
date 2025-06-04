@@ -255,7 +255,7 @@ function NavBarEx() {
                       <Nav.Link as={NavLink} to="carrito">
                         {iconoCarrito}
                       </Nav.Link>
-                      <Nav.Link as={NavLink} to="favorites">
+                      <Nav.Link as={NavLink} to="favorit">
                         {iconoFavorito}
                       </Nav.Link>
                       <div className="contadorFavMovil">{favsPage.length}</div>
@@ -285,7 +285,7 @@ function NavBarEx() {
                     <Nav.Link as={NavLink} to="admin">
                       Admin
                     </Nav.Link>
-                    <Nav.Link as={NavLink} to="favorites">
+                    <Nav.Link as={NavLink} to="favorit">
                       {iconoFavorito}
                     </Nav.Link>
                     <div className="contadorFav">{favsPage.length}</div>

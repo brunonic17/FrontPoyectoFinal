@@ -2,8 +2,9 @@ import { useForm } from "react-hook-form";
 import { CreateProductAdmin } from "../api/shopping";
 import { useEffect, useState } from "react";
 import { toast, Toaster } from "sonner";
-import GetListaProductos from "../ComponentAdmin/ListaProductos";
+
 import { useProducts } from "../Context/ProductsContext";
+import GetListaProductos from "./ListaProductos";
 
 const FormAdminProduct = () => {
   const { register, handleSubmit, reset } = useForm();

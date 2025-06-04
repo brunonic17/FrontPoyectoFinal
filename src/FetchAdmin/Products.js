@@ -22,6 +22,7 @@ const GetProduct=async  (id)=>{
 };
 
 const GetCompleteProduct=async  (Prod)=>{
+  
   let ProdString=JSON.stringify(Prod)
     const response= await fetch(`http://localhost:5050/api/Admin/Product`,{
       body:ProdString,
@@ -60,8 +61,9 @@ const GetCompleteProduct=async  (Prod)=>{
           return data
   };
   
-  const UploadProducts=async  (Prod)=>{
-  let ProdString=JSON.stringify(Prod)
+  const UploadProducts=async  (product)=>{
+  
+  let ProdString=JSON.stringify(product)
     const response= await fetch(`http://localhost:5050/api/Admin/Product`,{
       body:ProdString,
       method:"PUT",
@@ -72,16 +74,17 @@ const GetCompleteProduct=async  (Prod)=>{
           return data
   };
 
-  const UploadEspecificaciones=async  (Especificacion)=>{
-    let ProdString=JSON.stringify(Especificacion)
-      const response= await fetch(`http://localhost:5050/api/Admin/Especificaciones`,{
-        body:ProdString,
-        method:"PUT",
-        headers:{"content-type":"application/json"},
-            });
-            const data=response.json();
+  const UploadEspecificaciones=async  ()=>{
+
+    // let ProdString=JSON.stringify(data)
+    //   const response= await fetch(`http://localhost:5050/api/Admin/Especificaciones`,{
+    //     body:ProdString,
+    //     method:"PUT",
+    //     headers:{"content-type":"application/json"},
+    //         });
+    //         const res=response.json();
   
-            return data
+    //         return res
     };
 
     const UploadImage=async  (FormData)=>{

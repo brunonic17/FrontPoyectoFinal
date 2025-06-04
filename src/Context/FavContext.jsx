@@ -24,7 +24,7 @@ export const FavoritesProvider = ({ children }) => {
   const createFavorite = async (product1) => {
     try {
       const res = await createFavRequest(product1);
-      // console.log(product1)
+      
     } catch (error) {
       setErrors(error.message);
       console.log(error);
@@ -35,7 +35,6 @@ export const FavoritesProvider = ({ children }) => {
     try {
       const res = await getFavsRequest();
       setFavsPage(res.data);
-      console.log(favsPage);
     } catch (error) {
       console.log(error.response);
     }
@@ -57,8 +56,7 @@ export const FavoritesProvider = ({ children }) => {
         favsPage,
         createFavorite,
         getProductsFavorite,
-        deleteProductFavorites,
-        // remove,
+        deleteProductFavorites, 
         favsCreate,
         removeId,
         errors,

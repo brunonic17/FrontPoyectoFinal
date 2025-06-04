@@ -2,20 +2,21 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import {UseEdit } from '../ContextAdmin/EditContext.jsx';
-import {UploadProducts} from '../FetchAdmin/Products.js';
+// import {UseEdit } from '../ContextAdmin/EditContext.jsx';
+// import {UploadProducts} from '../FetchAdmin/Products.js';
 
 
-function Example({element}) {
+function MOdalEditProduct({element}) {
   const [show, setShow] = useState(false);
+  const [newEditProduct, setNewEditProduct] = useState(Object)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const{NewEditProduct,setNewEditProduct}=UseEdit()
+  // const{NewEditProduct,setNewEditProduct}=UseEdit()
   const ChangeEdit=(e)=>{
    setNewEditProduct({
-    ...NewEditProduct,
+    ...newEditProduct,
       [e.target.name]:e.target.value})}
     
 
@@ -56,10 +57,10 @@ function Example({element}) {
           <Button variant="primary" onClick={
             
             async()=>{
-                handleClose();
+                // handleClose();
                 
-                const ProductEdit=await UploadProducts(NewEditProduct);
-                console.log(ProductEdit)
+                // const ProductEdit=await UploadProducts(NewEditProduct);
+                console.log(newEditProduct)
                 
                 
                 
@@ -73,4 +74,4 @@ function Example({element}) {
   );
 }
 
-export default Example;
+export default MOdalEditProduct;

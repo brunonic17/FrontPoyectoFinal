@@ -1,0 +1,8 @@
+.buttonHoverDelete:hover {
+   background: red !important;
+   
+}
+.buttonHoverCart:hover {
+   background: green !important;
+   
+}

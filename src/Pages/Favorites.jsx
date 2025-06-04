@@ -14,7 +14,6 @@ const Favorites = () => {
   const { favsPage, getProductsFavorite, deleteProductFavorites } = useFav();
   const { isAuthenticated } = useAuth();
 
-  // console.log(user);
   const alertas = () => {
     return toast.success("Eliminaste el producto de Mis Favoritos");
   };
@@ -23,7 +22,7 @@ const Favorites = () => {
     getProductsFavorite();
     if (!isAuthenticated) navigate("/");
   }, []);
-  // console.log(favsPage);
+
 
   return (
     <>
@@ -56,13 +55,7 @@ const Favorites = () => {
                       </p>
                     </div>
                     <div className=" d-flex col-8 justify-content-end g-3 ">
-                      {/* <button
-                       
-                        type="submit"
-                        onClick={() => {}}
-                      >
-                        
-                      </button> */}
+                   
                       <button
                        className="bg-white"
                               onClick={async () => {
@@ -104,20 +97,6 @@ const Favorites = () => {
   );
 };
 
-// // Fetch products data from API and store it in the `products` state variable.
-// // You can use the `fetch()` function to make HTTP requests. Here's an example of how you might fetch data from a JSON
-{
-  /* <div>
-        <figure>
-          <img src={product.image} alt={product.title} />
-          <figcaption>{product.description}</figcaption>
-        </figure>
-        <div>
-          <h3>{product.title}</h3>
-          <p>$ {product.price}</p>
-          <button>Añadir  al carrito</button>
-        </div>
-      </div> */
-}
+
 
 export default Favorites;

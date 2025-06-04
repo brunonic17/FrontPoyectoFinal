@@ -5,7 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import { UseEdit } from "../ContextAdmin/EditContext.jsx";
 import { PostEspecificaciones } from "../FetchAdmin/Products.js";
 
-function Example(Id) {
+function MOdalCreateEspecific(Id) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -38,12 +38,12 @@ function Example(Id) {
           console.log(NewEditEspecific)
         }}
       >
-        Agregar una Especificacion
+      Agregar Especificaciones
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Nueva Especificacion</Modal.Title>
+          <Modal.Title>Modificar Producto</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -56,6 +56,15 @@ function Example(Id) {
                 onChange={(e) => {
                   ChangeEdit(e);
                 }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Precio</Form.Label>
+              <Form.Control
+                type="text"
+                name="Talle"
+                placeholder="45"
+                onChange={ChangeEdit}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -145,4 +154,4 @@ function Example(Id) {
   );
 }
 
-export default Example;
+export default MOdalCreateEspecific;
