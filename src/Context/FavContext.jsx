@@ -48,6 +48,7 @@ export const FavoritesProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
+   
   };
 
   return (

@@ -28,8 +28,6 @@ const ProductsList = () => {
   const navigate = useNavigate();
   const totalProducts = productsPage.length;
 
-
-
   const alertas = () => {
     return toast.success("Debes iniciar sesion");
   };
@@ -40,6 +38,7 @@ const ProductsList = () => {
   const handclick = (product) => {
     setCambiar((cambiar) => !cambiar);
     deleteProductFavorites(product._id);
+  
   };
 
   useEffect(() => {
@@ -47,12 +46,6 @@ const ProductsList = () => {
     getProducts();
   }, [cambiar]);
 
-  
-  
-
-  
-
-  console.log(productsPage);
 
   return (
     <>
@@ -89,6 +82,7 @@ const ProductsList = () => {
                       >
                         Ver más
                       </a>
+
                       {favsPage
                         .map((f) => f.product._id)
                         .includes(product._id) ? (
@@ -118,7 +112,7 @@ const ProductsList = () => {
 
                               //  await createFavRequest(product1);
                               await createFavorite(product1);
-
+                              
                               alertas1();
                             }
                             // handclick();

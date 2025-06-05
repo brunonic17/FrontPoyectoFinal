@@ -1,13 +1,11 @@
 // import { Toaster, toast } from "sonner";
 // import { iconoCarritoCart } from "../helpers/iconos";
-import { useAuth } from "../../Context/AuthContext"
-import "./favorite.css"
+import { useAuth } from "../../Context/AuthContext";
+import "./favorite.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useFav } from "../../Context/FavContext";
-import {
-  iconoCarritoCart, 
-} from "../../helpers/iconos";
+import { iconoCarritoCart } from "../../helpers/iconos";
 import { useProducts } from "../../Context/ProductsContext";
 import { toast, Toaster } from "sonner";
 
@@ -15,7 +13,7 @@ const Favorit = () => {
   const navigate = useNavigate();
   const { getProduct } = useProducts();
   const { favsPage, getProductsFavorite, deleteProductFavorites } = useFav();
-    const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     getProductsFavorite();
@@ -24,9 +22,16 @@ const Favorit = () => {
   const alertas = () => {
     return toast.success("Eliminaste el producto de Mis Favoritos");
   };
+
   return (
     <>
-      <h1 className=" text-uppercase text-center my-3">Favoritos</h1>
+      {favsPage.length === 0 ? (
+        <h1 className=" text-uppercase text-center my-3">
+          Tus favoritos se mostrarán aquí
+        </h1>
+      ) : (
+        <h1 className=" text-uppercase text-center my-3">Mis Favoritos</h1>
+      )}
       <div
         className=" d-flex justify-content-around p-4
       "

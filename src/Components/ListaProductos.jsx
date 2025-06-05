@@ -20,6 +20,7 @@ import ModalCreateEspecific from "../ComponentAdmin/ModalCreateEspecific.jsx";
 import { formatCurrency } from "../utils/index.js";
 import ModalEditProductos from "./ModalEditProductos.jsx";
 import ModalEditProductss from "./ModalEditProductos.jsx";
+import { DeleteProducts } from "../FetchAdmin/Products.js";
 
 // const ProductDb= await GetProducts();
 // console.log(ProductDb.data);
@@ -58,12 +59,20 @@ function GetListaProductos() {
                 <td className=" d-flex  h-100 justify-content-center ">
                   <div className=" d-flex flex-column justify-content-center gap-2 ">
                     <div className=" btn-secondary">
-                    
-                    <ModalEditProductss
-                    product={product}
-                    />
+                      <ModalEditProductss product={product} />
                     </div>
-                    <button className="btn btn-danger"> Eliminar</button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={async () => {
+                    
+                       const res= await DeleteProducts(product._id);
+                     
+                        console.log(res)
+                      }}
+                    >
+                      {" "}
+                      Eliminar
+                    </button>
                     <button className="btn btn-success"> Ver más</button>
                   </div>
                 </td>
@@ -75,7 +84,6 @@ function GetListaProductos() {
               <tr>
                 <td colSpan={2} className="">
                   <ModalCreateEspecific Id={product._id}></ModalCreateEspecific>
-                 
                 </td>
                 <td colSpan={3} className="">
                   <Button variant="primary">Agregar Imagenes</Button>

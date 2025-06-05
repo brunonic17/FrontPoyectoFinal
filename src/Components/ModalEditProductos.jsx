@@ -14,15 +14,15 @@ function ModalEditProductss({ product }) {
   const { getProducts } = useProducts();
   const onSubmit = handleSubmit(async (data) => {
     data.id = product._id;
-    const res = await UploadProducts(data);
+     await UploadProducts(data);
 
+    console.log(product)
     handleClose();
   });
 
   useEffect(() => {
     getProducts();
   }, [show]);
-
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
