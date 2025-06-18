@@ -193,8 +193,8 @@ export const Carrito = () => {
                 TotalCarro: Total,
               };
               console.log(carrito);
-              createOrderPayment(carrito);
-              setTotal(Total)
+              // createOrderPayment(carrito);
+              // setTotal(Total)
 
               // let PayShopping = {
               //   cid: getCarroId,

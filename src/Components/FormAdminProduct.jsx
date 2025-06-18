@@ -4,19 +4,19 @@ import { useEffect, useState } from "react";
 import { toast, Toaster } from "sonner";
 
 import { useProducts } from "../Context/ProductsContext";
-import GetListaProductos from "./ListaProductos";
+// import GetListaProductos from "./ListaProductos";
 
 const FormAdminProduct = () => {
   const { register, handleSubmit, reset } = useForm();
   const [files, setFiles] = useState();
   const { productsPage, getProducts } = useProducts();
   const [spinner, setSpinner] = useState(true);
-  const alertas = () => {
-    return toast.success("Producto en venta sastifactotiamente");
+  const alertasUpp = () => {
+    return toast.success("Producto en venta satisfactoriamente");
   };
   useEffect(() => {
     getProducts();
-    console.log("renderizando productos")
+    
   }, [spinner]);
   const formAdminProduct = async (data) => {
     const formData = new FormData();
@@ -25,18 +25,19 @@ const FormAdminProduct = () => {
     formData.append("NombreProducto", data.NombreProducto);
     formData.append("Precio", data.Precio);
     formData.append("Detalle", data.Detalle);
-    formData.append("Ultimoprecio", data.Ultimoprecio);
+    formData.append("UltimoPrecio", data.UltimoPrecio);
     formData.append("Categoria", data.Categoria);
     formData.append("UrlImagen", files);
 
-    const res = await CreateProductAdmin(formData);
-    console.log(res);
+    await CreateProductAdmin(formData);
+    
     reset();
     setFiles("");
-    alertas();
+    alertasUpp();
     setSpinner(false)
 
     return {};
+
   };
 
   return (
@@ -169,17 +170,18 @@ const FormAdminProduct = () => {
           Submit
         </button>
       </form>
-      <div className=" container">
-        <h2 className=" text-center fw-bold my-5">Agregar Espeficaciones</h2>
-
-        <GetListaProductos />
-      </div>
+    
       <Toaster
         theme="light"
         position="top-center"
+        richColors
+        closeButton={false}
+        expand={false}
+        icon={false}
+        dir="ltr"
         duration={2000}
         toastOptions={{
-          style: { background: "gren" },
+          style: { background: "green" },
           className: "my-toast",
         }}
       />

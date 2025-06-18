@@ -1,5 +1,6 @@
 // import AltaProducts from "../ComponentAdmin/AltaProductos.jsx";
 import FormAdminProduct from "../Components/FormAdminProduct.jsx";
+import GetListaProductos from "../Components/ListaProductos.jsx";
 // import GetListaProductos from "../ComponentAdmin/ListaProductos.jsx";
 
 // import { Image } from "../ComponentAdmin/Altaimagen.jsx";
@@ -10,13 +11,18 @@ import FormAdminProduct from "../Components/FormAdminProduct.jsx";
 const PageAdmin = () => {
   return (
     <>
-      <div className=" container">
+      <div className=" container ">
         <h2 className=" text-center fw-bold my-5">Carga de Productos</h2>
 
         <FormAdminProduct
         />
 
         
+      </div>
+        <div className=" container">
+        <h2 className=" text-center fw-bold my-5"> Productos</h2>
+
+        <GetListaProductos />
       </div>
     
 {/* 

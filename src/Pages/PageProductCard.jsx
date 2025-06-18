@@ -65,16 +65,14 @@ const PageProductCard = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     data.IdProduct = productCard.IdProduct;
-
     data.IdUsu = user.id;
     data.talle = talle;
-
     const res = await getEspecificaciones(data);
-
     data.eid = res._id;
     await PostShoppings(data);
     IncrementQty();
     alertas();
+   
   });
 
   const cambioIndexColor = (colorIndex) => {
@@ -86,7 +84,6 @@ const PageProductCard = () => {
     }, 500);
     return () => clearTimeout(timerColor);
   };
-  console.log(talle);
 
   const quantityMaxCantidad = (color) => {
     setColor(color);
@@ -102,17 +99,14 @@ const PageProductCard = () => {
     }, 500);
     return () => clearTimeout(timerColor);
   };
-  // console.log(spinnerColors);
 
-  // console.log(talleDuplicado);
   let talleD = [];
   let arrayColors = [];
-  // console.log(talle);
+
   return (
     <>
       {spinner ? (
         <>
-          {/* // <img src={spinnerLoading} /> */}
           <div className="productDisplay container text-center mt-3">
             <div className=" d-flex  justify-content-around">
               <figure className="productDisplayImg">
@@ -162,7 +156,7 @@ const PageProductCard = () => {
                 })}
               </div>
 
-              <figure className="">
+              <figure className="m-0">
                 <img
                   className="porductDisplayMainImg"
                   src={imgs}
@@ -181,137 +175,154 @@ const PageProductCard = () => {
                 <div className="productDisplayRightDescription">
                   {productCard.Detalle}
                 </div>
-                <form className="productDisplayRightTalle d-flex flex-column gap-2">
-                  <h3>Talle</h3>
+                <div>
+                  <form className="productDisplayRightTalle d-flex flex-column gap-2">
+                    <h3>Talle</h3>
 
-                  <select className="form-select">
-                    <option selected disabled>
-                      Seleccione su talle
-                    </option>
-                    {/* <option 
-                    {...register("talle")}
-                    >1</option>
-                    <option
-                    {...register("talle")}
-                    >2</option>
-                    <option value="tree">3</option> */}
-
-                    {productCard.Especificaciones.map((t) => {
-                      talleDuplicado.push(t.id.Talle);
-                    })}
-                    {(talleD = [...new Set(talleDuplicado)])}
-
-                    {talleD.map((t) => {
-                      return (
-                        <option
-                          onClick={() => {
-                            cambioIndexColor(t);
-                            setTalle(t);
-                            console.log(t);
-                          }}
-                          key={t.id}
-                          name="talle"
-                          // value={talle}
-                          // {...register("talle", {
-                          //   value: {t},
-                          // })}
-                        >
-                          {t}
+                    <div>
+                      {" "}
+                      <select
+                        className={` w-100 p-2 rounded-2  opacity-75 border-0  ${
+                          errors.talle &&
+                          "d-inline-flex focus-ring focus-ring-danger py-1 px-2 text-decoration-none border rounded-2"
+                        }`}
+                        {...register("talle", {
+                          required: "Talle es requerido",
+                        })}
+                      >
+                        <option disabled selected value="">
+                          ---Seleccione su talle---
                         </option>
-                      );
-                    })}
-                  </select>
 
-                  {errors.talle && (
-                    <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
-                      {console.log(errors.talle.message)}
-                    </span>
-                  )}
+                        {productCard.Especificaciones.map((t) => {
+                          talleDuplicado.push(t.id.Talle);
+                        })}
+                        {(talleD = [...new Set(talleDuplicado)])}
 
-                  <div className="productDisplayRightColor">
-                    <h3>Seleccione un Color</h3>
-                    {spinnerColors ? (
-                      <img src={spinnerLoading} className="spinner" />
-                    ) : (
-                      <div className=" d-flex ">
-                        <div className="d-flex bg-body-secondary w-100 gap-3">
-                          {productCard.Especificaciones.find((e) => {
-                            if (e.id.Talle === talle) {
-                              arrayColors.push(e.id.Color);
-                            }
-                            // {
-                            //   console.log(arrayColors);
-                            // }
-                          })}
-                          {arrayColors.map((e) => {
-                            return (
-                              <div
-                                className=" d-flex justify-content-center align-items-center gap-2"
-                                key={e}
-                              >
-                                {/* <label htmlFor={e}>dd</label> */}
-                                <input
-                                  type="radio"
-                                  // name="color"
-                                  onClick={() => {
-                                    quantityMaxCantidad(e);
-                                  }}
-                                  value={e}
-                                  {...register("color", {
-                                    required: true,
-                                    value: { e },
-                                    message: "color es requerido",
-                                  })}
-                                />
-                                <label>{e}</label>
-                                {errors.color && (
-                                  <span className=" fs-4 text-center mt-1  text-white  bg-danger  ">
-                                    {console.log(errors.color.message)}
-                                  </span>
-                                )}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
+                        {talleD.map((t) => {
+                          return (
+                            <option
+                              onClick={() => {
+                                cambioIndexColor(t);
+                                setTalle(t);
+                              }}
+                              key={t.id}
+                              value={t}
+                            >
+                              {t}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+
+                    {errors.talle && (
+                      <span className=" fs-4 text-start  text-danger ">
+                        {errors.talle.message}
+                      </span>
                     )}
 
-                    <div className="productDisplayRightCantidad">
-                      <h3>Cantidad</h3>
-                      {spinnerCantidad ? (
+                    <div className="productDisplayRightColor">
+                      {talle ? (
+                        <h3>Color</h3>
+                      ) : (
+                        <span className=" fs-4 text-start  text-black ">
+                          Seleccione un talle para ver los colores disponibles
+                        </span>
+                      )}
+                      {spinnerColors ? (
                         <img src={spinnerLoading} className="spinner" />
                       ) : (
-                        <input
-                          className=" w-50"
-                          type="number"
-                          placeholder={
-                            quantityMax === 0 ? "sin stock" : quantityMax
-                          }
-                          min={1}
-                          max={quantityMax}
-                          {...register("cantidad", {
-                            required: true,
-                            // value: true,
-                            message: "cantidad es requerida.",
-                            // validate: (value) =>
-                            //   value >= 1 && value <= productCard.Especificaciones.map(
-                            //     (c) => c.id.Stock
-                            //   ) ||
-                            //   "La cantidad debe estar entre 1 y el stock disponible",
-                          })}
-                        />
-                      )}
-
-                      {errors.cantidad && (
-                        <span className=" fs-4 text-center mt-1  text-white  bg-danger  "></span>
+                        <>
+                          <div className=" d-flex ">
+                            <div
+                              className={`d-flex bg-body-secondary w-100 gap-3 rounded-2 ${
+                                arrayColors.length > 0 ? "p-2" : ""
+                              }`}
+                            >
+                              {productCard.Especificaciones.find((e) => {
+                                if (e.id.Talle === talle) {
+                                  arrayColors.push(e.id.Color);
+                                }
+                              })}
+                              {arrayColors.map((e) => {
+                                return (
+                                  <div
+                                    className=" d-flex justify-content-center align-items-center gap-2 p-2"
+                                    key={e}
+                                  >
+                                    <input
+                                      type="radio"
+                                      value={e}
+                                      onClick={() => {
+                                        quantityMaxCantidad(e);
+                                      }}
+                                      {...register("color", {
+                                        required: "Color es requerido",
+                                      })}
+                                    />
+                                    <label>{e}</label>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                          <div>
+                            {errors.color && (
+                              <span className=" fs-4 text-start mt-1  text-danger    ">
+                                {errors.color.message}
+                              </span>
+                            )}
+                          </div>
+                        </>
                       )}
                     </div>
-                  </div>
 
-                  <div className="productDisplayRightTalleBtn hover">
-                    <btn onClick={onSubmit}>AGREAGAR AL CARRITO</btn>
-                  </div>
-                </form>
+                    <div className="productDisplayRightColor">
+                      <div className="productDisplayRightCantidad">
+                        {color ? (
+                          <>
+                            <h3>Cantidad</h3>
+                            {spinnerCantidad ? (
+                              <img src={spinnerLoading} className="spinner" />
+                            ) : (
+                              <input
+                                className=" w-50"
+                                type="number"
+                                placeholder={
+                                  quantityMax === 0 ? "sin stock" : quantityMax
+                                }
+                                min={1}
+                                max={quantityMax}
+                                {...register("cantidad", {
+                                  required: "Cantidad es requerida.",
+                                })}
+                              />
+                            )}
+                          </>
+                        ) : (
+                          <span
+                            className={`productDisplayRightColor ${
+                              talle ? "d-flex" : "d-none"
+                            }`}
+                          >
+                            Seleccione un color para ver la cantidad disponible
+                          </span>
+                        )}
+
+                        {errors.cantidad && (
+                          <span className=" fs-4 text-start mt-1  text-danger  ">
+                            {errors.cantidad.message}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="productDisplayRightTalleBtn w-100 hover">
+                      <btn onClick={onSubmit}>AGREAGAR AL CARRITO</btn>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>

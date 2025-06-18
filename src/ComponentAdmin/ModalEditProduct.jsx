@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { UploadProducts } from '../FetchAdmin/Products';
 // import {UseEdit } from '../ContextAdmin/EditContext.jsx';
 // import {UploadProducts} from '../FetchAdmin/Products.js';
 
@@ -57,10 +58,10 @@ function MOdalEditProduct({element}) {
           <Button variant="primary" onClick={
             
             async()=>{
-                // handleClose();
-                
-                // const ProductEdit=await UploadProducts(NewEditProduct);
-                console.log(newEditProduct)
+              
+              const ProductEdit=await UploadProducts(newEditProduct);
+              handleClose();
+                console.log(ProductEdit)
                 
                 
                 

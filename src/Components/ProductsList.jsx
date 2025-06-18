@@ -9,6 +9,7 @@ import { iconoFavorito, iconoFavoritoAgregado } from "../helpers/iconos";
 import { useProducts } from "../Context/ProductsContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
+import { formatCurrency } from "../utils";
 
 // import  Buscador  from "./Buscador";
 // import { createFavRequest } from "../api/favorite";
@@ -49,7 +50,7 @@ const ProductsList = () => {
 
   return (
     <>
-      <div className=" container-products mt-4">
+      <div className=" container-products mt-4 h-100 overflow-y-scroll">
         <div className=" d-flex flex-wrap gap-3 justify-content-center">
           {productsPage.map((product) => {
             return (
@@ -71,7 +72,7 @@ const ProductsList = () => {
                         {product.NombreProducto.substring(0, 12)}...
                       </h5>
                       <p className="card-text lead fw-bold">
-                        $ {product.Precio}
+                       {formatCurrency(product.Precio)}
                       </p>
                       <a
                         className="btn btn-outline-dark"

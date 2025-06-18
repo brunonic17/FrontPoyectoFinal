@@ -43,7 +43,7 @@ function MOdalCreateEspecific(Id) {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modificar Producto</Modal.Title>
+          <Modal.Title>Agregar Especificaciones</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -58,15 +58,7 @@ function MOdalCreateEspecific(Id) {
                 }}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Precio</Form.Label>
-              <Form.Control
-                type="text"
-                name="Talle"
-                placeholder="45"
-                onChange={ChangeEdit}
-              />
-            </Form.Group>
+          
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Talle</Form.Label>
               <Form.Control
@@ -76,19 +68,7 @@ function MOdalCreateEspecific(Id) {
                 onChange={ChangeEdit}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Fecha de Alta</Form.Label>
-              <Form.Control type="Date" name="Fecha" onChange={ChangeEdit} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Codigo de producto</Form.Label>
-              <Form.Control
-                type="text"
-                name="CodProducto"
-                placeholder="130002"
-                onChange={ChangeEdit}
-              />
-            </Form.Group>
+            
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Stock</Form.Label>
               <Form.Control
