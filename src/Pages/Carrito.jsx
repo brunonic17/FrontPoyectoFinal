@@ -6,7 +6,7 @@ import { Table } from "react-bootstrap";
 // import Form from "react-bootstrap/Form";
 import EditModalCarrito from "../Components/ModalEditCarrito";
 import Button from "react-bootstrap/Button";
-import { PagoPay } from "../fetch/shopping";
+// import { PagoPay } from "../fetch/shopping";
 import { useShoppingContext } from "../Context/ShoppingContext";
 
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
@@ -31,6 +31,7 @@ export const Carrito = () => {
   // const [formapago, setForma] = useState({});
 
   const navigate = useNavigate();
+
   useEffect(() => {
     getProductShopping();
     console.log("renderizando")
@@ -148,25 +149,7 @@ export const Carrito = () => {
                 </td>
               </tr>
             </tfoot>
-            {/* <tfoot colSpan={7} className=" p-2">
-              <tr>
-                <td className=" d-flex justify-content-center gap-2">
-                  <div>
-                    <button
-                      className="btn btn-success"
-                      onClick={() => {
-                        console.log(productShopping);
-                        // deleteShopping(getCarroId);
-                        // console.log(getCarroId);
-                      }}
-                    >
-                      {" "}
-                      Eliminar El Carrito
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            </tfoot> */}
+           
           </Table>
 
           {/* <div>
@@ -193,7 +176,7 @@ export const Carrito = () => {
                 TotalCarro: Total,
               };
               console.log(carrito);
-              // createOrderPayment(carrito);
+              createOrderPayment(carrito);
               // setTotal(Total)
 
               // let PayShopping = {

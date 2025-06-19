@@ -17,6 +17,8 @@ export const ShoppingProvider = ({ children }) => {
   const [total, setTotal] = useState(0);
 
   const createOrderPayment = async (carrito) => {
+   
+   console.log(carrito)
     try {
       const res = await ShoppingPaymentRequest(carrito);
       setPayment(res.id);

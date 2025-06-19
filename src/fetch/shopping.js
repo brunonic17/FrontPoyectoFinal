@@ -117,26 +117,26 @@ const DeleteProduct = async (Product) => {
 //   // console.log(data)
 // };
 
-const PagoPay = async (Carrito) => {
-  let CarritoJson = JSON.stringify(Carrito);
+// const PagoPay = async (Carrito) => {
+//   let CarritoJson = JSON.stringify(Carrito);
 
-  const response = await fetch(`http://localhost:5050/api/carrito/confirma`, {
-    method: "POST",
-    body: CarritoJson,
-    headers: {
-      "content-type": "application/json",
-    },
-  });
+//   const response = await fetch(`http://localhost:5050/api/carrito/confirma`, {
+//     method: "POST",
+//     body: CarritoJson,
+//     headers: {
+//       "content-type": "application/json",
+//     },
+//   });
 
-  const data = response.json();
+//   const data = response.json();
 
-  return data;
-};
+//   return data;
+// };
 
 export {
   PostShoppings,
   DeleteProduct,
-  PagoPay,
+  // PagoPay,
   // DeleteShopping,
   // GetIdUsu
 };
