@@ -123,7 +123,7 @@ const PaginaLoguin = () => {
             </NavLink>
           </btn>
           <div className="d-flex justify-content-between align-items-center">
-            <p className="d-flex  fw-bold text-black fst-italic">
+            <p className="d-flex  fw-bold text-black fst-italic align-items-center">
               No tienes una cuenta?
             </p>
 

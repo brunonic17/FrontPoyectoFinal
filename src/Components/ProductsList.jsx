@@ -47,12 +47,17 @@ const ProductsList = () => {
     getProducts();
   }, [cambiar]);
 
-
+let filteredProducts = productsPage.flat();
+  if (search) {
+    filteredProducts = productsPage.filter((product) =>
+      product.NombreProducto.toLowerCase().includes(search.toLowerCase())
+    );
+  }
   return (
     <>
       <div className=" container-products mt-4 h-100 overflow-y-scroll">
         <div className=" d-flex flex-wrap gap-3 justify-content-center">
-          {productsPage.map((product) => {
+          {filteredProducts.map((product) => {
             return (
               <>
                 <div className=" card mb-4 boxShadow containerCard overflow-hidden">

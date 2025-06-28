@@ -1,5 +1,6 @@
 .buttonHoverDelete:hover {
    background: red !important;
+   color: white !important;
    
 }
 .buttonHoverCart:hover {

@@ -26,9 +26,19 @@ const Favorit = () => {
   return (
     <>
       {favsPage.length === 0 ? (
-        <h1 className=" text-uppercase text-center my-3">
-          Tus favoritos se mostrarán aquí
-        </h1>
+        <>
+        <div className="container d-flex flex-column justify-content-center align-items-center">
+            <h1 className=" text-uppercase text-center my-3">
+            Tus favoritos se mostrarán aquí
+          </h1>
+          <button
+            className="btn btn-primary "
+            onClick={() => navigate("/")}
+          >
+            Volver
+          </button>
+        </div>
+        </>
       ) : (
         <h1 className=" text-uppercase text-center my-3">Mis Favoritos</h1>
       )}

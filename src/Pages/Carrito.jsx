@@ -1,5 +1,5 @@
 import { useProducts } from "../Context/ProductsContext";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Table } from "react-bootstrap";
@@ -11,6 +11,7 @@ import { useShoppingContext } from "../Context/ShoppingContext";
 
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { formatCurrency } from "../utils";
+import spinnerLoading from "../assets/img/spinnerLoading.svg";
 
 export const Carrito = () => {
   initMercadoPago("APP_USR-ee7c2a9d-4725-4e64-bf91-ad5ba9a3c2a2", {
@@ -18,7 +19,8 @@ export const Carrito = () => {
   });
   //---
   const { user, isAuthenticated } = useAuth();
-  const { createOrderPayment, payment, paymentId, setTotal } = useShoppingContext();
+  const { createOrderPayment, payment, paymentId, setTotal } =
+    useShoppingContext();
   const {
     getProductShopping,
     productShopping,
@@ -28,16 +30,23 @@ export const Carrito = () => {
     deleteShopping,
   } = useProducts();
 
+  const [spinner, setSpinner] = useState(false);
   // const [formapago, setForma] = useState({});
 
   const navigate = useNavigate();
-
+  console.log(spinner);
   useEffect(() => {
     getProductShopping();
-    console.log("renderizando")
-    // if (!isAuthenticated) navigate("/carrito");
+  
+    if (!isAuthenticated) navigate("/");
   }, []);
- console.log(productShopping)
+  useEffect(() => {
+    const timerPay = setTimeout(() => {
+      setSpinner(false);
+    }, 1000);
+    return () => clearTimeout(timerPay);
+  }, [spinner]);
+  console.log(productShopping);
   // console.log(productShopping[0].pid.Precio);
   let Total = 0;
   for (let i = 0; i < productShopping.length; i++) {
@@ -57,7 +66,6 @@ export const Carrito = () => {
   // for (let i = 0; i < productShopping.length; i++) {
   //   cantidadTotal = +productShopping[i].cantidad;
   // }
- 
 
   return (
     <>
@@ -149,7 +157,6 @@ export const Carrito = () => {
                 </td>
               </tr>
             </tfoot>
-           
           </Table>
 
           {/* <div>
@@ -167,51 +174,85 @@ export const Carrito = () => {
               <option value="Mercado Pago">Mercado Pago</option>
             </Form.Select>
           </div> */}
-          <Button
-            variant="outline-primary"
-            onClick={async () => {
-              const carrito = {
-                user: user.nameUser,
-                userEmail: user.email,
-                TotalCarro: Total,
-              };
-              console.log(carrito);
-              createOrderPayment(carrito);
-              // setTotal(Total)
+          <div className="container mb-2 ">
+            <div className=" border border-2 border-primary rounded p-3 mt-3 w-25 shadow-lg pay ">
+              <p className="  fw-semibold border-bottom p-2">
+                Resumen de compra
+              </p>
 
-              // let PayShopping = {
-              //   cid: getCarroId,
-              //   TotalCarro: Total,
-              // };
-              // console.log(PayShopping);
-              // // console.log(payment);
-              // console.log(paymentId);
+              <div className="d-flex flex-column  gap-2 p-2">
+                <div className="d-flex justify-content-between">
+                  <p>Producto</p>
+                  <p>{formatCurrency(Total)}</p>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <p>Envio</p>
+                  <p>{formatCurrency(0)}</p>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <p className="fw-bold">Total</p>
+                  <p className="fw-bold">{formatCurrency(Total)}</p>
+                </div>
+              </div>
+              <div className="d-flex flex-column justify-content-center align-items-center">
+                {spinner ? (
+                  <img src={spinnerLoading} className="spinner" />
+                ) : (
+                  <>
+                    {paymentId ? (
+                      <btn
+                        className="btn"
+                        onClick={() => {
+                          window.location.href = payment.data.init_point;
+                        }}
+                      >
+                        <Wallet
+                        className="bg-info"
+                          initialization={{
+                            preferenceId: paymentId,
+                            redirectMode: "target_blank",
+                          }}
+                          customization={{
+                            texts: { valueProp: "smart_option" },
+                          }}
+                        />
+                      </btn>
+                    ) : (
+                      <Button
+                        className="btn btn-primary w-100 mt-2"
+                        onClick={async () => {
+                          const carrito = {
+                            user: user.nameUser,
+                            userEmail: user.email,
+                            TotalCarro: Total,
+                          };
+                          console.log(carrito);
+                          createOrderPayment(carrito);
+                          setSpinner(true);
+                          // setTotal(Total)
 
-              // const Pay = await PagoPay(PayShopping);
+                          // let PayShopping = {
+                          //   cid: getCarroId,
+                          //   TotalCarro: Total,
+                          // };
+                          // console.log(PayShopping);
+                          // // console.log(payment);
+                          // console.log(paymentId);
 
-              // console.log(Pay);
-              // deleteShopping(getCarroId);
-            }}
-          >
-            CONFIRMA COMPRA CARRITO
-          </Button>
-          {paymentId && (
-            <btn
-              className="btn btn-primary"
-              onClick={() => {
-            
-                window.location.href = payment.data.init_point;
-              }}
-            >
-              <Wallet
-                initialization={{ preferenceId: paymentId,
-                  redirectMode: "target_blank" 
-                 }}
-          
-                customization={{ texts: { valueProp: "smart_option" } }}
-              />
-            </btn>
-          )}
+                          // const Pay = await PagoPay(PayShopping);
+
+                          // console.log(Pay);
+                          // deleteShopping(getCarroId);
+                        }}
+                      >
+                        CONFIRMA COMPRA CARRITO
+                      </Button>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
         </>
       )}
     </>

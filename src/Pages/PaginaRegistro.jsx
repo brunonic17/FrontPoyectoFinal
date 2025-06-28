@@ -173,8 +173,8 @@ function PaginaRegistro() {
             </button>
           </div>
 
-          <div className="d-flex justify-content-between">
-            <p className="d-flex  fw-bold fs-4 text-black fst-italic">
+          <div className="d-flex justify-content-between align-items-center">
+            <p className="d-flex  fw-bold text-black fst-italic">
               Ya tienes una cuenta?
             </p>
             <NavLink to="/login" className="btn bg-success text-white ">

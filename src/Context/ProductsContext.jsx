@@ -42,6 +42,7 @@ export const ProductsProvider = ({ children }) => {
   };
   const searcher = (e) => {
     setSearch(e.target.value);
+    console.log(e.target.value);
   };
 
   const getProducts = async () => {
@@ -54,7 +55,7 @@ export const ProductsProvider = ({ children }) => {
   };
 
   const getProduct = async (id) => {
-    console.log(id)
+    console.log(id);
     try {
       const res = await getProductCardRequest(id);
       setProductCard(res.data);
@@ -68,15 +69,15 @@ export const ProductsProvider = ({ children }) => {
   const getProductShopping = async () => {
     try {
       const res = await getProductsShoppingRequest();
-      console.log(res)
+
       setProductShopping(res.data.DetalleCarro);
-     
+
       setGetCarroId(res.data._id);
     } catch (error) {
       console.log(error.response);
     }
   };
-// ELIMINA PRODUCTOS DEL CARRITO
+  // ELIMINA PRODUCTOS DEL CARRITO
   const DeleteShoppingProduct = async (Product) => {
     try {
       const res = await DeleteProduct(Product);

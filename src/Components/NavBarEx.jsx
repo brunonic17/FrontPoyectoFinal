@@ -20,12 +20,13 @@ function NavBarEx() {
   const { isAuthenticated, logout, user } = useAuth();
   const { productShopping, getProductShopping, quantity, search } =
     useProducts();
-  const { favsPage } = useFav();
+  const { favsPage, getProductsFavorite } = useFav();
 
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     getProductShopping();
+    getProductsFavorite();
   }, [quantity, isAuthenticated]);
 
   // console.log(productsPage);
