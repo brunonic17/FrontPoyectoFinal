@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <main>
-        <div className="carrouselSlider">
+        <div className="">
           <IndividualIntervalsExample />
         </div>
         <div className="container">

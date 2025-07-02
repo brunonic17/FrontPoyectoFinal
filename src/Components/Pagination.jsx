@@ -21,6 +21,7 @@ const Pagination = ({
   const onSepecificPage = (e) => {
     setCurrentPage(e);
   };
+  console.log(pageNumber, currentPage, totalProducts)
   return (
     <div className=" container ">
       <nav aria-label="..." className="d-flex justify-content-around ">

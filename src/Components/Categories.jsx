@@ -14,7 +14,7 @@ const Categories = (categories) => {
   const { getProducts, productsPage, getProduct } = useProducts();
     const {
        favsPage,
-    //    getProductsFavorite,
+       getProductsFavorite,
        deleteProductFavorites,
        createFavorite,
      } = useFav();
@@ -32,17 +32,17 @@ const Categories = (categories) => {
       return toast.success("Agregaste a favoritos");
   };
   
-  console.log(categories.category);
-  console.log(productsPage);
-  console.log(productsPage.map((p) => p.Categoria === categories.category));
-  useEffect(() => {
 
+  useEffect(() => {
+getProductsFavorite();
     getProducts();
-  }, []);
+  }, [cambiar]);
 
     return (
 <>
-    
+    <h2 className=" text-center fw-semibold fs-2 my-3">
+      Categorias {categories.category}
+    </h2>
       <div className=" d-flex justify-content-center container-products mt-4 h-100 containerMax m-auto">
         <div className=" d-flex flex-wrap gap-3 justify-content-center">
           {

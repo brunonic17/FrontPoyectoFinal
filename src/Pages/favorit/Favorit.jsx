@@ -44,7 +44,7 @@ const Favorit = () => {
         <h1 className=" text-uppercase text-center my-3">Mis Favoritos</h1>
       )}
       <div
-        className=" d-flex justify-content-around p-4
+        className=" d-flex justify-content-around p-4 flex-wrap
       "
       >
         {favsPage.map((product) => {
@@ -70,9 +70,9 @@ const Favorit = () => {
                       $ {product.product.Precio}
                     </p>
                   </div>
-                  <div className=" w-100 d-flex justify-content-around p-3">
+                  <div className=" w-100 d-flex justify-content-around p-1">
                     <button
-                      className="bg-white buttonHoverCart border border-black w-25 rounded-1 p-1
+                      className="bg-white buttonHoverCart border border-black  rounded-1  p-1
                       "
                       onClick={async () => {
                         await getProduct(product.product._id);
@@ -82,7 +82,7 @@ const Favorit = () => {
                       {iconoCarritoCart}
                     </button>
                     <button
-                      className="bg-white border border-black w-25 rounded-1 p-1 buttonHoverDelete"
+                      className="bg-white border border-black  rounded-1 buttonHoverDelete p-1"
                       onClick={() => {
                         deleteProductFavorites(product.product._id);
                         alertas();

@@ -18,15 +18,15 @@ function IndividualIntervalsExample() {
             <div className="carousel-item active h-100" data-bs-interval="5000">
               <img
                 src={banner4}
-                className="d-block h-100 img-fluid "
+                className="d-block h-100 img-fluid w-100 "
                 alt={banner4}
               />
             </div>
             <div className="carousel-item h-100 w-100" data-bs-interval="5000">
-              <img src={banner2} className="d-block h-100 img-fluid" alt={banner2} />
+              <img src={banner2} className="d-block h-100 img-fluid w-100" alt={banner2} />
             </div>
             <div className="carousel-item h-100" data-bs-interval="5000">
-              <img src={banner3} className="d-block  h-100 img-fluid" alt={banner3} />
+              <img src={banner3} className="d-block  h-100 img-fluid w-100" alt={banner3} />
             </div>
           </div>
           <button

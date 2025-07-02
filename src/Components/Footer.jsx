@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import logoAdidas from "../assets/img/logoAdidas.png";
+import logoCodeShop from "../assets/img/logoCodeShop.png"
 import Nav from "react-bootstrap/Nav";
 import Image from "react-bootstrap/Image";
 import iconos from "../helpers/iconos";
@@ -12,7 +13,7 @@ const Footer = () => {
         <div className=" d-lg-flex w-100 justify-content-center  align-items-lg-baseline ">
           <div className="col  d-flex justify-content-center">
             <Nav.Link as={NavLink} to="/" className="col-lg-3  ">
-              <Image src={logoAdidas} className=""  />
+              <Image src={logoCodeShop} className=""  />
             </Nav.Link>
           </div>
           <li className="col d-flex  flex-column justify-content-center align-items-center">

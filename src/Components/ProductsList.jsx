@@ -35,7 +35,7 @@ const ProductsList = () => {
   const alertas1 = () => {
     return toast.success("Agregaste a favoritos");
   };
-console.log(favsPage)
+
   const handclick = (product) => {
     setCambiar((cambiar) => !cambiar);
     deleteProductFavorites(product._id);
@@ -45,7 +45,8 @@ console.log(favsPage)
     getProductsFavorite();
     getProducts();
   }, [cambiar]);
-
+ const lastIndex = currentPage * pageNumber;
+  const firstIndex = lastIndex - pageNumber;
   let filteredProducts = productsPage.flat();
   if (search) {
     filteredProducts = productsPage.filter((product) =>
@@ -132,7 +133,7 @@ console.log(favsPage)
                 </div>
               </>
             );
-          })}
+          }).slice(firstIndex, lastIndex)}
         </div>
       </div>
       {!search ? (

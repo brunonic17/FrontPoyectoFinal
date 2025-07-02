@@ -5,7 +5,8 @@ import Navbar from "react-bootstrap/Navbar";
 import Image from "react-bootstrap/Image";
 // import Form from "react-bootstrap/Form";
 // import LogoYoCampo from "../assets/img/LogoYoCampo.jpg";
-import logoAdidas from "../assets/img/logoAdidas.png";
+// import logoAdidas from "../assets/img/logoAdidas.png";
+import logoCodeShop from "../assets/img/logoCodeShop.png"
 import { Button } from "react-bootstrap";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import iconos, { iconoCarrito, iconoFavorito } from "../helpers/iconos";
@@ -44,7 +45,8 @@ function NavBarEx() {
           <Navbar className="col col-lg-12 order-2 order-lg-0 ">
             <Container className="d-flex justify-content-center  p-2 ">
               <Nav.Link as={NavLink} to="/" className="col-lg-3  ">
-                <Image src={logoAdidas} className="" />
+                <Image src={logoCodeShop} className=" w-25 h-25
+                " />
               </Nav.Link>
 
               <div className=" col-lg-6 d-none d-lg-block order-lg-0">
