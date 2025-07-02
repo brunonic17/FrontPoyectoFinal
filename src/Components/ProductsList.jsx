@@ -35,11 +35,10 @@ const ProductsList = () => {
   const alertas1 = () => {
     return toast.success("Agregaste a favoritos");
   };
-
+console.log(favsPage)
   const handclick = (product) => {
     setCambiar((cambiar) => !cambiar);
     deleteProductFavorites(product._id);
-  
   };
 
   useEffect(() => {
@@ -47,7 +46,7 @@ const ProductsList = () => {
     getProducts();
   }, [cambiar]);
 
-let filteredProducts = productsPage.flat();
+  let filteredProducts = productsPage.flat();
   if (search) {
     filteredProducts = productsPage.filter((product) =>
       product.NombreProducto.toLowerCase().includes(search.toLowerCase())
@@ -55,7 +54,7 @@ let filteredProducts = productsPage.flat();
   }
   return (
     <>
-      <div className=" container-products mt-4 h-100 overflow-y-scroll">
+      <div className=" d-flex justify-content-center container-products mt-4 h-100 containerMax">
         <div className=" d-flex flex-wrap gap-3 justify-content-center">
           {filteredProducts.map((product) => {
             return (
@@ -77,7 +76,7 @@ let filteredProducts = productsPage.flat();
                         {product.NombreProducto.substring(0, 12)}...
                       </h5>
                       <p className="card-text lead fw-bold">
-                       {formatCurrency(product.Precio)}
+                        {formatCurrency(product.Precio)}
                       </p>
                       <a
                         className="btn btn-outline-dark"

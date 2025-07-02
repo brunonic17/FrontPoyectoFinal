@@ -1,18 +1,16 @@
 import ProductsList from "../Components/ProductsList";
 import IndividualIntervalsExample from "../Components/SliderCarousels";
 
-
 const Home = () => {
   return (
     <>
       <main>
-        <div>
+        <div className="carrouselSlider">
           <IndividualIntervalsExample />
         </div>
-        <div>
+        <div className="container">
           <ProductsList />
         </div>
-        
       </main>
     </>
   );

@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const Ayuda = () => {
   return (
-    <div className="container mt-5 mb-5">
+    <div className="container-fluid container-lg  p-1 mt-5 mb-5">
       <h2 className=" fw-semibold ">¿Cómo podemos ayudarte?</h2>
       <div>
         <p className="fw-bold mt-3 mb-3 mt-4">Compras</p>

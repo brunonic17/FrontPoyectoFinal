@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
             <NavBarEx />
            
           </header>
-          <main className=" ">
+          <main className="">
             
           <Outlet />
           </main>

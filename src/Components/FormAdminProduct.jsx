@@ -7,7 +7,12 @@ import { useProducts } from "../Context/ProductsContext";
 // import GetListaProductos from "./ListaProductos";
 
 const FormAdminProduct = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const [files, setFiles] = useState();
   const { productsPage, getProducts } = useProducts();
   const [spinner, setSpinner] = useState(true);
@@ -16,7 +21,6 @@ const FormAdminProduct = () => {
   };
   useEffect(() => {
     getProducts();
-    
   }, [spinner]);
   const formAdminProduct = async (data) => {
     const formData = new FormData();
@@ -30,14 +34,13 @@ const FormAdminProduct = () => {
     formData.append("UrlImagen", files);
 
     await CreateProductAdmin(formData);
-    
+
     reset();
     setFiles("");
     alertasUpp();
-    setSpinner(false)
+    setSpinner(false);
 
     return {};
-
   };
 
   return (
@@ -59,9 +62,14 @@ const FormAdminProduct = () => {
             name="IdProduct"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-            {...register("IdProduct")}
+            {...register("IdProduct", {
+              required: "El ID del producto es obligatorio",
+            })}
           />
         </div>
+        {errors.IdProduct && (
+          <span className="text-danger">{errors.IdProduct.message}</span>
+        )}
         <div className="mb-3">
           <label
             htmlFor="exampleInputPassword1"
@@ -74,9 +82,14 @@ const FormAdminProduct = () => {
             className="form-control"
             name="NombreDelProducto"
             id="exampleInputPassword1"
-            {...register("NombreProducto")}
+            {...register("NombreProducto", {
+              required: "El nombre del producto es obligatorio",
+            })}
           />
         </div>
+        {errors.NombreProducto && (
+          <span className="text-danger">{errors.NombreProducto.message}</span>
+        )}
         <div className="mb-3">
           <label
             htmlFor="exampleInputPassword1"
@@ -88,8 +101,13 @@ const FormAdminProduct = () => {
             type="text"
             className="form-control"
             id="exampleInputPassword1"
-            {...register("Detalle")}
+            {...register("Detalle", {
+              required: "El detalle del producto es obligatorio",
+            })}
           />
+          {errors.Detalle && (
+            <span className="text-danger">{errors.Detalle.message}</span>
+          )}
         </div>
         <div className="mb-3">
           <label
@@ -102,9 +120,14 @@ const FormAdminProduct = () => {
             type="number"
             className="form-control"
             id="exampleInputPassword1"
-            {...register("Precio")}
+            {...register("Precio", {
+              required: "El precio del producto es obligatorio",
+            })}
           />
         </div>
+        {errors.Precio && (
+          <span className="text-danger">{errors.Precio.message}</span>
+        )}
         <div className="mb-3">
           <label
             htmlFor="exampleInputPassword1"
@@ -116,9 +139,14 @@ const FormAdminProduct = () => {
             type="number"
             className="form-control"
             id="exampleInputPassword1"
-            {...register("UltimoPrecio")}
+            {...register("UltimoPrecio", {
+              required: "El último precio del producto es obligatorio",
+            })}
           />
         </div>
+        {errors.UltimoPrecio && (
+          <span className="text-danger">{errors.UltimoPrecio.message}</span>
+        )}
         <div className="mb-3">
           <label
             htmlFor="exampleInputPassword1"
@@ -129,7 +157,9 @@ const FormAdminProduct = () => {
           <select
             className="form-select"
             aria-label="Default select example"
-            {...register("Categoria")}
+            {...register("Categoria", {
+              required: "La categoría del producto es obligatoria",
+            })}
           >
             <option selected>Selecciona una Categoria</option>
             <option value="Hombres">Hombres</option>
@@ -137,11 +167,14 @@ const FormAdminProduct = () => {
             <option value="Niños">Niños</option>
           </select>
         </div>
+        {errors.Categoria && (
+          <span className="text-danger">{errors.Categoria.message}</span>
+        )}
         <div className="mb-3">
           <label htmlFor="formFile" className="form-label fw-semibold">
             Cargar Imagen
           </label>
-          <div className="d-flex gap-2 justify-content-between align-items-center">
+          <div className="d-flex  justify-content-between align-items-center">
             <div
               className="w-100
       "
@@ -153,24 +186,30 @@ const FormAdminProduct = () => {
                 onChange={(e) => {
                   setFiles(e.target.files[0]);
                 }}
+                // {...register("Imagen",
+                //   { required: "La imagen del producto es obligatoria" }
+                // )}
               />
             </div>
+          <div className="d-flex justify-content-center mt-3">
 
             {files && (
               <img
-                className="card w-25"
+                className="card w-50"
                 src={URL.createObjectURL(files)}
                 alt={files.name}
               />
             )}
           </div>
+          </div>
+           
         </div>
-        {/* {URL.createObjectURL(files)} */}
+
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
       </form>
-    
+
       <Toaster
         theme="light"
         position="top-center"

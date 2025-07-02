@@ -38,6 +38,7 @@ import PageAdmin from "./Pages/PageAdmin.jsx";
 import Ayuda from "./Pages/Ayuda.jsx";
 import SuccesPassword from "./Pages/SuccesPassword.jsx";
 import Favorit from "./Pages/favorit/Favorit.jsx";
+import Categories from "./Components/Categories.jsx";
 
 
 // import { ShoppingRender } from "./ShoppingF";
@@ -125,22 +126,6 @@ const router = createBrowserRouter([
           </div>
         ),
       },
-      // {
-      //   path: "/favorites",
-      //   element: (
-      //     <div>
-      //       <PageSuccess />
-      //     </div>
-      //   ),
-      // },
-      // {
-      //   path: "/cardPage",
-      //   element: (
-      //     <div>
-      //       <PaginaArticulo />
-      //     </div>
-      //   ),
-      // },
       {
         path: "/productCard/:id",
         element: (
@@ -157,14 +142,36 @@ const router = createBrowserRouter([
           </div>
         ),
       },
-      // {
-      //   path: "/productos",
-      //   element: (
-      //     <div>
-      //       <ProductsList />
-      //     </div>
-      //   ),
-      // },
+      {
+        path: "/productos/hombres",
+        element: (
+          <div>
+            <Categories
+              category="Hombres"
+            />
+          </div>
+        ),
+      },
+      {
+        path: "/productos/mujeres",
+        element: (
+          <div>
+            <Categories
+              category="Mujeres"
+            />
+          </div>
+        ),
+      },
+      {
+        path: "/productos/niños",
+        element: (
+          <div>
+            <Categories
+              category="Niños"
+            />
+          </div>
+        ),
+      },
       {
         path: "/registro",
         element: (

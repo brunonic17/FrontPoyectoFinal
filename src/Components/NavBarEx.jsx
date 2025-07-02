@@ -14,6 +14,7 @@ import { useProducts } from "../Context/ProductsContext";
 import { useEffect, useState } from "react";
 import Buscador from "./Buscador";
 import { useFav } from "../Context/FavContext";
+import Categories from "./Categories";
 // import PaginaLoguin from "../Pages/PaginaLoguin";
 
 function NavBarEx() {
@@ -23,6 +24,11 @@ function NavBarEx() {
   const { favsPage, getProductsFavorite } = useFav();
 
   const [show, setShow] = useState(false);
+  const categories = [
+    { id: 1, name: "Hombres" },
+    { id: 2, name: "Mujeres" },
+    { id: 3, name: "Niños" },
+  ];
 
   useEffect(() => {
     getProductShopping();
@@ -33,7 +39,7 @@ function NavBarEx() {
 
   return (
     <>
-      <Navbar expand="lg" className=" bg-body-secondary ">
+      <Navbar expand="lg" className=" bg-body-secondary p-2">
         <Container className="  d-flex justify-content-center  flex-lg-column  ">
           <Navbar className="col col-lg-12 order-2 order-lg-0 ">
             <Container className="d-flex justify-content-center  p-2 ">
@@ -110,7 +116,7 @@ function NavBarEx() {
               </>
             ) : (
               <>
-                <ul className=" mb-0  ps-1">
+                <ul className=" mb-0 ps-2">
                   <li>
                     <Nav.Link as={NavLink} to="registro">
                       Registro
@@ -213,7 +219,7 @@ function NavBarEx() {
                 <div className="  w-75">
                   <Buscador buscar={search} />
                 </div>
-                <Button variant="" className="iconoBuscar">
+                {/* <Button variant="" className="iconoBuscar">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -224,7 +230,7 @@ function NavBarEx() {
                   >
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                   </svg>
-                </Button>
+                </Button> */}
               </div>
               <div className=" col-lg-3 m-0 text-start">
                 <Nav.Link as={NavLink} to="contacto">
@@ -233,15 +239,19 @@ function NavBarEx() {
               </div>
               <div className="col-lg-6 d-lg-flex justify-content-start ">
                 <NavDropdown title="Categorias" id="basic-nav-dropdown">
-                  <Nav.Link className="" as={NavLink} to="productos">
-                    Bombachas
-                  </Nav.Link>
-                  <Nav.Link className="" as={NavLink} to="productos">
-                    Boinas
-                  </Nav.Link>
-                  <Nav.Link className="" as={NavLink} to="productos">
-                    Accesorios
-                  </Nav.Link>
+                {categories.map((category) => (
+                  <>
+                      <Nav.Link
+                        key={category.id}
+                        className=""
+                        as={NavLink}
+                        to={`productos/${category.name}`}
+                        // to= "productos"
+                      >
+                        {category.name}
+                      </Nav.Link>
+                  </>
+                ))}
                 </NavDropdown>
 
                 <Nav.Link as={NavLink} to="contacto">

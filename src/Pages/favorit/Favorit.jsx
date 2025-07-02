@@ -22,6 +22,7 @@ const Favorit = () => {
   const alertas = () => {
     return toast.success("Eliminaste el producto de Mis Favoritos");
   };
+  console.log(favsPage)
 
   return (
     <>

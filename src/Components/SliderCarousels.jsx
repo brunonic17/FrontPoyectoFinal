@@ -11,22 +11,22 @@ function IndividualIntervalsExample() {
       {!search ? (
         <div
           id="carouselExampleInterval"
-          className="carousel slide"
+          className="carousel slide h-100  "
           data-bs-ride="carousel"
         >
-          <div className="carousel-inner">
-            <div className="carousel-item active" data-bs-interval="5000">
+          <div className="carousel-inner bg-body-secondary h-100">
+            <div className="carousel-item active h-100" data-bs-interval="5000">
               <img
                 src={banner4}
-                className="d-block w-100"
+                className="d-block h-100 img-fluid "
                 alt={banner4}
               />
             </div>
-            <div className="carousel-item" data-bs-interval="5000">
-              <img src={banner2} className="d-block w-100" alt={banner2} />
+            <div className="carousel-item h-100 w-100" data-bs-interval="5000">
+              <img src={banner2} className="d-block h-100 img-fluid" alt={banner2} />
             </div>
-            <div className="carousel-item" data-bs-interval="5000">
-              <img src={banner3} className="d-block w-100" alt={banner3} />
+            <div className="carousel-item h-100" data-bs-interval="5000">
+              <img src={banner3} className="d-block  h-100 img-fluid" alt={banner3} />
             </div>
           </div>
           <button

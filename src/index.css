@@ -3,6 +3,22 @@
   line-height: 1.5;
   font-weight: 400;
 }
+.dropdown-menu[data-bs-popper]{
+ 
+ left: -50px !important;
+
+}
+.carrouselSlider {
+
+  height: 70vh;
+ 
+
+}
+.containerMax{
+  max-width: 1200px;
+  
+}
+
 .contenedor {
   min-height: 100vh;
   display: grid;
@@ -144,21 +160,24 @@ img {
   .containerCard {
     transition: all 500ms ease-out;
     width: 8rem;
-    height: 20rem;
+   
   }
 }
 @media (width > 576px) {
   .containerCard {
     transition: all 500ms ease-out;
-    width: 15rem;
-    height: 20rem;
+    width: 12rem;
+   
   }
 }
 @media (width > 1200px) {
   .containerCard {
     transition: all 500ms ease-out;
-    width: 20rem;
-    height: 30rem;
+    width: 12rem;
+    /* height: 20rem; */
+    .containerMax {
+      max-width: 2000px;
+    }
   }
 }
 /* .imgCard:hover {
@@ -361,6 +380,27 @@ img {
   .containerCard {
     min-height: 250px;
     min-width: 100px;
+  }
+  .carrouselSlider {
+    height: 25vh;
+  }
+}
+@media (width > 430px) {
+  /* .containerCard {
+    min-height: 250px;
+    min-width: 150px;
+  } */
+  .carrouselSlider {
+    height: 50vh;
+  }
+}
+@media (width > 1200px) {
+  /* .containerCard {
+    min-height: 250px;
+    min-width: 150px;
+  } */
+  .carrouselSlider {
+    height: 60vh;
   }
 }
 @delprafede Comment @media (min-width: 576px) {
