@@ -12,7 +12,8 @@ const Layout = ({ children }) => {
   // const { productShopping, getProductShopping,quantity } = useProducts();
  
   return (
-    <div className="contenedor">
+  
+     <div className="contenedor">
       
         <>
           <header className="sticky-top">
@@ -30,6 +31,7 @@ const Layout = ({ children }) => {
         </>
      
     </div>
+  
   );
 };
 

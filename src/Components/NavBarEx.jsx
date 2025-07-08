@@ -44,7 +44,7 @@ function NavBarEx() {
         <Container className="  d-flex justify-content-center  flex-lg-column  ">
           <Navbar className="col col-lg-12 order-2 order-lg-0 ">
             <Container className="d-flex justify-content-center  p-2 ">
-              <Nav.Link as={NavLink} to="/" className="col-lg-3  ">
+              <Nav.Link as={NavLink} to="/" className="col-lg-3 d-flex justify-content-lg-start justify-content-center">
                 <Image src={logoCodeShop} className=" w-25 h-25
                 " />
               </Nav.Link>
@@ -216,7 +216,7 @@ function NavBarEx() {
             id="basic-navbar-nav"
             className="w-100  d-lg-flex order-4 justify-content-end align-items-center"
           >
-            <Nav className="p-2 w-100  col-lg-12">
+            <Nav className="p-2 w-100  col-lg-12 ">
               <div className="d-lg-none d-flex w-100">
                 <div className="  w-75">
                   <Buscador buscar={search} />

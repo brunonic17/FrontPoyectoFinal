@@ -11,7 +11,7 @@ function IndividualIntervalsExample() {
       {!search ? (
         <div
           id="carouselExampleInterval"
-          className="carousel slide h-100  "
+          className="carousel slide  "
           data-bs-ride="carousel"
         >
           <div className="carousel-inner bg-body-secondary h-100">

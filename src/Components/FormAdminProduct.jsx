@@ -213,15 +213,10 @@ const FormAdminProduct = () => {
       <Toaster
         theme="light"
         position="top-center"
-        richColors
-        closeButton={false}
-        expand={false}
-        icon={false}
-        dir="ltr"
         duration={2000}
         toastOptions={{
-          style: { background: "green" },
-          className: "my-toast",
+          style: { background: "blue" },
+          className: "myToast",
         }}
       />
     </>

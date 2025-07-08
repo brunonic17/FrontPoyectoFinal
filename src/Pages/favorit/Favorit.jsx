@@ -44,7 +44,7 @@ const Favorit = () => {
         <h1 className=" text-uppercase text-center my-3">Mis Favoritos</h1>
       )}
       <div
-        className=" d-flex justify-content-around p-4 flex-wrap
+        className=" d-flex justify-content-around p-4 flex-wrap container
       "
       >
         {favsPage.map((product) => {

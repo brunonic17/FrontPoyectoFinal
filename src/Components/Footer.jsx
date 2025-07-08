@@ -12,7 +12,7 @@ const Footer = () => {
       <div className=" d-flex align-items-center justify-content-center p-4 flex-column ">
         <div className=" d-lg-flex w-100 justify-content-center  align-items-lg-baseline ">
           <div className="col  d-flex justify-content-center">
-            <Nav.Link as={NavLink} to="/" className="col-lg-3  ">
+            <Nav.Link as={NavLink} to="/" className="col-lg-3 w-25 h-25  ">
               <Image src={logoCodeShop} className=""  />
             </Nav.Link>
           </div>
